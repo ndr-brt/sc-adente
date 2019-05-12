@@ -11,16 +11,58 @@ SynthDef(\sava, { |freq=440,amp=1,pan=0|
 )
 
 (
+var parameters;
+
+parameters = (
+    dur: 0.5,
+	lowFreq: 55,
+	hiFreq: 220,
+);
+
 Pdef(\dronide,
-	Pbind(
+	Pbindf(
+		Pfuncn({ parameters }, inf),
 		\instrument, \sava,
-		\dur, 0.4,
+		\freq, Pexprand(Pfuncn({parameters[\lowFreq]},inf), Pfuncn({parameters[\hiFreq]},inf), inf),
 		\amp, Pexprand(0.2,0.4),
-		\freq, Pexprand(55, 220, inf),
 		\pan, Prand([-0.8,-0.4,0,0.4,0.8], inf),
 	)
-)
-)
+);
 
-Pdef(\dronide).play;
-Pdef(\dronide).stop;
+OSCdef.new(
+	\state,
+	{ |msg, time, addr, port|
+		var state;
+		state = msg[1];
+		if (state == 0) {
+			"Stop drone".postln;
+			Pdef(\dronide).stop;
+		} {
+			"Start drone".postln;
+			Pdef(\dronide).play;
+		}
+	},
+	'/state'
+);
+
+OSCdef.new(
+	\density,
+	{ |msg, time, addr, port|
+		var density;
+		density = msg[1];
+		parameters[\dur] = density;
+	},
+	'/density'
+);
+
+OSCdef.new(
+	\frequency,
+	{ |msg, time, addr, port|
+		var frequency;
+		parameters[\lowFreq] = msg[1];
+		parameters[\hiFreq] = msg[2];
+	},
+	'/frequency'
+);
+
+)
