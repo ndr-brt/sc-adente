@@ -33,40 +33,18 @@ Pdef(\dronide,
 	)
 );
 
-OSCdef.new(
-	\state,
-	{ |msg, time, addr, port|
-		var state;
-		state = msg[1];
-		if (state == 0) {
-			"Stop drone".postln;
-			Pdef(\dronide).stop;
-		} {
-			"Start drone".postln;
-			Pdef(\dronide).play;
-		}
-	},
-	'/state'
-);
+OSCdef.new(\state, { |msg, time, addr, port|
+	postf("Drone state: %\n", msg[1]);
+	if (msg[1] == 0) { Pdef(\dronide).stop; } { Pdef(\dronide).play; }
+},'/state');
 
 OSCdef.new(\volume, { |msg, time, addr, port| parameters[\amp] = msg[1]; }, '/drone/volume');
 
-OSCdef.new(
-	\density,
-	{ |msg, time, addr, port|
-		var density;
-		density = msg[1];
-		parameters[\dur] = density;
-	},
-	'/density'
-);
+OSCdef.new(\density, { |msg, time, addr, port| parameters[\dur] = msg[1]; }, '/density');
 
-OSCdef.new(
-	\frequency,{ |msg, time, addr, port|
-		var frequency;
+OSCdef.new(\frequency, { |msg, time, addr, port|
 		parameters[\lowFreq] = msg[1];
 		parameters[\hiFreq] = msg[2];
-	}, '/frequency'
-);
+	}, '/frequency');
 
 )
