@@ -27,8 +27,7 @@ Pdef(\dronide,
 		Pfuncn({ parameters }, inf),
 		\instrument, \sava,
 		\freq, Pexprand(Pfuncn({parameters[\lowFreq]},inf), Pfuncn({parameters[\hiFreq]},inf), inf),
-		\amp, Pfunc { parameters[\amp] + [-0.1,0,0.1].rand },
-		//\amp, Pfunc { parameters[\amp] + Rand.new(-0.1,0.1) }, // TODO: does not work... why?
+		\amp, Pfunc { parameters[\amp] + rrand(-0.1,0.1) },
 		\pan, Prand([-0.8,-0.4,0,0.4,0.8], inf),
 	)
 );
@@ -36,15 +35,15 @@ Pdef(\dronide,
 OSCdef.new(\state, { |msg, time, addr, port|
 	postf("Drone state: %\n", msg[1]);
 	if (msg[1] == 0) { Pdef(\dronide).stop; } { Pdef(\dronide).play; }
-},'/state');
+},'/drone/state');
 
 OSCdef.new(\volume, { |msg, time, addr, port| parameters[\amp] = msg[1]; }, '/drone/volume');
 
-OSCdef.new(\density, { |msg, time, addr, port| parameters[\dur] = msg[1]; }, '/density');
+OSCdef.new(\density, { |msg, time, addr, port| parameters[\dur] = msg[1]; }, '/drone/density');
 
 OSCdef.new(\frequency, { |msg, time, addr, port|
 		parameters[\lowFreq] = msg[1];
 		parameters[\hiFreq] = msg[2];
-	}, '/frequency');
+	}, '/drone/frequency');
 
 )
