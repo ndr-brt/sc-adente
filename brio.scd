@@ -27,7 +27,7 @@ Pdef(\dronide,
 		Pfuncn({ parameters }, inf),
 		\instrument, \sava,
 		\freq, Pexprand(Pfuncn({parameters[\lowFreq]},inf), Pfuncn({parameters[\hiFreq]},inf), inf),
-		\amp, Pfunc { parameters[\amp] },
+		\amp, Pfunc { parameters[\amp] + [-0.1,0,0.1].rand },
 		//\amp, Pfunc { parameters[\amp] + Rand.new(-0.1,0.1) }, // TODO: does not work... why?
 		\pan, Prand([-0.8,-0.4,0,0.4,0.8], inf),
 	)
