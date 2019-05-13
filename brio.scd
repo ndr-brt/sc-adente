@@ -14,10 +14,12 @@ SynthDef(\sava, { |freq=440,amp=1,pan=0|
 	Out.ar(0, sig!2);
 }).add;
 
+
 parameters = (
     dur: 0.5,
 	lowFreq: 55,
 	hiFreq: 220,
+	amp: 0.3,
 );
 
 Pdef(\dronide,
@@ -25,7 +27,8 @@ Pdef(\dronide,
 		Pfuncn({ parameters }, inf),
 		\instrument, \sava,
 		\freq, Pexprand(Pfuncn({parameters[\lowFreq]},inf), Pfuncn({parameters[\hiFreq]},inf), inf),
-		\amp, Pexprand(0.2,0.4),
+		\amp, Pfunc { parameters[\amp] },
+		//\amp, Pfunc { parameters[\amp] + Rand.new(-0.1,0.1) }, // TODO: does not work... why?
 		\pan, Prand([-0.8,-0.4,0,0.4,0.8], inf),
 	)
 );
@@ -46,6 +49,8 @@ OSCdef.new(
 	'/state'
 );
 
+OSCdef.new(\volume, { |msg, time, addr, port| parameters[\amp] = msg[1]; }, '/drone/volume');
+
 OSCdef.new(
 	\density,
 	{ |msg, time, addr, port|
@@ -57,13 +62,11 @@ OSCdef.new(
 );
 
 OSCdef.new(
-	\frequency,
-	{ |msg, time, addr, port|
+	\frequency,{ |msg, time, addr, port|
 		var frequency;
 		parameters[\lowFreq] = msg[1];
 		parameters[\hiFreq] = msg[2];
-	},
-	'/frequency'
+	}, '/frequency'
 );
 
 )
