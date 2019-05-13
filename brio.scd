@@ -1,4 +1,9 @@
+NetAddr.langPort;
+
 (
+
+var parameters;
+
 SynthDef(\sava, { |freq=440,amp=1,pan=0|
 	var sig;
 	sig = { SinOsc.ar(freq * ExpRand(0.5, 1.5)) }!5;
@@ -8,10 +13,6 @@ SynthDef(\sava, { |freq=440,amp=1,pan=0|
 	sig = sig * (amp / 5);
 	Out.ar(0, sig!2);
 }).add;
-)
-
-(
-var parameters;
 
 parameters = (
     dur: 0.5,
