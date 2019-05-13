@@ -11,13 +11,13 @@ SynthDef(\burp, { |freq=440,t_gate=1,amp=1,atk=0.01,dec=0.3,sus=0.5,out=0,pan=0|
 	Out.ar(out, sig);
 }).add;
 
-SynthDef(\ringz, {|amp=1,inpfrq=10|
+SynthDef(\ringz, {|amp=1,inpfrq=10,cutoff=440|
 	var sig,input,arrayRef;
 	input = Impulse.ar(inpfrq);
 	arrayRef = `[LocalIn.ar.clip2(LFPulse.kr([1,2,1/8]).sum/2)*100100];
 	a = DynKlank.ar(arrayRef,input) * amp;
 	LocalOut.ar(a);
-	sig = LPF.ar(a, 220) * amp;
+	sig = LPF.ar(a, cutoff) * amp;
 	Out.ar(0, sig!2);
 }).add;
 
@@ -43,9 +43,10 @@ Pdef(\pat, Pbind(
 ));
 )
 
-x = Synth(\ringz, [\amp, 0.01]);
-x.set(\amp, 1);
-x.set(\inpfrq, 56);
+x = Synth(\ringz, [\amp, 0.01, \cutoff, 240]);
+x.set(\amp, 0.05);
+x.set(\inpfrq, 6);
+x.set(\cutoff, 140);
 x.free;
 
 s.reboot;
