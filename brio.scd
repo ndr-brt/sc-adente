@@ -33,7 +33,7 @@ Pdef(\dronide,
 		Pfuncn({ droneParams }, inf),
 		\instrument, \dronide,
 		\freq, Pexprand(Pfuncn({droneParams[\lowFreq]},inf), Pfuncn({droneParams[\hiFreq]},inf), inf),
-		\amp, Pfunc { droneParams[\amp] + rrand(-0.1,0.1) },
+		\amp, Pfunc { droneParams[\amp] },
 		\pan, Prand([-0.8,-0.4,0,0.4,0.8], inf),
 	)
 );

@@ -117,8 +117,8 @@
               "spring": false,
               "doubleTap": false,
               "range": {
-                "min": 0,
-                "max": 0.6
+                "min": 0.1,
+                "max": 0.5
               },
               "steps": "",
               "logScale": false,
