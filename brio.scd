@@ -1,5 +1,5 @@
 NetAddr.langPort;
-
+s.meter;
 (
 
 var droneParams;
@@ -62,3 +62,10 @@ OSCdef.new(\r_volume, { |msg, time, addr, port| ~ringz.set(\amp, msg[1]); }, '/r
 OSCdef.new(\r_cutoff, { |msg, time, addr, port| ~ringz.set(\cutoff, msg[1]); }, '/ring/cutoff');
 
 )
+
+SynthDef(\weirdpc, {
+	a=LFNoise0.kr(12).exprange(110,880);
+	Resonz.ar(HPF.ar(CombN.ar(SinOsc.ar(a!2,0,0.2),2,0.2,10),48,16),880,0.5,8));
+}).add;
+
+play{}; 
