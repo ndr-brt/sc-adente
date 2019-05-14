@@ -21,10 +21,11 @@ droneParams = (
     dur: 0.5,
 	lowFreq: 55,
 	hiFreq: 220,
-	amp: 0.3,
+	amp: 0.2,
 );
 ~osc.sendMsg("/drone/volume", droneParams[\amp]);
-~osc.sendMsg("/drone/frequency", [droneParams[\lowFreq], droneParams[\hiFreq]]);
+~osc.sendMsg("/drone/lofreq", droneParams[\lowFreq]);
+~osc.sendMsg("/drone/hifreq", droneParams[\hiFreq]);
 ~osc.sendMsg("/drone/density", droneParams[\dur]);
 
 Pdef(\dronide,
@@ -43,10 +44,8 @@ OSCdef.new(\d_state, { |msg, time, addr, port|
 },'/drone/state');
 OSCdef.new(\d_volume, { |msg, time, addr, port| droneParams[\amp] = msg[1]; }, '/drone/volume');
 OSCdef.new(\d_density, { |msg, time, addr, port| droneParams[\dur] = msg[1]; }, '/drone/density');
-OSCdef.new(\d_frequency, { |msg, time, addr, port|
-		droneParams[\lowFreq] = msg[1];
-		droneParams[\hiFreq] = msg[2];
-	}, '/drone/frequency');
+OSCdef.new(\d_lofreq, { |msg, time, addr, port| droneParams[\lowFreq] = msg[1]; }, '/drone/lofreq');
+OSCdef.new(\d_hifreq, { |msg, time, addr, port| droneParams[\hiFreq] = msg[1]; }, '/drone/hifreq');
 
 // RING
 SynthDef(\ringz, {|amp=1,inpfrq=10,cutoff=440|
@@ -100,4 +99,4 @@ SynthDef(\weirdpc, { |resf=880,speed=15,maxdelaytime=2,sus=8|
 
 )
 
-b = Synth(\weirdpc, [\sus, 5, \speed, 200, \maxdelaytime, 0.1, \resf, 540]);
+b = Synth(\weirdpc, [\sus, 3, \speed, 20, \maxdelaytime, 0.9, \resf, 540]);
