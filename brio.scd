@@ -64,8 +64,10 @@ OSCdef.new(\r_cutoff, { |msg, time, addr, port| ~ringz.set(\cutoff, msg[1]); }, 
 )
 
 SynthDef(\weirdpc, {
-	a=LFNoise0.kr(12).exprange(110,880);
-	Resonz.ar(HPF.ar(CombN.ar(SinOsc.ar(a!2,0,0.2),2,0.2,10),48,16),880,0.5,8));
+	var sig;
+	sig = LFNoise0.kr(12).exprange(110,880);
+	sig = Resonz.ar(HPF.ar(CombN.ar(SinOsc.ar(sig!2,0,0.2),2,0.2,10),48,16),880,0.5,8);
+	Out.ar(0, sig);
 }).add;
 
-play{}; 
+Synth(\weirdpc); 
