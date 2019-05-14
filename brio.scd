@@ -1,8 +1,10 @@
 NetAddr.langPort;
 s.meter;
+
 (
 
-var droneParams,weirdpcParams;
+var droneParams, weirdpcParams;
+~osc = NetAddr.new("127.0.0.1", 8080);
 
 // DRONE
 SynthDef(\dronide, { |freq=440,amp=1,pan=0|
@@ -21,6 +23,9 @@ droneParams = (
 	hiFreq: 220,
 	amp: 0.3,
 );
+~osc.sendMsg("/drone/volume", droneParams[\amp]);
+~osc.sendMsg("/drone/frequency", [droneParams[\lowFreq], droneParams[\hiFreq]]);
+~osc.sendMsg("/drone/density", droneParams[\dur]);
 
 Pdef(\dronide,
 	Pbindf(
@@ -89,10 +94,10 @@ SynthDef(\weirdpc, { |resf=880,speed=15,maxdelaytime=2,sus=8|
 	sig = HPF.ar(sig,48,16);
 	sig = Resonz.ar(sig,resf,0.5,8);
 	sig = Limiter.ar(sig, 0.1);
-	sig = sig * EnvGen.kr(Env([0,1,1,0],[1,sus,1]), doneAction:2);
+	sig = sig * EnvGen.kr(Env([0,1,1,0],[sus,sus,sus]), doneAction:2);
 	Out.ar(0, sig!2);
 }).add;
 
 )
 
-b = Synth(\weirdpc, [\sus, 2, \speed, 10, \maxdelaytime, 2, \resf, 840]);
+b = Synth(\weirdpc, [\sus, 5, \speed, 200, \maxdelaytime, 0.1, \resf, 540]);
