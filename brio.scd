@@ -2,7 +2,7 @@ NetAddr.langPort;
 s.meter;
 (
 
-var droneParams;
+var droneParams,weirdpcParams;
 
 // DRONE
 SynthDef(\dronide, { |freq=440,amp=1,pan=0|
@@ -61,13 +61,38 @@ OSCdef.new(\r_state, { |msg, time, addr, port|
 OSCdef.new(\r_volume, { |msg, time, addr, port| ~ringz.set(\amp, msg[1]); }, '/ring/volume');
 OSCdef.new(\r_cutoff, { |msg, time, addr, port| ~ringz.set(\cutoff, msg[1]); }, '/ring/cutoff');
 
-)
-
-SynthDef(\weirdpc, {
-	var sig;
-	sig = LFNoise0.kr(12).exprange(110,880);
-	sig = Resonz.ar(HPF.ar(CombN.ar(SinOsc.ar(sig!2,0,0.2),2,0.2,10),48,16),880,0.5,8);
-	Out.ar(0, sig);
+// WEIRDPC
+SynthDef(\weirdpc, { |resf=880,modf=15,maxdelaytime=2,sustain=8|
+	var sig,mod;
+	mod = LFNoise0.kr(modf).exprange(110,880);
+	sig = SinOsc.ar(mod!2,0,0.2);
+	sig = CombN.ar(sig,maxdelaytime,0.2,10);
+	sig = HPF.ar(sig,48,16);
+	sig = Resonz.ar(sig,resf,0.5,8);
+	sig = Limiter.ar(sig, 0.1);
+	sig = sig * EnvGen.kr(Env([0,1,1,0],[1,sustain,1]), doneAction:2);
+	Out.ar(0, sig!2);
 }).add;
 
-Synth(\weirdpc); 
+weirdpcParams = (
+	resf: 880,
+	speed: 15,
+	maxdelaytime: 2,
+	sus: 8,
+);
+
+SynthDef(\weirdpc, { |resf=880,speed=15,maxdelaytime=2,sus=8|
+	var sig,mod;
+	mod = LFNoise0.kr(speed).exprange(110,880);
+	sig = SinOsc.ar(mod!2,0,0.2);
+	sig = CombN.ar(sig,maxdelaytime,0.2,10);
+	sig = HPF.ar(sig,48,16);
+	sig = Resonz.ar(sig,resf,0.5,8);
+	sig = Limiter.ar(sig, 0.1);
+	sig = sig * EnvGen.kr(Env([0,1,1,0],[1,sus,1]), doneAction:2);
+	Out.ar(0, sig!2);
+}).add;
+
+)
+
+b = Synth(\weirdpc, [\sus, 2, \speed, 10, \maxdelaytime, 2, \resf, 840]);
