@@ -1,3 +1,5 @@
+setcps (120/60/4)
+
 d1 $ sound "bd <arpy:1 arpy:2 arpy:3>"
 d1 $ sound "bd/2"
 d1 $ sound "bd*3"
@@ -24,13 +26,54 @@ d1 $ sound "arpy(3,8)" # n (every 4 (* 2) "0 2")
 d1 $ n (off 0.125 (+12) $ off 0.25 (+7) $ slow 2 $ "0(3,8) [5 7]") # sound "arpy"
 d1 $ n "[0 .. 7] [3 .. 1]" # sound "arpy"
 d1 $ speed "-0.2 -5 1 0.5" # sound "arpy"
+d1 $ sound "[breath*4]" # n "1" # speed "1"
+d1 $ euclid 5 8 $ sound "bd"
+d1 $ sound "bd(3,8) sn(5,8)"
+d1 $ sound "bd(5,8,2)"
+d1 $ euclid 3 8 $ sound "bd*2 [sn cp]"
+d1 $ sound "bd([5 3]/2,8)"
+d1 $ sound "bd(7,16,14)" # cps (slow 2 $ range 0.2 1.6 saw)
+d1 $ sound "arpy*8" # up (run 8) # n (run 14)
+d1 $ speed (run 12) # sound "arpy"
+d1 $ sound "arpy*8" # up (every 2 (rev) $ run 8)
+d1 $ sound "arpy:0 arpy:2 arpy:3"
+d1 $ n "0 2 3" # s "arpy"
+d1 $ sound $ samples "drum*4" (every 4 (rev) "0 1 1 3")
+d1 $ n (run 4) # s "drum"
+d1 $ s "drum arpy cp hh" # n (run 10)
+d1 $ n (run 10) # s "drum arpy cp hh"
+d1 $ sound (samples "drum arpy cp hh" (run 10))
+d1 $ sound "bd sn drum arpy" # pan "0 1 0.25 0.75"
+d1 $ pan "0 1 0.25 0.75" # sound "bd sn drum arpy"
+d1 $ pan "0 1 0.25" # sound "bd sn drum arpy"
+d1 $ up "0 0*3 0*4 3" # sound "[arpy, bass2, bd]"
+d1 $ sound "drum" *| n "0 1*2 ~ 3"
+d1 $ sound "drum cp" >| n "0 1 2"
+d1 $ sound "bd*16" # pan (slow 8 $ saw)
+d1 $ sound "bd*8 sn*8" # speed (density 2 $ tri)
+d1 $ sound "bd*16" # pan (slowcat [sine, saw, square, tri])
+d1 $ sound "sn:2*16" # speed ((range 0.5 3 tri) * (slow 4 saw))
+d1 $ sound "bd*8 sn*8" # speed (range 1 3 $ saw)
+d1 $ sound "bd*8 sn*8" # speed (slow 4 $ range 1 3 $ tri)
+d1 $ sound "bd*8 sn*8" # speed (range (-2) 3 $ tri)
+d1 $ sound "hh*32" # cutoff (range 300 1000 $ slow 4 $ sine) # resonance (range 0.1 1 $ fast 2 $ sine)
+d1 $ sound "[bd bd ~ bd, ~ ~ sn ~, hh ~ hh hh, cr ~ ~ ~]" # cutoff (range 300 1000 $ slow 4 $ sine)
+d1 $ sound "{bd hh sn cp, arpy bass2 drum notes can}"
+d1 $ sound "{arpy bass2 drum notes can, bd hh sn cp}"
+d1 $ sound "{~ ~ ~ ~, arpy bass2 drum notes can}"
+d1 $ sound "{arpy bass2 drum notes can}%4"
+d1 $ (0.3 ~>) $ sound "bd*2 cp*2 hh sn"
+d1 $ every 3 (0.25 <~) $ sound "bd*2 cp*2 hh sn"
+d1 $ every 3 (0.0625 <~) $ sound "bd*2 cp*2 hh sn"
+d1 $ "[0 0.25]/4" <~ (sound "bd*2 cp*2 hh sn")
 
 d1 silence
 
-d2 $ sound "hh hh hh"
+
+d2 $ sound "hh*16"
 d2 silence
 
-d3 $ sound "~ arpy/3"
+d3 $ sound "sn*4"
 d3 silence
 
 unsolo 1
