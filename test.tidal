@@ -66,12 +66,85 @@ d1 $ (0.3 ~>) $ sound "bd*2 cp*2 hh sn"
 d1 $ every 3 (0.25 <~) $ sound "bd*2 cp*2 hh sn"
 d1 $ every 3 (0.0625 <~) $ sound "bd*2 cp*2 hh sn"
 d1 $ "[0 0.25]/4" <~ (sound "bd*2 cp*2 hh sn")
+d1 $ sound "{bd bd ~ bd bd ~ bd bd ~, ~ ~ sn:2 ~ ~ sn:2 ~ ~ sn:2}%1(6,8)"
+d1 $ sound "arpy*4" # pan (rand)
+d1 $ s "arpy*8" # n (slow 5 $ irand 30)
+d1 $ sound "bd? sd? sd? sd?"
+d1 $ sound "bd*16?"
+d1 $ sound "bd sn? cp hh?"
+d1 $ sound "[bd sn cp hh]?"
+d1 $ sound "bd*16?"
+d1 $ degradeBy 0.75 $ sound "bd*16"
+d1 $ sometimesBy 0.75 (# crush 4) $ sound "bd arpy sn ~"
+
+d1 $ every 5 (|+| speed "0.5") $ every 4 (0.25 <~) $ every 3 (rev) $
+  sound "bd sn arpy*2 cp"
+  # speed "[1 1.25 0.75 -1.5]/3"
+
+d1 $ whenmod 8 6 (rev) $ sound "bd*2 arpy*2 cp hh*4"
+d1 $ every 8 (rev) $ every 4 (density 2) $ sound "bd*2 hh sn cp*4"
+d1 $ const (sound "arpy*3") $ sound "bd sn cp hh"
+d1 $ whenmod 8 6 (const (sound "sn*16")) $ sound "{bd sn cp hh}"
+d1 $ every 8 (rev) $ every 4 (density 2) $ sound "bd hh sn cp"
+d1 $ whenmod 16 14 (# speed "2") $ sound "bd arpy*3 cp bass2"
+d1 $ every 12 (const $ sound "bd*4 sn*2") $ sound "bd sn bass2 sn"
+
+d1 $ fastcat [sound "bd sn:2" # vowel "[a o]/2",
+             sound "casio casio:1 casio:2*2"
+            ]
+
+d1 $ fastcat [sound "bd sn:2" # vowel "[a o]/2",
+             sound "casio casio:1 casio:2*2",
+             sound "drum drum:2 drum:3 drum:4*2"
+            ]
+
+d1 $ cat [sound "bd sn:2" # vowel "[a o]/2",
+         sound "casio casio:1 casio:2*2",
+         sound "drum drum:2 drum:3 drum:4*2"
+      ]
+
+d1 $ stack [
+  sound "bd bd*2",
+  sound "hh*2 [sn cp] cp future*4",
+  sound (samples "arpy*8" (run 16))
+]
+
+d1 $ every 4 (slow 2) $ whenmod 5 3 (# speed "0.75 1.5") $ stack [
+ sound "bd bd*2",
+ sound "hh*2 [sn cp] cp future*4",
+ sound (samples "arpy*8" (run 16))
+] # speed "[[1 0.8], [1.5 2]*2]/3" # cutoff (range 300 4500 $ slow 2 $ saw)
+
+d1 $ sound (samples "arpy*8" (run 8)) # speed "0.25"
+d1 $ sound (samples "arpy*8" (run 8)) # speed "0.25" # cut "1"
+
+d1 $ stack [
+  sound (samples "arpy*8" (run 8)) # speed "0.25" # cut "1",
+  sound (samples "bass2*6" (run 6)) # note [1 .. 5] # speed "0.5" # cut "2"
+]
+
+d1 $ sound (samples "hc*8" (iter 4 $ run 4))
+anticipate 1 $ sound (samples "bd(3,8)" (run 3))
+xfadeIn 1 16 $ sound "can(2,15)"
+
+d1 $ midinote "60 62*2" # s "supersaw"
+d1 $ n "c5 d5*2" # s "supersaw"
+d1 $ n "<[a5,cs5,e5,g5]*3 [d5,fs5,g5,c5]>" # s "supersquare" # gain "0.7"
+d1 $ n "0 5" # s "supersaw"
+d1 $ n "c5 d5*2" # s "supersaw" # sustain "0.4 0.2"
+d1 $ jux (# accelerate "-0.1") $ s "supermandolin*8" # midinote "[80!6 78]/8"
+ # sustain "1 0.25 2 1"
+
+d1 $ midinote (slow 2 $ (run 8) * 7 + 50) # s "supergong" # decay "[1 0.2]/4"
+  # voice "[0.5 0]/8" # sustain (slow 16 $ range 5 0.5 $ saw)
 
 d1 silence
 
 
 d2 $ sound "hh*16"
+d2 $ sound (samples "bass2*6" (run 6)) # speed "0.5" # cut "2"
 d2 silence
+d2 $ every 4 (rev) $ n "<[g5 df5 e5 a5] [gf5 d5 c5 g5]*3>" # s "supersaw" # speed rand
 
 d3 $ sound "sn*4"
 d3 silence
