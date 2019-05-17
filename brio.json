@@ -404,6 +404,52 @@
       ],
       "tabs": [],
       "scroll": true
+    },
+    {
+      "type": "tab",
+      "id": "grain-freeze",
+      "linkId": "",
+      "label": "auto",
+      "color": "auto",
+      "css": "",
+      "default": "",
+      "value": "",
+      "precision": 2,
+      "address": "/tab_2",
+      "preArgs": "",
+      "target": "",
+      "bypass": false,
+      "variables": "@{parent.variables}",
+      "widgets": [
+        {
+          "type": "switch",
+          "top": 10,
+          "left": 10,
+          "id": "gf-onoff",
+          "linkId": "",
+          "width": "auto",
+          "height": "auto",
+          "label": "auto",
+          "color": "auto",
+          "css": "",
+          "horizontal": false,
+          "showValues": false,
+          "values": {
+            "on": 1,
+            "off": 0
+          },
+          "traversing": true,
+          "default": "",
+          "value": "",
+          "precision": 2,
+          "address": "/switch_2",
+          "preArgs": "",
+          "target": "",
+          "bypass": false
+        }
+      ],
+      "tabs": [],
+      "scroll": true
     }
   ],
   "scroll": true,

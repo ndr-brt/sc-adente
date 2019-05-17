@@ -22,6 +22,15 @@ SynthDef(\grain_freeze, {
 
 	Out.ar(outBus, (dist * env)!2);
 }).add;
+
+// OSCdef.new(\gf_onoff, { |msg, time, addr, port|
+// 	postf("grain-freeze state: %\n", msg[1]);
+// 	if (msg[1] == 1) { Pdef(\dronide).stop; } { Pdef(\dronide).play; }
+// },'/drone/state');
+
+a = Bus.audio;
+// then this:
+{ Out.ar(a, SoundIn.ar(0)) }.play;
 )
 
 
@@ -29,16 +38,14 @@ SynthDef(\grain_freeze, {
 //// examples:
 
 // execute this:
-a = Bus.audio;
-// then this:
-b = { Out.ar(a, SoundIn.ar(0)) }.play;
+
 
 // sing, whistle, or play a steady held note, then execute this line of code:
 c = Synth(\prm_GrainFreeze, [\inBus, a, \outBus, 0, \attackTime, 4], addAction: \addToTail);
 
 
 // play at half the speed, (one octave down):
-c.set(\rate, 0.8);
+c.set(\rate, 0.2);
 
 // set lowpass cutoff:
 c.set(\lowPassCutoff, 2700);

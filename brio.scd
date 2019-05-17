@@ -1,7 +1,5 @@
 // crucial-library required
 
-NetAddr.langPort;
-
 (
 
 var droneParams, weirdpcParams, ringParams;
