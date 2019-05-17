@@ -18,8 +18,10 @@ c.start;
 
 w.alwaysOnTop = true;
 w.front;
+CmdPeriod.doOnce { w.close };
 
 { ScopeOut2.ar(In.ar(0, outputs), f.bufnum) }.play;
+
 )
 
 // try it!
