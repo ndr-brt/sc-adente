@@ -93,18 +93,9 @@ weirdpcParams = (
 	sus: 8,
 );
 
-SynthDef(\weirdpc, { |resf=880,speed=15,maxdelaytime=2,sus=8|
-	var sig,mod;
-	mod = LFNoise0.kr(speed).exprange(110,880);
-	sig = SinOsc.ar(mod!2,0,0.2);
-	sig = CombN.ar(sig,maxdelaytime,0.2,10);
-	sig = HPF.ar(sig,48,16);
-	sig = Resonz.ar(sig,resf,0.5,8);
-	sig = Limiter.ar(sig, 0.1);
-	sig = sig * EnvGen.kr(Env([0,1,1,0],[sus,sus,sus]), doneAction:2);
-	Out.ar(0, sig!2);
-}).add;
+OSCdef.new(\w_launch, { |msg, time, addr, port|
+	postf("Launch weird pc: %\n", msg[1]);
+	if (msg[1] == 1) { Synth(\weirdpc, [\sus, 3, \speed, 20, \maxdelaytime, 0.9, \resf, 540]); }
+},'/weirdpc/launch');
 
 )
-
-b = Synth(\weirdpc, [\sus, 3, \speed, 20, \maxdelaytime, 0.9, \resf, 540]);

@@ -353,6 +353,53 @@
             }
           ],
           "tabs": []
+        },
+        {
+          "type": "panel",
+          "top": 90,
+          "left": 520,
+          "id": "weird pc",
+          "linkId": "",
+          "width": "auto",
+          "height": "auto",
+          "label": "auto",
+          "color": "auto",
+          "css": "",
+          "scroll": true,
+          "border": true,
+          "default": "",
+          "value": "",
+          "precision": 2,
+          "address": "/weirdpc",
+          "preArgs": "",
+          "target": "",
+          "bypass": false,
+          "variables": "@{parent.variables}",
+          "widgets": [
+            {
+              "type": "push",
+              "top": 10,
+              "left": 10,
+              "id": "w_launch",
+              "linkId": "",
+              "width": "auto",
+              "height": "auto",
+              "label": "auto",
+              "color": "auto",
+              "css": "",
+              "doubleTap": false,
+              "on": 1,
+              "off": 0,
+              "norelease": false,
+              "value": "",
+              "precision": 2,
+              "address": "/weirdpc/launch",
+              "preArgs": "",
+              "target": "",
+              "bypass": false
+            }
+          ],
+          "tabs": []
         }
       ],
       "tabs": [],
