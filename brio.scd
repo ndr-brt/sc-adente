@@ -1,11 +1,10 @@
 // crucial-library required
 
 NetAddr.langPort;
-s.meter;
 
 (
 
-var droneParams, weirdpcParams, controls;
+var droneParams, weirdpcParams;
 ~osc = NetAddr.new("127.0.0.1", 8080);
 
 // DRONE
@@ -98,16 +97,6 @@ SynthDef(\weirdpc, { |resf=880,speed=15,maxdelaytime=2,sus=8|
 	sig = sig * EnvGen.kr(Env([0,1,1,0],[sus,sus,sus]), doneAction:2);
 	Out.ar(0, sig!2);
 }).add;
-
-Window.closeAll;
-controls = Dictionary();
-controls[\droneStateBtn] = ToggleButton.new(nil,"on",{ Pdef(\dronide).play }, { Pdef(\dronide).stop },false);
-w = Window.new("GUI Introduction").layout_(
-    VLayout(
-		HLayout(controls[\droneStateBtn], TextField(), Button() ),
-        TextView()
-    )
-).front;
 
 )
 
