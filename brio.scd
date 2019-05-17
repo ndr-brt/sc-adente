@@ -4,7 +4,7 @@ NetAddr.langPort;
 
 (
 
-var droneParams, weirdpcParams;
+var droneParams, weirdpcParams, ringParams;
 ~osc = NetAddr.new("127.0.0.1", 8080);
 
 // DRONE
@@ -59,9 +59,16 @@ SynthDef(\ringz, {|amp=1,inpfrq=10,cutoff=440|
 	Out.ar(0, sig!2);
 }).add;
 
+ringParams = (
+	cutoff: 400,
+	amp: 0.01
+);
+~osc.sendMsg("/ring/volume", ringParams[\amp]);
+~osc.sendMsg("/ring/cutoff", ringParams[\cutoff]);
+
 OSCdef.new(\r_state, { |msg, time, addr, port|
 	postf("Ring state: %\n", msg[1]);
-	if (msg[1] == 0) { ~ringz.free; } { ~ringz = Synth(\ringz, [\cutoff, 440, \amp, 0.01]); }
+	if (msg[1] == 0) { ~ringz.free; } { ~ringz = Synth(\ringz, [\cutoff, ringParams[\cutoff], \amp, ringParams[\amp]]); }
 },'/ring/state');
 OSCdef.new(\r_volume, { |msg, time, addr, port| ~ringz.set(\amp, msg[1]); }, '/ring/volume');
 OSCdef.new(\r_cutoff, { |msg, time, addr, port| ~ringz.set(\cutoff, msg[1]); }, '/ring/cutoff');
