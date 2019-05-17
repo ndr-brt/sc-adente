@@ -1,21 +1,26 @@
 (
 var inputs = 2;
 var outputs = 2;
+var port = StaticText();
+port.string = "Listen port: " + NetAddr.langPort;
+
 Window.closeAll;
 
 w = Window.new("Monitoring");
 
-ServerMeterView.new(s, w, Point(0,0), inputs, outputs);
-
 f = Buffer.alloc(s,1024,2);
 b = Bus.audio(s,1);
 
-c = ScopeView(w.view, Rect(ServerMeterView.getWidth(inputs, outputs), 0, 200, ServerMeterView.height));
+c = ScopeView();
 c.bufnum = f.bufnum;
 c.server_(s);
 c.start;
 
+m = ServerMeterView.new(s, w, numIns: inputs, numOuts: outputs).view;
+m.minHeight_(ServerMeterView.height);
+m.minWidth_(ServerMeterView.getWidth(inputs, outputs, s));
 
+w.layout = HLayout(VLayout(port, m), c);
 w.alwaysOnTop = true;
 w.front;
 CmdPeriod.doOnce { w.close };
