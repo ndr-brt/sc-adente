@@ -7,8 +7,7 @@ var droneParams, weirdpcParams, ringParams;
 
 // DRONE
 SynthDef(\dronide, { |freq=440,amp=1,pan=0|
-	var sig;
-	sig = { SinOsc.ar(freq * ExpRand(0.5, 1.5)) }!5;
+	var sig = { SinOsc.ar(freq * ExpRand(0.5, 1.5)) }!5;
 	sig = sig.sum;
 	sig = sig * EnvGen.kr(Env([0,1,0],[1,1]), 1, doneAction:2);
 	sig = Pan2.ar(sig, pan);
@@ -47,10 +46,10 @@ OSCdef.new(\d_lofreq, { |msg, time, addr, port| droneParams[\lowFreq] = msg[1]; 
 OSCdef.new(\d_hifreq, { |msg, time, addr, port| droneParams[\hiFreq] = msg[1]; }, '/drone/hifreq');
 
 // RING
-SynthDef(\ringz, {|amp=1, inpfrq=10, cutoff=440, gate=1|
-	var sig,input,arrayRef;
-	input = Impulse.ar(inpfrq);
-	arrayRef = `[LocalIn.ar.clip2(LFPulse.kr([1,2,1/8]).sum/2)*100100];
+SynthDef(\ringz, {|amp=1, freq=10, cutoff=440, gate=1|
+	var sig;
+	var input = Impulse.ar(freq);
+	var arrayRef = `[LocalIn.ar.clip2(LFPulse.kr([1,2,1/8]).sum/2)*100100];
 	a = DynKlank.ar(arrayRef,input) * amp;
 	LocalOut.ar(a);
 	sig = LPF.ar(a, cutoff) * amp;
@@ -64,6 +63,7 @@ ringParams = (
 );
 ~osc.sendMsg("/ring/volume", ringParams[\amp]);
 ~osc.sendMsg("/ring/cutoff", ringParams[\cutoff]);
+~osc.sendMsg("/ring/freq", ringParams[\freq]);
 
 OSCdef.new(\r_state, { |msg, time, addr, port|
 	postf("Ring state: %\n", msg[1]);
@@ -74,9 +74,8 @@ OSCdef.new(\r_cutoff, { |msg, time, addr, port| ~ringz.set(\cutoff, msg[1]); }, 
 
 // WEIRDPC
 SynthDef(\weirdpc, { |resf=880, modf=15, maxdelaytime=2, sustain=8, gate=1|
-	var sig,mod;
-	mod = LFNoise0.kr(modf).exprange(110,880);
-	sig = SinOsc.ar(mod!2,0,0.2);
+	var mod = LFNoise0.kr(modf).exprange(110,880);
+	var sig = SinOsc.ar(mod!2,0,0.2);
 	sig = CombN.ar(sig,maxdelaytime,0.2,10);
 	sig = HPF.ar(sig,48,16);
 	sig = Resonz.ar(sig,resf,0.5,8);
