@@ -334,8 +334,8 @@
               "spring": false,
               "doubleTap": false,
               "range": {
-                "min": 0.001,
-                "max": 0.2
+                "min": 0.01,
+                "max": 0.8
               },
               "steps": "",
               "logScale": false,
