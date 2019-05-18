@@ -46,20 +46,20 @@ OSCdef.new(\d_lofreq, { |msg, time, addr, port| droneParams[\lowFreq] = msg[1]; 
 OSCdef.new(\d_hifreq, { |msg, time, addr, port| droneParams[\hiFreq] = msg[1]; }, '/drone/hifreq');
 
 // RING
-SynthDef(\ringz, {|amp=1, freq=10, cutoff=440, gate=1|
-	var sig;
+SynthDef(\ringz, {|amp=0.4, freq=10, cutoff=440, gate=1|
+	var sig = SinOsc.ar(freq);
 	var input = Impulse.ar(freq);
-	var arrayRef = `[LocalIn.ar.clip2(LFPulse.kr([1,2,1/8]).sum/2)*100100];
+	var arrayRef = `[LocalIn.ar.clip2(LFPulse.kr([7/19,2/5,1/8]).sum/2)*19220];
 	a = DynKlank.ar(arrayRef,input) * amp;
 	LocalOut.ar(a);
-	sig = LPF.ar(a, cutoff) * amp;
+	sig = sig * LPF.ar(a, cutoff) * amp;
 	sig = sig * EnvGen.kr(Env.adsr, gate, amp, doneAction: 2);
 	Out.ar(0, sig!2);
 }).add;
 
 ringParams = (
 	cutoff: 400,
-	amp: 0.01
+	amp: 0.1
 );
 ~osc.sendMsg("/ring/volume", ringParams[\amp]);
 ~osc.sendMsg("/ring/cutoff", ringParams[\cutoff]);
