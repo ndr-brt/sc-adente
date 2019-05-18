@@ -1,25 +1,20 @@
 //Drifty noodle machine
 
 (
-SynthDef(\StereoModDelay, { arg
-    //Chorus delay with EQ in the feedback loop
-    //for that vintage tape echo mood
+SynthDef(\StereoModDelay, {
+    //Chorus delay with EQ in the feedback loop for that vintage tape echo mood
+	|
+	bufferL, bufferR,
+	time = 1.5, fb = 0.8,
+	modRate = 5.5, modDepth = 0.0005,
+	eqFc = 800, eqQ = 3
+	|
 
-	bufferL,
-	bufferR,
-	time = 1.5,
-	fb = 0.8,
-	modRate = 5.5,
-	modDepth = 0.0005,
-	eqFc = 800,
-	eqQ = 3;
-
-	var signal, tapPhase, tap, tapPhaseL, tapPhaseR, tapL, tapR;
+	var tapPhase, tap, tapPhaseL, tapPhaseR, tapL, tapR;
 	var timeMod, eqMod;
 
 	//Drop the input slightly to avoid clicky clipping
-	signal = 0.7*In.ar(18, 2);
-    signal = signal + LocalIn.ar(2);
+    var signal = 0.2 * In.ar(18, 2) + LocalIn.ar(2);
 
     timeMod = LFDNoise3.ar(modRate, modDepth);
     eqMod = LFDNoise3.kr(1, 400);
@@ -125,7 +120,7 @@ SynthDef(\ChMach, { arg
 	var stereoBuffer1L = Buffer.alloc(s, s.sampleRate*3, 1);
 	var stereoBuffer1R = Buffer.alloc(s, s.sampleRate*3, 1);
 
-     var monoBuffer1 = Buffer.alloc(s, s.sampleRate*2, 1);
+    var monoBuffer1 = Buffer.alloc(s, s.sampleRate*2, 1);
 
 	var rootPitch=36;										// Start on a C
 
