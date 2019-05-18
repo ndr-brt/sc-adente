@@ -5,9 +5,12 @@ parameters = [
 	\inBus, a,
 	\outBus, 0,
 	\attackTime, 4,
-	\rate, 1
+	\rate, 1,
+	\lowPassCutoff, 7000,
+	\highPassCutoff, 100,
+	\postDistCutoff, 18000,
+	\distAmt, 1
 ];
-
 
 SynthDef(\grain_freeze, {
 	|
@@ -44,6 +47,10 @@ OSCdef.new(\gf_onoff, { |msg|
 },'/gf/onoff');
 
 OSCdef.new(\gf_rate, { |msg| c.set(\rate, msg[1]) }, '/gf/rate');
+OSCdef.new(\gf_lowPassCutoff, { |msg| c.set(\lowPassCutoff, msg[1]) }, '/gf/lowPassCutoff');
+OSCdef.new(\gf_highPassCutoff, { |msg| c.set(\highPassCutoff, msg[1]) }, '/gf/highPassCutoff');
+OSCdef.new(\gf_postDistCutoff, { |msg| c.set(\postDistCutoff, msg[1]) }, '/gf/postDistCutoff');
+OSCdef.new(\gf_distAmt, { |msg| c.set(\distAmt, msg[1]) }, '/gf/distAmt');
 
 { Out.ar(a, SoundIn.ar(0)) }.play;
 )
