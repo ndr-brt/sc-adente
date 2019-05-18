@@ -41,11 +41,11 @@ a = Bus.audio;
 
 
 // sing, whistle, or play a steady held note, then execute this line of code:
-c = Synth(\prm_GrainFreeze, [\inBus, a, \outBus, 0, \attackTime, 4], addAction: \addToTail);
+c = Synth(\grain_freeze, [\inBus, a, \outBus, 0, \attackTime, 4], addAction: \addToTail);
 
 
 // play at half the speed, (one octave down):
-c.set(\rate, 0.2);
+c.set(\rate, 0.7);
 
 // set lowpass cutoff:
 c.set(\lowPassCutoff, 2700);
@@ -58,8 +58,8 @@ c.set(\highPassCutoff, 20);
 
 // set distortion (CAREFUL!! Gets loud):
 (
-c.set(\postDistCutoff, 120);
-c.set(\distAmt, 48.dbamp);
+c.set(\postDistCutoff, 160);
+c.set(\distAmt, 44.dbamp);
 )
 
 // increase release time and free:
