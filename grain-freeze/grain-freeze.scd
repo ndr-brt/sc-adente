@@ -1,4 +1,14 @@
 (
+var parameters;
+a = Bus.audio;
+parameters = [
+	\inBus, a,
+	\outBus, 0,
+	\attackTime, 4,
+	\rate, 1
+];
+
+
 SynthDef(\grain_freeze, {
 	|
 	inBus = 0, outBus = 0, amp = 1,
@@ -23,44 +33,34 @@ SynthDef(\grain_freeze, {
 	Out.ar(outBus, (dist * env)!2);
 }).add;
 
-// OSCdef.new(\gf_onoff, { |msg, time, addr, port|
-// 	postf("grain-freeze state: %\n", msg[1]);
-// 	if (msg[1] == 1) { Pdef(\dronide).stop; } { Pdef(\dronide).play; }
-// },'/drone/state');
+OSCdef.new(\gf_onoff, { |msg|
+	postf("grain-freeze state: %\n", msg[1]);
+	if (msg[1] == 1) {
+		c = Synth(\grain_freeze, parameters, addAction: \addToTail);
+	} {
+		c.set(\releaseTime, 10);
+		c.set(\gate, 0);
+	}
+},'/gf/onoff');
 
-a = Bus.audio;
-// then this:
+OSCdef.new(\gf_rate, { |msg| c.set(\rate, msg[1]) }, '/gf/rate');
+
 { Out.ar(a, SoundIn.ar(0)) }.play;
 )
 
-
-
-//// examples:
-
-// execute this:
-
-
-// sing, whistle, or play a steady held note, then execute this line of code:
-c = Synth(\grain_freeze, [\inBus, a, \outBus, 0, \attackTime, 4], addAction: \addToTail);
-
-
-// play at half the speed, (one octave down):
-c.set(\rate, 0.7);
-
 // set lowpass cutoff:
-c.set(\lowPassCutoff, 2700);
+c.set(\lowPassCutoff, 5000);
 
 // set high pass cutoff:
-c.set(\highPassCutoff, 200);
+c.set(\highPassCutoff, 20);
 
 // reset it:
 c.set(\highPassCutoff, 20);
 
 // set distortion (CAREFUL!! Gets loud):
-(
-c.set(\postDistCutoff, 160);
-c.set(\distAmt, 44.dbamp);
-)
+c.set(\postDistCutoff, 180);
+
+c.set(\distAmt, 50.dbamp);
 
 // increase release time and free:
 (
