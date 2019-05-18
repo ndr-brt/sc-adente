@@ -11,13 +11,11 @@ SynthDef(\StereoModDelay, {
 	|
 
 	var tapPhase, tap, tapPhaseL, tapPhaseR, tapL, tapR;
-	var timeMod, eqMod;
 
 	//Drop the input slightly to avoid clicky clipping
     var signal = 0.2 * In.ar(18, 2) + LocalIn.ar(2);
-
-    timeMod = LFDNoise3.ar(modRate, modDepth);
-    eqMod = LFDNoise3.kr(1, 400);
+    var timeMod = LFDNoise3.ar(modRate, modDepth);
+    var eqMod = LFDNoise3.kr(1, 400);
 
 	tapPhaseL = DelTapWr.ar(bufferL, signal[0]);
 	tapL = DelTapRd.ar(bufferL, tapPhaseL, time+LFDNoise3.ar(modRate, modDepth), 2);
@@ -32,9 +30,9 @@ SynthDef(\StereoModDelay, {
 	LocalOut.ar(fb*[tapR, tapL]);
 }).add;
 
-SynthDef(\Filters, { arg
-	//Slowly varying bp filter applied across the mix
-	//Creates a subtle phasing effect
+SynthDef(\Filters, {
+	//Slowly varying bp filter applied across the mix, creates a subtle phasing effect
+	|
 	cutoffBase = 500,
 	cutoffMod = 2000,
 	resBase = 0.3,
@@ -42,7 +40,8 @@ SynthDef(\Filters, { arg
 	bpVol = 1,
 	hpVol = 0,
 	notchVol = 0,
-	peakVol = 0;
+	peakVol = 0
+	|
 
 	var signal = In.ar(16,2);
 
@@ -50,7 +49,6 @@ SynthDef(\Filters, { arg
 	var modSig = Saw.ar(0.05+0.5*LFDNoise3(1), 0, 0.5, 0.5);
 
 	//Two 12dB LPFs for 24db total
-	//
 	var output = SVF.ar(signal, cutoffBase + (modSig*cutoffMod), resBase, lpVol, bpVol, hpVol, notchVol, peakVol);
 	output = 4*SVF.ar(output, cutoffBase + (modSig*cutoffMod), resBase, lpVol, bpVol, hpVol, notchVol, peakVol);
 
@@ -58,26 +56,13 @@ SynthDef(\Filters, { arg
 	Out.ar([18, 19], output);
 }).add;
 
-SynthDef(\ChMach, { arg
-	f=440,
-	width = 0.5,
-	modFreq = 1,
-	aTime = 5,
-	rTime = 5,
-	filter = 2,
-	filterQ = 0,
-	pan = 0.5;
+SynthDef(\ChMach, { | f=440, width = 0.5, modFreq = 1, aTime = 5, rTime = 5, filter = 2, filterQ = 0, pan = 0.5 |
 
-
-	 var env = EnvGen.ar(Env([0.01,1,0.01],[aTime, rTime], 'exp'),  doneAction:2);
-
-     var input = Vibrato.ar(VarSaw.ar(f, 0, LFNoise2.kr(1)), 5, 0.1, 0, 0.2, 0.1, 0.7);
+	var env = EnvGen.ar(Env([0.01,1,0.01],[aTime, rTime], 'exp'), doneAction:2);
+    var input = Vibrato.ar(VarSaw.ar(f, 0, LFNoise2.kr(1)), 5, 0.1, 0, 0.2, 0.1, 0.7);
 	var theSine = SinOsc.ar(f);
 
-//	var theSaw = VarSaw.ar(f*1.5, 0, width);
-
-// Emulate six unsynched LFOs driving six comparators for a multi-pulse chorus
-
+    // Emulate six unsynched LFOs driving six comparators for a multi-pulse chorus
 	var oscs = 6;
 	var scaler = 1/oscs;
 
@@ -97,16 +82,16 @@ SynthDef(\ChMach, { arg
 
 	var output = scaler*(comp1+comp2+comp3+comp4+comp5+comp6);
 	//Add a hint of fundamental for body
-     output = output+0.001*theSine;
+    output = output+0.001*theSine;
 
 	output = 0.01*LeakDC.ar(output, 0.9995);
 
 	//Doubled Moog with overdrive.
 	//Mmmm yeah.
 	output = MoogFF.ar(output.tanh*20.0, (f*filter)+LFNoise2.ar(1, 400, 1), LFNoise2.ar(0,3.5, 0));
-	output = MoogFF.ar(output*4, f*LFNoise2.kr(0.2, 6, 4), 0.5);
+	output = MoogFF.ar(output*2, f*LFNoise2.kr(0.2, 6, 4), 0.5);
 
-	output = 2*env*output.tanh;
+	output = env * output.tanh;
 	Out.ar(0, Pan2.ar(output, pan));
 	Out.ar(16, Pan2.ar(output, pan));
 	Out.ar(18, Pan2.ar(output, pan));
@@ -115,21 +100,20 @@ SynthDef(\ChMach, { arg
 );
 
 (
-	var g=Group.basicNew(s,1);
+	var g = Group.basicNew(s,1);
 
 	var stereoBuffer1L = Buffer.alloc(s, s.sampleRate*3, 1);
 	var stereoBuffer1R = Buffer.alloc(s, s.sampleRate*3, 1);
 
     var monoBuffer1 = Buffer.alloc(s, s.sampleRate*2, 1);
 
-	var rootPitch=36;										// Start on a C
+	var rootPitch = 36;										// Start on a C
 
 	var stopTranspose = 0;
 	var transposeCount = 10;									//Wait a while after transposing to minimise semitone clashes
 
-	//Non-ET pentatonic ratios
-	var thisRatio = [0.25, 0.5, 0.75, 1, 1.125, 1.333333, 1.5, 1.6875, 2, 2.25, 2.6666666, 3, 3.375, 4, 5];
-	var thisPitch;
+    var thisRatio = Scale.minor.ratios;
+	var thisPitch = thisRatio.choose * rootPitch.midicps;
 
 	var svf = Synth.tail(g, \Filters);
 	var d = Synth.tail(g, \StereoModDelay);
@@ -138,8 +122,6 @@ SynthDef(\ChMach, { arg
 	stereoBuffer1R.zero;
 	d.set(\bufferL, stereoBuffer1L);
 	d.set(\bufferR, stereoBuffer1R);
-
-	thisPitch = thisRatio.choose*rootPitch.midicps;
 
 	//First few notes have a slow attack and longer interval
 	{4.do
@@ -157,11 +139,10 @@ SynthDef(\ChMach, { arg
 		}
 	};
 
-	//Pick a note from the pentatonic scale with somewhat random settings
-	//and slowly noodle around the circle of fifths
+	//Pick a note from the scale with somewhat random settings and slowly noodle around the circle of fifths
 	{inf.do
 		{
-		thisPitch = thisRatio.choose*rootPitch.midicps;
+		thisPitch = thisRatio.choose * rootPitch.midicps;
 		stopTranspose = stopTranspose + 1;
 		Synth.head(g, \ChMach,
 			[\f, thisPitch,
