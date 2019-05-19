@@ -8,12 +8,14 @@ SynthDef(\krell, { |attackMod=0.1, decayMod=0.1, freq=440|
 	Out.ar(0, sig!2);
 }).add;
 
+s = Scale.minor;
+
 Pdef(\krell, Pbind(
 	\instrument, \krell,
-	\attackMod, Pexprand(0.1, 2),
+	\attackMod, Pexprand(0.1, 1),
 	\decayMod, Pexprand(0.1, 1),
 	\dur, Pkey(\attackMod) + Pkey(\decayMod),
-	\freq, Pexprand(110, 440),
+	\freq, 220 * Prand(s.ratios, inf),
 ));
 )
 
