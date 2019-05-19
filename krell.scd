@@ -1,7 +1,5 @@
 (
-SynthDef(\krell, {
-	var attackMod = Rand(0.1, 1);
-	var decayMod = Rand(0.1, 1);
+SynthDef(\krell, { |attackMod=0.1, decayMod=0.1|
 	//var env = Env.adsr(attackMod, decayMod, 0, 0);
 	var env = Env([0,1,0], [attackMod, decayMod], 2);
 	var envgen = EnvGen.kr(env, doneAction:2);
@@ -13,6 +11,9 @@ SynthDef(\krell, {
 
 Pdef(\krell, Pbind(
 	\instrument, \krell,
+	\attackMod, Pexprand(0.1, 2),
+	\decayMod, Pexprand(0.1, 1),
+	\dur, Pkey(\attackMod) + Pkey(\decayMod),
 ));
 )
 
