@@ -1,24 +1,27 @@
 (
-SynthDef(\krell, { |attackMod=0.1, decayMod=0.1, freq=440, modfreq=1|
+SynthDef(\krell, { |attackMod=0.1, decayMod=0.1, freq=440, modfreq=1, pan=0|
 	var env = Env([0,1,0], [attackMod, decayMod], 2);
 	var envgen = EnvGen.kr(env, doneAction:2);
-	var sig = VarSaw.ar(freq * LFNoise1.kr(modfreq).range(0.5, 1.5)) * Rand(0.4, 0.8);
+	var sig = VarSaw.ar(freq * SinOsc.kr(modfreq).range(0.5, 1.5)) * Rand(0.4, 0.8);
 	sig = BPF.ar(sig, Rand(100, 300), Rand(0.1, 2));
 	sig = FreeVerb.ar(sig, 0.3, 0.8);
 	sig = sig * envgen;
-	Out.ar(0, sig!2);
+	sig = Pan2.ar(sig, pan);
+	Out.ar(0, sig);
 }).add;
 
 s = Scale.minor;
 
 Pdef(\krell, Pbind(
 	\instrument, \krell,
-	\attackMod, Pexprand(0.1, 1),
-	\decayMod, Pexprand(0.1, 1),
+	\attackMod, Pexprand(0.1, 0.5),
+	\decayMod, Pexprand(0.1, 0.5),
 	\dur, Pkey(\attackMod) + Pkey(\decayMod),
 	\freq, 220 * Prand(s.ratios, inf),
-	\modfreq, Pexprand(5, 25),
+	\modfreq, Pexprand(0.5, 2),
+	\pan, Pwhite(-0.5, 0.5),
 ));
 )
 
 Pdef(\krell).play;
+Pdef(\krell).pause;
