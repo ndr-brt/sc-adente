@@ -1,5 +1,3 @@
 # sc-adente
-Some supercollider related stuff.
+Shitty live coding stuff.
 
-## TODO:
-Set open stage controller default values from supercollider
