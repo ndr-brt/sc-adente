@@ -1,0 +1,18 @@
+
+d1 $ stack [
+  every 4 (fast 4) (slow 2 $ s "bd:2 sn bd:7" # room (rand + 1) # orbit 0 # delay (rand + 2) # speed 0.5 # gain 1.4 # size (range 0.3 0.5 $ saw)),
+  every 4 (rev) (s "hh ~ . hh hh*2" # n "2" # delay "[4 2.4]" # orbit 2 # speed 0.3 # cutoff 400)
+]
+
+d2 $ every 2 (rev) (s "~ supersaw . supergong ~" # n "c2 d2 bb1" # sustain 1.5 # decay 0.9 # orbit 1 # room (rand + 0.5) # speed rand # cutoff (range 300 600 $ sine) # gain 1.2)
+
+d2 silence
+
+d3 $ every 3 (rev) (euclid 3 8 $ sound "cb" # speed 0.5 # cutoff (range 200 500 $ sine))
+d3 silence
+
+d4 $ degradeBy 0.60 $ sound "em2*3 em2" # note (range 1 6 $ saw) # speed ((rand - 0.2) * 2) # room (rand + 2.5) # orbit 3 # gain 0.6 # pan (rand)
+
+d5 $ sometimesBy 0.80 (rev) $ sound "industrial*4?" # crush (irand 6) # gain (rand + 0.1)
+
+hush
