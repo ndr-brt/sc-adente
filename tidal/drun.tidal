@@ -1,0 +1,12 @@
+setcps (120/60/4)
+
+d1 $ slow 2 $ sound "bd ~ bd" # n "3" # speed 0.05 # gain 2.8 # delay "0.4"
+
+d2 $ slow 2 $ every 2 (slow 2.5) $ every 3 (# room 1) (midinote "22 20 24" # s "supersaw supersquare supergong" # speed 0.05 # orbit 1 # room "0.5" # gain 2)
+
+d3 $ slow 2 $ stack [
+  degradeBy 0.60 $ sometimesBy 0.80 (# crush 3) $ "metal*6" # delay "[0 0.8 0.6]/2",
+  every 2 (rev) (n "[1 .. 5]" # sound "space" # room "0.4" # gain "0.6" # orbit 0)
+] # speed 0.5
+
+hush
