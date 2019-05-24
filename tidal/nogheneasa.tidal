@@ -1,4 +1,4 @@
-d1 $ slow 4 $ n "c2 as2 f2" # s "supersaw" # sustain "4" # pitch1 (range 1 3 $ fast 4 $ sine) # vowel "e"
+d1 $ jux (rev) $ slow 4 $ n "c2 as2 f2" # s "supersaw" # sustain "4" # pitch1 (range 1 3 $ fast 4 $ sine) # vowel "e"
 
 d2 $ stack [
   every 3 (slow 2.4) $ every 5 (rev) $ sound "industrial industrial odx? incoming" # orbit 0 # room 0.5 # size 0.4 # speed 0.8,
@@ -8,4 +8,15 @@ d2 $ stack [
   every 2 (fast 3) $ sound "realclaps*5?" # pan (rand) # n (irand 5) # speed (sine) # orbit 2 # size (tri)
 ]
 
-d3 $ sound "wind" # sustain 4 # crush "1"
+d3 $ jux rev
+    $ chunk 4 (fast 2 . (|- n 12))
+    $ off 0.25 (|+ 7)
+    $ struct (iter 4 "t(5,8)")
+    $ n (scale "ritusen" "0 .. 7")
+      # sound "superpiano" # crush (run 17)
+
+d4 $ jux (rev) $ n (scale "marva" (run 14)) # s "supergrind" # room 0.8 # delay 0.5
+
+d5 $ jux (rev) $ euclid 13 19 $ n "2*2 4? 9*2 ~ 7?" # s "superzow" # detune (run 8) # room (range 0 1 $ fast 4 $ sine) # cutoff (range 100 (run 5000 + 3000) $ fast 4 $ saw)
+
+hush

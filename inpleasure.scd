@@ -18,6 +18,5 @@ Pdef(\inpleasure, Pbind(
 )
 
 Pdef(\inpleasure).play;
+Pdef(\inpleasure).stop;
 
-Ndef(\inpleasure).play;
-Ndef(\inpleasure).free;
