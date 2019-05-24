@@ -1,0 +1,11 @@
+d1 $ slow 4 $ n "c2 as2 f2" # s "supersaw" # sustain "4" # pitch1 (range 1 3 $ fast 4 $ sine) # vowel "e"
+
+d2 $ stack [
+  every 3 (slow 2.4) $ every 5 (rev) $ sound "industrial industrial odx? incoming" # orbit 0 # room 0.5 # size 0.4 # speed 0.8,
+  fast 4 $ sound "speechless?" # n (irand 8) # gain 1.2 # pan (sine),
+  sound "bottle . bottle*2 ~" # speed 0.09 # delay "[1 0 1 0]" # gain 0.6,
+  euclid 12 17 $ sound "rs" # speed 0.05 # room 0.7 # orbit 1 # resonance 0.9 # size 0.6,
+  every 2 (fast 3) $ sound "realclaps*5?" # pan (rand) # n (irand 5) # speed (sine) # orbit 2 # size (tri)
+]
+
+d3 $ sound "wind" # sustain 4 # crush "1"

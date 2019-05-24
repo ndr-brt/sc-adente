@@ -2,7 +2,7 @@ setcps (90/60/4)
 
 d1 $ cat [
   n "d5 d5 c5 c5 d5 d5 c5 c5 d5 d5 ~ ~ f5 f5 ~ ~",
-  n "d5 d5 c5 c5 d5 d5 c5 c5 d5 d5 ~ ~ b4 b4 ~ ~"
+  n "d5 d5 c5 c5 d5 d5 c5 c5 d5 d5 ~ ~ f4 f4 ~ ~"
 ] # sound "superpwm" # sustain 0.09 # release 0.12 # cutoff (range 500 1200 $ sine)
 
 hush
