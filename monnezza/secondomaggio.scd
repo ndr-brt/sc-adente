@@ -15,8 +15,8 @@ x.free;
 (
 ~pathos = Pdef(\sona, Pbind(
 	\instrument, \cappu,
-	\dur, Pexprand(0.2, 0.8, inf),
-	\freq, Prand([60, 43, 78, 43, 32, 54].choose.midicps, inf),
+	\dur, Pexprand(0.2, 0.5, inf),
+	\freq, Prand([60, 43, 78, 43, 32, 54].midicps, inf),
 	\pan, Prand([-0.5, 0, 0.5], inf),
 	\atk, Pexprand,
 	\decay, Pexprand(5, 6),
@@ -26,7 +26,6 @@ x.free;
 )
 )
 
-s.meter;
 ~pathos.play;
 ~pathos.stop;
 ~pathos.set(\amp, 0.1);

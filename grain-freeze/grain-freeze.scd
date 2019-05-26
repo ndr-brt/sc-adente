@@ -54,24 +54,3 @@ OSCdef.new(\gf_distAmt, { |msg| c.set(\distAmt, msg[1]) }, '/gf/distAmt');
 
 { Out.ar(a, SoundIn.ar(0)) }.play;
 )
-
-// set lowpass cutoff:
-c.set(\lowPassCutoff, 5000);
-
-// set high pass cutoff:
-c.set(\highPassCutoff, 20);
-
-// reset it:
-c.set(\highPassCutoff, 20);
-
-// set distortion (CAREFUL!! Gets loud):
-c.set(\postDistCutoff, 180);
-
-c.set(\distAmt, 50.dbamp);
-
-// increase release time and free:
-(
-c.set(\releaseTime, 10);
-c.set(\gate, 0);
-)
-

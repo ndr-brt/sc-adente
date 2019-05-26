@@ -25,4 +25,3 @@ Pdef(\krell, Pbind(
 
 Pdef(\krell).play;
 Pdef(\krell).pause;
-
