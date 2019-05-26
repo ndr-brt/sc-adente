@@ -2,11 +2,16 @@
 // Ndef(\flanger).fadeTime = 20
 
 Ndef(\flanger, {
-	var sigPluck, local, delay, cutoff, rate, width, pluckOffset, pluckCoef, bassTrig;
-	var pulse, famp, dist;
+	var sigPluck, local, delay, cutoff, bassTrig, pulse, dist;
 
 	var sig = Ndef(\in).ar(2)[0];
 	var f0 = Select.kr(LFTri.kr(1/64).range(0, 3), [44, 43, 41]).lag(12);
+	var famp = 1;
+	var rate = 4;
+	var pluckOffset = 5;
+	var pluckCoef = 0.9;
+	var width = SinOsc.kr(1/34).range(0.1, 0.9);
+
 	var f = [
 		43,
 		// f0,
@@ -20,15 +25,6 @@ Ndef(\flanger, {
 
 	f = f.midicps;
 	f = f.scramble;
-
-	famp = 1;
-
-	rate = 4;
-
-	pluckOffset = 5;
-	pluckCoef = 0.9;
-
-	width = SinOsc.kr(1/34).range(0.1, 0.9);
 
 	pulse = Impulse.ar(rate / 2) + Impulse.ar(rate / 2, 1/2.2);
 	pulse = pulse * LFNoise2.ar(20).range(-20, 0).dbamp;
@@ -51,8 +47,7 @@ Ndef(\flanger, {
 	local = -20.dbamp * local;
 	local = local + Splay.ar(DelayC.ar(local, 4, { rrand(0.0, 4.0) } ! 6, 0.5));
 
-	sigPluck = delay.collect({
-		|delay, i|
+	sigPluck = delay.collect({ |delay, i|
 		delay = [
 			LFCub.ar(1 / rrand(30, 36), 2.0.rand).range(delay - pluckOffset, delay + pluckOffset)
 			+ SinOsc.ar(1/2).range(-0.2, 0.2),
