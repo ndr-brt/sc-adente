@@ -1,5 +1,9 @@
-p = ProxySpace.push(s.boot);
 (
+p = ProxySpace.push(s.boot);
+p.fadeTime = 3;
+)
+(
+
 ~inpleasure = { |mix=0.33, room=0.5, damp=0.5|
 	var in = SoundIn.ar(0, 1);
 	in = FreeVerb.ar(in, mix, room, damp);
@@ -7,10 +11,6 @@ p = ProxySpace.push(s.boot);
 	in = Pan2.ar(in);
 	Limiter.ar(in);
 };
-)
-
-~inpleasure.play;
-~inpleasure.vol = 6;
 
 ~mixMouse = { [MouseX.kr(0, 5)] };
 ~roomMouse = { [MouseY.kr(0, 5)] };
@@ -19,3 +19,13 @@ p = ProxySpace.push(s.boot);
 ~inpleasure.map(\mix, ~mixMouse);
 ~inpleasure.map(\room, ~roomMouse);
 ~inpleasure.map(\damp, ~dampMouse);
+)
+
+(
+~inpleasure.play;
+~inpleasure.vol = 6;
+)
+
+~inpleasure.end(5);
+
+p.clear;
