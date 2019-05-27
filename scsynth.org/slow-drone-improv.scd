@@ -1,4 +1,10 @@
 (
+s.quit;
+s.options.memSize = 65536;  // e.g., could be different for you
+s.boot;
+)
+
+(
 // Ndef(\flanger).fadeTime = 20
 
 Ndef(\flanger, {
@@ -49,15 +55,15 @@ Ndef(\flanger, {
 
 	sigPluck = delay.collect({ |delay, i|
 		delay = [
-			LFCub.ar(1 / rrand(30, 36), 2.0.rand).range(delay - pluckOffset, delay + pluckOffset)
+			LFCub.ar(1 / rrand(34, 36), 2.0.rand).range(delay - pluckOffset, delay + pluckOffset)
 			+ SinOsc.ar(1/2).range(-0.2, 0.2),
 			delay * 4.05
 		];
-		PeakFollower.kr(sig, 0.9) * Pluck.ar(
+		PeakFollower.kr(sig, 0.8) * Pluck.ar(
 			sig + local, sig,
-			4,
+			LFNoise2.kr(0.3).range(0.2, 15),
 			delay.reciprocal,
-			9,
+			7,
 			[pluckCoef, 0.1],
 			[1, -16.dbamp]
 		).sum;
@@ -65,12 +71,12 @@ Ndef(\flanger, {
 
 	sig = SoftClipAmp8.ar(sig + sigPluck, -30.dbamp, 1);
 	sig = Splay.ar(sig);
-	sig = sig + PitchShift.ar(sig, 2, 0.25);
+	sig = sig + PitchShift.ar(sig, 3, 0.25);
 
 	sig = LeakDC.ar(sig);
 	LocalOut.ar(sig);
 
-	sig = sig + (-20.dbamp * AdCVerb.ar(HPF.ar(sig, 900), 9));
+	sig = sig + (-20.dbamp * FreeVerb.ar(HPF.ar(sig, 900), 9));
 
 	sig = -6.dbamp * sig;
 
