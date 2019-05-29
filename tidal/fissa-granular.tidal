@@ -1,0 +1,29 @@
+d1 $ "feelfx*2"
+  # speed (range 0.04 0.07 $ rand)
+
+d2 $ every 3 (fast 2) $ slow 4 $ "bd? hh*2? cb*2? sn*3? bd?" # n (irand 8)
+  # speed 0.5
+  # orbit 1
+  # room 0.8
+  # size 1
+  # delay 0.7
+  # gain 0.5
+
+d2 silence
+
+d3 $ slow 1.5 $ jux (rev) $ n "d9*3 e9*2 d9*5"
+  # s "supersaw"
+  # orbit 1
+  # size 0.7
+  # cutoff (range 400 800 $ rand)
+  # speed (range 0.5 0.9 $ rand)
+
+d4 $ every 4 (slow 8) $ degradeBy 0.75 $ slow 4 $ n (irand 10) # s "diphone"
+  # gain 0.
+  # hpf (range 800 1800 $ slow 16 $ sine)
+  # speed "[0.5, -0.5]"
+
+d5 $ euclid 4 18 $ s "oc" # cutoff 1000
+d5 silence
+
+hush
