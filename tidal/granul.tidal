@@ -1,7 +1,46 @@
-d1 $ slow 6 $ striate' 4096 (1) $ s "wobble"
-  # cutoff (range 100 1500 $ slow 16 $ sine)
-  # room (range 0.4 1.5 $ slow 4 $ saw)
-  # speed (range 0.8 1.2 $ rand)
+d1 $ loopAt 32 $ chop 32 $ s "industrial"
+  # n (irand 2)
+  # hcutoff "80"
+  # cutoff "37"
+  # resonance "0.9"
+  # gain "0.8"
+
+d2 $ jux (rev) $ sound "[808? 808? 808?]*20"
+    # speed (range 0.11 0.21 $ slow 0.1 $ sine)
+    # gain "0.9"
+    # hcutoff "90"
+    # hresonance "0.1"
+    # cut "0"
+    # room "0.5"
+    # size "4"
+
+
+-- ou yeah
+
+d1 $ jux (rev) $ sound "speech:6*10"
+  # speed (range 0.15 0.25 $ rand)
+  # resonance 0.8
+  # cutoff (range 20 (range 200 400 $ sine) $ rand)
+  # gain 0.6
+
+d2 $ every 2 (rev) $ every 4 (slow 1.5) $ n (irand 8) # sound "808bd*2 808ht? 808sd*2 808hc*3"
+  # gain 0.9
+  # room 1
+  # size 0.5
+  # orbit 0
+
+d2 silence
+
+d3 $ jux (rev) $ slow 3 $ n (run 12) # s "speech" # crush (irand 16) # gain 0.9 # delay 2
+
+d3 silence
+
+d4 $ jux (fast 3) $ s "supersquare*12? superpiano*6?" # n (range (irand 10 + 8) ((range 25 50 $ slow 8 $ saw)-15) $ rand) # room 0.3 # orbit 1 # cutoff 300
+
+d4 silence
+
+hush
+
 
 d2 $ every 4 (fast 2) $ every 4 (rev) $ jux (rev) $ n (run 5) # s "breaks125" # speed 0.9 # attack 0.1 # release 2 # delay 0.4
 
