@@ -1,0 +1,22 @@
+d1 $ slow 6 $ striate' 4096 (1) $ s "wobble"
+  # cutoff (range 100 1500 $ slow 16 $ sine)
+  # room (range 0.4 1.5 $ slow 4 $ saw)
+  # speed (range 0.8 1.2 $ rand)
+
+d2 $ every 4 (fast 2) $ every 4 (rev) $ jux (rev) $ n (run 5) # s "breaks125" # speed 0.9 # attack 0.1 # release 2 # delay 0.4
+
+d2 silence
+
+d3 $ slow 2 $ n (rand * saw) # s "supersaw" # speed (rand) # cutoff (range 300 2500 $ fast 4 $ sine)
+  # attack 0.4
+  # delay 1
+  # orbit 0
+  # size 0.2 # gain 0.6
+
+d3 silence
+
+d4 $ jux (rev) $ slow 1.5 $ n (run 8) # s "industrial:5" # gain 0.6 # room 0.5 # orbit 1 # stretch 1
+
+d4 silence
+
+hush
