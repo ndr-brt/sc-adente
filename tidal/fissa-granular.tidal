@@ -25,15 +25,28 @@ d4 $ every 4 (slow 8) $ degradeBy 0.75 $ slow 4 $ n (irand 10) # s "diphone"
   # hpf (range 800 1800 $ slow 16 $ sine)
   # speed "[0.5, -0.5]"
 
-d5 $ striate' 12 (1/3) $ s "circus:1*2"
+d5 $ striate' 16 (1/1) $ s "circus:1"
   # cutoff (range 200 400 $ rand)
-  # crush 6
+  # crush 5
 
-d5 silence
+d5 $ jux (rev) $ s "juno*24"
+  # cutoff (irand 200 + 500)
 
-d5 $ jux (rev) $ s "juno*12" # cutoff (irand 200 + 300)
+d6 $ every 8 (fast 2) $ striate 2 $ n (run 10)
+  # s "haw haw:5?"
 
-d6 $ slow 6 $ n (irand 6) # s "ifdrums"
+d7 $ n (run 24)
+  # s "speech"
+  # speed (range 0.4 1.5 $ rand)
+  # hpf 800
+  # orbit 1
+  # delay 0.9
+  # crush (range 16 1 $ slow 8 $ saw)
+  # attack (rand)
+  # release (rand)
 
+d8 $ jux (rev) $ s "supersaw*11"
+  # n (range (range 1 21 $ slow (irand 5) $ saw) (range 21 42 $ slow (irand 3) $ sine) $ rand)
+  # cutoff (range 600 1200 $ slow 16 $ tri)
 
 hush
