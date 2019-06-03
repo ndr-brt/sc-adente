@@ -1,0 +1,19 @@
+d1 $ slow 4 $ striate' 64 (rand * 0.4 + 0.6) $ s "battles:1" # speed (range 0.9 0.4 $ slow 2 $ sine)
+
+d2 $ stack [
+  jux (rev) $ n (irand 12) # s "industrial" # gain 0.7 # speed (rand) # cutoff (range 300 800 $ slow 2 $ saw),
+  n (irand 2) # s "dr" # gain 1 # cutoff (range 1000 10000 $ fast 0.5 $ sine),
+  every 4 (slow 2) $ n "[0 4 3 6]" # s "haw*4" # attack 0.3 # gain 1.4 # speed (rand -0.5 * 2)
+] # room 0.7 # orbit 1
+
+d3 $ fastcat [
+  every 2 (rev) $ s "clak*3? clak:1 ~ clak*2?" # gain (range 1 4 $ rand),
+  n (irand 32) # s "miniyeah" # gain (rand + 1.5) # speed (range 1 4 $ rand) # release 0.5 # attack 0.001 # pan (rand-1)
+]
+
+xfade 1 $ silence
+xfade 2 $ silence
+xfade 3 $ silence
+
+
+hush
