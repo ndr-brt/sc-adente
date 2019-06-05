@@ -1,33 +1,35 @@
-d1 $ slow 2 $ every 3 (jux (rev)) $ n "[1 .. 3]*2?" # s "voodoo" 
-    # speed (slow 8 $ sine) 
-    # room sine
-    # orbit 0
-    # pan saw
-    # resonance 1.4
-    # crush (run 16)
-    # gain 1
+d1 $ stack [
+    n (irand 6) 
+        # s "latibro" 
+        # lpf (range 100 1000 $ slow (irand 6) $ sine) 
+        # leslie 1 
+        # lsize 1.5 
+        # lrate (irand 5) 
+        # pan (perlin) 
+        # gain 0.8
+        # orbit 1,
+    jux (rev) $ every 4 (fast 4) $ s "808bd*2 ~ 808:2? 808mc*3" 
+        # squiz (irand 60)
+        # nudge 0.1,
+    striate' 64 (1/2) $ n (irand 2) 
+        # s "latibro" 
+        # attack 0.3 
+        # release 0.7 
+        # gain 0.6
+        # bpf (range 100 1000 $ slow 16 $ tri) # bpq (rand),
+    every 3 (degradeBy 0.75) $ euclid 3 8 $ s "mash*8?" # n "<0 2 1>" 
+        # gain 0.7 
+        # crush (run 8) 
+        # pan (rand * 0.5),
+    every 4 (slow 2) $ every 2 (degradeBy (rand)) $ n "[0 4 2 1]/2" # s "~ [cb cb:1]" 
+        # loop (run 5) 
+        # lpf (range 500 700 $ slow 4 $ isaw) 
+        # shape (range 0.5 0.85 $ rand) 
+        # gain (range 0.5 0.8 $ perlin)
+]
 
-d2 $ jux (rev) $ n "[1 .. 5]" 
-    # s "tink" 
-    # detune (irand 6) 
-    # delay (sine + 0.4)
-    # pan sine
-    # cutoff (range 600 6100 $ sine)
-    # gain 0.5
+xfadeIn 1 8 $ sound "speech:2" # n (run 16) # delay 0.8 # delayfb 0.7 # delaytime 0.7
 
-d3 $ every 2 (rev) $ s "industrial:2 industrial:4?" # room 1.5 # orbit 1 # speed 0.1
-
-d4 $ slow 2 $ n "c2 d2 a2" # s "bass0" # speed 0.08 # size 2 
-    # room (slow 4 $ sine + 0.5)
-    # size (sine + 0.5)
-    # orbit 2
-    # gain 0.3
-    # squiz "100 2 8 256"
-
-d5 $ every 3 (jux (fast 2)) $ slow 4 
-    $ n "c2 ~ c2 ~ c2 c2 ~ d2" # s "supersaw" 
-    # speed 0.25 # room 2 # orbit 3 # crush 8
-    # pan sine # shape rand
-    # gain 0.3
+hush
 
 hush
