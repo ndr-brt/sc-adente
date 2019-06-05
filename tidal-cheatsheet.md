@@ -1,5 +1,9 @@
 # Tidal cheatsheet
 
+## Silence
+* (not a lot to say... shut up that sound!) **silence**
+* (shut up everything) **hush**
+
 ## Oscillators
 ### Wave
 * (output 0 to 1) **sine**, **cosine**, **square**, **tri**, **saw**, **isaw**
@@ -7,6 +11,10 @@
 ### Random
 * (output 0 to 1) **rand**
 * (int output 0 to N) **irand** N
+* (smooth noise) **perlin**
+* (smooth noise with input) **perlinWith** (saw * 4)
+* (2d noise with custom pattern as 2nd dimension) **perlin2** (sine*4)
+* (2d noise with custom dimensions) **perlin2With** (cosine*2) (sine*2)
 
 ### Choose
 * (choose an item from a list) **choose** [0,1,...]
