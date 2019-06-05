@@ -1,4 +1,8 @@
-d1 $ slow 3 $ striate' 64 (rand * 0.4 + 0.6) $ s "battles:1" # speed 0.5 # gain 0.9 -- # crush 0
+d1 $ slow 3 $ striate' 64 (rand * 0.4 + 0.6) $ s "battles:1"
+  # speed 0.5
+  # gain 0.9
+  # cutoff (range 100 1500 $ slow 3 $ cosine)
+  # resonance (rand) -- # crush 0
 
 d2 $ stack [
   n (irand 12) # s "industrial" # gain 0.7 # speed (rand) # cutoff 6400,
