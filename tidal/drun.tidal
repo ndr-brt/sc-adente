@@ -1,12 +1,56 @@
-setcps (120/60/4)
+d1 $ striate' 64 (1 - (rand/5)) $ n (run (irand 5 + 15))
+  # s "msg"
+  # lpf (range (irand 200 + 100) (irand 100 + 1000) $ slow 32 $ sine)
+  # lpq (rand/3)
+  # crush (range 16 4 $ slow 8 $ saw)
+  # orbit 1
+  # shape (perlin / 2)
+  # pan (rand)
+  # leslie 2
+  # lrate 3
 
-d1 $ slow 2 $ sound "bd ~ bd" # n "3" # speed 0.05 # gain 2.8 # delay "0.4"
+d1 silence
 
-d2 $ slow 2 $ every 2 (slow 2.5) $ every 3 (# room 1) (midinote "22 20 24" # s "supersaw supersquare supergong" # speed 0.05 # orbit 1 # room "0.5" # gain 2)
 
-d3 $ slow 2 $ stack [
-  degradeBy 0.60 $ sometimesBy 0.80 (# crush 3) $ "metal*6" # delay "[0 0.8 0.6]/2",
-  every 2 (rev) (n "[1 .. 5]" # sound "space" # room "0.4" # gain "0.6" # orbit 0)
-] # speed 0.5
+d2 $ slow 2 $ every 2 (slow 2.5) $ every 3 (jux (rev)) $ midinote "<22 20 24>"
+  # s "supersaw supersquare*2 supergong?"
+  # speed (range 0.01 0.04 $ sine)
+  # orbit 0
+  # room (rand)
+  # nudge 0.3
+  # gain 0.8
+
+d2 silence
+
+d3 $ jux (rev) $ fast 4 $ n (irand 4) # s "metal:2*4 metal:0*2 metal:1*5"
+  # gain (1 - (rand/3))
+  # orbit 1
+  # cps (rand/4)
+  # hpf ((irand 400 + 200) + irand 300)
+  # hpq (range 0.5 1 $ slow 3 $ rand)
+  # waveloss (range 20 80 $ slow 4 $ sine)
+  # crush (range 10 1 $ slow 30 $ isaw)
+
+d3 silence
+
+d4 $ s "outdoor:2*3?"
+  # coarse (irand (8))
+  # speed (rand * 2)
+  # squiz (irand 80)
+  # bpf (range 1000 5000 $ tri)
+  # bpq (irand 16)
+
+d4 silence
+
+d5 $ striate' (8) (1)
+  $ n (run 8)
+  # s "kurt"
+  # begin (range 0.1 0.4 $ perlin)
+  # vowel "o e a"
+  # end (range 0.6 0.9 $ rand)
+  # gain 0.1
+  # cps (range 0.2 0.8 $ rand)
+
+d5 silence
 
 hush
