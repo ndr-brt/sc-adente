@@ -26,8 +26,6 @@
 ### Control
 * (change fade-in time) **attack** "0 1"
 * (change fade-out time) **release** "<0.5 1>"
-* (change start time of pattern) **begin** "<0 0.25 0.5>"
-* (change finish time of pattern) **end** "<0 0.25 0.5>"
 * (lower the sample rate, factor) **coarse** "<4 8 16 24>"
 * (bit crusher, 1 max, 16 min) **crush** "8"
 * (send effects on separate channel) **orbit** 1
@@ -40,16 +38,20 @@
 * (leslie cabinet size in meters) **lsize** 3.4
 * (play sample N times in loop) **loop** "2.3"
 * (convert midi to note) **midinote** 62
-* (change sample ordinality) **n** 2
 * (give swing feel, 0 human, 1 machine) **nudge** 0.7
 * (change pan) **pan** 0.7
 * (change how much reverb in mix) **room** 0.8
 * (change reverb size) **size** 0.7
 * (waveshape distortion. 1 is louuud!) **shape** 0.7
-* (load a sample) **s** "bd"
 * (pitch raise with crazy stuffy, from 1 to inf) **squiz** "1 2 8 256"
 * (voice effect) **vowel** "a e i o u"
 * (divide audio into segments and discard a fraction of them from 0 to 100) **waveloss** "20 0.6 100"
+
+#### Sample
+* (load a sample) **s** "bd"
+* (change sample ordinality) **n** 2
+* (change start time of pattern) **begin** "<0 0.25 0.5>"
+* (change finish time of pattern) **end** "<0 0.25 0.5>"
 
 #### Filter
 * (bandpass filter, cutoff frequency) **bpf** 3000
