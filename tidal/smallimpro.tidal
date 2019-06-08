@@ -1,35 +1,33 @@
 d1 $ stack [
-    n (irand 6) 
-        # s "latibro" 
-        # lpf (range 100 1000 $ slow (irand 6) $ sine) 
-        # leslie 1 
-        # lsize 1.5 
-        # lrate (irand 5) 
-        # pan (perlin) 
+    n (irand 6)
+        # s "latibro"
+        # lpf (range 100 1000 $ slow (irand 6) $ sine)
+        # leslie 1
+        # lsize 1.5
+        # lrate (irand 5)
+        # pan (perlin)
         # gain 0.8
         # orbit 1,
-    jux (rev) $ every 4 (fast 4) $ s "808bd*2 ~ 808:2? 808mc*3" 
+    jux (rev) $ every 4 (fast 4) $ s "808bd*2 ~ 808:2? 808mc*3"
         # squiz (irand 60)
         # nudge 0.1,
-    striate' 64 (1/2) $ n (irand 2) 
-        # s "latibro" 
-        # attack 0.3 
-        # release 0.7 
+    striate' 64 (1/2) $ n (irand 2)
+        # s "latibro"
+        # attack 0.3
+        # release 0.7
         # gain 0.6
         # bpf (range 100 1000 $ slow 16 $ tri) # bpq (rand),
-    every 3 (degradeBy 0.75) $ euclid 3 8 $ s "mash*8?" # n "<0 2 1>" 
-        # gain 0.7 
-        # crush (run 8) 
+    slow 8 $ every 3 (degradeBy 0.75) $ euclid 3 8 $ s "mash*8?" # n "<0 2 1>"
+        # gain 0.7
+        # crush (run 8)
         # pan (rand * 0.5),
-    every 4 (slow 2) $ every 2 (degradeBy (rand)) $ n "[0 4 2 1]/2" # s "~ [cb cb:1]" 
-        # loop (run 5) 
-        # lpf (range 500 700 $ slow 4 $ isaw) 
-        # shape (range 0.5 0.85 $ rand) 
+    every 4 (slow 2) $ every 2 (degradeBy (rand)) $ n "[0 4 2 1]/2" # s "~ [cb cb:1]"
+        # loop (run 5)
+        # lpf (range 500 700 $ slow 4 $ isaw)
+        # shape (range 0.5 0.85 $ rand)
         # gain (range 0.5 0.8 $ perlin)
 ]
 
 xfadeIn 1 8 $ sound "speech:2" # n (run 16) # delay 0.8 # delayfb 0.7 # delaytime 0.7
-
-hush
 
 hush
