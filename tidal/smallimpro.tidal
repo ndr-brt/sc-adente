@@ -2,12 +2,8 @@ d1 $ stack [
     n (irand 6)
         # s "latibro"
         # lpf (range 100 1000 $ slow (irand 6) $ sine)
-        # leslie 1
-        # lsize 1.5
-        # lrate (irand 5)
         # pan (perlin)
-        # gain 0.8
-        # orbit 1,
+        # gain 0.8,
     jux (rev) $ every 4 (fast 4) $ s "808bd*2 ~ 808:2? 808mc*3"
         # squiz (irand 60)
         # nudge 0.1,
@@ -26,7 +22,10 @@ d1 $ stack [
         # lpf (range 500 700 $ slow 4 $ isaw)
         # shape (range 0.5 0.85 $ rand)
         # gain (range 0.5 0.8 $ perlin)
-]
+] # leslie 0.6
+  # lsize 1.2
+  # lrate (irand 3)
+  # orbit 1
 
 xfadeIn 1 8 $ sound "speech:2" # n (run 16) # delay 0.8 # delayfb 0.7 # delaytime 0.7
 
