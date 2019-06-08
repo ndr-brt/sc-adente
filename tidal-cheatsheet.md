@@ -71,8 +71,35 @@
   * "c": playback rate relative to cycle length
   * "s": playback length in seconds
 
-
 #### Cut
 * (cut sample when another starts on same cutgroup) **cut** "1"
 * (cut only sample when it recours) **cut** "-1"
 * (creative use of cut) sound "bev(3,8)" # **cut** "[1 2 4]*2"
+
+### Hi Order
+
+
+* (apply another function conditionally) **every** 3 (fun)
+* (add offset to every) **every'** 3 1 (fun)
+* (applies another function to matching events in a pattern) **fix** (# crush 3) (n "[1,4]")
+* (run every with different arguments) **foldEvery** [3,4,5] (fast 2)
+* (apply one or another function conditionally) **ifp** (rand > 0.7) (striate 4) (# coarse "24 48")
+* (applies stereo effects with a function) **jux** (rev)
+* (parametrize pan of jux with values from 0 to 1) **juxBy** 0.5 (rev)
+* (apply a function over the same pattern) **superimpose** (fast 2)
+* (apply different functions to same pattern) **layer** [id, rev, fast 2]
+* (superimpose but with an offset in cycle time) **off** 0.25 (# crush 2)
+
+#### Sometimes
+Apply function to a pattern with different possibility
+* (100%) **always** (# crush 2)
+* (90%) **almostAlways** (fast 2)
+* (75%) **often** (slow 3)
+* (50%) **sometimes** (rev)
+* (25%) **rarely** (# speed 2)
+* (10%) **almostNever** (# accelerate 2)
+* (0%) **never** (# cut 1)
+* (can choose percentual) **sometimesBy** 0.93 (jux (rev))
+
+* (as sometimes but on cycles) **someCycles** (# crush 3)
+* (as sometimes but with probabilty) **someCyclesBy** 0.64 (# speed 3)
