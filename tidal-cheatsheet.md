@@ -78,8 +78,8 @@
 
 ### Hi Order
 
-
 * (apply another function conditionally) **every** 3 (fun)
+* (apply function to some cycles) **whenmod** 4 3 (fast 4) $ s "bd sn"
 * (add offset to every) **every'** 3 1 (fun)
 * (applies another function to matching events in a pattern) **fix** (# crush 3) (n "[1,4]")
 * (run every with different arguments) **foldEvery** [3,4,5] (fast 2)
@@ -89,6 +89,13 @@
 * (apply a function over the same pattern) **superimpose** (fast 2)
 * (apply different functions to same pattern) **layer** [id, rev, fast 2]
 * (superimpose but with an offset in cycle time) **off** 0.25 (# crush 2)
+* (apply different functions for every cycle) **spread** ($) [rev, fast 2]
+* (apply different functions for every cycle, randomly) **spreadr** ($) [rev, fast 2]
+* (apply different functions in a single cycle) **fastspread** (s) [(# speed 2), striate 3]
+* (run pattern of patterns) **ur**
+* (apply one control pattern to list of patterns) **weave** 4 (pan sine) [s "bd", s "casio"]
+* (apply a list of functions to a pattern) **weaveWith** 3 (s "bd sn") [fast 2, chop 16]
+* (apply a function only on a part of a pattern) **within** (0, 0.5) (fast 2)
 
 #### Sometimes
 Apply function to a pattern with different possibility
