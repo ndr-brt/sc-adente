@@ -1,0 +1,53 @@
+xfadeIn 1 4
+  $ slow 2
+  $ striate' 32 (1)
+  $ s "battles:3"
+  # lpf (range 100 3000 $ slow 4 $ tri)
+  # lpq (range 0.1 0.7 $ rand)
+
+xfadeIn 1 16 $ silence
+
+xfadeIn 2 4
+  $ superimpose (fast 2)
+  $ n "~ e7 ~ [as7 a7]"
+  # s "supersaw"
+  # bpf (range 1500 3000 $ rand)
+  # bpq (range 0.5 2 $ slow 4 $ isaw)
+  # shape 0.8
+  # squiz (irand 60)
+  # cut "[1 2]*2"
+
+d2 silence
+
+xfadeIn 3 2
+  $ whenmod 4 3 (fast 4)
+  $ often (jux (rev))
+  $ spread ($) [rev, fast 2]
+  $ s "~ [bd ~ sn] ~ sn:2"
+  # shape 0.8
+  # orbit 1
+  # gain (range 0.6 0.8 $ rand)
+  # delay 0.8
+  # delayt 0.8
+  # delayfb 0.7
+  # room 0.4
+  # nudge 0.5
+  # size (rand)
+  # crush (range 10 1 $ slow 4 $ perlin)
+
+xfadeIn 3 8 $ silence
+
+xfadeIn 4 2
+  $ whenmod 8 7 (# crush 0)
+  $ n (run 16)
+  # s "birds"
+  # pan (perlin)
+  # gain 1
+  # crush 16
+  # hpf (range 1000 10000 $ slow 2 $ isaw)
+  # crush (range 1 16 $ slow 4 $ sine)
+  # coarse (irand 8)
+
+xfadeIn 4 8 $ silence
+
+hush

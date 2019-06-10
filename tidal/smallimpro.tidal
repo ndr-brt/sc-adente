@@ -30,3 +30,8 @@ d1 $ stack [
 xfadeIn 1 8 $ sound "speech:2" # n (run 16) # delay 0.8 # delayfb 0.7 # delaytime 0.7
 
 hush
+
+
+d1 $ fast 512 $ sound "bd*2 sn lt mt hh hh" # cut 1
+
+d1 silence
