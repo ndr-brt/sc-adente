@@ -1,0 +1,19 @@
+xfadeIn 1 2
+  $ slow 4
+  $ brak
+  $ stripe 2
+  $ striate' 64 (1)
+  $ n (irand 5)
+  # s "tabla"
+  # attack (range 0.05 0.2 $ slow 4 $ perlin)
+  # lpf (range 200 2000 $ slow 8 $ cosine)
+  # lpq (range 0.1 0.5 $ perlin)
+  # orbit 1
+  # size 1.5
+  # room (range 0.1 0.2 $ slow 2 $ perlin)
+  # pan (range 0.25 0.75 $ sine)
+  # squiz (range 1 2 $ slow 16 $ tri)
+  # shape (range 0.3 0.5 $ slow 64 $ isaw)
+  # crush 1
+
+hush
