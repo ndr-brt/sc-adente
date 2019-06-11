@@ -37,6 +37,7 @@
 * (leslie modulation rate) **lrate** 6.7
 * (leslie cabinet size in meters) **lsize** 3.4
 * (play sample N times in loop) **loop** "2.3"
+* (make sample fit the given number of cycles) **loopAt** 4
 * (convert midi to note) **midinote** 62
 * (give swing feel, 0 human, 1 machine) **nudge** 0.7
 * (change pan) **pan** 0.7
@@ -121,3 +122,32 @@ Apply function to a pattern with different possibility
 * (divide the pattern into number of parts and combine without replacement) **shuffle** 3
 * (repeat a pattern at random speeds) **stripe** 2
 * (repeat a pattern at random speeds but also slow down by n) **slowstripe** 3
+
+### Time Functions
+* (make pattern sound a bit like breakbeat) **brak** "bd sn"
+* (divides a pattern into a number of pats then cycles apply function) **chunk** 4 (# speed 2)
+* (chunk in reverse direction) **chunk'**
+* (speed up pattern) **fast** 2
+* (slow down pattern) **slow** 2
+* (shift pattern backward in time) every 4 (0.25 **<~**)
+* (shift pattern foreward in time) every 4 (0.25 **~>**)
+* (speed up pattern and increase speed control) **hurry** 3
+* (divide a pattern, play the subdivisions and increment them each cycle) **iter** 4
+* (iter in reverse direction) **iter'** 3
+* (truncate a pattern) **trunc** 0.75
+* (like truncate but fill the cycle) **linger** 0.25
+* (applies rev to a pattern every other cycle) **palindrome**
+* (reverse the pattern) **rev**
+* (breaks each cycles and then delay every piece by n) **swingBy** (1/4)
+* (alias for swingBy (1/3)) **swing**
+* (play a portion of a pattern) **zoom** (0.25, 0.75)
+
+### Granularization
+* (cuts each sample into parts) **chop** 16
+* (like cuts but bits organized differently) **striate** 8
+* (specify the length of the parts) **striate'** 16 (1/4)
+* (granulate every sample but every other grain is silent) **gap** 8
+
+### Other Functions
+* (append two patterns) **append** (s "bd sn") (s "arpy jvbass")
+* (append two patterns into single cycle) **fastAppend** (s "bd sn") (s "arpy jvbass")
