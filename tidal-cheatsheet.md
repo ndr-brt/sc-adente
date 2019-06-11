@@ -110,3 +110,14 @@ Apply function to a pattern with different possibility
 
 * (as sometimes but on cycles) **someCycles** (# crush 3)
 * (as sometimes but with probabilty) **someCyclesBy** 0.64 (# speed 3)
+
+### Randomness and chance
+* (randomly remove events from a pattern, 50% of the time) **degrade**
+* (randomly remove events from a pattern with probability) **degradeBy** 0.7
+* (play pattern randomly) **randcat** [s "bd*2 sn", sound "jvbass*3"]
+* (chop the sample into pieces and play a random one each cycle) **randslice** 32
+* (repeat each cycle a given number of times) **repeatCycles** 3
+* (divide the pattern into number of parts and combine them radomly) **scramble** 3
+* (divide the pattern into number of parts and combine without replacement) **shuffle** 3
+* (repeat a pattern at random speeds) **stripe** 2
+* (repeat a pattern at random speeds but also slow down by n) **slowstripe** 3
