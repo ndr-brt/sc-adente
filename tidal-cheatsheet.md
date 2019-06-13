@@ -151,3 +151,22 @@ Apply function to a pattern with different possibility
 ### Other Functions
 * (append two patterns) **append** (s "bd sn") (s "arpy jvbass")
 * (append two patterns into single cycle) **fastAppend** (s "bd sn") (s "arpy jvbass")
+
+### Transitions
+* (trigger a pattern at the specified number of cycles) **anticipate** 1
+* (trigger a pattern at the specified number of cycles with time) **anticipate** 1 4
+* (degrade the current pattern to while another undegrading next) ** **clutch** 1
+* (degrade the current pattern to while another undegrading next with time) ** **clutchIn** 1 7
+* (pan the last n version of the pattern across the field) **histpan** 3
+* (interpolate between patterns) **interpolate** 2
+* (interpolate between patterns in time) **interpolateIn** 2 8
+* (jump directly into given pattern without transitions) **jump**
+* (jump after number of cycles) **jumpIn** 3
+* (jump after at least the specified number of cycles passed) **jumpIn'** 4
+* (jump after cycle count mod given integer is zero) **jumpMod** 5
+* (degrade pattern until ends in silence) **mortal** 1
+* (wash away the current pattern applying a function then switching to next) **wash** (chop 8) 4
+* (washes away the current pattern after a certain delay by applying a function to it over time then switching over to the next pattern) **superwash** (# accelerate "4 2") (striate 2) 1 4 6
+* (stop a bit before playing new pattern) **wait** 2
+* (crossfade between old and new pattern over the next two cycles) **xfade** 1
+* (crossfade between old and new pattern over the next n cycles) **xfadeIn** 1  16
