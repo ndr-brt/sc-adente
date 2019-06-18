@@ -1,0 +1,5 @@
+d1
+  $ whenmod 8 6 (# s "sd*3")
+  $ s "bd ~ bd ~ sd:2"
+
+hush
