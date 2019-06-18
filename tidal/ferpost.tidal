@@ -1,0 +1,60 @@
+xfadeIn 1 4
+  $ s "moog*36"
+  # attack 0.4
+  # release 0.3
+  # lpf (range 80 2000 $ slow 8 $ sine)
+  # gain 1
+
+xfadeIn 1 32 $ silence
+
+d2
+  $ every 4 (jux (rev))
+  $ s "[hh27:2*2 ~ hh27:2] ~ hh27:2?"
+  # orbit 2
+  # room 0.2
+  # size 0.4
+  # delaytime 0.3
+  # delay 0.2
+
+xfadeIn 2 12 $ silence
+
+d2 silence
+
+xfadeIn 3 4
+  $ striate' 32 (range 0.9 1 $ rand)
+  $ s "less"
+  # lpf (range 300 (irand 1000 + 800) $ slow (irand 6 + 2) $ (sine + isaw + tri)/3)
+  # gain 0.7
+  # lpq 2.4
+  # orbit 3
+  # crush 1
+
+xfadeIn 3 32 $ silence
+
+d4
+  $ every 3 (fast 2)
+  $ every 15 (jux (rev))
+  $ slow 4
+  $ s "industrial:3"
+  # speed 0.1
+  # coarse (irand 32)
+  # pan (rand)
+  # gain 0.8
+  # crush 1
+
+d4 silence
+
+d5
+  $ hurry (irand 3)
+  $ brak
+  $ n (irand 12)
+  # s "tabla"
+  # speed 0.2
+  # gain 0.6
+  # size 0.8
+  # pan (perlin)
+  # crush 4
+
+xfadeIn 5 12 $ silence
+
+hush
