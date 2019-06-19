@@ -1,5 +1,50 @@
 d1
-  $ whenmod 8 6 (# s "sd*3")
-  $ s "bd ~ bd ~ sd:2"
+  $ degradeBy 1
+  $ slow 4
+  $ juxBy 0.75 (rev)
+  $ every 4 (fast 4)
+  $ every 7 (0.25 <~)
+  $ whenmod 8 6 (# s "sd:3*3")
+  $ s "bd ~ bd ~ sd:3 ~"
+  # nudge 0.3
+  # orbit 1
+  # room 0.1
+  # size 0.1
+  # speed 0.7
+  # waveloss (range 0.1 50 $ slow 8 $ perlin)
+  # shape 0.4
+  # crush 14
+  # gain 0.8
+
+d2
+  $ juxBy 0.7 (rev)
+  $ slow 2
+  $ striate 3
+  $ stack [
+    n "<d2*32 c2*8>" # gain 0.7,
+    n "<as7*16 gs7*16 e7*8>" # gain 0.3 # detune 6 # hpf 3500
+  ]
+  # s "<supersaw>"
+  # attack 1
+  # sustain 1
+  # release 1
+  # lpf (range 300 4000 $ slow 7 $ tri)
+  # lpq (range 0 0.4 $ slow 31 $ (tri + sine)/2)
+  # orbit 2
+
+d2 silence
+
+xfadeIn 2 32 $ silence
+
+d3 
+  $ s "moog:5"
+  # coarse 79
+  # ring 1
+  # ringf 1800
+  # ringdf 1.9
+  # shape 0.5
+  # gain 0.7
+
+d3 silence
 
 hush
