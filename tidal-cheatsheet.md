@@ -11,9 +11,10 @@
 *choose*: **choose** [0,1,..], **chooseBy** "0 0.25 0.5" [0, 2, 3], **wchoose** [(0,0.25),(2,0.5),(3,0.25)], **wchooseBy** "0 0.4 0.7" [(0,0.25),(2,0.5),(3,0.25)]  
 
 ## Functions
+
+*asr*: **attack**, **release**, **sustain**, **hold**
+
 ### Control
-* (change fade-in time) **attack** "0 1"
-* (change fade-out time) **release** "<0.5 1>"
 * (lower the sample rate, factor) **coarse** "<4 8 16 24>"
 * (bit crusher, 1 max, 16 min) **crush** "8"
 * (send effects on separate channel) **orbit** 1
