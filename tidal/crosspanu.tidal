@@ -1,0 +1,122 @@
+d2
+  $ degradeBy (range 0.1 0.4 $ perlin2 (isaw*2))
+  $ striate 12
+  $ scramble 3
+  $ n (run 7)
+  # s "moog*4"
+  # attack (range 0.8 1.2 $ slow 4 $ sine)
+  # release (range 0.8 1.2 $ slow 7 $ cosine)
+  # bpf (range 900 5000 $ slow 11 $ sine)
+  # bpq (range 0.3 3 $ (isaw + tri)/2)
+  -- # waveloss 1 -- optimal for closing
+
+
+d1
+  $ jux (rev)
+  $ slow (choose [8, 6, 10, 4])
+  $ striate' (choose [132, 252, 312, 512]) (range 0.5 1 $ slow 12 $ sine)
+  $ s "ndr"
+  # lpf (range 200 1500 $ slow 5 $ (saw + tri)/2)
+  # lpq (range 0 0.5 $ slow (irand 15) $ (tri + cosine + isaw)/3)
+  # detune (irand 18)
+  # gain 0.8
+
+
+xfadeIn 1 4
+  $ slow (choose [19, 18, 12, 17])
+  $ jux (rev)
+  $ striate' (choose [320, 221, 215, 287]) (range 0.2 1 $ slow 43 $ (sine + perlin)/2)
+  $ "ndr*2"
+  # lpf (range 1000 2700 $ slow 19 $ (saw + tri)/2)
+  # lpq (range 0 0.85 $ slow 17 $ perlin)
+  # detune 18
+  # speed (range 0.2 1.2 $ perlin)
+  # orbit 1
+  # waveloss 100
+  # shape 0.6
+  # delay 1.5
+  # delayt 0.5
+  # delayfb 1.2
+  # room 0.8
+  # size 1.4
+  # coarse (choose [23, 27, 28, 41])
+
+d1 $ sound "hh" # size 0.1 # orbit 1
+
+d1 silence
+
+d2
+  $ slow 4
+  $ s "bass:2 ~ ~"
+  # room 0.8
+  # size 0.8
+  # shape 0.5
+  # orbit 2
+  # gain 0.7
+
+d3
+  $ slow 2
+  $ stack [
+    every 3 (# n "5 7 9 7") $ layer [id, (0.03 ~>)] $ n "5 5 7 9",
+    sometimes (# n (scale "marva" "2 .. 10")) $ jux (rev) $ fast 2 $ n (scale "jiao" "3 .. 9")
+  ]
+  # s "superpiano"
+  -- # detune 51
+  # gain 0.7
+  # orbit 2
+  # room 0.2
+  # size 0.4
+
+d3 silence
+
+
+d4
+  $ juxBy (perlin) (# octave 2)
+  $ striate 15
+  $ every 7 (# detune 3)
+  $ every 4 (# speed 0.9)
+  $ every 6 (# speed 1.4)
+  $ n "5 3 8 11*2"
+  # s "superpiano"
+  # attack 0.7
+  # sustain 1
+  # release 0.7
+  # coarse 2
+  # waveloss 100
+  # size 0.3
+  # orbit 4
+  # lpq 0.3
+
+d5
+  $ degradeBy 1
+  $ every 3 (fast 2)
+  $ juxBy (perlin) (0.005 ~>)
+  $ brak
+  $ every 8 (linger 0.8)
+  $ chunk 4 (# speed (rand + 0.5))
+  $ superimpose (scramble 3)
+  $ s "bd bd ~ ~ sn"
+  # cut 1
+  # orbit 5
+  # room 0.15
+  # size 0.2
+  # coarse 4
+
+
+d4 silence
+
+
+d1
+  $ spread (slow) [64, 52, 56, 60]
+  $ spread (striate' 10000) [(1/20), (1/75), (1/50), (1/100), (1/10)]
+  $ s "fm*4"
+  # n (irand 3)
+  # lpf (range 600 2100 $ slow 7 $ tri)
+  # gain 0.7
+  # orbit 1
+  # delay 0.3
+  # delayfb 0.3
+  # delayt 0.3
+
+
+hush
