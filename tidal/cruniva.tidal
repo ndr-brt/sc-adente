@@ -1,0 +1,47 @@
+
+xfadeIn 1 4
+  $ striate' (choose [100, 96, 104, 111]) (range 0.5 1 $ slow 17 $ sine)
+  $ s "ndr"
+  # lpf (range 200 1200 $ slow 13 $ (sine+saw)/2)
+  # lpq (range 0.1 0.3 $ slow 45 $ (cosine+saw)/2)
+  # detune (irand 13)
+  # speed (range 0.5 1.5 $ perlin)
+  # orbit 1
+  # room 0.2
+  # size 0.3
+  # gain 0.6
+  # delay 0.4
+  # coarse 14
+  # waveloss 95
+
+xfadeIn 1 19 $ silence
+
+d2
+  $ s "bd/3"
+  # delay 1
+  # delayt 0.4
+  # delayfb 0.7
+  # room 0.7
+  # size 0.8
+  # orbit 2
+  # shape 0.5
+
+d2 silence
+
+d3
+  $ juxBy 0.5 (rev)
+  $ every 7 (fast 2)
+  $ every 11 (shuffle 3)
+  $ every 13 (palindrome)
+  $ s "~ hit/4 hit*2"
+  # hpf 1000
+  # orbit 3
+  # room 0.4
+  # size 0.4
+  # coarse (irand 10)
+  # shape 0.2
+  # squiz 32
+  # crush 4
+  # delay 0.5
+
+d3 silence
