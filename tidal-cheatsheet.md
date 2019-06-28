@@ -6,21 +6,20 @@
 ## Oscillators
 
 *waves*: **sine**, **cosine**, **square**, **tri**, **saw**, **isaw** { output 0 to 1 }  
-*random*: **rand** { 0 to 1 }, **irand** (N) { 0 to N, int }
+*random*: **rand** { 0 to 1 }, **irand** { 0 to N, int }  
 *smooth random*: **perlin**, **perlinWith** (val), **perlin2** (val), **perlin2With** (val) (val)  
 *choose*: **choose** [0,1,..], **chooseBy** "0 0.25 0.5" [0, 2, 3], **wchoose** [(0,0.25),(2,0.5),(3,0.25)], **wchooseBy** "0 0.4 0.7" [(0,0.25),(2,0.5),(3,0.25)]  
 
 ## Functions
 
-*asr*: **attack**, **release**, **sustain**, **hold**
+*asr/ahr*: **attack** { time }, **release** { time }, **sustain** { time }, **hold** { time }  
+*reverb*: **room** { level }, **size** { level}  
+*delay*: **delay** { level }, **delayt** { level }, **delayfb** { level }  
 
 ### Control
 * (lower the sample rate, factor) **coarse** "<4 8 16 24>"
 * (bit crusher, 1 max, 16 min) **crush** "8"
 * (send effects on separate channel) **orbit** 1
-* (initial signal level of delay) **delay** "0.5"
-* (feedback level of delay) **delayfb** "0.7"
-* (length of delay time) **delaytime** 0.7
 * (change volume) **gain** 0.8
 * (control dry/wet) **leslie** 2
 * (leslie modulation rate) **lrate** 6.7
@@ -30,8 +29,6 @@
 * (convert midi to note) **midinote** 62
 * (give swing feel, 0 human, 1 machine) **nudge** 0.7
 * (change pan) **pan** 0.7
-* (change how much reverb in mix) **room** 0.8
-* (change reverb size) **size** 0.7
 * (waveshape distortion. 1 is louuud!) **shape** 0.7
 * (pitch raise with crazy stuffy, from 1 to inf) **squiz** "1 2 8 256"
 * (voice effect) **vowel** "a e i o u"
@@ -44,12 +41,9 @@
 * (change finish time of pattern) **end** "<0 0.25 0.5>"
 
 #### Filter
-* (bandpass filter, cutoff frequency) **bpf** 3000
-* (bandpass filter, q-factor) **bpq** 0.5
-* (lowpass filter, cutoff frequency) **lpf** 3000
-* (lowpass filter, resonance) **lpq** 0.5
-* (hipass filter, cutoff frequency) **hpf** 3000
-* (hipass filter, resonance) **hpq** 0.5
+*lowpass*: **lpf** { freq }, **lpq** { resonance }  
+*hipass*: **hpf** { freq }, **hpq** { resonance }  
+*bandpass*: **bpf** { freq }, **bpq** { q-factor }  
 
 #### Speed
 * (change tempo, factor) **cps** "<1 0.5 2>"
