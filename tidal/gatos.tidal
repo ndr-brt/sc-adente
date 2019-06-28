@@ -1,4 +1,8 @@
-d1 $ every 4 (rev) $ every 8 (fast 4) $ slow 2 $ sound "incoming? incoming*4 hoover*3"
+d1
+  $ every 4 (rev)
+  $ every 8 (fast 4)
+  $ slow 2
+  $ sound "incoming? incoming*4 hoover*3"
   # speed 0.3
   # room 1.5
   # orbit 0

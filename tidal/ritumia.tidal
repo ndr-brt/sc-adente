@@ -1,0 +1,28 @@
+d1
+  $ every 4 (slow 2)
+  $ every 7 (palindrome)
+  $ slow 2
+  $ n (run 14)
+  # s "haw"
+  # coarse 8
+  # crush 8
+  # shape 0.3
+
+d2
+  $ striate' 128 (range 0.5 0.99 $ perlin)
+  $ s "battles:3"
+  # lpf 500
+  # orbit 2
+
+d3
+  $ slow 2
+  $ n "d5 d5 f5 gs5"
+  # s "superpiano"
+  # speed (range 0.5 1.5 $ slow 4 $ saw)
+  # crush (irand 8 + 8)
+  # squiz 50
+  # shape 0.4
+  # pan (perlin)
+  # vowel "e o a"
+
+hush

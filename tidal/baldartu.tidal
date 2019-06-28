@@ -1,5 +1,4 @@
 d1
-  $ degradeBy 1
   $ juxBy 0.4 (rev)
   $ slow 4
   $ s "bd ~ bd ~ sd:3 ~"
