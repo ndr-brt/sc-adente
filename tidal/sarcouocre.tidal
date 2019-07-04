@@ -1,0 +1,57 @@
+d1
+  $ chop "<2 4 8 6>"
+  $ s "emsoft"
+  # lpf (range 1000 1600 $ slow 17 $ saw)
+  # lpq 0.15
+  # shape 0.2
+  # crush 2
+
+xfadeIn 1 19 $ silence
+
+d2
+  $ every 4 (# coarse 12)
+  $ every 6 (# squiz 16)
+  $ every 16 (brak)
+  $ juxBy (range 0.2 0.7 $ slow 3 $ perlin) (rev)
+  $ every 7 (palindrome)
+  $ s "percuo:2 ~ percuo:3? [percuo:1 ~ percuo:0*2]"
+  # waveloss 80
+
+xfadeIn 2 23 $ silence
+
+xfadeIn 3 4
+  $ striate' "<12 24 16 32>" (range 0.7 1 $ slow 54 $ (tri + saw) / 2)
+  $ s "droni:4*2"
+  # lpf (range 400 1800 $ slow 73 $ (cosine + saw) / 2)
+  # lpq 0.05
+  # gain 0.8
+  # speed 0.9
+  # waveloss 70
+
+xfadeIn 3 31 $ silence
+
+d4
+  $ whenmod 8 6 (# speed 2)
+  $ s "osc:3*5"
+  # gain 0.9
+  # orbit 4
+  # room 0.6
+  # size 1.1
+  # shape 0.1
+  # crush 2
+
+xfadeIn 4 27 $ s "percuo:3" # size 0.1 # orbit 4
+
+d5
+  $ every 3 (# speed 2.5)
+  $ s "syntho:7/3"
+  # orbit 5
+  # leslie 2
+  # lrate 6
+  # lsize 6
+  # gain 0.90
+  # crush 1
+
+xfadeIn 5 1 $ s "syntho:1" # size 0.1 # orbit 5
+
+hush
