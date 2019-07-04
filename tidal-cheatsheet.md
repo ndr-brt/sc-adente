@@ -37,8 +37,8 @@
 #### Sample
 * (load a sample) **s** "bd"
 * (change sample ordinality) **n** 2
-* (change start time of pattern) **begin** "<0 0.25 0.5>"
-* (change finish time of pattern) **end** "<0 0.25 0.5>"
+* (change start time of sample) **begin** "<0 0.25 0.5>"
+* (change finish time of sample) **end** "<0 0.25 0.5>"
 
 #### Filter
 *lowpass*: **lpf** { freq }, **lpq** { resonance }  
