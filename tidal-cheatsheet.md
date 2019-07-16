@@ -10,6 +10,11 @@
 *smooth random*: **perlin**, **perlinWith** (val), **perlin2** (val), **perlin2With** (val) (val)  
 *choose*: **choose** [0,1,..], **chooseBy** "0 0.25 0.5" [0, 2, 3], **wchoose** [(0,0.25),(2,0.5),(3,0.25)], **wchooseBy** "0 0.4 0.7" [(0,0.25),(2,0.5),(3,0.25)]  
 
+
+## Synths
+*basic*: **imp**, **psin**, **pmsin**, **gabor**, **cyclo**
+*input*: **in**, **inr**
+
 ## Functions
 
 *asr/ahr*: **attack** { time }, **release** { time }, **sustain** { time }, **hold** { time }  
@@ -44,6 +49,7 @@
 *lowpass*: **lpf** { freq }, **lpq** { resonance }  
 *hipass*: **hpf** { freq }, **hpq** { resonance }  
 *bandpass*: **bpf** { freq }, **bpq** { q-factor }  
+*djfilter*: **djf** { level }
 
 #### Speed
 * (change tempo, factor) **cps** "<1 0.5 2>"
@@ -80,6 +86,9 @@
 * (apply one control pattern to list of patterns) **weave** 4 (pan sine) [s "bd", s "casio"]
 * (apply a list of functions to a pattern) **weaveWith** 3 (s "bd sn") [fast 2, chop 16]
 * (apply a function only on a part of a pattern) **within** (0, 0.5) (fast 2)
+* (repeats each event the given number of times) **ply** 3 $ s "bd sn"
+* (add a sort of delay to pattern elements with reduction and time) **stut** 4 0.5 0.1 $ s "bd sn"
+* (like stut by applying a function every step) **stutWith** 4 0.5 (|* speed 1.5) $ s "bd sn"
 
 #### Sometimes
 Apply function to a pattern with different possibility
@@ -130,6 +139,7 @@ Apply function to a pattern with different possibility
 * (like cuts but bits organized differently) **striate** 8
 * (specify the length of the parts) **striate'** 16 (1/4)
 * (granulate every sample but every other grain is silent) **gap** 8
+* (cuts sample into pieces and rearrange into pattern) **slice** 8 "7 2 4 1 2 [0..4]"
 
 ### Other Functions
 * (append two patterns) **append** (s "bd sn") (s "arpy jvbass")

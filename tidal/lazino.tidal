@@ -1,0 +1,150 @@
+d1
+  $ whenmod 16 14 (swing 3)
+  $ every 4 (scramble (irand 6))
+  $ every 8 (# s "hh:4*4")
+  $ s "[bd(2,2),sn:1(1,2,1),hh(4,4)]"
+  # shape 0.3
+  # nudge 0.7
+
+d2 silence
+
+d2
+  $ every 4 (|*| speed 2)
+  $ striate' 16 (0.7)
+  $ s "emlong:1"
+  # speed (range 0.3 6 $ perlin)
+  # cps "<0.8 1.2 0.5 1.6>"
+  # begin (range 0 0.3 $ rand)
+  # end (range 0.7 1 $ rand)
+
+d2 silence
+
+xfadeIn 3 4
+  $ n "0 3"
+  # s "emhard"
+  # shape 0.3
+
+
+d5 $ loopAt 0.5 $ s "syntho:8*2"
+
+hush
+
+d1 $ stack [
+  s "bd sn:1 [~ bd] sn:1",
+  s "hh*8"
+] # orbit 1 # room 0.2 # size 0.2 # cps 0.5
+
+d1 silence
+
+
+d2
+  $ degradeBy 0.1
+  $ slow 16
+  $ every 4 (0.02 ~>)
+  $ every 3 (|+| speed (rand - 0.5))
+  $ striate 64 $ s "emlong:1"
+  # speed "[[1.2 0.7 2.1]*4, [2.25 2 0.2]*3]*3"
+  # delay 0.4
+  # delayfb 0.52
+  # delayt 0.4
+  # gain 0.9
+
+d2 silence
+
+d3
+  $ slow 4
+  $ juxBy 0.4 (0.1 ~>)
+  $ every 4 (|+| speed 1)
+  $ s "osc:3*32"
+  # gain 0.8
+  # speed (range 0.5 1.5 $ perlin)
+  # orbit 3
+  # gain (trigger 3 $ range 0.8 0 $ slow 10 $ envL)
+
+d3 silence
+
+d4
+  $ slow 2
+  $ striate 8
+  $ loopAt 2
+  $ every 3 (|-| speed 0.5)
+  $ s "crzydrn*2"
+  # speed "[[1.2 0.7], [~ 1.5]*2, 0.6/5]"
+  # gain 0.8
+  # orbit 4
+  # crush 0
+
+d4 silence
+
+
+d1 $ striate 2 $ "percuo:1*2"
+  # speed "[[2 3], [0.5 0.5]]"
+  |+| speed (rand)
+
+d1 silence
+
+d1 $ slow 4
+  $ striate' 128 (1/25)
+  $ every 2 (|+| speed (rand - 0.5))
+  $ "droni:3*3"
+  # speed "[[0.9 5.4], [~ 3 2 0.4]*2, [~ 0.5]*3]"
+  # delay 0.4
+  # delayt 0.45
+  # delayfb (range 0.1 0.5 $ slow 15 $ sine)
+
+d1 silence
+
+d1
+  $ slow 2
+  $ linger (range 0.2 0.6 $ slow 17 $ sine)
+  $ speed "[[0.4 0.7 [0.9 1.3]*2], [0.5 ~ 0.8]]"
+  # s "[emhard:1 ~ emsoft:2]*2"
+  # coarse "1 4 ~!7"
+  # pan (range 0.25 0.75 $ rand)
+  # orbit 1
+  # size 0.4
+  # room 0.2
+
+d1 silence
+
+d2
+  $ striate' "<8 12 6 9>" (range 0.6 0.99 $ slow 5 $ tri)
+  $ slow 5
+  $ every 3 (ply 3)
+  $ s "syntho:9"
+  # delay 0.2
+  # delayt 0.4
+  # orbit 2
+  # pan (range (range 0 0.5 $ rand) (range 0.5 1 $ rand) $ slow 2 $ square)
+  # bpf 7000
+  # bpq (range 1 15 $ slow 5 $ sine)
+
+d2 silence
+
+d3
+  $ slow 3
+  $ gap 12
+  $ loopAt 3
+  $ juxBy 0.5 (rev)
+  $ speed "[[1 [1.1 0.76 0.92]*2], [<0.8> ~!3 0.7]]"
+  # s "droni:4"
+  # delay 0.5
+  # delayt 0.4
+  # delayfb 0.2
+  # orbit 3
+
+d3 silence
+
+hush
+
+
+d2 silence
+
+d1
+  $ slow 2
+  $ every 4 (|+| n "0 0 ~ 2")
+  $ n "1 4 ~ 6"
+  # s "gabor"
+  # sustain 4
+
+d1 silence
