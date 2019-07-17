@@ -147,4 +147,56 @@ d1
   # s "gabor"
   # sustain 4
 
+
+
+d1
+  $ superimpose ((0.05 ~>) . (iter 4) . (# pan rand) . (# room 0.2))
+  $ stutWith 2 0.5 (stutWith 4 0.3 ((# speed (range 0.1 (range 0.5 1.8 $ slow 31 $ cosine) $ slow 13 $ sine)). (# lpf 800)))
+  $ stack [
+    s "syntho" # shape 0.4,
+    striate' 32 (1/2) $ loopAt 3 $ s "emsoft:2" # lpf 1200
+  ]
+  # cps (80/120)
+
 d1 silence
+
+setcps (80/120)
+
+d1
+  $ slice 8 "4 3 2 1 [6 7] 5"
+  $ stutWith 2 0.2 (|+| waveloss 15) . (0.05 <~)
+  $ every 4 (|+| speed (range 0.1 0.5 $ slow 4 $ sine))
+  $ juxBy 0.5 (superimpose (# squiz 3))
+  $ speed "[1 2 3]"
+  # s "emlong"
+  # orbit 1
+  # delay "0.1"
+
+d1 silence
+
+d2
+  $ slow 2
+  $ striate' 32 (choose [1/2, 1/4, 1/8])
+  $ every 8 (|+| speed (choose [0.3, 0.5, 0.7]))
+  $ every 4 (juxBy 0.6 (rev))
+  $ whenmod 16 14 (# coarse "[2 4]")
+  $ s "syntho"
+  # gain 1
+  # waveloss (4)
+  # shape 0.5
+  # orbit 2
+  # room 0.5
+  # size 0.3
+  # lpf 1200
+  # lpq 0.02
+
+d2 silence
+
+d3
+  $ superimpose (# delay 1) . (# cut 1)
+  $ s "percuo:1 ~ [~ percuo:2]"
+  # gain 1
+  # leslie 2
+  # orbit 3
+
+d3 silence
