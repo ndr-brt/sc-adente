@@ -1,0 +1,36 @@
+
+d1
+  $ slow 2
+  $ superimpose (0.10 ~>) . (|+| pan (rand - 0.5))
+  $ stutWith 2 0.2 (# lpf 1200) . (# delay 0.6) . (# delayt 0.2)
+  $ every 4 (|*| speed "-1")
+  $ every 7 (shuffle 3)
+  $ speed "[[1.2 ~ 2.4], [[1.4 3.1] ~ 2.5]]"
+  # "syntho:10"
+  # pan (choose [0.25, 0.5, 0.75])
+  # room 0.2
+  # size 0.2
+  # gain 0.6
+  # bpf (range 2000 3600 $ slow 31 $ sine)
+  # bpq (range 0.1 0.5 $ slow 17 $ saw)
+
+d2
+  $ slow 4
+  $ striate' ((irand 16 + 16) * 2) (choose [0.7, 0.5, 0.8, 0.9])
+  $ every 4 (|+| speed rand)
+  $ juxBy (perlin) (|*| speed "-1")
+  $ s "droni:1"
+  # lpf (range 800 1200 $ slow 13 $ (saw + square)/2)
+  # lpq (range 0 0.4 $ slow 321 $ sine)
+  # gain 0.75
+
+d3
+  $ superimpose (# pan (rand)) . (|+| speed (rand*2 - 1))
+  $ stutWith 4 0.5 (# vowel (choose ["a", "o"])) . (0.1 ~>)
+  $ s "crzydrn?"
+  # speed 4
+  # gain 0.45
+  # hpf 3400
+  # hpq 0.3
+
+hush
