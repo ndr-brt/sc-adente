@@ -14,6 +14,7 @@
 ## Synths
 *basic*: **imp**, **psin**, **pmsin**, **gabor**, **cyclo**
 *input*: **in**, **inr**
+*drumkit*: **superkick**, **superhat**, **supersnare**, **superclap**, **super808**
 
 ## Functions
 
