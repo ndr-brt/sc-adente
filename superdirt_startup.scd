@@ -16,6 +16,13 @@ s.waitForBoot {
 	(
 		~d1 = ~dirt.orbits[0]; // one orbit
 		~d2 = ~dirt.orbits[1];
+		~d3 = ~dirt.orbits[2];
+		~d4 = ~dirt.orbits[3];
+		~d5 = ~dirt.orbits[4];
+		~d6 = ~dirt.orbits[5];
+		~d7 = ~dirt.orbits[6];
+		~d8 = ~dirt.orbits[7];
+		~d9 = ~dirt.orbits[8];
 	);
 };
 
