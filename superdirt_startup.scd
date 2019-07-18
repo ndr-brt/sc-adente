@@ -11,7 +11,7 @@ s.waitForBoot {
 	// for example: ~dirt.loadSoundFiles("/Users/myUserName/Dirt/samples/*");
 	~dirt.loadSoundFiles("~/.sam-ples/*");
 	// s.sync; // optionally: wait for samples to be read
-	~dirt.start(57120, [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);   // start listening on port 57120, create two busses each sending audio to channel 0
+	~dirt.start(57120, 0!9);   // start listening on port 57120, create two busses each sending audio to channel 0
 
 	(
 		~d1 = ~dirt.orbits[0]; // one orbit
