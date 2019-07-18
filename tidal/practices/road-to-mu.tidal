@@ -1,3 +1,4 @@
+-- obhiò
 
 d1
   $ slow 2
@@ -32,5 +33,48 @@ d3
   # gain 0.45
   # hpf 3400
   # hpq 0.3
+
+hush
+
+-- bakuzanin
+
+setcps (80/120)
+
+d1
+  $ slow 2
+  $ whenmod 8 6 (|*| speed "[-1, -0.5]")
+  $ every 3 (|+| speed (rand - 0.5))
+  $ every 7 (# squiz 2) . (# lpf 1500)
+  $ speed "[[0.5 [~ 0.9]*2 1.2], [[1.5 ~ 1.9]/2 ~ 1.6]]"
+  # s "syntho:10"
+  # gain 0.7
+  # pan (choose [0.5, 0.25, 0.75])
+  # room 0.1
+  # size 0.2
+  # bpf (range 1500 3000 $ slow 31 $ (sine + saw)/2)
+  # bpq (irand 8 + 4)
+
+d2
+  $ slow 2
+  $ striate' 32 (choose [0.4,0.7,0.9,0.6])
+  $ every 4 (# up (scale "minor" "2"))
+  $ juxBy 0.4 (# speed "-1")
+  $ s "droni:1"
+  # gain 0.7
+  # lpf (choose [800, 1001, 954])
+  # lpq (range 0 0.4 $ slow 213 $ sine)
+
+d3
+  $ slow 5
+  $ slice 8 "[4..0] 7 5 ~!2 6"
+  $ stutWith 3 0.4 (stutWith 3 0.2 (# waveloss 10))
+  $ s "crzydrn"
+  # speed (rand + 3)
+  # gain 0.5
+  # delay 0.5
+  # delayt 0.48
+  # delayfb 0.3
+  # hpf 3000
+  # hpq (range 0.1 0.7 $ slow 23 $ saw)
 
 hush
