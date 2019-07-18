@@ -27,4 +27,9 @@ s.waitForBoot {
 };
 
 s.latency = 0.3; // increase this if you get "late" messages
+
+FreqScope.new(500, 50 , 0, server: s);
+s.meter;
+s.scope;
+s.makeGui;
 );
