@@ -3,6 +3,7 @@
 :set prompt-cont ""
 
 import Sound.Tidal.Context
+import qualified Data.Bits.Bitwise as BW
 
 -- total latency = oLatency + cFrameTimespan
 tidal <- startTidal (superdirtTarget {oLatency = 0.1, oAddress = "127.0.0.1", oPort = 57120}) (defaultConfig {cFrameTimespan = 1/20})
@@ -53,5 +54,8 @@ let d13 = p 13
 let d14 = p 14
 let d15 = p 15
 let d16 = p 16
+
+let toBits n num = listToPat $ pad $ reverse $ BW.toListLE num where pad xs = (take (n - length xs) $ repeat False) ++ xs
+let to8bit = toBits 8
 
 :set prompt "tidal> "

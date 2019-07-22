@@ -137,9 +137,30 @@ d1
 
 d2 
   $ fast 4
-  $ every 4 (|+| n (irand 3))
+  $ every 4 (|+| n ((irand 4) - 2))
+  $ whenmod 8 6 (# speed "-1")
   $ n (scale "purvi" "0 4 2 8 9 5 2")
   # s "superhex"
   # gain 0.7
+  # lpf 1000
+
+-- niiiiic drumi
+
+d1
+  $ slow 2
+  $ superimpose ((0.01 ~>).(# lpf 800))
+  $ every 4 ((linger 0.25).(fast 2))
+  $ stack [
+    struct (to8bit 200) $ s "super808",
+    struct (to8bit 76) $ s "supersnare",
+    struct (to8bit 28) $ s "superhat",
+    superimpose ((0.01 ~>).(#pan 1)) $ struct (to8bit 101) $ s "supergong" # pan 0
+  ] 
+  # room 0.2 
+  # size 0.2 
+  # nudge 0.4 
+  # delay 0.3 
+  # delayt 0.2 
+  # delayfb 0.25
 
 hush

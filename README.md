@@ -7,3 +7,7 @@ Retrieve samples:
 
 Update samples:  
 ```rclone sync ~/.sam-ples annoying:sam-ples -P```
+
+### Dependencies
+
+```cabal install bitwise``` (for bit operations)
