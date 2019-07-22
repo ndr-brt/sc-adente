@@ -10,39 +10,44 @@
 *smooth random*: **perlin**, **perlinWith** (val), **perlin2** (val), **perlin2With** (val) (val)  
 *choose*: **choose** [0,1,..], **chooseBy** "0 0.25 0.5" [0, 2, 3], **wchoose** [(0,0.25),(2,0.5),(3,0.25)], **wchooseBy** "0 0.4 0.7" [(0,0.25),(2,0.5),(3,0.25)]  
 
-
 ## Synths
 *basic*: **imp**, **psin**, **pmsin**, **gabor**, **cyclo**
 *input*: **in**, **inr**
 *drumkit*: **superkick**, **superhat**, **supersnare**, **superclap**, **super808**
+*physical*: **supermandolin**, **supergong**, **superpiano**, **superhex**
+*analogue*: **supersquare**, **supersaw**, **superpwm**, **supercomparator**
+*digital*: **superchip**, **supernoise**
 
 ## Functions
 
 *asr/ahr*: **attack** { time }, **release** { time }, **sustain** { time }, **hold** { time }  
 *reverb*: **room** { level }, **size** { level}  
 *delay*: **delay** { level }, **delayt** { level }, **delayfb** { level }  
+*leslie*: **leslie** { level }, **lrate** { rate }, **lsize** { size }
 
 ### Control
 * (lower the sample rate, factor) **coarse** "<4 8 16 24>"
 * (bit crusher, 1 max, 16 min) **crush** "8"
 * (send effects on separate channel) **orbit** 1
 * (change volume) **gain** 0.8
-* (control dry/wet) **leslie** 2
-* (leslie modulation rate) **lrate** 6.7
-* (leslie cabinet size in meters) **lsize** 3.4
 * (play sample N times in loop) **loop** "2.3"
 * (make sample fit the given number of cycles) **loopAt** 4
 * (convert midi to note) **midinote** 62
 * (give swing feel, 0 human, 1 machine) **nudge** 0.7
-* (change pan) **pan** 0.7
 * (waveshape distortion. 1 is louuud!) **shape** 0.7
 * (pitch raise with crazy stuffy, from 1 to inf) **squiz** "1 2 8 256"
 * (voice effect) **vowel** "a e i o u"
 * (divide audio into segments and discard a fraction of them from 0 to 100) **waveloss** "20 0.6 100"
 
+#### Scale
+* (list scales) **scaleList**
+* (get notes from scale) n (**scale** "major" "0..7")
+
 #### Sample
 * (load a sample) **s** "bd"
 * (change sample ordinality) **n** 2
+* (change pan) **pan** 0.7
+* (tell a pattern when it should play with true or false) **struct** "t ~ f t"
 * (change start time of sample) **begin** "<0 0.25 0.5>"
 * (change finish time of sample) **end** "<0 0.25 0.5>"
 
@@ -66,6 +71,7 @@
 * (cut sample when another starts on same cutgroup) **cut** "1"
 * (cut only sample when it recours) **cut** "-1"
 * (creative use of cut) sound "bev(3,8)" # **cut** "[1 2 4]*2"
+* (handle duration of the space 1 is until next note) # legato "1"
 
 ### Hi Order
 
