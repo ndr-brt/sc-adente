@@ -4,7 +4,6 @@
 *shut up*: **silence** (one synth) / **hush** (everything)
 
 ## Oscillators
-
 *waves*: **sine**, **cosine**, **square**, **tri**, **saw**, **isaw** { output 0 to 1 }  
 *random*: **rand** { 0 to 1 }, **irand** { 0 to N, int }  
 *smooth random*: **perlin**, **perlinWith** (val), **perlin2** (val), **perlin2With** (val) (val)  
@@ -19,7 +18,6 @@
 *digital*: **superchip**, **supernoise**
 
 ## Functions
-
 *asr/ahr*: **attack** { time }, **release** { time }, **sustain** { time }, **hold** { time }  
 *reverb*: **room** { level }, **size** { level}  
 *delay*: **delay** { level }, **delayt** { level }, **delayfb** { level }  
@@ -74,7 +72,6 @@
 * (handle duration of the space 1 is until next note) # legato "1"
 
 ### Hi Order
-
 * (apply another function conditionally) **every** 3 (fun)
 * (apply function to some cycles) **whenmod** 4 3 (fast 4) $ s "bd sn"
 * (add offset to every) **every'** 3 1 (fun)
@@ -107,7 +104,6 @@ Apply function to a pattern with different possibility
 * (10%) **almostNever** (# accelerate 2)
 * (0%) **never** (# cut 1)
 * (can choose percentual) **sometimesBy** 0.93 (jux (rev))
-
 * (as sometimes but on cycles) **someCycles** (# crush 3)
 * (as sometimes but with probabilty) **someCyclesBy** 0.64 (# speed 3)
 
@@ -140,6 +136,7 @@ Apply function to a pattern with different possibility
 * (breaks each cycles and then delay every piece by n) **swingBy** (1/4)
 * (alias for swingBy (1/3)) **swing**
 * (play a portion of a pattern) **zoom** (0.25, 0.75)
+* (turn a continuous pattern into a discrete one) **segment** 2 $ range 0 32 $ sine
 
 ### Granularization
 * (cuts each sample into parts) **chop** 16

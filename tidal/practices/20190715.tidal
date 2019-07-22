@@ -1,0 +1,18 @@
+d1 
+    $ slow 2
+    $ every 4 (|+| speed (rand - 0.5))
+    $ speed "1.1 1.2 0.8"
+    # s "emlong"
+    # pan (rand)
+    # cps "0.8 0.6 0.4"
+    # lpf 1200
+    # gain 0.6
+
+d2 
+    $ striate' 12 (range 0.5 1 $ slow 12 $ tri) 
+    $ s "osc:3"
+    # gain 0.9
+
+d1 silence
+    
+hush

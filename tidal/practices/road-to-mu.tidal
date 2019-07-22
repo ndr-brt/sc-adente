@@ -78,3 +78,44 @@ d3
   # hpq (range 0.1 0.7 $ slow 23 $ saw)
 
 hush
+
+-- wraccodu!
+
+d1
+  $ stack [
+    superimpose ((range 0.01 0.2 $ slow 14 $ sine) ~>)
+    $ every 8 (|*| speed (range "-1" "1" $ rand))
+    $ speed "[[2 ~ 1.4], [[~ 1] [2.3]*2 3.1?]]"
+    # s "emsoft:4"
+    # pan (rand)
+    # gain 0.7
+    ,
+    stutWith 2 0.2 (stutWith 2 0.1 (# lpf 700))
+    $ every 6 (# coarse 2)
+    $ every 11 (# attack 0.4)
+    $ layer [id, (loopAt 1).(# pan 0.25), (loopAt 2).(# pan 0.75)]
+    $ s "syntho:10"
+    # gain 0
+    # crush 1
+    ,
+    loopAt "0.5"
+    $ juxBy 0.4 (rev)
+    $ s "~ crzydrn:1"
+    # gain 0
+    # delay 0.3
+    # delayt 0.22
+    # delayfb 0.3
+    # squiz (segment 1 $ slow 8 $ range 1 14 $ perlin)
+    # waveloss 100
+    ,
+    superimpose (# shape 0.3).(# lpf 900)
+    $ iter 4
+    $ every 3 (palindrome)
+    $ s "~ super808/2"
+    # waveloss 45
+    # room 0.8
+    # size 1.1
+    # shape 0.4
+  ]
+  
+hush
