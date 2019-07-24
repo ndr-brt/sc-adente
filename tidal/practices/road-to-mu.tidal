@@ -54,16 +54,6 @@ d1
   # bpf (range 1500 3000 $ slow 31 $ (sine + saw)/2)
   # bpq (irand 8 + 4)
 
-d2
-  $ slow 2
-  $ striate' 32 (choose [0.4,0.7,0.9,0.6])
-  $ every 4 (# up (scale "minor" "2"))
-  $ juxBy 0.4 (# speed "-1")
-  $ s "droni:1"
-  # gain 0.7
-  # lpf (choose [800, 1001, 954])
-  # lpq (range 0 0.4 $ slow 213 $ sine)
-
 d3
   $ slow 5
   $ slice 8 "[4..0] 7 5 ~!2 6"
@@ -117,10 +107,10 @@ d1
     # size 1.1
     # shape 0.4
   ]
-  
+
 -- esperimap
 
-d1 
+d1
   $ superimpose (
     (|+| speed (range 5 10 $ slow 13 $ (saw + cosine)/2))
     .(|*| speed "-1")
@@ -135,32 +125,13 @@ d1
   # lpq 0.1
   # gain 0.7
 
-d2 
-  $ fast 4
+d2
+  $ fast 2
   $ every 4 (|+| n ((irand 4) - 2))
   $ whenmod 8 6 (# speed "-1")
   $ n (scale "purvi" "0 4 2 8 9 5 2")
   # s "superhex"
   # gain 0.7
   # lpf 1000
-
--- niiiiic drumi
-
-d1
-  $ slow 2
-  $ superimpose ((0.01 ~>).(# lpf 800))
-  $ every 4 ((linger 0.25).(fast 2))
-  $ stack [
-    struct (to8bit 200) $ s "super808",
-    struct (to8bit 76) $ s "supersnare",
-    struct (to8bit 28) $ s "superhat",
-    superimpose ((0.01 ~>).(#pan 1)) $ struct (to8bit 101) $ s "supergong" # pan 0
-  ] 
-  # room 0.2 
-  # size 0.2 
-  # nudge 0.4 
-  # delay 0.3 
-  # delayt 0.2 
-  # delayfb 0.25
 
 hush
