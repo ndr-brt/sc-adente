@@ -45,9 +45,14 @@
 * (load a sample) **s** "bd"
 * (change sample ordinality) **n** 2
 * (change pan) **pan** 0.7
-* (tell a pattern when it should play with true or false) **struct** "t ~ f t"
 * (change start time of sample) **begin** "<0 0.25 0.5>"
 * (change finish time of sample) **end** "<0 0.25 0.5>"
+
+#### Binary
+* (tell a pattern when it should play with true or false) **struct** "t ~ f t"
+* (convert a number to binary, 8 bit) **binary** 132
+* (convert a number to binary, n bit) **binaryN** n 132
+* (convert an ascii char to binary, 8 bit each char) **ascii** "hey"
 
 #### Filter
 *lowpass*: **lpf** { freq }, **lpq** { resonance }  

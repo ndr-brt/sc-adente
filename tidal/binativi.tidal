@@ -4,9 +4,9 @@ d1
   $ every 4 ((linger 0.25).(fast 2))
   $ whenmod 12 10 (brak)
   $ stack [
-    struct (to8bit 197) $ s "super808" # lpf 800,
-    struct (to8bit 96) $ s "supersnare",
-    struct (to8bit 66) $ s "superhat",
+    struct (binary 199) $ s "super808" # lpf 800,
+    struct (binary 96) $ s "supersnare",
+    struct (binary 66) $ s "superhat",
     superimpose ((0.01 ~>).(#pan 1)) $ struct (to8bit 123) $ s "supergong" # pan 0
   ]
   # room 0.2
