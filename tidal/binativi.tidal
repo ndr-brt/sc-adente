@@ -6,8 +6,8 @@ d1
   $ stack [
     struct (binary 199) $ s "super808" # lpf 800,
     struct (binary 96) $ s "supersnare",
-    struct (binary 66) $ s "superhat",
-    superimpose ((0.01 ~>).(#pan 1)) $ struct (to8bit 123) $ s "supergong" # pan 0
+    struct (binary 65) $ s "superhat",
+    superimpose ((0.01 ~>).(#pan 1)) $ struct (binary 123) $ s "supergong" # pan 0
   ]
   # room 0.2
   # size 0.2
