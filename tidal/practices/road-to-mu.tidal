@@ -46,7 +46,7 @@ d1
   $ slow 2
   $ whenmod 8 6 (|*| speed "[-1, -0.5]")
   $ every 3 (|+| speed (rand - 0.5))
-  $ every 7 (# squiz 1) . (# lpf 1200)
+  $ every 7 ((# squiz 1) . (# lpf 1200))
   $ speed "[[0.5 [~ 0.9]*2 1.2], [[1.5 ~ 1.9]/2 ~ 1.6]]"
   # s "syntho:10"
   # gain 0.7
@@ -87,7 +87,7 @@ d1
     $ every 11 (# attack 0.4)
     $ layer [id, (loopAt 1).(# pan 0.25), (loopAt 2).(# pan 0.75)]
     $ s "syntho:10"
-    # gain 0
+    # gain 0.6
     # crush 10
     ,
     loopAt "0.5"
@@ -140,5 +140,48 @@ d3
   # lpf 900
   # gain 0.6
 
+
+-- vlacambra
+
+setcps (80/120)
+
+d1
+  $ hurry (run 4 + 1)
+  $ stack [
+    superimpose ((((range 0.05 0.2 $ slow 8 $ sine)) ~>).(#pan rand).(# squiz (irand 8)).(#lpf 1200))
+      $ stutWith 2 0.5 (# lpf 800)
+      $ s "~ super808"
+      # lpf 1000
+      # shape 0.2
+    ,
+    every 4 (|+| n (irand 4 - 2))
+      $ degradeBy 0.3
+      $ whenmod 8 6 ((linger 0.4).(bite 3 2))
+      $ superimpose (((range 0.01 0.9 $ slow 2 $ cosine) ~>).(# octave (irand 10)))
+      $ n (scale "kumai" "[[~ [-1 2]*3], [[6 4]*2 ~ 3]]")
+      # s "supersquare"
+      # pan (rand)
+      # legato 1
+      # attack 0.2
+      # gain 0.7
+      # delay 0.3
+      # delayt 0.2
+      # delayfb 0.21
+      # crush 1
+    ,
+    loopAt 1
+      $ every 4 (swing 3)
+      $ every 7 (brak)
+      $ slice 8 "[4..0]*2 7 8 5 ~!3 <6>"
+      $ speed (range 0.4 0.9 $ slow 8 $ saw)
+      # s "crzydrn:1"
+      # gain 0.5
+      # squiz (run 10)
+      # delay 0.4
+      # delayt 0.5
+      # pan (perlin)
+  ]
+  # room 0.2
+  # size 0.9
 
 hush
