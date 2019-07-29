@@ -185,3 +185,96 @@ d1
   # size 0.9
 
 hush
+
+-- bazzibido
+
+setcps (80/120)
+
+d1
+  $ every 4 (palindrome)
+  $ juxBy 0.4 (rev)
+  $ superimpose (
+      (0.1 ~>).(stut 5 0.4 0.1)
+  )
+  $ "~ super808/2"
+  # room 0.5
+  # size 0.7
+  # gain 0.8
+  # shape 0.3
+  # lpf 900
+
+d2
+  $ superimpose ((0.2 <~).(# squiz 2))
+  $ every 4 (# silence)
+  $ loopAt (range 0.2 0.6 $ slow 8 $ sine)
+  $ s "[~ crzydrn]*2?"
+  # gain 0.8
+  # bpf 3000
+  # bpq 1
+  # delay 0.43
+  # delayt 0.23
+  # delayfb 0.12
+
+d3
+  $ speed "[[~ 2.4] [1.2], [1.2 ~ 0.9]]"
+  # s "syntho:10"
+  # gain 0.3
+  # pan (rand)
+
+--- picibuzza
+
+d1
+  $ slow 2
+  $ stutWith 3 0.5 (# n "-2")
+  $ superimpose ((0.1 ~>).(#pan rand))
+  $ struct (binary "<87 74 123 99>")
+  $ s "super808"
+  # lpf 1000
+  # room 0.2
+  # sustain 1
+  # size (range 0.7 1.1 $ slow 4 $ rand)
+  # gain 0.7
+  # crush (segment 2 $ slow 8 $ range 16 2 $ sine)
+
+d2
+  $ slow 2
+  $ every 4 (superimpose (
+    (|+| speed 12)
+    .(juxBy 0.4 (|*| speed "-1"))
+    .(# room 0.7)
+    .(# size 0.9)
+    .(# gain 0.7)
+    .(stut 3 0.5 0.1)
+  ))
+  $ striate' 12 (9/10)
+  $ s "droni:3"
+  # bpf (range 1000 5000 $ slow 43 $ cosine)
+  # bpq 2
+
+d3
+  $ loopAt "<3 4 5>"
+  $ superimpose ((0.2 ~>).(stut 2 0.4 0.1).(#pan (range 0.1 0.9 $ slow 2 $ square)))
+  $ sometimes (linger 0.35)
+  $ slice 16 "[8..0] 9 [14..10] ~!2 <15>"
+  $ s "syntho:10"
+  # gain 0.75
+  # delay 0.4
+  # delayt 0.34
+  # delayfb 0.23
+  # lpf 1200
+
+d4
+  $ degradeBy 0.2
+  $ stutWith 4 0.5 (stutWith 3 0.4 (# lpf 800))
+  $ whenmod 8 6 (# coarse 12)
+  $ sometimes (# accelerate "-1")
+  $ every 4 (|*| speed (rand + 0.5))
+  $ s "crzydrn" # speed 12
+  # gain 0.6
+  # waveloss (range 1 50 $ slow 12 $ saw)
+  # delay 0.8
+  # crush 5
+  # pan (perlin)
+
+
+hush
