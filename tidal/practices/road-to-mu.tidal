@@ -223,6 +223,8 @@ d3
 
 --- picibuzza
 
+setcps (80/120)
+
 d1
   $ slow 2
   $ stutWith 3 0.5 (# n "-2")
@@ -261,20 +263,95 @@ d3
   # delay 0.4
   # delayt 0.34
   # delayfb 0.23
-  # lpf 1200
+  # lpf (range 800 3500 $ sine)
 
 d4
   $ degradeBy 0.2
   $ stutWith 4 0.5 (stutWith 3 0.4 (# lpf 800))
   $ whenmod 8 6 (# coarse 12)
   $ sometimes (# accelerate "-1")
+  $ often (hurry "2")
   $ every 4 (|*| speed (rand + 0.5))
-  $ s "crzydrn" # speed 12
+  $ s "crzydrn"
+  # speed (segment 2 $ range "-10" "10" $ slow 10 $ tri)
   # gain 0.6
   # waveloss (range 1 50 $ slow 12 $ saw)
   # delay 0.8
   # crush 5
   # pan (perlin)
 
+
+-- temnetico
+
+setcps (80/120)
+
+d1
+  $ every 4 (linger (choose [0.22, 0.43, 0.63]))
+  $ stack [
+    layer [
+      id,
+      (0.02 ~>)
+      .(#pan rand)
+      .(|*| speed 0.5)
+      .(chop 4)
+      .(#delay 0.3)
+      .(#delayt 0.2)
+      .(whenmod 8 6 (# accelerate "-1"))
+      .(every 4 (# squiz 2)),
+      (|*| speed 10)
+      .(scramble 3)
+      .(every 6 (stut 3 0.4 0.1))
+      .(juxBy 0.5 (rev))
+      .(every 4 (palindrome))
+      .(#lpf 900)
+      .(#pan perlin)
+      .(#shape 0.9)
+    ]
+    $ speed "[[3.8 ~ 5] [3.5 ~] 4]"
+    # s "emsoft:2"
+    # bpf (range 400 800 $ slow 4 $ perlin)
+    ,
+    striate' 16 (range 0.6 0.9 $ slow 8 $ sine)
+    $ superimpose ((0.1 ~>).(|*| speed 15).(jux (hurry 2)))
+    $ s "droni:2"
+    # lpf 750
+    # delay 0.3
+    # delayfb 0.5
+    # gain 0.85
+  ]
+  # room 0.3
+  # size 0.2
+
+
+-- liminata
+
+d1
+  $ every 4 (|+| n 3)
+  $ every 6 (|*| n 2)
+  $ whenmod 8 6 (# legato 1)
+  $ slow 2
+  $ superimpose (
+    (juxBy 0.8 rev)
+    .(# octave 6)
+    .(|*| n (irand 3 - (segment 1 $ range 1 4 $ slow 4 $ sine)))
+    .(stut 2 0.4 0.1)
+  )
+  $ n (scale "diminished" "0 0 2 4")
+  # s "superpiano"
+  # room 0.2
+  # size 0.4
+
+d2
+  $ whenmod 8 6 (linger 0.5)
+  $ every 12 (scramble 4)
+  $ stack[
+    "bd sn:1",
+    swing 4 $ s "hh*4"
+  ]
+  # room 0.3
+  # accelerate 1
+  # shape 0.2
+
+scaleList
 
 hush
