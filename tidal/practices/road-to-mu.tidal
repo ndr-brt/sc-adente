@@ -326,32 +326,41 @@ d1
 -- liminata
 
 d1
-  $ every 4 (|+| n 3)
-  $ every 6 (|*| n 2)
-  $ whenmod 8 6 (# legato 1)
-  $ slow 2
-  $ superimpose (
-    (juxBy 0.8 rev)
-    .(# octave 6)
-    .(|*| n (irand 3 - (segment 1 $ range 1 4 $ slow 4 $ sine)))
-    .(stut 2 0.4 0.1)
-  )
-  $ n (scale "diminished" "0 0 2 4")
-  # s "superpiano"
-  # room 0.2
-  # size 0.4
-
-d2
-  $ whenmod 8 6 (linger 0.5)
-  $ every 12 (scramble 4)
-  $ stack[
-    "bd sn:1",
-    swing 4 $ s "hh*4"
+  $ slow 1.2
+  $ layer [
+    id
+    .(chop (irand 6))
+    .(# accelerate ((rand - 0.5) * 3))
+    .(# crush 5)
+    .(# gain 0.8)
+    .(# delay 0.3)
+    .(# delayt 0.4)
+    .(# delayfb 0.2),
+    (
+      (0.1 ~>)
+      .(#pan rand)
+      .(|*|speed 7)
+      .(every 7 (swing 3))
+      .(stutWith 3 0.4 (#lpf 800))
+      .(every 4 (# waveloss 80).(# delay 0.3).(|*| speed (rand + 1)))
+      .(whenmod 8 6 (brak))
+      .(# hpf 3000)
+      .(# hpq (range 0 0.4 $ slow 13 (sine + saw + tri)/3))
+    ),
+    (
+      (striate' 10 (0.8))
+      .(juxBy perlin (rev))
+      .(# gain 0.70)
+      .(# lpf (range 800 1000 $ slow 14 $ sine))
+      .(# lpq 0.1)
+    )
   ]
+  $ every 6 (|+| speed (irand 2))
+  $ speed "[2.5 1.8 [~!3 3 ~]*2, ~ [1.5]*2 [2.4]/2]"
+  # s "syntho:11"
   # room 0.3
-  # accelerate 1
-  # shape 0.2
+  # size 0.4
+  # gain 0.9
 
-scaleList
 
 hush
