@@ -365,21 +365,42 @@ d1
   # size 0.4
   # gain 0.9
 
+-- benzolina
+
+d1
+  $ slow 2
+  $ every 3 (# n "[4,5]")
+  $ n "[6, 3]" 
+  # s "benjolis"
+  # loop 1
+  # lpf (range 400 1200 $ slow 45 $ cosine)
+  # lpq 0.1
+  # offset (run 4)
+  # begin (slow 15 $ cosine)
+  # end (slow 8 $ sine)
+
+
 
 --facinocile
 
+setcps(80/120)
+
 d1 
-  $ juxBy perlin (# speed "-1")
-  $ s "droni:1" 
-  # speed (slow 4 $ sine + 0.5)
+  $ slow 2 
+  $ superimpose ((|*| speed (irand 4 + 23)).(stutWith 3 0.4 (#lpf 800).(0.1 ~>)))
+  $ s "droni:1"
+  # lpf (range 600 1500 $ slow 59 $ (cosine+tri)/2)
+  # lpq (range 0 0.15 $ slow 13 $ square)
 
-
-d2 
-  $ stutWith 4 0.4 (stutWith 2 0.5 ((#lpf 800).(#pan rand)))
-  $ every 4 (palindrome)
-  $ every 6 (# accelerate (irand 8 - 8))
-  $ speed "[15 17]/4"
-  # s "crzydrn" 
-  # gain 0.9
+d2
+  $ slow 2
+  $ juxBy 0.4 (rev)
+  $ stut 2 0.4 0.1
+  $ every 4 (# accelerate "-1")
+  $ speed "[[12 ~ [10 ~]/2],[9 [~ 11 ~!3]*2]]"
+  # s "crzydrn/3"
+  # gain 0.7
+  # delay 0.7
+  # delayt 0.2
 
 hush
