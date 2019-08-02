@@ -338,29 +338,31 @@ d1
     .(# delayfb 0.2),
     (
       (0.1 ~>)
-      .(#pan rand)
-      .(|*|speed 7)
+      .(# pan rand)
+      .(|*| speed (irand 4 + 6))
       .(every 7 (swing 3))
       .(stutWith 3 0.4 (#lpf 800))
       .(every 4 (# waveloss 80).(# delay 0.3).(|*| speed (rand + 1)))
       .(whenmod 8 6 (brak))
       .(# hpf 3000)
       .(# hpq (range 0 0.4 $ slow 13 (sine + saw + tri)/3))
+      .(#gain 0.9)
     ),
     (
-      (striate' 10 (0.8))
+      (striate' (choose [10, 12, 8, 6]) (range 0.6 0.85 $ rand))
+      .(stut 3 0.4 0.2)
       .(juxBy perlin (rev))
-      .(# gain 0.70)
-      .(# lpf (range 800 1000 $ slow 14 $ sine))
+      .(sometimes (# accelerate (irand 8 - 4)))
+      .(# gain 0.67)
+      .(# lpf (range 800 1400 $ slow 4 $ saw))
       .(# lpq 0.1)
     )
   ]
-  $ every 6 (|+| speed (irand 2))
+  $ every 6 (|+| speed (irand 3))
   $ speed "[2.5 1.8 [~!3 3 ~]*2, ~ [1.5]*2 [2.4]/2]"
   # s "syntho:11"
   # room 0.3
   # size 0.4
   # gain 0.9
-
 
 hush
