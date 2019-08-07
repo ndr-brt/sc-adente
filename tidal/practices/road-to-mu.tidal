@@ -380,27 +380,147 @@ d1
   # end (slow 8 $ sine)
 
 
-
---facinocile
+--narobbaussi
 
 setcps(80/120)
 
 d1 
-  $ slow 2 
-  $ superimpose ((|*| speed (irand 4 + 23)).(stutWith 3 0.4 (#lpf 800).(0.1 ~>)))
+  $ juxBy (perlin) (# accelerate "-1")
+  $ slow 2
   $ s "droni:1"
-  # lpf (range 600 1500 $ slow 59 $ (cosine+tri)/2)
-  # lpq (range 0 0.15 $ slow 13 $ square)
+  # lpf (range 900 1600 $ slow 32 $ (tri + cosine)/2)
+  # lpq (0.59)
+  # room (range 0.5 1.2 $ slow 41 $ sine)
+  # size 1.1
+  # shape 0.8
+  # delay 0.7
+  # delayt 0.53
+  # delayfb 0.74
+  # crush 0
+
+d3 
+  $ stutWith 5 0.4 (stutWith 3 0.5 ((# lpf 800).(#pan perlin).(#size 0.9).(#room 0.6)))
+  $ s "crzydrn/3"
+  # speed (irand 4 + 13)
+  # gain (trigger 3 $ range 0.7 0 $ slow 6 $ envL)
+  # accelerate (irand 3 - 2)
+  # hpf (range 1600 3500 $ slow 31 $ isaw)
+  # hpq 0.2
+  # crush 1
+
+hush
+
+d1
+  $ slow 1
+  $ sometimes (brak)
+  $ often (fast 2)
+  $ whenmod 8 6 (|+| n (irand 2 + 1))
+  $ every 4 (# accelerate "-1")
+  $ n "[[5 ~ [3 2]*2],[1.3 [~ 3.1]*3 4.2 ~!3]]"
+  # s "blow"
+  # legato 1
+
+d1 silence
+
+d2 $ slow 4
+  $ stack [
+    superimpose (((range 0.1 0.3 $ slow 54 $ sine) ~>).(#pan 0.1).(#lpf 500).(#gain 0.9).(#accelerate "-2"))
+    $ struct (binary "<102 91 91 89>")
+    $ s "super808"
+    # lpf 700
+    ,
+    every 7 (struct (ascii "ma"))
+    $ struct (ascii "Tc")
+    $ superimpose (
+      (|+| n 6).(0.2 <~).(#pan perlin)
+    )
+    $ s "supersnare"
+    # gain 0.6
+    # delay 0.32
+  
+    # delayt 0.23
+    # delayfb 0.23
+    ,
+    struct (binary 230)
+    $ s "superhat"
+    # pan (range 0.1 0.9 $ square)
+    # hpf 5000
+    # accelerate 3
+  ]
+  # room 0.2
+  # size 0.6
+  
+
+setcps (80/120)
+
+d1 
+  $ juxBy (range 0.2 0.8 $ slow 31 $ sine) (# speed "-1")
+  $ slow 2.5
+  $ superimpose (
+    (|+| speed 15)
+    .(stutWith 4 0.6 (# lpf 800))
+    .(# delay 0.4).(# delayt 0.3)
+    .(rarely (# accelerate (range "0" "-2" $ slow 17 $ saw)))
+  )
+  $ s "droni:1"
+  # lpf (range 900 1300 $ slow 67 $ (cosine+isaw)/2)
+  # gain (trigger 1 $ range 0.75 0 $ slow 4 $ envL)
+  # room 0.2
+  # size 0.7
+  # crush 0
+
+d1 silence
 
 d2
-  $ slow 2
-  $ juxBy 0.4 (rev)
-  $ stut 2 0.4 0.1
+  $ slow 2.5
   $ every 4 (# accelerate "-1")
-  $ speed "[[12 ~ [10 ~]/2],[9 [~ 11 ~!3]*2]]"
-  # s "crzydrn/3"
+  $ superimpose (
+    (0.1 <~).(#lpf 500)
+  )
+  $ stutWith 4 0.5 (# squiz 2)
+  $ s "~ super808"
+  # room 0.3
+  # gain 0.8
+  # shape 0.6
+  # lpf 800
+  # coarse 4
+  # crush 1
+
+d2 silence
+
+d3 
+  $ slow 3
+  $ every 4 (scramble 3)
+  $ superimpose (
+    (0.1 ~>)
+    .(# waveloss 74).(|+| speed "-2").(# pan perlin)
+    .(# squiz 12)
+  )
+  $ degradeBy 0.8
+  $ stutWith 3 0.4 (stutWith 4 0.3 (#lpf 800))
+  $ s "crzydrn"
+  # speed (irand 4 + 12)
+  # gain 0.55
+  # room 0.5
+  # size 0.7
+  # delay 0.97
+  # delayt 0.4
+  # pan (rand)
+  # waveloss (range 1 100 $ slow 79 $ perlin)
+
+d4 
+  $ slow 2.5
+  $ whenmod 8 6 (# accelerate (irand 3 - 2))
+  $ every 4 (brak)
+  $ every 6 (|+| speed ((irand 4) - 2))
+  $ speed "[[1.9 ~ [2.3 3.7]/2] , [[1.5 ~!3]*2 1.6]]"
+  # s "syntho:10"
   # gain 0.7
-  # delay 0.7
-  # delayt 0.2
+  # room 0.5
+  # delay 0.6
+  # size 0.9
+  # shape 0.45
+  # crush 2
+
 
 hush
