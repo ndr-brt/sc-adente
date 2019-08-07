@@ -365,26 +365,12 @@ d1
   # size 0.4
   # gain 0.9
 
--- benzolina
-
-d1
-  $ slow 2
-  $ every 3 (# n "[4,5]")
-  $ n "[6, 3]" 
-  # s "benjolis"
-  # loop 1
-  # lpf (range 400 1200 $ slow 45 $ cosine)
-  # lpq 0.1
-  # offset (run 4)
-  # begin (slow 15 $ cosine)
-  # end (slow 8 $ sine)
-
 
 --narobbaussi
 
 setcps(80/120)
 
-d1 
+d1
   $ juxBy (perlin) (# accelerate "-1")
   $ slow 2
   $ s "droni:1"
@@ -398,7 +384,7 @@ d1
   # delayfb 0.74
   # crush 0
 
-d3 
+d3
   $ stutWith 5 0.4 (stutWith 3 0.5 ((# lpf 800).(#pan perlin).(#size 0.9).(#room 0.6)))
   $ s "crzydrn/3"
   # speed (irand 4 + 13)
@@ -409,6 +395,8 @@ d3
   # crush 1
 
 hush
+
+-- grizzano
 
 d1
   $ slow 1
@@ -437,7 +425,7 @@ d2 $ slow 4
     $ s "supersnare"
     # gain 0.6
     # delay 0.32
-  
+
     # delayt 0.23
     # delayfb 0.23
     ,
@@ -449,11 +437,13 @@ d2 $ slow 4
   ]
   # room 0.2
   # size 0.6
-  
+
+
+-- mijuccu
 
 setcps (80/120)
 
-d1 
+d1
   $ juxBy (range 0.2 0.8 $ slow 31 $ sine) (# speed "-1")
   $ slow 2.5
   $ superimpose (
@@ -488,7 +478,7 @@ d2
 
 d2 silence
 
-d3 
+d3
   $ slow 3
   $ every 4 (scramble 3)
   $ superimpose (
@@ -508,7 +498,7 @@ d3
   # pan (rand)
   # waveloss (range 1 100 $ slow 79 $ perlin)
 
-d4 
+d4
   $ slow 2.5
   $ whenmod 8 6 (# accelerate (irand 3 - 2))
   $ every 4 (brak)
@@ -521,6 +511,21 @@ d4
   # size 0.9
   # shape 0.45
   # crush 2
+
+
+  -- benzolina
+
+  d1
+    $ slow 2
+    $ every 3 (# n "[4,5]")
+    $ n "[6, 3]"
+    # s "benjolis"
+    # loop 1
+    # lpf (range 400 1200 $ slow 45 $ cosine)
+    # lpq 0.1
+    # offset (run 4)
+    # begin (slow 15 $ cosine)
+    # end (slow 8 $ sine)
 
 
 hush
