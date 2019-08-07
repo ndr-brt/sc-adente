@@ -512,20 +512,6 @@ d4
   # shape 0.45
   # crush 2
 
-
-  -- benzolina
-
-  d1
-    $ slow 2
-    $ every 3 (# n "[4,5]")
-    $ n "[6, 3]"
-    # s "benjolis"
-    # loop 1
-    # lpf (range 400 1200 $ slow 45 $ cosine)
-    # lpq 0.1
-    # offset (run 4)
-    # begin (slow 15 $ cosine)
-    # end (slow 8 $ sine)
-
+d4 silence
 
 hush

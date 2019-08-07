@@ -43,14 +43,14 @@ let p = streamReplace tidal
     setS = streamSetS tidal
     setR = streamSetI tidal
     setB = streamSetB tidal
-    d1 = p 1 . (|< orbit 0) 
-    d2 = p 2 . (|< orbit 1) 
-    d3 = p 3 . (|< orbit 2) 
-    d4 = p 4 . (|< orbit 3) 
-    d5 = p 5 . (|< orbit 4) 
-    d6 = p 6 . (|< orbit 5) 
-    d7 = p 7 . (|< orbit 6) 
-    d8 = p 8 . (|< orbit 7) 
+    d1 = p 1 . (|< orbit 0)
+    d2 = p 2 . (|< orbit 1)
+    d3 = p 3 . (|< orbit 2)
+    d4 = p 4 . (|< orbit 3)
+    d5 = p 5 . (|< orbit 4)
+    d6 = p 6 . (|< orbit 5)
+    d7 = p 7 . (|< orbit 6)
+    d8 = p 8 . (|< orbit 7)
     d9 = p 9 . (|< orbit 8)
     d10 = p 10 . (|< orbit 9)
     d11 = p 11 . (|< orbit 10)
@@ -59,6 +59,15 @@ let p = streamReplace tidal
     d14 = p 14
     d15 = p 15
     d16 = p 16
+
+    -- benjolis params
+    oscA = pF "oscA"
+    oscB = pF "oscB"
+    runA = pF "runA"
+    runB = pF "runB"
+    runF = pF "runF"
+    res = pF "res"
+    freq = pF "freq"
 :}
 
 :set prompt "tidal> "
