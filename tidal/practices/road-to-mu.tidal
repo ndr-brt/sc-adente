@@ -515,3 +515,73 @@ d4
 d4 silence
 
 hush
+
+
+-- niticlazi
+
+setcps(30/120)
+
+d1
+  $ juxBy (range 0.2 0.9 $ slow 17 $ perlin) (|*| speed "-1")
+  $ off 0.1 (
+    (|+| speed 15)
+    .(# lpf 1500)
+    .(stutWith 4 0.4 (|*| speed (irand 4 - 2)))
+    .(rarely (#accelerate "-1"))
+    .(#gain 0.8)
+    .(#room 0.2)
+  )
+  $ always (# gain 0)
+  $ s "droni:1"
+  # lpf (range 800 1300 $ slow 32 $ cosine)
+  # lpq (range 0 0.2 $ slow 51 $ isaw)
+  # waveloss 60
+
+d2 
+  $ every 2 (# crush 3)
+  $ stutWith 3 0.3 (#squiz 2)
+  $ s "~ super808"
+  # n "-3"
+  # lpf 900
+  # shape 0.7
+  # gain 0.9
+  # waveloss 80
+
+d2 silence
+
+d3 
+  $ superimpose (
+    ((range 0.05 0.2 $ slow 4 $ (tri+sine)/2) ~>)
+    .(scramble 3)
+    .(sometimes (stutWith 3 0.4 (# coarse 4)))
+  )
+  $ s "crzydrn/2"
+  # speed 13
+  # room 0.3
+  # gain 0.7
+  # size 0.3
+  # delay 0.5
+  # delayt 0.34
+  # delayfb 0.23
+  # coarse "<8 16 32>"
+  # waveloss 96
+
+d3 silence
+
+d4
+  $ stutWith 4 0.5 (stutWith 3 0.5 (# coarse 4))
+  $ spread ($) [
+    id,
+    id,
+    (|-| speed (perlin - 2)),
+    (|+| speed (rand + 2))
+  ]
+  $ speed "[2 [~ 1.8]*2, [~ 1.5]/2 2.3]"
+  # s "syntho:10"
+  # gain 0.9
+  # room "0.2 0.6 0.9"
+  # size 0.7
+  # pan (rand)
+  # crush 3
+
+d4 silence
