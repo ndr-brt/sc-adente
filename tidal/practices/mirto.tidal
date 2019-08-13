@@ -1,0 +1,23 @@
+d1
+  $ rarely (scramble 2)
+  $ stack [
+    every 8 ((fast 3).(# crush 6).(stut 3 0.4 0.2))
+      $ s "super808"
+      # lpf "800"
+    ,
+    every 6 ((0.1 <~).(# accelerate "-1"))
+      $ sometimesBy 0.12 ((# delay 0.5).(# delayt 0.2).(# delayfb 0.2))
+      $ rarely (superimpose ((0.02 ~>).(# pan rand).(#squiz 21).(stut 2 0.3 0.04)))
+      $ s "~ supersnare"
+    ,
+    every 4 (degradeBy 0.5)
+      $ sometimes (swing 2)
+      $ s "superhat*4"
+    ,
+    every 4 (# loop 4) $ s "superclap/4" # speed 0.5
+  ]
+  # nudge 0.4
+  # cps 0.8
+  # room 0.05
+  # size 0.6
+  # shape 0.1
