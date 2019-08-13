@@ -537,7 +537,7 @@ d1
   # lpq (range 0 0.2 $ slow 51 $ isaw)
   # waveloss 60
 
-d2 
+d2
   $ every 2 (# crush 3)
   $ stutWith 3 0.3 (#squiz 2)
   $ s "~ super808"
@@ -549,7 +549,7 @@ d2
 
 d2 silence
 
-d3 
+d3
   $ superimpose (
     ((range 0.05 0.2 $ slow 4 $ (tri+sine)/2) ~>)
     .(scramble 3)
@@ -585,3 +585,79 @@ d4
   # crush 3
 
 d4 silence
+
+
+-- pappoplettico
+
+setcps (30/120)
+
+d1
+  $ superimpose (
+    (|*| speed (irand 4 + 10))
+    .(# hpf 1500)
+    .(stut 3 0.5 0.15)
+    .(# pan perlin)
+    .(sometimes (# coarse 8))
+    .(rarely (# accelerate ((irand 3) - 3)))
+    .(#room 0.1)
+  )
+  $ sometimes (|-| speed (rand / 5))
+  $ juxBy 0.4 (|*| speed "-1")
+  $ s "droni:1"
+  # gain 0.80
+  # lpf (range 800 1000 $ slow 3 $ square)
+  # lpq (0.05)
+  # waveloss 99
+
+d1 silence
+
+d2
+  $ every 4 (# accelerate "-4")
+  $ sometimesBy 0.4 (stut' 3 0.5 (# squiz 4))
+  $ s "crzydrn/2"
+  # speed (range 13 17 $ slow 4 $ saw)
+  # pan rand
+  # gain 0.65
+  # room 0.20
+  # size 0.14
+  # delay 0.4
+  # crush 1
+
+d2 silence
+
+d3
+  $ degradeBy 0.6
+  $ stutWith 3 0.4 ((# pan rand).(0.1 ~>))
+  $ slow 2
+  $ struct (binary 193)
+  $ s "super808"
+  # lpf 900
+  # gain 0.75
+  # shape 0.4
+  # crush 3
+
+d3 silence
+
+d4
+  $ stut' 4 0.5 (stut' 2 0.4 (# squiz 12))
+  $ sometimes (# accelerate (irand 4 - 3))
+  $ every 4 (
+    (linger (range 0.2 0.3 $ rand))
+    .(juxBy (rand) (rev))
+    .(# delay 0.45)
+    .(# delayt 0.23)
+    .(# delayfb 0.12)
+    .(# accelerate (irand 3 - 2))
+    .(# crush 2)
+  )
+  $ speed "[2 1.9 ~, 1.8 [2.1 ~]*2 2.7]"
+  # s "syntho:10"
+  # bpf (range 2000 5000 $ slow 31 $ (sine+isaw)/2)
+  # bpq (3)
+  # gain 0.8
+  # room 0.4
+  # size 0.1
+  # waveloss 80
+  # crush 1
+
+hush
