@@ -661,3 +661,68 @@ d4
   # crush 1
 
 hush
+
+
+-- acciderpolato
+
+setcps (30/120)
+
+d1 
+  $ every 8 (randslice 8)
+  $ stutWith 2 0.3 (# lpf 1200)
+  $ superimpose (
+    (|*| speed (irand 13 + 5))
+    .(stut 3 0.4 (range 0.08 0.18 $ slow 19 $ tri))
+    .(# hpf (range 2000 5000 $ perlin))
+    .(# hpq (range 0.1 0.5 $ slow 54 $ (tri+saw)/2))
+    .(# delay 0.4)
+    .(# pan rand)
+    .(# accelerate (range "-0.5" "-4" $ rand))
+  )
+  $ juxBy 0.4 (# speed "-1")
+  $ s "droni:1"
+  # lpf (range 800 1300 $ slow 34 $ sine)
+  # gain 0.8
+  # room 0.15
+  # size 0.3
+  # crush 1
+
+d1 $ silence
+
+d2 
+  $ degradeBy 0.8
+  $ every 4 (swing 2)
+  $ whenmod 8 6 (# crush 3)
+  $ stutWith 3 0.5 (stutWith 2 0.4 (# lpf 600))
+  $ s "~ super808"
+  # lpf 900
+  # shape 0.2
+  # gain 0.8
+
+d3
+  $ every 8 (# accelerate "-2")
+  $ every 2 (stut 4 0.4 0.1)
+  $ rarely (# coarse 16)
+  $ speed "<16 15.5 16 15.2>"
+  # s "crzydrn/2"
+  # delay "<0.45 0.89>"
+  # delayt 0.3
+  # delayfb 0.15
+  # gain 0.5
+  # waveloss 99
+
+d3 silence
+
+d4 
+  $ every 2 ((swing 2).(brak))
+  $ whenmod 8 6 (# coarse 32)
+  $ often (|*| speed "0.5")
+  $ stut' 2 0.5 (stut' 2 0.4 ((0.08 ~>).(#pan perlin).(#accelerate "-3")))
+  $ sometimes (# crush 3)
+  $ speed "[2 2.34 ~, 1.87 [2.12 ~]*2 2.39]"
+  # s "syntho:10"
+  # gain 0.5
+  # room 0.6
+  # size 1.1
+
+hush
