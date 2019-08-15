@@ -726,3 +726,72 @@ d4
   # size 1.1
 
 hush
+
+-- ciappali
+
+setcps(30/120)
+
+d1 
+  $ every 3 (chop 18)
+  $ every 9 (# accelerate (irand 4 - 5))
+  $ every 6 (|*| speed (range 0.85 1.15 $ slow 36 $ (cosine+isaw)/2))
+  $ rarely (striate 18)
+  $ superimpose (
+    (|*| speed (12))
+    .(# pan rand)
+    .(# delay 0.36)
+    .(# delayfb 0.12)
+    .(sometimes (# accelerate "-3"))
+  )
+  $ juxBy (range 0.2 0.8 $ slow 48 $ sine) (|*| speed "-1")
+  $ "droni:1"
+  # lpf 900
+  # gain 0.80
+  # waveloss 80
+
+d1 silence
+
+d2 
+  $ degradeBy 0.6
+  $ sometimes (palindrome)
+  $ whenmod 9 6 (swing 6)
+  $ stut' 3 0.5 (# coarse 2)
+  $ s "~ super808"
+  # lpf 900
+  # gain 0.8
+  # shape 0.3
+  # crush 1
+
+d2 silence
+
+d3 
+  $ degradeBy 0.5
+  $ every 9 (fast 6)
+  $ every 15 (# s "syntho:6")
+  $ stutWith 3 0.36 ((# coarse "-15").(#pan perlin).(# delay 0.33))
+  $ s "crzydrn/3"
+  # speed "15"
+  # gain 0.5
+
+d3 silence
+
+d4 
+  $ every 3 (|+| speed (rand - 1.5))
+  $ every 4 (
+    (stut' 4 0.7 (
+      (#squiz (irand 60))
+      .(#coarse (irand 40 + 20)))
+      .(# accelerate (rand - 3)) 
+      .(|*| speed "0.7")
+    )     
+  )
+  $ speed "[1.8 1.69 ~, 1.43 [1.69 ~]*2 1.94]"
+  # s "syntho:10"
+  # gain 0.9
+  # room 0.7
+  # size 0.99
+  # delay 0.6
+  # waveloss 100
+
+hush
+
