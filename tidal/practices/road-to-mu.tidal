@@ -795,3 +795,88 @@ d4
 
 hush
 
+
+setcps(30/120)
+
+d1
+  $ loopAt "1"
+  $ every 4 (
+    (gap 9)
+    .(# delay 0.6)
+    .(# delayt 0.05)
+  )
+  $ superimpose (
+    (|*| speed (rand * (irand 3) + 10))
+    .(# gain 0.8)
+    .(# pan perlin)
+    .(stut 2 0.4 0.2)
+    .(often (# accelerate (irand 4 - 5)))
+  )
+  $ sometimes (|-| speed (rand*2 - 1))
+  $ juxBy (perlin) (|*| speed "-1")
+  $ n "<1 1 4 1 1 2>"
+  # s "droni"
+  # lpf (range 800 1800 $ slow 33 $ sine)
+  # room 0.2
+
+d1 silence
+
+d2 
+  $ slow 2
+  $ superimpose ((0.005 ~>).(#pan rand).(# gain 0.6).(# room 0.9).(#size 0.9))
+  $ stack [
+    struct (binary "<213 200 189>") 
+      $ s "super808" 
+      # lpf 550,
+    struct (binary "<65 101 103>") $ s "supersnare" 
+      # bpf (range 800 2600 $ slow 9 $ sine)
+      # delay 0.4,
+    fast 1.5 $ struct (binary "<254 248 219>") 
+      $ every 3 (swing 5)
+      $ s "superhat"
+      # hpf 5500
+  ] 
+  # crush (irand 6 + 1)
+  # n (irand 6 - 3)
+  # room (range 0.1 0.8 $ slow 9 $ saw)
+  # shape 0.3
+
+d2 silence
+
+d3
+  $ stut' 3 0.6 (# lpf "700")) 
+  $ slow 2
+  $ sometimes ((#leslie 3).(0.2 <~))
+  $ s "crzydrn"
+  # speed 15
+  # room 0.2
+  # size 0.4
+  # gain 0.8
+  # crush 1
+
+d3 silence
+
+d4
+  $ every 3 (|+| speed ((0.4)*sine))
+  $ rarely (# accelerate (irand 8 - 4))
+  $ every 5 (brak . palindrome)
+  $ superimpose (
+    (0.05 ~>)
+    .(# crush 1)
+    .(# pan sine)
+    .(stut' 3 0.5 (
+      stut' 3 0.3 (
+        (# squiz (irand 30))
+        .(# accelerate "-4")
+        .(coarse (irand 40))
+      )
+    )
+  )
+  $ speed "[1.4 1.7 ~, 1.21 [~1.53]*2 1.89]"
+  # s "syntho:10"
+  # gain 0.8
+  # room 0.4
+  # size 0.8
+  # delay 0.4
+
+  hush
