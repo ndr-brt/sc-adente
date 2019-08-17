@@ -818,6 +818,7 @@ d1
   # s "droni"
   # lpf (range 800 1800 $ slow 33 $ sine)
   # room 0.2
+  # gain 0.9
 
 d1 silence
 
@@ -840,6 +841,7 @@ d2
   # n (irand 6 - 3)
   # room (range 0.1 0.8 $ slow 9 $ saw)
   # shape 0.3
+  # pan (slow 4 $ sine)
 
 d2 silence
 
