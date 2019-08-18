@@ -56,4 +56,4 @@ d1
     $ fast 2
     $ every 4 (rev)
     $ sometimes ((# delay 0.43).(#delayt 0.12))
-    $ s "[kk*2 snare]" # n "0"
+    $ s "[kk*2 snare]"
