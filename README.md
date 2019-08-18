@@ -7,3 +7,6 @@ Retrieve samples:
 
 Update samples:  
 ```rclone sync ~/.sam-ples annoying:sam-ples -P```
+
+## Synths
+`synthdefs_extra.scd` taken from https://github.com/pierstu/tidalcycles/blob/master/synthdefs_extra.scd
