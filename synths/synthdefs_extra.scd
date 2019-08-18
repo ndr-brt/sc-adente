@@ -500,12 +500,11 @@ SynthDef("harpsichord1", { arg out = 0, freq = 440, amp = 0.1, pan = 0.0;
 	OffsetOut.ar(out, DirtPan.ar(snd, ~dirt.numChannels, pan));
 }).add;
 
-SynthDef(\hat, { | out=0 |
-	var osc1, env, pan=0.0;
-	osc1 = WhiteNoise.ar;
-	env = EnvGen.kr(Env.perc(0, 0.01), doneAction: 2);
+SynthDef(\hat, { | out=0,pan |
+	var osc1 = WhiteNoise.ar * 0.4;
+	var env = EnvGen.kr(Env.perc(0.01, 0.2), doneAction: 2);
 	// Out.ar(out, Pan2.ar(osc1, 0, env));
-	OffsetOut.ar(out, DirtPan.ar(osc1, 0, ~dirt.numChannels, pan));
+	OffsetOut.ar(out, DirtPan.ar(osc1, ~dirt.numChannels, pan, env));
 }).add;
 
 
