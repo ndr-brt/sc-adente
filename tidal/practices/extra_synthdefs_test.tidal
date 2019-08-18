@@ -1,22 +1,22 @@
 
-d1 
-    $ stut' 4 0.25 (#speed (slow 8 $ sine)) 
-    $ every 8 (off 0.25 ( 0.125 ~>)) 
-    $ within (0, 1.25) (fast 4) 
-    $ jux (#up 4) 
-    $ slow 2 
+d1
+    $ stut' 4 0.25 (#speed (slow 8 $ sine))
+    $ every 8 (off 0.25 ( 0.125 ~>))
+    $ within (0, 1.25) (fast 4)
+    $ jux (#up 4)
+    $ slow 2
     $ foldEvery[8, 16, 24] (rev)
     $ chop (choose [50, 4, 6, 8, 10, 12]*2)
     $ s "percuo"
-    # lpf (range 80 3000 $ slow 2 $ sine ) 
-    # resonance 0.4 
+    # lpf (range 80 3000 $ slow 2 $ sine )
+    # resonance 0.4
 
 hush
 
 d1
     $ n (fromIntegral <$> markovPat 4 3 [
-        [0.25, 0.45, 0.3], 
-        [0.3, 0, 0.7], 
+        [0.25, 0.45, 0.3],
+        [0.3, 0, 0.7],
         [0.7, 0.3, 0],
         [0.15, 0.39, 0.46]
     ])
@@ -24,7 +24,7 @@ d1
     # legato 2
     # room 0.2
     # size 0.8
-    
+
     # delay 0.34
     # delayt 0.23
     # delayfb 0.33
@@ -43,7 +43,7 @@ d3 $ slow 4 $ cat [
     ]
     $ legato 2
 
-d2 
+d2
     $ slow 2
     $ stack [
         struct (binary "19") $ s "kick_oto309",
@@ -52,9 +52,11 @@ d2
     ]
 hush
 
-d1 
-    $ fast 1.5
-    $ stack [
-        s "[kk ss]",
-        s "hh(6,8)" # up "0" 
-    ]
+d1
+  $ stack [
+    s "kk",
+    s "ss(1,2,1)",
+    s "hh(3,4)"
+  ]
+
+hush
