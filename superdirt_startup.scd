@@ -15,7 +15,7 @@ s.waitForBoot {
 	~dirt.start(57120, 0!9);
 
 	(
-		~d1 = ~dirt.orbits[0]; // one orbit
+		~d1 = ~dirt.orbits[0];
 		~d2 = ~dirt.orbits[1];
 		~d3 = ~dirt.orbits[2];
 		~d4 = ~dirt.orbits[3];
