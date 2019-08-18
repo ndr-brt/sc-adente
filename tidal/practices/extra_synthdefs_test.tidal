@@ -53,11 +53,30 @@ d2
 hush
 
 d1
-  $ s "[kk ss, hh(5,8)]"
+  $ every 4 (iter 2)
+  $ every 6 (shuffle 2)
+  $ rarely (brak)
+  $ s "[kk kk*2 [~ ss]*2, hh(5,8)]"
+  # del' 0.12 0.1 "0 0.5"
+  # rvb' "0.2 0.04" "0.41 0.1"
+  # distort "0.6"
+  # accelerate 2
+  # n "-2"
 
-d2 $ s "emsoft:2*4"
-  # gain 0.4
-  # rvb' 0.12 0.32
+d2
+  $ s "benjolis"
+  # oscA "1200"
+  # oscB "25"
+  # runB 0.9
+  # runA (range 0 1 $ slow 8 $ sine)
+  # runF (range 0 1 $ slow 8 $ cosine)
+  # gain 0.9
+  # loop 98
+  # res 0.8
+  # offset 0.1
+  # freq 500
+  # n 8
+  # legato 2
 
 bpm 120
 
