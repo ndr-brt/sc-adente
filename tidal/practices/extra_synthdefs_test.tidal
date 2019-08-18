@@ -1,0 +1,58 @@
+
+d1 
+    $ stut' 4 0.25 (#speed (slow 8 $ sine)) 
+    $ every 8 (off 0.25 ( 0.125 ~>)) 
+    $ within (0, 1.25) (fast 4) 
+    $ jux (#up 4) 
+    $ slow 2 
+    $ foldEvery[8, 16, 24] (rev)
+    $ chop (choose [50, 4, 6, 8, 10, 12]*2)
+    $ s "percuo"
+    # lpf (range 80 3000 $ slow 2 $ sine ) 
+    # resonance 0.4 
+
+hush
+
+d1
+    $ n (fromIntegral <$> markovPat 4 3 [
+        [0.25, 0.45, 0.3], 
+        [0.3, 0, 0.7], 
+        [0.7, 0.3, 0],
+        [0.15, 0.39, 0.46]
+    ])
+    # s "plucking"
+    # legato 2
+    # room 0.2
+    # size 0.8
+    
+    # delay 0.34
+    # delayt 0.23
+    # delayfb 0.33
+
+hush
+
+d3 $ slow 4 $ cat [
+    note "[a4@2 c5@4 d5@2 e5@3 f5 e5@2 d5@4 b4@2 g4@3 a4 b4@2 c5@4 a4@2 a4@3 gs4 a4@2 b4@4 gs4@2 e4@4]"
+        # s "superpiano",
+    note "[a4@2 c5@4 d5@2 e5@3 f5 e5@2 d5@4 b4@2 g4@3 a4 b4@2 c5@3 b4 a4@2 gs4@3 fs4 gs4@2 a4@6 a4@6]"
+        # s "superpiano",
+    note "[g5@6 g5@3 f5 e5@2 d5@4 b4@2 g4@3 a4 b4@2 c5@4 a4@2 a4@3 gs4 a4@2 b4@4 gs4@2 e4@6]"
+        # s "superpiano",
+    note "[g5@6 g5@3 f5 e5@2 d5@4 b4@2 g4@3 a4 b4@2 c5@3 b4 a4@2 gs4@3 fs4 gs4@2 a4@6 a4@6]"
+        # s "superpiano"
+    ]
+    $ legato 2
+
+d2 
+    $ slow 2
+    $ stack [
+        struct (binary "19") $ s "kick_oto309",
+        struct (binary "79") $ s "hihat" # gain 0.8,
+        struct (binary "121") $ s "snare_stein"
+    ]
+hush
+d1 
+    $ fast 2
+    $ every 4 (rev)
+    $ sometimes ((# delay 0.43).(#delayt 0.12))
+    $ s "[kk*2 snare]"
