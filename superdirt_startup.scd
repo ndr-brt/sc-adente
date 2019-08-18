@@ -12,7 +12,7 @@ s.waitForBoot {
 	~dirt.loadSoundFiles("~/.sam-ples/*");
 	// s.sync; // optionally: wait for samples to be read
 	loadRelative("synths/*.scd");
-	~dirt.start(57120, 0!9);
+	~dirt.start(57120, 0!6);
 
 	(
 		~d1 = ~dirt.orbits[0];
@@ -21,9 +21,6 @@ s.waitForBoot {
 		~d4 = ~dirt.orbits[3];
 		~d5 = ~dirt.orbits[4];
 		~d6 = ~dirt.orbits[5];
-		~d7 = ~dirt.orbits[6];
-		~d8 = ~dirt.orbits[7];
-		~d9 = ~dirt.orbits[8];
 	);
 };
 
