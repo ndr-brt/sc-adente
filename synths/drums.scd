@@ -19,4 +19,20 @@ SynthDef(\kk, { |out=0, amp=0.5, pan, distort=0.3, n, attack=0.0001, release=0.0
 	)
 }).add;
 
+SynthDef(\ss, { |out=0, amp=0.1, pan=0.0|
+	var filtWhite = LPF.ar(WhiteNoise.ar(1), 7040, 1);
+
+	var snare = ((SinOsc.ar(330,0,0.25) * EnvGen.ar(Env.perc(0.0005,0.055))) +(SinOsc.ar(185,0,0.25) * EnvGen.ar(Env.perc(0.0005,0.075))) + (filtWhite * EnvGen.ar(Env.perc(0.0005,0.2), doneAction: 2) * 0.2)
+ + (HPF.ar(filtWhite, 523, 1) * EnvGen.ar(Env.perc(0.0005,0.183)) * 0.2));
+
+	OffsetOut.ar(
+		out,
+		DirtPan.ar(
+			snare * amp * 10,
+			~dirt.numChannels,
+			pan
+		)
+	)
+}).add;
+
 )
