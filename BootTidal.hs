@@ -59,8 +59,11 @@ let p = streamReplace tidal
     d14 = p 14
     d15 = p 15
     d16 = p 16
+:}
 
-    -- benjolis params
+-- benjolis params
+:{
+let
     oscA = pF "oscA"
     oscB = pF "oscB"
     runA = pF "runA"
@@ -68,6 +71,43 @@ let p = streamReplace tidal
     runF = pF "runF"
     res = pF "res"
     freq = pF "freq"
+:}
+
+-- shortcuts taken from BootTidalCustom
+:{
+let
+  bps b = setcps (b/2)
+  bpm b = setcps (b/2/120)
+
+  adsr = grp [mF "attack",  mF "decay", mF "sustain", mF "release"]
+  del  = grp [mF "delay",   mF "delaytime", mF "delayfeedback"]
+  scc  = grp [mF "shape",   mF "coarse", mF "crush"]
+  lp  = grp [mF "lpf",  mF "lpq"]
+  bp  = grp [mF "bpf",   mF "bpq"]
+  hp  = grp [mF "hpf", mF "hpq"]
+  spa  = grp [mF "speed",   mF "accelerate"]
+  rvb  = grp [mF "room",    mF "size"]
+  gco  = grp [mF "gain",    mF "cut"]
+  glo  = grp [mF "gain",    mF "legato"]
+  io   = grp [mF "begin",   mF "end"]
+  eq   = grp [mF "cutoff",  mF "resonance", mF "bandf", mF "bandq", mF "hcutoff", mF "hresonance"]
+  tremolo = grp [mF "tremolorate", mF "tremolodepth"]
+  phaser  = grp [mF "phaserrate", mF "phaserdepth"]
+  -- FX groups' function version
+  adsr' a d s r = attack a # decay d # sustain s # release r
+  del' l t f = delay l # delaytime t # delayfeedback f
+  scc' s c c' = shape s # coarse c # crush c'
+  lp' c r = cutoff c # resonance r
+  bp' f q = bandf f # bandq q
+  hp' c r = hcutoff c # hresonance r
+  spa' s a = speed s # accelerate a
+  gco' g c = gain g # cut c
+  glo' g l = gain g # legato l
+  rvb' r s = room r # size s
+  io' i o  = begin i # end o
+  eq' h b l q = cutoff l # resonance q # bandf b # bandq q # hcutoff h # hresonance q
+  tremolo' r d = tremolorate r # tremolodepth d
+  phaser' r d = phaserrate r # phaserdepth d
 :}
 
 :set prompt "tidal> "

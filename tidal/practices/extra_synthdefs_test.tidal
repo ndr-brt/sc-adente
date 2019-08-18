@@ -53,10 +53,12 @@ d2
 hush
 
 d1
-  $ stack [
-    s "kk",
-    s "ss(1,2,1)",
-    s "hh(3,4)"
-  ]
+  $ s "[kk ss, hh(5,8)]"
+
+d2 $ s "emsoft:2*4"
+  # gain 0.4
+  # rvb' 0.12 0.32
+
+bpm 120
 
 hush
