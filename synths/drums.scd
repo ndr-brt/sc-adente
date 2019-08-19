@@ -14,10 +14,10 @@ SynthDef(\kk, { |out=0, amp, pan, distort=0.3, n, attack=0.0001, release=0.09, a
 }).add;
 
 SynthDef(\ss, { |out=0, amp, pan, attack=0.0005, release=0.2, freq|
-	var filtWhite = LPF.ar(WhiteNoise.ar(1), freq*16);
+	var filtWhite = LPF.ar(WhiteNoise.ar(amp*4), freq*16);
 	var env = EnvGen.ar(Env.perc(attack, release), doneAction: 2);
 	var snare =
-	    (SinOsc.ar(330,0,0.25) * EnvGen.ar(Env.perc(attack,0.055))) +
+	    (SinOsc.ar(30,0,0.25) * EnvGen.ar(Env.perc(attack,0.055))) +
 	    (SinOsc.ar(285,0,0.25) * EnvGen.ar(Env.perc(attack,0.075))) +
 	    (filtWhite * amp) +
 	    (HPF.ar(filtWhite, 223, 1) * amp);

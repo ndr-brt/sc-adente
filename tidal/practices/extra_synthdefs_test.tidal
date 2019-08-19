@@ -31,18 +31,6 @@ d1
 
 hush
 
-d3 $ slow 4 $ cat [
-    note "[a4@2 c5@4 d5@2 e5@3 f5 e5@2 d5@4 b4@2 g4@3 a4 b4@2 c5@4 a4@2 a4@3 gs4 a4@2 b4@4 gs4@2 e4@4]"
-        # s "superpiano",
-    note "[a4@2 c5@4 d5@2 e5@3 f5 e5@2 d5@4 b4@2 g4@3 a4 b4@2 c5@3 b4 a4@2 gs4@3 fs4 gs4@2 a4@6 a4@6]"
-        # s "superpiano",
-    note "[g5@6 g5@3 f5 e5@2 d5@4 b4@2 g4@3 a4 b4@2 c5@4 a4@2 a4@3 gs4 a4@2 b4@4 gs4@2 e4@6]"
-        # s "superpiano",
-    note "[g5@6 g5@3 f5 e5@2 d5@4 b4@2 g4@3 a4 b4@2 c5@3 b4 a4@2 gs4@3 fs4 gs4@2 a4@6 a4@6]"
-        # s "superpiano"
-    ]
-    $ legato 2
-
 d2
     $ slow 2
     $ stack [
@@ -50,7 +38,9 @@ d2
         struct (binary "79") $ s "hihat" # gain 0.8,
         struct (binary "121") $ s "snare_stein"
     ]
-hush
+    # nudge 0.4
+
+d2 silence
 
 d1
   $ every 4 (iter 2)
@@ -60,8 +50,12 @@ d1
   # del' 0.12 0.1 "0 0.5"
   # rvb' "0.2 0.04" "0.41 0.1"
   # distort "0.6"
-  # accelerate 2
-  # n "-2"
+  # nudge 0.4
+
+
+d1
+  $ s "[kk*2? ss]*2"
+  # nudge 0.4
 
 d2
   $ s "benjolis"
