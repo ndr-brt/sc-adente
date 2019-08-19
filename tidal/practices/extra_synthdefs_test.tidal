@@ -42,6 +42,25 @@ d2
 
 d2 silence
 
+d2
+$ s "benjolis"
+# oscA "400"
+# oscB "25"
+# runB 0.9
+# runA (range 0 1 $ slow 8 $ sine)
+# runF (range 0 1 $ slow 8 $ cosine)
+# gain 0.9
+# loop 45
+# res 0.6
+# offset 0.4
+# freq (range 80 160 $ slow 16 $ cosine)
+# lp' 1200 0.01
+# n 8
+# legato 2
+
+
+-- marunn che flou
+
 d1
   $ every 4 (iter 2)
   $ every 6 (shuffle 2)
@@ -54,23 +73,45 @@ d1
 
 
 d1
-  $ s "[kk*2? ss]*2"
+  -- $ whenmod 4 0 (# n "~")
+  $ every 4 (linger 0.25)
+  $ stack [
+    s "[kk*2? ss]*2",
+    sometimes (# del' "0.67" "0.34" "0.12") $ s "hh(5,8)"
+  ]
   # nudge 0.4
+  # rvb' "0.015" "0.1"
 
-d2
-  $ s "benjolis"
-  # oscA "1200"
-  # oscB "25"
-  # runB 0.9
-  # runA (range 0 1 $ slow 8 $ sine)
-  # runF (range 0 1 $ slow 8 $ cosine)
-  # gain 0.9
-  # loop 98
-  # res 0.8
-  # offset 0.1
-  # freq 500
-  # n 8
+d1 silence
+
+d2 silence
+
+d3
+  $ slow 2
+  $ n (scale "minor" (irand 8))
+  # stack [
+    s "werkit" # octave 4 # gain 0.6,
+    s "~" # octave 3
+  ]
+  # nudge 0.4
   # legato 2
+  -- # tremolo' 0.23 0.16
+
+d4
+  $ every 4 (|+| n 2)
+  $ n (scale "minor" "0 4 5 6")
+  # s "plucking"
+  # gain 0.8
+  # nudge 0.4
+  # rvb' 0.04 0.2
+
+d4 silence
+
+d5
+  $ s "werkit"
+  # legato 2
+
+d5 silence
 
 bpm 120
 

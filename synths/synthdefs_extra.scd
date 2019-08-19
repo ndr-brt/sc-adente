@@ -1,27 +1,16 @@
 //* taken from https://github.com/everythingwillbetakenaway/Synthdefs *//
-
 (
-SynthDef(\plastickystrings,{ |out= 0, freq = 440, amp = 0.1, gate=1, lforate = 5900, lfowidth= 0.01 cutoff= 12000, rq=0.5, pan=0.0|
 
-	var lfo, saw, filter, env;
+SynthDef(\plastickystrings,{ |out=0, freq=440, lforate = 5900, lfowidth=0.01, pan, attack=0.4|
+	var lfo = LFTri.ar(lforate, Rand(0,2.0));
+	var signal = SinOsc.ar(freq*(1.0+(lfowidth*lfo)),0.5);
+	var env = EnvGen.ar(Env.adsr(attack,0.0,1.0,1.0),1,doneAction:2);
 
-	// lfo = LFTri.ar(lforate,Rand(0,2.0));
-
-	filter = SinOsc.ar(freq/**(1.0+(lfowidth*lfo))*/,0.5, amp);
-
-	//filter = BBandPass.ar(saw,freq,4);
-	//filter = BHiPass.ar(saw,cutoff,rq, amp); 	//or using cutoff
-
-	env = EnvGen.ar(Env.adsr(0.4,0.0,1.0,1.0),gate,doneAction:2);
-
-	//Out.ar(out,Pan2.ar(filter*env*amp,pan));
-	OffsetOut.ar(out, DirtPan.ar((filter * env * amp), ~dirt.numChannels, pan));
+	OffsetOut.ar(out, DirtPan.ar(signal, ~dirt.numChannels, pan, env));
 }).add;
 
-SynthDef(\plucking, { | out=0, amp = 0.1, freq = 440, decay = 5, coef = 0.1, pan=0.0 |
-var env, snd;
-env = EnvGen.kr(Env.linen(0, decay, 0), doneAction: 2);
-snd = Pluck.ar(
+SynthDef(\plucking, { | out=0, amp, freq=440, decay = 5, coef = 0.1, pan |
+	var snd = Pluck.ar(
         in: WhiteNoise.ar(amp),
         trig: Impulse.kr(0),
 
@@ -29,38 +18,29 @@ snd = Pluck.ar(
         delaytime: freq.reciprocal,
         decaytime: decay,
         coef: coef);
-    // Out.ar(0, [snd, snd]);
+
+	var env = EnvGen.kr(Env.linen(0, decay, 0), doneAction: 2);
+
 	OffsetOut.ar(out, DirtPan.ar(snd, ~dirt.numChannels, pan, env));
 }).add;
 
 SynthDef(\pitchednoise, { | out=0, freq=440, amp=0.1,attack=0.01, sustain=0.1, decay=0.01,pan=0.0, bandwidth=100 |
-var source, filter, env;
+	var env= EnvGen.ar(Env([0,1,1,0],[attack, sustain, decay]), doneAction:2);
+	var source= WhiteNoise.ar(amp);
+	var filter= BPF.ar(source*env, freq, bandwidth/freq);
 
-env= EnvGen.ar(Env([0,1,1,0],[attack, sustain, decay]), doneAction:2);
-
-source= WhiteNoise.ar;
-
-filter= BPF.ar(source*env*2*amp,freq,bandwidth/freq);
-
-	// Out.ar(0,PanAz.ar(numChannels,filter,pan))
 	OffsetOut.ar(out, DirtPan.ar(filter, ~dirt.numChannels, pan, env));
 }).add;
 
-SynthDef(\werkit, { | out = 0, freq = 440, amp = 0.1, gate = 1, cutoff = 100, rq = 0.1, att = 0.01, dec = 0, sus = 1, rel = 0.1, pan=0.0 |
-
-	var source, filter, env, snd;
-	source = LFSaw.ar(Array.fill(16, { Rand(100, 200) }));
-	filter = BLowPass4.ar(source, freq, rq) * 0.1;
-	env = EnvGen.ar(
-		envelope: Env.adsr(att, dec, sus, rel, amp),
-		gate: gate,
-		doneAction: 2);
-	snd = (0.7 * filter + (0.3 * filter.distort)) * env;
+SynthDef(\werkit, { | out=0, freq = 440, amp = 0.1, gate = 1, cutoff = 100, rq = 0.1, attack = 0.2, sustain=0.5, release=0.2, pan |
+	var source = LFSaw.ar(Array.fill(16, { Rand(100, 200) }));
+	var filter = BLowPass4.ar(source, freq, rq) * 0.1;
+	var env = EnvGen.ar(Env.asr(attack, sustain, release), gate, doneAction: 2);
+	var snd = (filter + (0.3 * filter.distort));
 	snd = HPF.ar(snd, 100);
 	snd = Splay.ar(snd);
-	// Out.ar(out, snd);
-	OffsetOut.ar(out, DirtPan.ar(snd, ~dirt.numChannels, pan, env));
 
+	OffsetOut.ar(out, DirtPan.ar(snd, ~dirt.numChannels, pan, env));
 }).add;
 
 SynthDef("trianglewavebells",{ | out = 0, pan = 0.0, freq = 440, amp = 1.0, gate = 1, att = 0.01, dec = 0.1, sus = 1, rel = 0.5, lforate = 10, lfowidth = 0.0, cutoff = 100, rq = 0.5 |
