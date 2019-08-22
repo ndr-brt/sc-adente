@@ -84,30 +84,26 @@ d1
 
 d1 silence
 
+d2
+  $ s "babbl"
+  # n (scale "minor" (irand 2))
+  # nudge 0.4
+  # legato 2
+  # pan perlin
+
 d2 silence
 
-d2
-  $ slow 8
-  $ every 4 (# detune 2)
-  $ s "werkit"
-  # n (scale "minor" (irand 2))
-  # octave 4
-  # gain 0.7
+once
+  $ n (run 3 * 3.4)
+  # s "goeyfx*2"
   # nudge 0.4
-
-d3
-  $ slow 4
-  $ every 4 ((rev).(fast 2))
-  $ s "gabor*2"
-  # n (scale "minor" "<[1 0] [0 3] [0 4] [2 0]>")
-  # octave 3
-  # gain 0.9
+  # legato 2
 
 d4
   $ every 4 (|+| n 2)
   $ rarely (stut 4 0.5 0.2)
   $ n (scale "minor" "0 4 5 6")
-  # s "plucking"
+  # s "blowbotl"
   # gain 0.9
   # nudge 0.4
   # rvb' 0.04 0.2
@@ -115,15 +111,13 @@ d4
 d4 silence
 
 d5
-  $ striate (20)
-  $ whenmod 4 1 (# gain 0)
-  $ n "[1 3 2 6]"
-  # s "voicform*4"
-  # gain 0.87
-  # crush 2
+  $ every 4 (# n (scale "minor" "3 2 0 7 8 ~!3"))
+  $ n (scale "minor" "6 8 ~!2 5 4 ~!2 [5 7]*2")
+  # s "spook2"
+  # octave 3
+  # gain 1
   # pan rand
-  # rvb' 0.2 0.56
-  # del' 0.67 0.45 0.45
+  # nudge 0.4
 
 d5 silence
 
