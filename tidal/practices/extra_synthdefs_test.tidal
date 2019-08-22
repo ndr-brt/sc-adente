@@ -122,3 +122,13 @@ d5
 d5 silence
 
 hush
+
+
+d1
+  $ every 3 (iter 5)
+  $ every 5 (scramble 4)
+  $ whenmod 8 6 (fast 2)
+  $ s "sillyVoice*3"
+  # n (irand 6)
+  # nudge 0.4
+  # legato 2
