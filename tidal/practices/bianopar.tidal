@@ -1,0 +1,26 @@
+d1
+  -- $ juxBy 0.1 ((# octave 4).(fast 2))
+  $ layer [
+    id
+    ,(slow 4).(#octave 2).(# pan 0.5)
+    ,(degradeBy 1).(slow 8).(#octave 1).(# pan rand)
+    ,(degradeBy 1).(fast 4).(#octave 7).(# pan (choose [0, 1])).(#gain 0.8)
+  ]
+  $ n (scale "hirajoshi" "3 5 6 7")
+  # s "superpiano"
+
+hush
+
+d2
+  $ degradeBy 1
+  $ every 4 (swing 3)
+  $ whenmod 8 6 (fast 2)
+  $ every 6 (linger 0.25)
+  $ sometimes (# del' 0.54 0.34 0.33)
+  $ whenmod 14 12 (iter 4)
+  $ s "[[kk kk?]*2 ss*2?, hh(7,8)]"
+  # shape 0.5
+  # distort 0.3
+  # rvb' 0.05 0.3
+
+hush
