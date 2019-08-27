@@ -1,87 +1,67 @@
 d1
-  $ whenmod 16 14 (swing 3)
-  $ every 4 (scramble (irand 6))
-  $ every 8 (# s "hh:4*4")
-  $ s "[bd(2,2),sn:1(1,2,1),hh(4,4)]"
-  # shape 0.3
-  # nudge 0.7
-
-d2 silence
-
-d2
-  $ every 4 (|*| speed 2)
-  $ striate' 16 (0.7)
-  $ s "emlong:1"
-  # speed (range 0.3 6 $ perlin)
-  # cps "<0.8 1.2 0.5 1.6>"
-  # begin (range 0 0.3 $ rand)
-  # end (range 0.7 1 $ rand)
-
-d2 silence
-
-xfadeIn 3 4
-  $ n "0 3"
-  # s "emhard"
-  # shape 0.3
-
-
-d5 $ loopAt 0.5 $ s "syntho:8*2"
-
-hush
-
-d1 $ stack [
-  s "bd sn:1 [~ bd] sn:1",
-  s "hh*8"
-] # orbit 1 # room 0.2 # size 0.2 # cps 0.5
+  $ juxBy (slow 4 $ sine - 0.5) ((|+ octave 1).(fast 2))
+  $ slow 2
+  $ layer [
+    id,
+    (# octave 2),
+    (
+      (# octave 7)
+      .(fast 4)
+      .(# lpf 1000)
+      .(#gain 0.9)
+    )
+    ,
+    (
+      (slow 4)
+      .(# octave 9)
+      .(# tremolo' (slow 5 $ cosine) 0.9)
+      .(# lpf 4000)
+      .(# gain 0.8)
+    )
+  ]
+  $ every 6 (|+ n "2 0 ~ -2")
+  $ every 4 (|+ n "0 0 ~ 2")
+  $ n "1 4 ~ 6"
+  # s "gabor"
+  # sustain 4
+  # octave 4
 
 d1 silence
 
-
 d2
-  $ degradeBy 0.1
-  $ slow 16
-  $ every 4 (0.02 ~>)
-  $ every 3 (|+| speed (rand - 0.5))
-  $ striate 64 $ s "emlong:1"
-  # speed "[[1.2 0.7 2.1]*4, [2.25 2 0.2]*3]*3"
-  # delay 0.4
-  # delayfb 0.52
-  # delayt 0.4
-  # gain 0.9
-
-d2 silence
-
-d3
-  $ slow 4
-  $ juxBy 0.4 (0.1 ~>)
-  $ every 4 (|+| speed 1)
-  $ s "osc:3*32"
-  # gain 0.8
-  # speed (range 0.5 1.5 $ perlin)
-  # orbit 3
-  # gain (trigger 3 $ range 0.8 0 $ slow 10 $ envL)
-
-d3 silence
+  $ sometimesBy 0.05 (# del' 0.45 0.34 0.21)
+  $ whenmod 10 7 (
+    (slow 2)
+    .(# s "[kk hh*2 ss hh]")
+    .(# nudge 0.4)
+    .(# distort (slow 8 $ isaw))
+  )
+  $ slow 2
+  $ stack [
+    s "bd sn:1 [~ bd] sn:1",
+    s "hh*8"
+  ]
+  # rvb' 0.2 0.2
+  # shape 0.3
+  # nudge 0.4
 
 d4
   $ slow 2
-  $ striate 8
+  $ striate "<8 10 6 12>"
   $ loopAt 2
-  $ every 3 (|-| speed 0.5)
-  $ s "crzydrn*2"
+  $ every 3 (|- speed 0.5)
+  $ s "crzydrn"
   # speed "[[1.2 0.7], [~ 1.5]*2, 0.6/5]"
-  # gain 0.8
-  # orbit 4
-  # crush 0
+  # gain 0.6
+  # rvb' 0.7 0.8
 
 d4 silence
 
+hush
 
-d1 $ striate 2 $ "percuo:1*2"
-  # speed "[[2 3], [0.5 0.5]]"
-  |+| speed (rand)
+-- boooooo
 
-d1 silence
+
 
 d1 $ slow 4
   $ striate' 128 (1/25)
@@ -139,15 +119,6 @@ hush
 
 
 d2 silence
-
-d1
-  $ slow 2
-  $ every 4 (|+| n "0 0 ~ 2")
-  $ n "1 4 ~ 6"
-  # s "gabor"
-  # sustain 4
-
-
 
 d1
   $ superimpose ((0.05 ~>) . (iter 4) . (# pan rand) . (# room 0.2))
