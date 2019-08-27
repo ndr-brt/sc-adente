@@ -1,0 +1,50 @@
+d1
+  $ every 3 (fast 3)
+  $ ply 4
+  $ superimpose (
+      (# speed 0.3)
+      .(# cut 1)
+  )
+  $ euclid 3 8
+  $ sound "insect"
+  # speed (rand)
+  # room 0.9
+  # tremolo' rand rand
+
+d1 silence
+
+d2
+  $ slow 2.5
+  $ every 4 (rev . linger 0.5)
+  $ sound "[kk:8 hh*2 kk*2 ss:2*3, cp(5,8)]"
+  # crush 3
+  # shape 0.5
+  # distort 0.6
+  # nudge 0.3
+
+d2 silence
+
+d3 $ stack [
+    every 3 (rev)
+      $ s "ulgab/3 noise2"
+      # speed 0.4
+      # del' 0.6 0.2 0.3
+    ,
+    euclid 3 8
+      $ sound "tink"
+      # lpf (range 300 1900 $ slow 4 $sine)
+    ,
+    iter 2
+      $ stut' 3 0.3 (# pan (rand))
+      $ n (run 3)
+      # s "miniyeah"
+      # amp 0.8
+      # cps (slow 4 $ (sine + saw)/2 + 0.8)
+      # pan (slow 4 $ perlin)
+]
+
+d3 silence
+
+d4 $ sound "mt*2 808*3 amencutup"
+
+hush
