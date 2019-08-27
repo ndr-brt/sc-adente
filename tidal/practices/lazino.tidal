@@ -1,22 +1,24 @@
 d1
-  $ juxBy (slow 4 $ sine - 0.5) ((|+ octave 1).(fast 2))
   $ slow 2
   $ layer [
-    id,
-    (# octave 2),
+    id
+    .(juxBy (slow 4 $ sine - 0.5) ((|+ octave 1).(fast 2)))
+    ,
+    (# octave 1)
+    ,
     (
-      (# octave 7)
+      (# octave 6)
       .(fast 4)
       .(# lpf 1000)
-      .(#gain 0.9)
+      .(|* gain 0.9)
     )
     ,
     (
       (slow 4)
-      .(# octave 9)
+      .(# octave 8)
       .(# tremolo' (slow 5 $ cosine) 0.9)
       .(# lpf 4000)
-      .(# gain 0.8)
+      .(|* gain 0.8)
     )
   ]
   $ every 6 (|+ n "2 0 ~ -2")
@@ -24,150 +26,52 @@ d1
   $ n "1 4 ~ 6"
   # s "gabor"
   # sustain 4
-  # octave 4
+  # octave 3
+  # gain 0.87
 
 d1 silence
 
 d2
   $ sometimesBy 0.05 (# del' 0.45 0.34 0.21)
   $ whenmod 10 7 (
-    (slow 2)
-    .(# s "[kk hh*2 ss hh]")
-    .(# nudge 0.4)
-    .(# distort (slow 8 $ isaw))
+    (# s "[kk hh*2 ss hh]")
   )
+  $ every 7 (linger 0.5)
   $ slow 2
   $ stack [
-    s "bd sn:1 [~ bd] sn:1",
+    s "kk ss [~ kk]*2? ss:1",
     s "hh*8"
   ]
-  # rvb' 0.2 0.2
-  # shape 0.3
+  # rvb' 0.20 0.4
+  # shape 0.1
   # nudge 0.4
+  # distort (slow 8 $ perlin / 4)
 
-d4
+d2 silence
+
+d3
   $ slow 2
   $ striate "<8 10 6 12>"
   $ loopAt 2
   $ every 3 (|- speed 0.5)
   $ s "crzydrn"
   # speed "[[1.2 0.7], [~ 1.5]*2, 0.6/5]"
+  # pan "<0.1 0.9>"
   # gain 0.6
   # rvb' 0.7 0.8
+
+d3 silence
+
+d4 $ slow 4
+  $ striate' 128 (1/25)
+  $ every 2 (|+| speed (rand - 0.5))
+  $ "droni:3"
+  # speed "[[0.9 5.4], [~ 3 2 0.4]*2, [~ 0.5]*3]"
+  # del' 0.4 0.45 (range 0.1 0.5 $ slow 15 $ sine)
+  # gain 0.82
+  # hpf 100
+  # hpq 0.2
 
 d4 silence
 
 hush
-
--- boooooo
-
-
-
-d1 $ slow 4
-  $ striate' 128 (1/25)
-  $ every 2 (|+| speed (rand - 0.5))
-  $ "droni:3*3"
-  # speed "[[0.9 5.4], [~ 3 2 0.4]*2, [~ 0.5]*3]"
-  # delay 0.4
-  # delayt 0.45
-  # delayfb (range 0.1 0.5 $ slow 15 $ sine)
-
-d1 silence
-
-d1
-  $ slow 2
-  $ linger (range 0.2 0.6 $ slow 17 $ sine)
-  $ speed "[[0.4 0.7 [0.9 1.3]*2], [0.5 ~ 0.8]]"
-  # s "[emhard:1 ~ emsoft:2]*2"
-  # coarse "1 4 ~!7"
-  # pan (range 0.25 0.75 $ rand)
-  # orbit 1
-  # size 0.4
-  # room 0.2
-
-d1 silence
-
-d2
-  $ striate' "<8 12 6 9>" (range 0.6 0.99 $ slow 5 $ tri)
-  $ slow 5
-  $ every 3 (ply 3)
-  $ s "syntho:9"
-  # delay 0.2
-  # delayt 0.4
-  # orbit 2
-  # pan (range (range 0 0.5 $ rand) (range 0.5 1 $ rand) $ slow 2 $ square)
-  # bpf 7000
-  # bpq (range 1 15 $ slow 5 $ sine)
-
-d2 silence
-
-d3
-  $ slow 3
-  $ gap 12
-  $ loopAt 3
-  $ juxBy 0.5 (rev)
-  $ speed "[[1 [1.1 0.76 0.92]*2], [<0.8> ~!3 0.7]]"
-  # s "droni:4"
-  # delay 0.5
-  # delayt 0.4
-  # delayfb 0.2
-  # orbit 3
-
-d3 silence
-
-hush
-
-
-d2 silence
-
-d1
-  $ superimpose ((0.05 ~>) . (iter 4) . (# pan rand) . (# room 0.2))
-  $ stutWith 2 0.5 (stutWith 4 0.3 ((# speed (range 0.1 (range 0.5 1.8 $ slow 31 $ cosine) $ slow 13 $ sine)). (# lpf 800)))
-  $ stack [
-    s "syntho" # shape 0.4,
-    striate' 32 (1/2) $ loopAt 3 $ s "emsoft:2" # lpf 1200
-  ]
-  # cps (80/120)
-
-d1 silence
-
-setcps (80/120)
-
-d1
-  $ slice 8 "4 3 2 1 [6 7] 5"
-  $ stutWith 2 0.2 (|+| waveloss 15) . (0.05 <~)
-  $ every 4 (|+| speed (range 0.1 0.5 $ slow 4 $ sine))
-  $ juxBy 0.5 (superimpose (# squiz 3))
-  $ speed "[1 2 3]"
-  # s "emlong"
-  # orbit 1
-  # delay "0.1"
-
-d1 silence
-
-d2
-  $ slow 2
-  $ striate' 32 (choose [1/2, 1/4, 1/8])
-  $ every 8 (|+| speed (choose [0.3, 0.5, 0.7]))
-  $ every 4 (juxBy 0.6 (rev))
-  $ whenmod 16 14 (# coarse "[2 4]")
-  $ s "syntho"
-  # gain 1
-  # waveloss (4)
-  # shape 0.5
-  # orbit 2
-  # room 0.5
-  # size 0.3
-  # lpf 1200
-  # lpq 0.02
-
-d2 silence
-
-d3
-  $ superimpose (# delay 1) . (# cut 1)
-  $ s "percuo:1 ~ [~ percuo:2]"
-  # gain 1
-  # leslie 2
-  # orbit 3
-
-d3 silence
