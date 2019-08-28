@@ -1,54 +1,54 @@
 # Tidal cheatsheet
 
 ## Basic
-*shut up*: **silence** (one synth) / **hush** (everything)
+*shut up*: **silence** (one synth) / **hush** (everything)\
 *orbit*: **orbit** { orbit channel }
 
 ## Oscillators
-*waves*: **sine**, **cosine**, **square**, **tri**, **saw**, **isaw** { output 0 to 1 }
-*random*: **rand** { 0 to 1 }, **irand** { 0 to N, int }
-*smooth random*: **perlin**, **perlinWith** (val), **perlin2** (val), **perlin2With** (val) (val)
-*choose*: **choose** [0,1,..], **chooseBy** "0 0.25 0.5" [0, 2, 3], **wchoose** [(0,0.25),(2,0.5),(3,0.25)], **wchooseBy** "0 0.4 0.7" [(0,0.25),(2,0.5),(3,0.25)]
+*waves*: **sine**, **cosine**, **square**, **tri**, **saw**, **isaw** { output 0 to 1 }\
+*random*: **rand** { 0 to 1 }, **irand** { 0 to N, int }\
+*smooth random*: **perlin**, **perlinWith** (val), **perlin2** (val), **perlin2With** (val) (val)\
+*choose*: **choose** [0,1,..], **chooseBy** "0 0.25 0.5" [0, 2, 3], **wchoose** [(0,0.25),(2,0.5),(3,0.25)], **wchooseBy** "0 0.4 0.7" [(0,0.25),(2,0.5),(3,0.25)]}
 
 ## Synths
-*basic*: **imp**, **psin**, **pmsin**, **gabor**, **cyclo**
-*input*: **in**, **inr**
-*drumkit*: **superkick**, **superhat**, **supersnare**, **superclap**, **super808**
-*physical*: **supermandolin**, **supergong**, **superpiano**, **superhex**
-*analogue*: **supersquare**, **supersaw**, **superpwm**, **supercomparator**
+*basic*: **imp**, **psin**, **pmsin**, **gabor**, **cyclo**\
+*input*: **in**, **inr**\
+*drumkit*: **superkick**, **superhat**, **supersnare**, **superclap**, **super808**\
+*physical*: **supermandolin**, **supergong**, **superpiano**, **superhex**\
+*analogue*: **supersquare**, **supersaw**, **superpwm**, **supercomparator**\
 *digital*: **superchip**, **supernoise**
 
 ## Functions
-*asr/ahr*: **attack** { time }, **release** { time }, **sustain** { time }, **hold** { time }
-*bin scrambling*: **scram** { level }
-*bin shifting*: **binshift** { level }
-*bitcrush*: **crush** { level [0:15] }
-*delay (del')*: **delay** { level }, **delayt** { level }, **delayfb** { level }
-*distortion*: **shape** { level }, **distort** { level }, **triode** { level }
-*frequency shifter (fshi')*: **fshift** { freqHz }, **fshiftnote** { note }, **fshiftphase** { phase }
-*kursh (kru')*: **krush** { level[0:inf] }, **kcutoff** { freq }
-*leslie (lesl')*: **leslie** { level }, **lrate** { rate }, **lsize** { size }
-*magnitude freeze*: **freeze** { [0,1] }
-*magnitude smearing*: **smear** { level }
-*octer (oct')*: **octer** { level }, **octersub** { level }, **octersubsub** { level }
-*reverb (rvb')*: **room** { level }, **size** { level}, **dry** { level }
-*ring modulator (rmod')*: **ring** { level }, **ringf** { freq }, **ringdf** { slide }
-*sample rate*: **coarse** { factor }
-*squiz*: **squiz** { level [0:inf] }
-*vowel*: **vowel** { [a,e,i,o,u] }
+*asr/ahr*: **attack** { time }, **release** { time }, **sustain** { time }, **hold** { time }\
+*bin scrambling*: **scram** { level }\
+*bin shifting*: **binshift** { level }\
+*bitcrush*: **crush** { level [0:15] }\
+*delay (del')*: **delay** { level }, **delayt** { level }, **delayfb** { level }\
+*distortion*: **shape** { level }, **distort** { level }, **triode** { level }\
+*frequency shifter (fshi')*: **fshift** { freqHz }, **fshiftnote** { note }, **fshiftphase** { phase }\
+*kursh (kru')*: **krush** { level[0:inf] }, **kcutoff** { freq }\
+*leslie (lesl')*: **leslie** { level }, **lrate** { rate }, **lsize** { size }\
+*magnitude freeze*: **freeze** { [0,1] }\
+*magnitude smearing*: **smear** { level }\
+*octer (oct')*: **octer** { level }, **octersub** { level }, **octersubsub** { level }\
+*reverb (rvb')*: **room** { level }, **size** { level}, **dry** { level }\
+*ring modulator (rmod')*: **ring** { level }, **ringf** { freq }, **ringdf** { slide }\
+*sample rate*: **coarse** { factor }\
+*squiz*: **squiz** { level [0:inf] }\
+*vowel*: **vowel** { [a,e,i,o,u] }\
 *waveloss*: **waveloss** { level [0:100] }
 
 ## Spectral
-*spectral comb*: **comb** { level }
-*spectral delay (sdel')*: **xsdelay** { level }, **tsdelay** { level }
-*spectral hpass*: **hbrick** { level }
-*spectral lpass*: **lbrick** { level }
-*spectral conformer (scon')*: **real** { level }, **imag** { level }
+*spectral comb*: **comb** { level }\
+*spectral delay (sdel')*: **xsdelay** { level }, **tsdelay** { level }\
+*spectral hpass*: **hbrick** { level }\
+*spectral lpass*: **lbrick** { level }\
+*spectral conformer (scon')*: **real** { level }, **imag** { level }\
 *spectral enhancer*: **enhance** { level }
 
 ## Volume
-*gain*: **gain** { level }
-*amp*: **amp** { level }
+*gain*: **gain** { level }\
+*amp*: **amp** { level }\
 *pan*: **pan** { level }
 
 ### Control
@@ -72,9 +72,9 @@
 * (convert an ascii char to binary, 8 bit each char) **ascii** "hey"
 
 #### Filter
-*lowpass*: **lpf** { freq }, **lpq** { resonance }
-*hipass*: **hpf** { freq }, **hpq** { resonance }
-*bandpass*: **bpf** { freq }, **bpq** { q-factor }
+*lowpass*: **lpf** { freq }, **lpq** { resonance }\
+*hipass*: **hpf** { freq }, **hpq** { resonance }\
+*bandpass*: **bpf** { freq }, **bpq** { q-factor }\
 *djfilter*: **djf** { level }
 
 #### Speed
