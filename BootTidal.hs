@@ -96,6 +96,8 @@ let
   lesl = grp [mF "leslie", mF "lrate", mF "lsize"]
   fshi = grp [mF "fshift", mF "fshiftnote", mF "fshiftphase"]
   rmod = grp [mF "ring", mF "ringf", mF "ringdf"]
+  oct = grp [mf "octer", mf "octersub", mf "octersubsub"]
+  sdel = grp [mf "xsdelay", mf "tsdelay"]
 
   -- FX groups' function version
   adsr' a d s r = attack a # decay d # sustain s # release r
@@ -114,7 +116,21 @@ let
   phaser' r d = phaserrate r # phaserdepth d
   lesl' l r s = leslie l # lrate r # lsize l
   fshi' f n p = fshift f # fshiftnote n # fshiftphase p
-  rmod a f s = ring a # ringf f # ringdf s
+  rmod' a f s = ring a # ringf f # ringdf s
+  oct' o s ss = octer o # octersub s # octersubsub ss
+  sdel' x t = xsdelay x # tsdelay t
+
+  -- runs of numbers
+  r = run
+  ri a = rev (r a) -- run inverted
+  rodd a = (((r a) + 1) * 2) - 1 -- run of odd numbers
+  reven a = ((r a) + 1) * 2 -- run of even numbers
+  roddi a = rev (rodd a) -- run of odd numbers inverted
+  reveni a = rev (reven a) -- run of even numbers inv erted
+
+  c = choose
+  codd a = c $ take a [1,3..] -- choose an odd number
+  ceven a = c $ take a [0,2..] -- choose an even number
 :}
 
 :set prompt "tidal> "

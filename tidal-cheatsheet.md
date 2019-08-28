@@ -4,10 +4,10 @@
 *shut up*: **silence** (one synth) / **hush** (everything)
 
 ## Oscillators
-*waves*: **sine**, **cosine**, **square**, **tri**, **saw**, **isaw** { output 0 to 1 }  
-*random*: **rand** { 0 to 1 }, **irand** { 0 to N, int }  
-*smooth random*: **perlin**, **perlinWith** (val), **perlin2** (val), **perlin2With** (val) (val)  
-*choose*: **choose** [0,1,..], **chooseBy** "0 0.25 0.5" [0, 2, 3], **wchoose** [(0,0.25),(2,0.5),(3,0.25)], **wchooseBy** "0 0.4 0.7" [(0,0.25),(2,0.5),(3,0.25)]  
+*waves*: **sine**, **cosine**, **square**, **tri**, **saw**, **isaw** { output 0 to 1 }
+*random*: **rand** { 0 to 1 }, **irand** { 0 to N, int }
+*smooth random*: **perlin**, **perlinWith** (val), **perlin2** (val), **perlin2With** (val) (val)
+*choose*: **choose** [0,1,..], **chooseBy** "0 0.25 0.5" [0, 2, 3], **wchoose** [(0,0.25),(2,0.5),(3,0.25)], **wchooseBy** "0 0.4 0.7" [(0,0.25),(2,0.5),(3,0.25)]
 
 ## Synths
 *basic*: **imp**, **psin**, **pmsin**, **gabor**, **cyclo**
@@ -18,9 +18,9 @@
 *digital*: **superchip**, **supernoise**
 
 ## Functions
-*asr/ahr*: **attack** { time }, **release** { time }, **sustain** { time }, **hold** { time }  
-*reverb*: **room** { level }, **size** { level}  
-*delay*: **delay** { level }, **delayt** { level }, **delayfb** { level }  
+*asr/ahr*: **attack** { time }, **release** { time }, **sustain** { time }, **hold** { time }
+*reverb*: **room** { level }, **size** { level}
+*delay*: **delay** { level }, **delayt** { level }, **delayfb** { level }
 *leslie*: **leslie** { level }, **lrate** { rate }, **lsize** { size }
 
 ### Control
@@ -36,6 +36,8 @@
 * (pitch raise with crazy stuffy, from 1 to inf) **squiz** "1 2 8 256"
 * (voice effect) **vowel** "a e i o u"
 * (divide audio into segments and discard a fraction of them from 0 to 100) **waveloss** "20 0.6 100"
+* (freezes a note) **freeze** 1
+* (comb filter) **comb** 0.7
 
 #### Scale
 * (list scales) **scaleList**
@@ -55,9 +57,9 @@
 * (convert an ascii char to binary, 8 bit each char) **ascii** "hey"
 
 #### Filter
-*lowpass*: **lpf** { freq }, **lpq** { resonance }  
-*hipass*: **hpf** { freq }, **hpq** { resonance }  
-*bandpass*: **bpf** { freq }, **bpq** { q-factor }  
+*lowpass*: **lpf** { freq }, **lpq** { resonance }
+*hipass*: **hpf** { freq }, **hpq** { resonance }
+*bandpass*: **bpf** { freq }, **bpq** { q-factor }
 *djfilter*: **djf** { level }
 
 #### Speed
