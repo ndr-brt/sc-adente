@@ -93,6 +93,10 @@ let
   eq   = grp [mF "cutoff",  mF "resonance", mF "bandf", mF "bandq", mF "hcutoff", mF "hresonance"]
   tremolo = grp [mF "tremolorate", mF "tremolodepth"]
   phaser  = grp [mF "phaserrate", mF "phaserdepth"]
+  lesl = grp [mF "leslie", mF "lrate", mF "lsize"]
+  fshi = grp [mF "fshift", mF "fshiftnote", mF "fshiftphase"]
+  rmod = grp [mF "ring", mF "ringf", mF "ringdf"]
+
   -- FX groups' function version
   adsr' a d s r = attack a # decay d # sustain s # release r
   del' l t f = delay l # delaytime t # delayfeedback f
@@ -108,6 +112,9 @@ let
   eq' h b l q = cutoff l # resonance q # bandf b # bandq q # hcutoff h # hresonance q
   tremolo' r d = tremolorate r # tremolodepth d
   phaser' r d = phaserrate r # phaserdepth d
+  lesl' l r s = leslie l # lrate r # lsize l
+  fshi' f n p = fshift f # fshiftnote n # fshiftphase p
+  rmod a f s = ring a # ringf f # ringdf s
 :}
 
 :set prompt "tidal> "
