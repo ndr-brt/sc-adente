@@ -73,7 +73,7 @@ let
     freq = pF "freq"
 :}
 
--- shortcuts taken from BootTidalCustom
+-- shortcuts taken from BootTidalCustom, improved
 :{
 let
   bps b = setcps (b/2)
@@ -96,8 +96,10 @@ let
   lesl = grp [mF "leslie", mF "lrate", mF "lsize"]
   fshi = grp [mF "fshift", mF "fshiftnote", mF "fshiftphase"]
   rmod = grp [mF "ring", mF "ringf", mF "ringdf"]
-  oct = grp [mf "octer", mf "octersub", mf "octersubsub"]
-  sdel = grp [mf "xsdelay", mf "tsdelay"]
+  oct = grp [mF "octer", mF "octersub", mF "octersubsub"]
+  sdel = grp [mF "xsdelay", mF "tsdelay"]
+  kru = grp [mF "krush", mF "kcutoff"]
+  scon = grp [mF "real", mF "imag"]
 
   -- FX groups' function version
   adsr' a d s r = attack a # decay d # sustain s # release r
@@ -119,6 +121,8 @@ let
   rmod' a f s = ring a # ringf f # ringdf s
   oct' o s ss = octer o # octersub s # octersubsub ss
   sdel' x t = xsdelay x # tsdelay t
+  kru' k c = krush k # kcutoff c
+  scon' r i = real r # imag i
 
   -- runs of numbers
   r = run
@@ -131,6 +135,23 @@ let
   c = choose
   codd a = c $ take a [1,3..] -- choose an odd number
   ceven a = c $ take a [0,2..] -- choose an even number
+
+  -- transitions
+  j p n  = jumpIn' p n
+  j2 p   = jumpIn' p 2
+  j4 p   = jumpIn' p 4
+  j8 p   = jumpIn' p 8
+  j16 p  = jumpIn' p 16
+  xf p n = xfadeIn  p n
+  xf2 p  = xfadeIn  p 2
+  xf4 p  = xfadeIn  p 4
+  xf8 p  = xfadeIn  p 8
+  xf16 p = xfadeIn  p 16
+  cl p n = clutchIn p n
+  cl2 p  = clutchIn p 2
+  cl4 p  = clutchIn p 4
+  cl8 p  = clutchIn p 8
+  cl16 p = clutchIn p 16
 :}
 
 :set prompt "tidal> "

@@ -1,7 +1,8 @@
 # Tidal cheatsheet
 
-## Silence
+## Basic
 *shut up*: **silence** (one synth) / **hush** (everything)
+*orbit*: **orbit** { orbit channel }
 
 ## Oscillators
 *waves*: **sine**, **cosine**, **square**, **tri**, **saw**, **isaw** { output 0 to 1 }
@@ -19,25 +20,38 @@
 
 ## Functions
 *asr/ahr*: **attack** { time }, **release** { time }, **sustain** { time }, **hold** { time }
-*reverb*: **room** { level }, **size** { level}
-*delay*: **delay** { level }, **delayt** { level }, **delayfb** { level }
-*leslie*: **leslie** { level }, **lrate** { rate }, **lsize** { size }
+*bin scrambling*: **scram** { level }
+*bin shifting*: **binshift** { level }
+*bitcrush*: **crush** { level [0:15] }
+*delay (del')*: **delay** { level }, **delayt** { level }, **delayfb** { level }
+*distortion*: **shape** { level }, **distort** { level }, **triode** { level }
+*frequency shifter (fshi')*: **fshift** { freqHz }, **fshiftnote** { note }, **fshiftphase** { phase }
+*kursh (kru')*: **krush** { level[0:inf] }, **kcutoff** { freq }
+*leslie (lesl')*: **leslie** { level }, **lrate** { rate }, **lsize** { size }
+*magnitude freeze*: **freeze** { [0,1] }
+*magnitude smearing*: **smear** { level }
+*octer (oct')*: **octer** { level }, **octersub** { level }, **octersubsub** { level }
+*reverb (rvb')*: **room** { level }, **size** { level}, **dry** { level }
+*ring modulator (rmod')*: **ring** { level }, **ringf** { freq }, **ringdf** { slide }
+*sample rate*: **coarse** { factor }
+*squiz*: **squiz** { level [0:inf] }
+*vowel*: **vowel** { [a,e,i,o,u] }
+*waveloss*: **waveloss** { level [0:100] }
+
+## Spectral
+*spectral comb*: **comb** { level }
+*spectral delay (sdel')*: **xsdelay** { level }, **tsdelay** { level }
+*spectral hpass*: **hbrick** { level }
+*spectral lpass*: **lbrick** { level }
+*spectral conformer (scon')*: **real** { level }, **imag** { level }
+*spectral enhancer*: **enhance** { level }
+
+## Volume
+*gain*: **gain** { level }
+*amp*: **amp** { level }
+*pan*: **pan** { level }
 
 ### Control
-* (lower the sample rate, factor) **coarse** "<4 8 16 24>"
-* (bit crusher, 1 max, 16 min) **crush** "8"
-* (send effects on separate channel) **orbit** 1
-* (change volume) **gain** 0.8
-* (play sample N times in loop) **loop** "2.3"
-* (make sample fit the given number of cycles) **loopAt** 4
-* (convert midi to note) **midinote** 62
-* (give swing feel, 0 human, 1 machine) **nudge** 0.7
-* (waveshape distortion. 1 is louuud!) **shape** 0.7
-* (pitch raise with crazy stuffy, from 1 to inf) **squiz** "1 2 8 256"
-* (voice effect) **vowel** "a e i o u"
-* (divide audio into segments and discard a fraction of them from 0 to 100) **waveloss** "20 0.6 100"
-* (freezes a note) **freeze** 1
-* (comb filter) **comb** 0.7
 
 #### Scale
 * (list scales) **scaleList**
@@ -46,9 +60,10 @@
 #### Sample
 * (load a sample) **s** "bd"
 * (change sample ordinality) **n** 2
-* (change pan) **pan** 0.7
+* (convert midi to note) **midinote** 62
 * (change start time of sample) **begin** "<0 0.25 0.5>"
 * (change finish time of sample) **end** "<0 0.25 0.5>"
+* (play sample N times in loop) **loop** "2.3"
 
 #### Binary
 * (tell a pattern when it should play with true or false) **struct** "t ~ f t"
@@ -66,6 +81,7 @@
 * (change tempo, factor) **cps** "<1 0.5 2>"
 * (change sample speed) **speed** "<1 -1>"
 * (speed up or down sample) **accelerate** "<0 1 -1>"
+* (give swing feel, 0 human, 1 machine) **nudge** 0.7
 * (change pitch, in semitones) **up** "<0 1 5>"
 * (change how speed parameter is considered):
   * "r" (default): multiplies sample playback rate
@@ -131,6 +147,7 @@ Apply function to a pattern with different possibility
 * (chunk in reverse direction) **chunk'**
 * (speed up pattern) **fast** 2
 * (slow down pattern) **slow** 2
+* (make sample fit the given number of cycles) **loopAt** 4
 * (shift pattern backward in time) every 4 (0.25 **<~**)
 * (shift pattern foreward in time) every 4 (0.25 **~>**)
 * (speed up pattern and increase speed control) **hurry** 3

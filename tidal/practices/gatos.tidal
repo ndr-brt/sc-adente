@@ -3,13 +3,13 @@ d1
   $ every 8 (fast 4)
   $ slow 2
   $ sound "incoming? incoming*4 hoover*3"
-  # speed 0.3
-  # room 1.5
-  # orbit 0
-  # delay 2
-  # crush 8
+  # rvb' 1.5 0.4
+  # speed (slow 15 $ perlin)
+  # del' 2 0.23 0.12
+  # sdel' 200 14
+  # scram 0.7
 
-d3 $ stack [
+d2 $ stack [
   sound "battles*2? tink . tink*2" # cutoff (range 100 500 $ saw) # room 2 # orbit 1,
   sound "~ gabba bassfoo" # speed 0.1,
   every 4 (rev) $ sound "voodoo dorkbot diphone2" # delay 5 # crush (irand 9) # speed (rand + 1),
@@ -18,5 +18,13 @@ d3 $ stack [
   sometimesBy 0.70 (# crush 4) $ s "superchip superhex*3 superchip*2?" # octave (irand 6) # cutoff (range 100 800 $ fast 4 $ sine) # n (irand 9),
   sound "bubble" # gain 3 # cutoff (range 100 400 $ saw)
 ]
+
+d3
+  $ euclid 2 5
+  $ s "emlong"
+  # legato 4
+  # binshift (range 0.2 1.3 $ slow 7 $ saw)
+  # begin (range 0.2 0.6 $ slow 7 $ sine)
+  # cps 0.7
 
 hush
