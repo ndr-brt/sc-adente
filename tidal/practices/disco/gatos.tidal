@@ -1,32 +1,57 @@
-d1
-  $ every 4 (rev)
-  $ every 8 (fast 4)
+xfadeIn 1 8
   $ slow 2
+  $ every 4 (rev)
+  $ every 8 (fast 2)
   $ sound "incoming? incoming*4 hoover*3"
-  # rvb' 1.5 0.4
-  # speed (slow 15 $ perlin)
-  # del' 2 0.23 0.12
-  # sdel' 200 14
+  # pan "{0.5 0.2 0.8}%4"
+  # rvb' 1.5 0.8
+  # speed ((perlin + 1) / 1.5)
+  # del' 0.99 0.23 0.12
+  # sdel' (range 80 200 $ slow 31 $ saw) (choose [14, 20, 24])
   # scram 0.7
+  # oct' 0.5 0.7 0.9
+  # lpf 1000
 
 clutchIn 1 16
   $ stack [
-    sound "battles*2? tink . tink*2" # cutoff (range 100 500 $ saw) # room 2 # orbit 1,
-    sound "~ gabba bassfoo" # speed 0.1,
-    every 4 (rev) $ sound "voodoo dorkbot diphone2" # delay 5 # crush (irand 9) # speed (rand + 1),
-    s "supersaw*8" # n (irand 8) # octave 2,
-    sound "chink*32?" # speed (range 0.2 1.2 $ rand),
-    sometimesBy 0.70 (# crush 4) $ s "superchip superhex*3 superchip*2?" # octave (irand 6) # cutoff (range 100 800 $ fast 4 $ sine) # n (irand 9),
-    sound "bubble" # gain 3 # cutoff (range 100 400 $ saw)
+    sound "battles*2? tink . tink*2"
+      # cutoff (range 100 1000 $ slow 4 $ saw)
+      # rvb' 1 1
+      # binshift 0.5,
+    juxBy 0.4 (|* speed "-1")
+      $ s "~ gabba bassfoo"
+      # speed 0.1,
+    every 4 (rev)
+      $ sound "voodoo dorkbot diphone2"
+      # del' 0.9 0.45 0.32
+      # crush (irand 9)
+      # speed (rand + 1),
+    n (scale "yu" (irand 8))
+      # s "supersaw"
+      # legato 2
+      # octave 2,
+    s "chink*32?"
+      # speed (range 0.2 1.2 $ rand)
+      # pan (perlin2 (sine)),
+    sometimesBy 0.70 (# crush 4)
+      $ s "superchip superhex*3 superchip*2?"
+      # octave (irand 6)
+      # cutoff (range 100 800 $ sine)
+      # n (irand 9),
+    s "bubble"
+      # gain 3
+      # bp' 3000 0.8
   ]
 
 clutchIn 1 16
   $ whenmod 8 6 (scramble 4)
   $ whenmod 15 13 (swing 3)
-  $ superimpose (
+  $ rarely (
+    superimpose (
       ((range 0.01 0.03 $ rand) ~>)
       .(|* pan (rand))
       .(rarely (within (0, 0.6) (# waveloss 98)))
+    )
   )
   $ stack [
     every 2 (stut' 3 0.2 (# squiz 120))
@@ -36,11 +61,13 @@ clutchIn 1 16
     every 4 (ply 2)
     $ whenmod 8 7 (swing 3)
       $ sometimes (# del' 0.43 0.32 0.34)
+      $ whenmod 6 4 (# crush 3)
       $ rarely (# kru' 2 1200)
       $ struct (binary "<49 51 53 55>")
       $ s "kk"
       # distort 0.4
-      # crush 2
+      # shape 0.3
+      # up "-2"
     ,
     degradeBy 0.7
       $ often (# smear 0.5)
@@ -74,6 +101,12 @@ clutchIn 1 16
       # gain 1.2
       # pan (perlin)
       # sdel' 120 18
+    ,
+    slow 1
+      $ (0.1 <~)
+      $ s "droni:3"
+      # lp' 450 0.83
+      # freeze 1
   ]
   # nudge 0.4
 
