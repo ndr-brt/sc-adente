@@ -249,16 +249,6 @@ SynthDef(\cymbalic_mcld, { |out=0, pan=0.0, amp=0.1|
 	OffsetOut.ar(out, DirtPan.ar(((res * 1) + (lodriver * 2) + thwack) * amp, ~dirt.numChannels, pan))
 }).add;
 
-SynthDef(\drum_kick, {
-	|freq=440, gate=1, amp=0.5, pan = 0.0,out=0|
-	var env = EnvGen.kr(Env.perc(0.0001, 0.09, amp, 8));
-	var source =
-		SinOsc.ar(EnvGen.kr(Env.perc(0.0001, 1.5, 1, -200), gate, 1000, 45, doneAction:2), 1, 1) +
-		((BPF.ar([GrayNoise.ar(6),GrayNoise.ar(6)],EnvGen.kr(Env.perc(0.001, 0.3, 1, -200), gate, 6000, 70), 1.5)).distort * Line.kr(0.3,0,0.1));
-
-	OffsetOut.ar(out, DirtPan.ar(source, ~dirt.numChannels, pan, env))
-}).add;
-
 // Originally found at http://ecmc.rochester.edu/ecmc/docs/supercollider/scbook/Ch21_Interface_Investigations/ixi%20SC%20tutorial/ixi_SC_tutorial_10.html
 SynthDef("flute", { | scl = 0.2, freq = 440, ipress = 0.9, ibreath = 0.09, ifeedbk1 = 0.4, ifeedbk2 = 0.4, dur = 1, gate = 1, amp = 2, pan=0.0 |
 
@@ -378,14 +368,6 @@ SynthDef(\hat, { | out=0, pan, amp |
 	var env = EnvGen.kr(Env.perc(0.01, 0.2), doneAction: 2);
 
 	OffsetOut.ar(out, DirtPan.ar(osc1, ~dirt.numChannels, pan, env));
-}).add;
-
-SynthDef(\hihat, { | out = 0, amp = 0.5, att = 0.01, rel = 0.2, ffreq = 6000, pan = 0 |
-	var snd = WhiteNoise.ar(amp);
-	var env = Env.perc(att, rel).kr(doneAction: 2);
-	snd = HPF.ar(snd, ffreq);
-
-	OffsetOut.ar(out, DirtPan.ar(snd, ~dirt.numChannels, pan, env))
 }).add;
 
 SynthDef(\snare, { | out = 0, amp = 0.1, sinfreq = 180, att = 0.01, rel = 0.2, ffreq = 2000, pan = 0 |
@@ -637,18 +619,6 @@ SynthDef(\snare_oto309, { | out=0, amp=0.1, pan=0 |
 	son = son.clip2(1) * amp;
 
 	OffsetOut.ar(out, DirtPan.ar(son, ~dirt.numChannels, pan))
-}).add;
-
-SynthDef(\snare_stein, { |out=0, amp=0.1, pan=0.0|
-	var filtWhite = LPF.ar(WhiteNoise.ar(1), 7040, 1);
-
-	var snare = ((SinOsc.ar(330,0,0.25) * EnvGen.ar(Env.perc(0.0005,0.055)))
-		+(SinOsc.ar(185,0,0.25) * EnvGen.ar(Env.perc(0.0005,0.075)))
-		+(filtWhite * EnvGen.ar(Env.perc(0.0005,0.2), doneAction: 2) * 0.2)
-		+(HPF.ar(filtWhite, 523, 1) * EnvGen.ar(Env.perc(0.0005,0.183)) * 0.2)
-	);
-
-	OffsetOut.ar(out, DirtPan.ar(snare * amp * 10, ~dirt.numChannels, pan))
 }).add;
 
 )
