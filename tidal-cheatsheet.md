@@ -26,7 +26,7 @@
 *delay (del')*: **delay** { level }, **delayt** { level }, **delayfb** { level }\
 *distortion*: **shape** { level }, **distort** { level }, **triode** { level }\
 *frequency shifter (fshi')*: **fshift** { freqHz }, **fshiftnote** { note }, **fshiftphase** { phase }\
-*kursh (kru')*: **krush** { level[0:inf] }, **kcutoff** { freq }\
+*krush (kru')*: **krush** { level[0:inf] }, **kcutoff** { freq }\
 *leslie (lesl')*: **leslie** { level }, **lrate** { rate }, **lsize** { size }\
 *magnitude freeze*: **freeze** { [0,1] }\
 *magnitude smearing*: **smear** { level }\
