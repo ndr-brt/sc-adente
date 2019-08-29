@@ -1,11 +1,10 @@
 d1
-  $ juxBy 0.4 (rev)
+  $ juxBy 0.4 ((range 0.01 0.03 $ slow 7 $ cosine) ~>)
   $ slow 4
   $ s "bd ~ bd ~ sd:3 ~"
   # waveloss (range 0.1 50 $ slow 8 $ perlin)
   # crush 6
   # speed (range 0.6 0.8 $ slow 3 $ saw)
-  # orbit 1
   # room 0.2
   # size 0.8
   # delay 0.6
@@ -20,7 +19,6 @@ xfadeIn 2 4
     n "<as7 gs7 gs7 e7>" # gain 0.6 # hpf 2000
   ]
   # s "supersaw"
-  # orbit 2
   # attack 2
   # sustain 2
   # release 2
@@ -35,11 +33,9 @@ d3
   # coarse 92
   # hpq (range 0.01 0.25 $ slow 42 $ perlin)
   # hpf (range 100 800 $ slow 4 $ sine)
-  # ring 1
-  # ringf 1500
-  # ringdf 1.5
+  # rmod' 1 1500 1.5
   # gain 0.7
-  # crush 0
+  # crush 4
 
 d3 silence
 
