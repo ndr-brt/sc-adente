@@ -45,9 +45,7 @@ d4
   # sustain 1
   # release 0.7
   # coarse 2
-  # waveloss 100
   # size 0.3
-  # orbit 4
   # lpq 0.3
 
 d5
@@ -60,14 +58,11 @@ d5
   $ superimpose (scramble 3)
   $ s "bd bd ~ ~ sn"
   # cut 1
-  # orbit 5
   # room 0.15
   # size 0.2
   # coarse 4
 
-
 d4 silence
-
 
 xfadeIn 4 4
   $ spread (slow) [64, 52, 56, 60]

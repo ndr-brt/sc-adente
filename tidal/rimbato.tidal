@@ -4,22 +4,20 @@ xfadeIn 1 1
   $ whenmod 8 4 (# n "c2 e2")
   $ n "c1 a1" # s "supersaw"
   # loop 16
-  # orbit 1
 
 xfadeIn 2 1
   $ juxBy 0.5 (rev)
   $ n (irand 8 * perlin)
   # s "industrial"
   # crush (slow 4 $ run 16)
-  # gain 0.8
-  # orbit 2
-  # room 0.5
-  # size (rand)
+  # gain 0.9
+  # rvb' 0.5 rand
 
 xfadeIn 2 2 $ silence
 
 xfadeIn 3 2
   $ slow 2
+  $ every 4 (ply 3)
   $ n "c7 a7"
   # s "supermandolin"
   # vowel "o o"

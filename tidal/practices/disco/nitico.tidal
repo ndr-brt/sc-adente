@@ -30,7 +30,6 @@ d4
   $ slow 4
   $ n (irand 10)
   # s "diphone"
-  # gain 0.9
   # hpf (range 800 1800 $ slow 16 $ sine)
   # speed "[0.5, -0.5]"
 

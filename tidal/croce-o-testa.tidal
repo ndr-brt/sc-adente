@@ -2,8 +2,8 @@ xfadeIn 1 4
   $ slow 2
   $ striate' 32 (1)
   $ s "battles:3"
-  # lpf (range 100 3000 $ slow 4 $ tri)
-  # lpq (range 0.1 0.7 $ rand)
+  # lpf (range 100 3000 $ slow 43 $ tri)
+  # lpq (range 0.1 0.5 $ rand)
 
 xfadeIn 1 16 $ silence
 
@@ -25,14 +25,10 @@ xfadeIn 3 2
   $ spread ($) [rev, fast 2]
   $ s "~ [bd ~ sn] ~ sn:2"
   # shape 0.8
-  # orbit 1
   # gain (range 0.6 0.8 $ rand)
-  # delay 0.8
-  # delayt 0.8
-  # delayfb 0.7
-  # room 0.4
+  # del' 0.8 0.8 0.7
+  # rvb' 0.4 rand
   # nudge 0.5
-  # size (rand)
   # crush (range 10 1 $ slow 4 $ perlin)
 
 xfadeIn 3 8 $ silence
