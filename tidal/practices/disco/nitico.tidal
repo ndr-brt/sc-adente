@@ -1,38 +1,54 @@
 d1 $ "feelfx*2"
   # n (irand 10)
+  # gain (range 1 1.5 $ slow 13 $ square)
   # cut 2
+  # rvb' 0.05 0.3
   # speed (range 0.07 0.09 $ rand)
 
-d2 $ every 3 (fast 2) $ slow 4 $ "bd? hh*2? cb*2? sd*3? bd?" # n (irand 8)
-  # speed 0.5
-  # orbit 1
-  # room 0.8
-  # size 0.2
-  # delay 0.7
+d2
+  $ every 3 (fast 2)
+  $ whenmod 10 8 (brak)
+  $ slow 4
+  $ "bd? hh*2? cb*2? sd*3? bd?"
+  # n (irand 8)
+  # speed (range 0.4 0.6 $ slow 12 $ saw)
+  # rvb' 0.8 0.2
+  # del' 0.7 0.23 0.14
   # gain 0.5
 
 d2 silence
 
 d3 $ slow 1.5 $ jux (rev) $ n "d9*3 e9*2 d9*5"
   # s "supersaw"
-  # orbit 1
   # size 0.7
   # cutoff (range 400 800 $ rand)
   # speed (range 0.5 0.9 $ rand)
 
-d4 $ every 4 (slow 8) $ degradeBy 0.75 $ slow 4 $ n (irand 10) # s "diphone"
-  # gain 0.
+d4
+  $ every 4 (slow 8)
+  $ degradeBy 0.75
+  $ slow 4
+  $ n (irand 10)
+  # s "diphone"
+  # gain 0.9
   # hpf (range 800 1800 $ slow 16 $ sine)
   # speed "[0.5, -0.5]"
 
-d5 $ striate' 16 (1/1) $ s "circus:1"
+d5
+  $ juxBy (range 0 1 $ slow 10 $ sine) (|* speed 0.95)
+  $ whenmod 40 20 (
+    (# s "juno*24")
+    .(# cutoff (irand 200 + 500))
+  )
+  $ striate' 16 (1/1)
+  $ s "circus:1"
   # cutoff (range 200 400 $ rand)
   # crush 5
 
-d5 $ jux (rev) $ s "juno*24"
-  # cutoff (irand 200 + 500)
-
-d6 $ every 8 (fast 2) $ striate 2 $ n (run 10)
+d6
+  $ every 8 (fast 2)
+  $ striate 2
+  $ n (run 10)
   # s "haw haw:5?"
 
 d7 $ n (run 24)
