@@ -27,12 +27,37 @@ SynthDef(\ss, { |out=0, amp, pan, attack=0.0005, release=0.2, freq|
 	OffsetOut.ar(out, DirtPan.ar(sound, ~dirt.numChannels, pan, env));
 }).add;
 
-SynthDef("hh", { |out=0, amp, attack=0.01, release = 0.18, freq, pan|
+SynthDef(\hhat, { |out=0, amp, attack=0.01, release = 0.08, freq, pan|
 	var snd = WhiteNoise.ar(amp);
 	var env = Env.perc(attack, release).kr(doneAction: 2);
-	var sound = HPF.ar(snd * env, freq * 18);
+	var sound = HPF.ar(snd, freq * 18);
 
 	OffsetOut.ar(out, DirtPan.ar(sound, ~dirt.numChannels, pan, env));
+}).add;
+
+SynthDef(\clap, { | out=0, amp = 0.1, pan=0 |
+
+	var env1 = EnvGen.ar(Env.new([0, 1, 0, 1, 0, 1, 0, 1, 0], [0.001, 0.013, 0, 0.01, 0, 0.01, 0, 0.03], [0, -3, 0, -3, 0, -3, 0, -4]));
+	var env2 = EnvGen.ar(Env.new([0, 1, 0], [0.02, 0.3], [0, -4]), doneAction:2);
+
+	var noise1 = BPF.ar(
+		HPF.ar(
+			WhiteNoise.ar(env1),
+			600),
+		2000, 3
+	);
+
+	var noise2 = BPF.ar(
+		HPF.ar(
+			WhiteNoise.ar(env2),
+			1000),
+		1200, 0.7, 0.7
+	);
+
+	var son = noise1 + noise2;
+	son = son.softclip * amp * 2;
+
+	OffsetOut.ar(out, DirtPan.ar(son, ~dirt.numChannels, pan))
 }).add;
 
 )
