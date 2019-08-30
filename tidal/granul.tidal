@@ -1,4 +1,6 @@
-d1 $ loopAt 32 $ chop 32 $ s "industrial"
+d1
+  $ loopAt 32 $
+   chop 32 $ s "industrial"
   # n (irand 2)
   # hcutoff "80"
   # cutoff "37"
@@ -27,7 +29,6 @@ d2 $ every 2 (rev) $ every 4 (slow 1.5) $ n (irand 8) # sound "808bd*2 808ht? 80
   # gain 0.9
   # room 1
   # size 0.5
-  # orbit 0
 
 d2 silence
 

@@ -1,30 +1,35 @@
-d1 $ striate' 64 (1 - (rand/5)) $ n (run (irand 5 + 15))
+d1
+  -- $ striate' 64 (1 - (rand/5))
+  $ n (run (12))
   # s "msg"
-  # lpf (range (irand 200 + 100) (irand 100 + 1000) $ slow 32 $ sine)
-  # lpq (rand/3)
+  # nudge 0.4
+  # hpf (range (irand 200 + 100) (irand 100 + 1000) $ slow 32 $ sine)
+  # hpq (rand/3)
   # crush (range 16 4 $ slow 8 $ saw)
-  # orbit 1
   # shape (perlin / 2)
   # pan (rand)
-  # leslie 2
-  # lrate 3
+  # lesl' 2 3 2.5
 
 d1 silence
 
 
-d2 $ slow 2 $ every 2 (slow 2.5) $ every 3 (jux (rev)) $ midinote "<22 20 24>"
+d2
+  $ every 2 (slow 2.5)
+  $ every 3 (jux (rev))
+  $ n (scale "iwato" "{0 2 4}")
   # s "supersaw supersquare*2 supergong?"
-  # speed (range 0.01 0.04 $ sine)
-  # orbit 0
   # room (rand)
-  # nudge 0.3
+  # octave 2
+  # nudge 0.4
   # gain 0.8
 
 d2 silence
 
-d3 $ jux (rev) $ fast 4 $ n (irand 4) # s "metal:2*4 metal:0*2 metal:1*5"
+d3
+  $ jux (rev)
+  $ fast 4
+  $ s "metal:2*4 metal:0*2 metal:1*5"
   # gain (1 - (rand/3))
-  # orbit 1
   # cps (rand/4)
   # hpf ((irand 400 + 200) + irand 300)
   # hpq (range 0.5 1 $ slow 3 $ rand)
@@ -33,7 +38,8 @@ d3 $ jux (rev) $ fast 4 $ n (irand 4) # s "metal:2*4 metal:0*2 metal:1*5"
 
 d3 silence
 
-d4 $ s "outdoor:2*3?"
+d4
+  $ s "outdoor:2*3?"
   # coarse (irand (8))
   # speed (rand * 2)
   # squiz (irand 80)
@@ -42,7 +48,8 @@ d4 $ s "outdoor:2*3?"
 
 d4 silence
 
-d5 $ striate' (8) (1)
+d5
+  $ striate' (8) (1)
   $ n (run 8)
   # s "kurt"
   # begin (range 0.1 0.4 $ perlin)
@@ -54,3 +61,21 @@ d5 $ striate' (8) (1)
 d5 silence
 
 hush
+
+
+let mar = markovPat 4 2 [[9,5,2,1], [4,5,3,5], [4,6,9,3], [4,1,14,7], [5,14,3,10]]
+
+d1
+  $ slow 2
+  $ juxBy (sine - 0.5) ((|+ octave 1).(fast 2))
+  $ superimpose (
+    (# octave 2)
+    .(slow 3)
+    .(every 4 (fast 2))
+    .(# n (scale "pelog" (fmap ([0, 3, 2, 5]!!) $ mar)))
+  )
+  $ n (scale "pelog" (fmap ([0, 2, 4, 6]!!) $ mar))
+  # s "superpiano"
+  # legato 1
+  # nudge 0.4
+  # octave 5
