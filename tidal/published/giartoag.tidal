@@ -1,0 +1,34 @@
+d1
+  $ every 4 (linger (choose [0.25, 0.75]))
+  $ juxBy ((saw+sine)/2) (rev)
+  $ sometimesBy 0.45 (plyWith 4 (# comb 0.9))
+  $ foldEvery [3, 5] (fast 2)
+  $ sometimes (# del' 0.45 0.23 0.21)
+  $ iter 4
+  $ s "[kk(1,2),ss(1,2,1),hhat(5,8),clap/4]"
+  # distort (rand)
+
+d1 silence
+
+d2
+  $ loopAt 1
+  $ layer [
+    id
+     .(sometimes (fast 2))
+    ,
+    (#speed 0.0035)
+     .(# begin 0.18)
+     .(# end 0.21)
+     .(# lpf 300)
+     .(# shape 0.5)
+     ,
+    (# speed "<12 11.5 10.2 13.9>")
+     .(ply 2)
+     .(0.12 ~>)
+    .(stutWith 4 "<0.07 0.12 0.09 0.15>" ((#binshift 0.9).(#accelerate "-1").(#pan perlin)))
+    .(#lpf 2000)
+    .(#lpq 0.3)
+  ]
+  $ "emsoft:2"
+
+d2 silence

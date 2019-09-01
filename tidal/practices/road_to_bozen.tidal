@@ -1,0 +1,89 @@
+d1
+  $ every 4 (slice 8 (ri 8))
+  $ juxBy (rand - 0.5) (# accelerate ((irand 5) * "-1"))
+  $ sometimes (# fshi' 2300 3 0.6)
+  $ sometimesBy 0.4 ((striate 12).(#del' 0.5 0.3 0.2))
+  $ rarely (
+    (# freeze 1).(#squiz (irand 21))
+  )
+  $ loopAt 1
+  $ s "emhard:2"
+  # shape 0.2
+  # waveloss 99
+
+d1 silence
+
+d2
+  $ fast 12
+  $ every 3 (euclid 3 8)
+  $ foldEvery [2, 5] (ply 4)
+  $ s "kk/4"
+  # distort 1.99
+  # up (irand 20 - 10)
+  # shape 0.97
+  # kru' 400 0.6
+  # rvb' 0.62 (range 0.6 0.99 $ slow 13 $ sine)
+
+d3
+  $ often (iter 5)
+  $ sometimesBy 0.5 (plyWith 2 (#lpf 400))
+  $ stut' 9 0.6 (# kru' 2 2300)
+  $ rarely (# lesl' 3 4.5 2.3)
+  $ struct (binary 97)
+  $ s "hhat clap*2"
+  # binshift 0.7
+  # shape (0.9)
+  # triode 0.99
+
+d4
+  $ superimpose (
+    (0.1 ~>)
+    .(|* speed 7)
+    .(stut' 4 0.1 (# crush 2))
+    .(# sdel' 120 19)
+    .(# pan (slow 8 $ sine))
+    .(# shape (range 0.1 0.6 $ slow 12 $ saw))
+    .(rarely (# accelerate "-1"))
+  )
+  $ speed "[0.9 0.95, 1.1 1.05]"
+  # s "syntho:8*2"
+  # legato 2
+  # pan (rand)
+  # rvb' 0.2 1.6
+
+hush
+
+d1
+  $ layer [
+    id
+    ,
+    (# speed (range 0.01 0.05 $ slow 15 $ (sine+isaw)/2))
+    .(# begin (range 0 0.5 $ slow 8 $ sine))
+    .(# end (range 0.1 0.6 $ slow 8 $ sine))
+    .(# lpf 800)
+    .(# gain 1)
+    .(# shape 0.8)
+    .(juxBy
+      (slow 8 $ sine - 0.5)
+      (|* accelerate "-6")
+    )
+    ,
+    (0.3 ~>)
+    .(euclid 3 8)
+    .(stut' (run 5 + 5) 0.8 ((# binshift 0.9).(#smear 0.78)))
+    .(# speed ((irand 8) + 23))
+    .(# pan perlin)
+    .(# hp' 5000 0.9)
+  ]
+  $ s "emhard:2"
+
+d1 silence
+
+d2
+  $ stut 2 0.5 0.1
+  $ juxBy 0.6 ((|+ octave 1).(fast 2))
+  $ s "superpiano(7,8)"
+  # n (scale "enigmatic" (irand 8))
+  # octave 3
+
+d2 silence
