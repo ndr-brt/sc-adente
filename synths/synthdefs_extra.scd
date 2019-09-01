@@ -209,25 +209,6 @@ SynthDef(\cymbal808_ryan, { | out=0, baseFreq = 300, time = 250, amp=0.1, pan=0.
 	OffsetOut.ar(out, DirtPan.ar(signal * 4 * amp, ~dirt.numChannels, pan, env))
 }).add;
 
-SynthDef(\cymbalic_mcld, { |out=0, pan=0.0, amp=0.1|
-	var freqs, res, thwack;
-
-	var locutoffenv = EnvGen.ar(Env.perc(0.5, 5)) * 20000 + 10;
-	var lodriver = LPF.ar(WhiteNoise.ar(0.1), locutoffenv);
-
-	var hicutoffenv = 10001 - (EnvGen.ar(Env.perc(1, 3)) * 10000);
-	var hidriver = HPF.ar(WhiteNoise.ar(0.1), hicutoffenv);
-	hidriver = hidriver * EnvGen.ar(Env.perc(1, 2, 0.25));
-
-	thwack = EnvGen.ar(Env.perc(0.001,0.001,1));
-
-	freqs  = {exprand(300, 20000)}.dup(100);
-
-	res    = Ringz.ar(lodriver + hidriver + thwack, freqs).mean;
-
-	OffsetOut.ar(out, DirtPan.ar(((res * 1) + (lodriver * 2) + thwack) * amp, ~dirt.numChannels, pan))
-}).add;
-
 // Originally found at http://ecmc.rochester.edu/ecmc/docs/supercollider/scbook/Ch21_Interface_Investigations/ixi%20SC%20tutorial/ixi_SC_tutorial_10.html
 SynthDef("flute", { | scl = 0.2, freq = 440, ipress = 0.9, ibreath = 0.09, ifeedbk1 = 0.4, ifeedbk2 = 0.4, dur = 1, gate = 1, amp = 2, pan=0.0 |
 

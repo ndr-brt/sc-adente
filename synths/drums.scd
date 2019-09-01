@@ -37,8 +37,18 @@ SynthDef(\hhat, { |out=0, amp, attack=0.01, release = 0.08, freq, pan|
 
 SynthDef(\clap, { | out=0, amp = 0.1, pan=0 |
 
-	var env1 = EnvGen.ar(Env.new([0, 1, 0, 1, 0, 1, 0, 1, 0], [0.001, 0.013, 0, 0.01, 0, 0.01, 0, 0.03], [0, -3, 0, -3, 0, -3, 0, -4]));
-	var env2 = EnvGen.ar(Env.new([0, 1, 0], [0.02, 0.3], [0, -4]), doneAction:2);
+	var env1 = EnvGen.ar(
+		Env.new(
+			[0, 1, 0, 1, 0, 1, 0, 1, 0],
+			[0.001, 0.013, 0, 0.01, 0, 0.01, 0, 0.03],
+			[0, -3, 0, -3, 0, -3, 0, -4]
+	));
+	var env2 = EnvGen.ar(
+		Env.new(
+			[0, 1, 0],
+			[0.02, 0.3],
+			[0, -4]
+	), doneAction:2);
 
 	var noise1 = BPF.ar(
 		HPF.ar(
@@ -58,6 +68,28 @@ SynthDef(\clap, { | out=0, amp = 0.1, pan=0 |
 	son = son.softclip * amp * 2;
 
 	OffsetOut.ar(out, DirtPan.ar(son, ~dirt.numChannels, pan))
+}).add;
+
+
+SynthDef(\crash, { |out=0, pan=0.0, amp=0.1, attack=0.01, release=2|
+	var freqs, res, thwack, env;
+
+	var locutoffenv = EnvGen.ar(Env.perc(0.5, 5)) * 20000 + 10;
+	var lodriver = LPF.ar(WhiteNoise.ar(0.1), locutoffenv);
+
+	var hicutoffenv = 10001 - (EnvGen.ar(Env.perc(1, 3)) * 10000);
+	var hidriver = HPF.ar(WhiteNoise.ar(0.1), hicutoffenv);
+	hidriver = hidriver * EnvGen.ar(Env.perc(1, 2, 0.25));
+
+	thwack = EnvGen.ar(Env.perc(0.001,0.001,1));
+
+	freqs  = {exprand(300, 20000)}.dup(100);
+
+	res    = Ringz.ar(lodriver + hidriver + thwack, freqs).mean;
+
+	env = EnvGen.ar(Env.perc(attack, release, amp));
+
+	OffsetOut.ar(out, DirtPan.ar(((res * 1) + (lodriver * 2) + thwack), ~dirt.numChannels, pan, env))
 }).add;
 
 )
