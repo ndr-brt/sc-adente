@@ -82,6 +82,7 @@
 * (change sample speed) **speed** "<1 -1>"
 * (speed up or down sample) **accelerate** "<0 1 -1>"
 * (give swing feel, 0 human, 1 machine) **nudge** 0.7
+* (multiplies pattern speed) **spaceOut** [1, 0.5, 2.5] $ s "bd*4"
 * (change pitch, in semitones) **up** "<0 1 5>"
 * (change how speed parameter is considered):
   * "r" (default): multiplies sample playback rate
