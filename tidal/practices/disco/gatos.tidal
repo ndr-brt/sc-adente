@@ -11,8 +11,9 @@ xfadeIn 1 8
   # scram 0.7
   # oct' 0.5 0.7 0.9
   # lpf 1000
+  # gain 0.8
 
-clutchIn 1 16
+clutchIn 1 8
   $ stack [
     sound "battles*2? tink . tink*2"
       # cutoff (range 100 1000 $ slow 4 $ saw)
@@ -42,6 +43,7 @@ clutchIn 1 16
       # gain 3
       # bp' 3000 0.8
   ]
+  # gain 0.8
 
 clutchIn 1 16
   $ whenmod 8 6 (scramble 4)

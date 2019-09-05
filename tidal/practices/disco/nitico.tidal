@@ -1,17 +1,17 @@
 d1 $ "feelfx*2"
   # n (irand 10)
-  # gain (range 1 1.5 $ slow 13 $ square)
   # cut 2
   # rvb' 0.05 0.3
   # speed (range 0.07 0.09 $ rand)
 
 d2
   $ every 3 (fast 2)
+  $ rarely (juxBy 0.6 (iter 6))
   $ whenmod 10 8 (brak)
   $ slow 4
   $ "bd? hh*2? cb*2? sd*3? bd?"
   # n (irand 8)
-  # speed (range 0.4 0.6 $ slow 12 $ saw)
+  # speed (range 0.4 0.7 $ slow 12 $ (saw+cosine)/2)
   # rvb' 0.8 0.2
   # del' 0.7 0.23 0.14
   # gain 0.5
@@ -28,40 +28,49 @@ d4
   $ every 4 (slow 8)
   $ degradeBy 0.75
   $ slow 4
-  $ n (irand 10)
-  # s "diphone"
+  $ s "diphone"
+  # n (irand 10)
   # hpf (range 800 1800 $ slow 16 $ sine)
   # speed "[0.5, -0.5]"
+  # pan "[0, 1]"
 
 d5
-  $ juxBy (range 0 1 $ slow 10 $ sine) (|* speed 0.95)
+  $ juxBy (range 0 1 $ slow 10 $ sine) ((|* speed 0.95).(0.08 ~>))
   $ whenmod 40 20 (
-    (# s "juno*24")
-    .(# cutoff (irand 200 + 500))
+    (# s "juno*12")
+    .(# lpf (irand 200 + 300))
   )
-  $ striate' 16 (1/1)
+  $ striate' 16 (0.98)
   $ s "circus:1"
+  # speed 1
   # cutoff (range 200 400 $ rand)
   # crush 5
+  # oct' 0.3 0.4 0.8
+  # gain 0.8
 
 d6
   $ every 8 (fast 2)
   $ striate 2
   $ n (run 10)
   # s "haw haw:5?"
+  # gain 0.8
 
 d7 $ n (run 24)
   # s "speech"
   # speed (range 0.4 1.5 $ rand)
-  # hpf 800
-  # orbit 1
-  # delay 0.9
-  # crush (range 16 1 $ slow 8 $ saw)
+  # hpf 1800
+  # del' 0.9 0.34 0.19
+  # crush (range 16 3 $ slow 8 $ saw)
   # attack (rand)
   # release (rand)
+  # gain 0.8
 
-d8 $ jux (rev) $ s "supersaw*11"
+d8
+  $ jux (rev)
+  $ s "supersaw*11"
   # n (range (range 1 21 $ slow (irand 5) $ saw) (range 21 42 $ slow (irand 3) $ sine) $ rand)
-  # cutoff (range 600 1200 $ slow 16 $ tri)
+  # cutoff (range 400 1000 $ slow 16 $ (tri+cosine)/2)
+  # gain 0.8
+  # octave 3
 
 hush

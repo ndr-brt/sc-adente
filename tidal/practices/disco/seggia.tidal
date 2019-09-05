@@ -1,0 +1,40 @@
+d1
+  $ rarely (# n (ri 8))
+  $ layer [
+    (whenmod 7 5 ((# freeze 1).(# n 0)))
+      .(jux (iter 5))
+      .(sometimes (brak))
+      .(rarely (# accelerate (irand 4 - 2)))
+      .(# smear (range 0.1 0.8 $ slow 10 $ (cosine+square)/2))
+      .(rarely (stut 4 0.5 0.2))
+      .(# rvb' 0.2 0.5)
+    ,
+    (|* speed "<0.1 0.4 0.2>")
+      .(# binshift 0.25)
+      .(# comb (slow 4 $ sine))
+      .(# oct' 0.7 0.7 0.9)
+      .(# shape (slow 4 $ cosine/3 + 0.1))
+    ,
+    (slow 4)
+      .(|* speed 4)
+      .(rarely (stut 3 0.5 0.1))
+      .(# del' 0.45 0.34 0.42)
+      .(# pan rand)
+      .(# hpf 3000)
+      .(# binshift "[0.5 0 0.9]")
+  ]
+  $ n (run 8)
+  # s "chair"
+
+d1 silence
+
+d2
+  $ every 6 ((linger 0.5).(swing 3))
+  $ s "[chair:15/2 chair:10?] chair:12*2?"
+  # rvb' 0.3 0.6
+  # nudge 0.6
+  # oct' 0.3 0.3 0.8
+
+d2 silence
+
+hush
