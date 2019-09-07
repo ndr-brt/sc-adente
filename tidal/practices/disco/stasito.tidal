@@ -1,8 +1,8 @@
 bpm (110)
 
---xfadeIn 1 8
-d1
-  $ whenmod 40 20 (# n "2")
+xfadeIn 1 8
+-- d1
+  $ whenmod 40 20 (|+ n "2")
   $ layer [
     (striate' 24 (range 0.85 0.95 $ slow 10 $ (saw+tri)/2))
     .(rarely (# vowel "o"))
@@ -11,18 +11,21 @@ d1
     .(# comb 0.86)
     ,
     (slow 4)
+    .(# gain 1.02)
     .(|* speed 0.1)
     .(juxBy
-      (range "-0.6" "0.6" $ slow 10 $ cosine)
+      (range "-0.7" "0.7" $ slow 10 $ cosine)
       (
-        (0.5 ~>)
-        .(|* speed "<2 4>")
+        ((range 0.3 0.7 $ slow 20 $ (isaw+square)/2) ~>)
+        .(|* speed "<2 4 2 2 4 2 4 8 4 2>")
         .(sometimesBy 0.6 (stut 2 0.55 0.13))
-        .(rarely ((# accelerate "-0.4").(|* gain 1.05)))
+        .(rarely (# accelerate "-0.4"))
+        .(every 3 (# smear (choose [0.1,0.5,0.9,0,0.7])))
       )
     )
   ]
   $ n "0"
   # s "sitar"
+  # rvb' 0.1 0.4
 
 hush
