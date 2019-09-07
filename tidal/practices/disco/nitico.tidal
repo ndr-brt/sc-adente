@@ -33,7 +33,7 @@ d3
   $ sometimesBy 0.6 (# del' 0.56 0.32 0.13)
   $ n (run 10)
   # s "haw haw:5?"
-  # gain 0.8
-  # crush 8
+  # gain 0.6
+  # crush 6
 
 hush

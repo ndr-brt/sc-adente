@@ -7,7 +7,7 @@ s.options.numInputBusChannels = 2; // set this to your hardware output channel s
 
 s.waitForBoot {
 	~dirt = SuperDirt(2, s); // two output channels, increase if you want to pan across more channels
-	// ~dirt.loadSoundFiles;   // do not load basic samples on the shitty laptop!
+  ~dirt.loadSoundFiles;   // do not load basic samples on the shitty laptop!
 	// for example: ~dirt.loadSoundFiles("/Users/myUserName/Dirt/samples/*");
 	~dirt.loadSoundFiles("~/.sam-ples/*");
 	// s.sync; // optionally: wait for samples to be read
