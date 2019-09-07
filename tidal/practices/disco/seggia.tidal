@@ -1,4 +1,5 @@
-d1
+xfadeIn 1 8
+-- d1
   $ rarely (# n (ri 8))
   $ layer [
     (juxBy 0.8 (iter 5))
@@ -29,7 +30,8 @@ d1
 
 d1 silence
 
-d2
+-- d2
+clutchIn 2 8
   $ slow 2
   $ every 6 ((linger 0.5).(swing 3))
   $ s "[chair:15/2 chair:10?] chair:12*2"

@@ -1,76 +1,39 @@
-d1 $ "feelfx*2"
+d1
+  $ "feelfx*2"
   # n (irand 10)
-  # cut 2
-  # rvb' 0.05 0.3
+  # legato 3
+  # rvb' 0.09 0.4
   # speed (range 0.07 0.09 $ rand)
 
+d1 silence
+
 d2
-  $ every 3 (fast 2)
-  $ rarely (juxBy 0.6 (iter 6))
-  $ whenmod 10 8 (brak)
-  $ slow 4
-  $ "bd? hh*2? cb*2? sd*3? bd?"
-  # n (irand 8)
-  # speed (range 0.4 0.7 $ slow 12 $ (saw+cosine)/2)
-  # rvb' 0.8 0.2
-  # del' 0.7 0.23 0.14
+  $ juxBy
+    (range 0 1 $ slow 10 $ sine)
+    ((|* speed 0.65).(0.13 ~>))
+  $ striate' 16 (0.98)
+  $ s "juno:2*6"
+  # comb 0.2
+  # sdel' 101 17
+  # speed (range 0.8 1 $ slow 20 $ sine)
+  # crush 5
+  # begin (range 0 0.8 $ slow 20 $ cosine)
   # gain 0.5
+  # bp' 7000 2
+  # pan (slow 8 $ perlin)
 
 d2 silence
 
-d3 $ slow 1.5 $ jux (rev) $ n "d9*3 e9*2 d9*5"
-  # s "supersaw"
-  # size 0.7
-  # cutoff (range 400 800 $ rand)
-  # speed (range 0.5 0.9 $ rand)
-
-d4
-  $ every 4 (slow 8)
-  $ degradeBy 0.75
-  $ slow 4
-  $ s "diphone"
-  # n (irand 10)
-  # hpf (range 800 1800 $ slow 16 $ sine)
-  # speed "[0.5, -0.5]"
-  # pan "[0, 1]"
-
-d5
-  $ juxBy (range 0 1 $ slow 10 $ sine) ((|* speed 0.95).(0.08 ~>))
-  $ whenmod 40 20 (
-    (# s "juno*12")
-    .(# lpf (irand 200 + 300))
-  )
-  $ striate' 16 (0.98)
-  $ s "circus:1"
-  # speed 1
-  # cutoff (range 200 400 $ rand)
-  # crush 5
-  # oct' 0.3 0.4 0.8
-  # gain 0.8
-
-d6
+d3
+  $ slow 2
   $ every 8 (fast 2)
+  $ whenmod 6 5 ((# accelerate "-1").(stut 4 0.5 0.1))
+  $ rarely (plyWith (choose [2, 4]) ((# lpf 400).(# pan rand)))
   $ striate 2
+  $ sometimesBy 0.6 (# del' 0.56 0.32 0.13)
   $ n (run 10)
   # s "haw haw:5?"
   # gain 0.8
-
-d7 $ n (run 24)
-  # s "speech"
-  # speed (range 0.4 1.5 $ rand)
-  # hpf 1800
-  # del' 0.9 0.34 0.19
-  # crush (range 16 3 $ slow 8 $ saw)
-  # attack (rand)
-  # release (rand)
-  # gain 0.8
-
-d8
-  $ jux (rev)
-  $ s "supersaw*11"
-  # n (range (range 1 21 $ slow (irand 5) $ saw) (range 21 42 $ slow (irand 3) $ sine) $ rand)
-  # cutoff (range 400 1000 $ slow 16 $ (tri+cosine)/2)
-  # gain 0.8
-  # octave 3
+  # crush 8
 
 hush
