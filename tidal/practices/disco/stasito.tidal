@@ -1,7 +1,7 @@
 bpm (110)
 
-xfadeIn 1 8
--- d1
+--xfadeIn 1 8
+d1
   $ whenmod 40 20 (|+ n "2")
   $ layer [
     (striate' 24 (range 0.85 0.95 $ slow 10 $ (saw+tri)/2))
@@ -9,6 +9,8 @@ xfadeIn 1 8
     .(# lpf (range 320 390 $ slow 20 $ (isaw+sine)/2))
     .(# begin (range 0 0.4 $ slow 4 $ sine))
     .(# comb 0.86)
+    .(# legato 25)
+    .(# shape 0.4)
     ,
     (slow 4)
     .(# gain 1.02)
@@ -27,5 +29,7 @@ xfadeIn 1 8
   $ n "0"
   # s "sitar"
   # rvb' 0.1 0.4
+
+xfadeIn 1 32 $ silence
 
 hush

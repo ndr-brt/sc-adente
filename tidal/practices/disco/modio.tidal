@@ -1,0 +1,50 @@
+bpm(105)
+
+d1
+  $ juxBy 0.6 (|* accelerate (irand 6 * "-1"))
+  $ sometimesBy 0.15 (fast 2)
+  $ loopAt 1
+  $ s "modem"
+  # rvb' 0.15 0.23
+  # hpf 4000
+
+d2
+  $ loopAt 2
+  $ sometimesBy 0.32 (stut 2 0.5 0.1)
+  $ rarely (# squiz 4)
+  $ s "modem"
+  # bpf 2000
+  # bpq 0.8
+  # binshift "<0.4 0.6 0.8 0.2>"
+  # del' 0.7 0.34 0.21
+  # pan (perlin)
+
+d3
+  $ loopAt 8
+  $ superimpose (
+    (0.1 ~>)
+    .(# pan rand)
+    .(# accelerate 4)
+  )
+  $ sometimes (chop 4)
+  $ rarely (# waveloss 23)
+  $ every 8 (# crush 6)
+  $ s "modem"
+  # bpf 1000
+  # distort 0.6
+
+d4
+  $ striate' 32 (0.9)
+  $ loopAt 16
+  $ s "modem"
+  # oct' 0.7 0.6 0.9
+  # lpf 600
+
+d5
+  $ loopAt 32
+  $ s "modem"
+  # lpf 400
+  # lpq 0.1
+  # shape 0.5
+
+hush

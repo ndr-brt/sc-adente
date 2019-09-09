@@ -1,4 +1,4 @@
--- oscale
+bpm (87)
 
 d1
   $ juxBy (range 0.1 0.9 $ slow 13 $ cosine) (# octave 3)
@@ -22,7 +22,7 @@ d1
 d1 silence
 
 d2
-  $ slow 4
+  $ slow 2
   $ whenmod 7 5 (brak)
   $ rarely (# del' 0.56 0.23 0.15)
   $ "[kk*2 ~ kk ss*2?, hh(5,8)]"
@@ -51,9 +51,10 @@ d4
   # pan rand
   # n (choose [2, 6, 9])
   # waveloss (range 0 60 $ rand)
-  # del' (rand) (rand) (rand)
-  # gain 0.9
-  # sustain 4
+  # del' 0.65 (rand) 0.32
+  # gain 0.8
+  # sustain 3.5
+  # distort 0.4
 
 d4 silence
 

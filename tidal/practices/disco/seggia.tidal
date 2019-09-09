@@ -1,5 +1,7 @@
-xfadeIn 1 8
--- d1
+bpm (114)
+
+--xfadeIn 1 8
+d1
   $ rarely (# n (ri 8))
   $ layer [
     (juxBy 0.8 (iter 5))
