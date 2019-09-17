@@ -29,6 +29,7 @@ d1
   $ n "0"
   # s "sitar"
   # rvb' 0.1 0.4
+  # shape 0.25
 
 xfadeIn 1 32 $ silence
 

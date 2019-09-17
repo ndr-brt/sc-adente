@@ -20,3 +20,21 @@ d4 $ jux (rev) $ n (scale "marva" (run 14)) # s "supergrind" # room 0.8 # delay 
 d5 $ jux (rev) $ euclid 13 19 $ n "2*2 4? 9*2 ~ 7?" # s "superzow" # detune (run 8) # room (range 0 1 $ fast 4 $ sine) # cutoff (range 100 (run 5000 + 3000) $ fast 4 $ saw)
 
 hush
+
+
+d1
+  $ stack [
+    juxBy 0.4 (iter 4)
+      $ sometimes (# up (run 3))
+      $ n (arpg "'m9 [3 1,7,2 [3 5]*2]")
+      # s "glass"
+      # accelerate (range "-8" "8" $ slow 4 $ sine)
+      # octave 4
+    ,
+    fast 2
+      $ swing 3
+      $ brak
+      $ stut 3 0.7 0.2
+      $ s "kk*2 ~!2 ss" # distort 0.5 # up "-3" # shape 0.2
+  ]
+  # nudge 0.2

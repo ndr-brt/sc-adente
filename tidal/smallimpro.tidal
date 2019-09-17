@@ -4,7 +4,7 @@ d1 $ stack [
       # lpf (range 100 1000 $ slow (irand 6) $ sine)
       # pan (perlin)
       # gain 0.8,
-    jux (rev)
+    jux ((rev).(0.08 ~>))
       $ every 4 (fast 4)
       $ s "808bd*2 ~ 808:2? 808mc*3"
       # squiz (irand 60)
@@ -20,9 +20,9 @@ d1 $ stack [
       $ euclid 3 8
       $ s "mash*8?"
       # n "<0 2 1>"
-      # gain 0.7
+      # gain 0.8
       # crush (run 8)
-      # pan (rand * 0.5),
+      # pan (rand / 2),
     every 4 (slow 2)
       $ every 2 (degradeBy (rand))
       $ n "[0 4 2 1]/2"

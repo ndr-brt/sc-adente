@@ -1,3 +1,5 @@
+-- pasculiz
+
 d1
   $ every 4 (slice 8 (ri 8))
   $ juxBy (rand - 0.5) (# accelerate ((irand 5) * "-1"))
@@ -53,6 +55,8 @@ d4
 
 hush
 
+-- emboss
+
 d1
   $ layer [
     id
@@ -87,3 +91,51 @@ d2
   # octave 3
 
 d2 silence
+
+-- druippo
+d1
+  $ juxBy (range "-0.5" "0.5" $ slow 12 $ sine) ((|* speed 0.5).(#begin 0.25).(#end 0.75))
+  $ every 6 (# crush "1.5")
+  $ rarely (# waveloss 95)
+  $ loopAt "<1 1 1 1.2>"
+  $ s "emhard:1"
+  # crush "2"
+
+d1 silence
+
+d2
+  $ slow 2
+  $ sometimes (plyWith 3 (# crush 2))
+  $ whenmod 8 6 (iter 4)
+  $ stut 3 0.7 0.1
+  $ s "[ss*2 ~!2 kk*3, [~!8 clap*4]/3]"
+  # n (irand 16 - 8)
+  # distort 0.9
+  # shape 0.96
+  # rvb' 0.3 0.7
+
+d3
+  $ loopAt "0.05"
+  $ foldEvery [3, 5, 7] (slow 2)
+  $ whenmod 8 5 (degradeBy 0.01)
+  $ superimpose (
+    ((rand) ~>)
+    .(|* speed (rand))
+    .(fast 2)
+    .(sometimes (# oct' 0.6 0.7 0.9))
+    .(#pan (slow 32 $ cosine))
+    .(#del' 0.5 0.2 0.1)
+    .(#binshift 0.5)
+    .(#shape 0.2)
+    .(stut 7 0.6 0.05)
+    .(#lp' (range 300 3000 $ slow 12 $ saw) 0.2)
+    .(# nudge (range 0 1 $ slow 8 $ tri))
+  )
+  $ mask "t(2,3,1)"
+  $ s "syntho:7"
+  # speed "<1 1 1 1 0.5 1.2 1.3 1.5 1.5>"
+  # accelerate (range "-0.2" "3" $ slow 6 $ perlin)
+  # rvb' 0.4 0.9
+  # pan (perlin)
+
+hush
