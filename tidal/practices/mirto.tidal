@@ -1,25 +1,77 @@
+-- hop hop
+
 d1
   $ rarely (scramble 2)
   $ stack [
     every 8 ((fast 3).(# crush 6).(stut 3 0.4 0.2))
-      $ s "super808"
+      $ s "kk"
       # lpf "800"
     ,
     every 6 ((0.1 <~).(# accelerate "-1"))
       $ sometimesBy 0.12 ((# delay 0.5).(# delayt 0.2).(# delayfb 0.2))
       $ rarely (superimpose ((0.02 ~>).(# pan rand).(#squiz 21).(stut 2 0.3 0.04)))
-      $ s "~ supersnare"
+      $ s "~ ss"
     ,
     every 4 (degradeBy 0.5)
       $ sometimes (swing 2)
-      $ s "superhat*4"
+      $ s "hhat*4"
     ,
-    every 4 (# loop 4) $ s "superclap/4" # speed 0.5
+    every 4 (# loop 4) $ s "clap/4" # speed 0.5
   ]
-  # nudge 0.4
+  # nudge 0.2
   # cps 0.8
   # room 0.05
   # size 0.6
   # shape 0.1
 
 hush
+
+-- villico
+
+d1
+  $ rarely ((palindrome).(plyWith 2 (# cut 1)))
+  $ stack [
+    sometimes (slow 2)
+      $ rarely (scramble 2)
+      $ s "kk*2 ~ [kk*2]? ~!3"
+      -- $ "kk*6"
+      # shape 0.5
+      # rvb' 0.2 0.8
+      # n (segment 1 $ irand 3)
+    ,
+    degradeBy 0.2
+      $ sometimes (brak)
+      $ s "~!2 ss(2,5)"
+      # rvb' 0.2 0.6
+    ,
+    euclid 6 8
+      $ sometimesBy 0.05 (plyWith 2 (#squiz 4))
+      $ every 10 ((iter 3).(fast 2))
+      $ s "hhat"
+      # crush 3
+    ,
+    superimpose (
+        (|- octave 2)
+          .(0.2 <~)
+          .(fast 2)
+    )
+      $ fast "<1 1 1 1.5 1 2>"
+      $ euclid 2 3
+      $ s "synchronicity*2"
+        # gain 0.94
+        # n (scale "iwato" "<0 4 6 7 2 5>")
+        # octave 4
+        # release 1
+        # crush 5
+        # detune 2
+        # lp' (range 1200 4000 $ slow 4 $ saw) 0.1
+    ,
+    euclid 4 6
+      $ stut' 3 0.1 (# lpf 300)
+      $ s "pmsin"
+      # n (scale "iwato" "3 5 1 0")
+      # octave 3
+  ]
+  # nudge 0.2
+
+d1 $ silence

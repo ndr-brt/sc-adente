@@ -127,7 +127,7 @@ d3
     .(#del' 0.5 0.2 0.1)
     .(#binshift 0.5)
     .(#shape 0.2)
-    .(stut 7 0.6 0.05)
+    .(stut 1 0.6 0.05)
     .(#lp' (range 300 3000 $ slow 12 $ saw) 0.2)
     .(# nudge (range 0 1 $ slow 8 $ tri))
   )
@@ -139,3 +139,62 @@ d3
   # pan (perlin)
 
 hush
+
+-- crustooo
+
+d1
+  $ juxBy 0.5 ((|* speed "-0.9").(0.1 ~>))
+  $ loopAt "2"
+  $ superimpose (
+      (|* speed 0.2)
+      .(#begin (range 0.2 0.5 $ slow 5 $ sine))
+      .(#end 0.6)
+      .(#pan (slow 12 $ sine))
+  )
+  $ whenmod 7 5 ((slice 8 "~ 3 2 6 1 5 7").(#del' 0.55 0.32 0.21))
+  $ every 4 (|* speed 0.87)
+  $ s "emhard:1"
+  # speed 0.95
+
+d1 $ silence
+
+d2
+  $ degradeBy (trigger 2 $ range 0.1 1 $ slow 10 $ envL)
+  $ rarely ((swing 7).(iter 3))
+  $ every 6 (linger 0.5)
+  $ rarely ((fast 2).(rev))
+  $ foldEvery [3,5,7] (plyWith 4 (#crush 2))
+  $ whenmod 10 5 (# s "{ss*3 ~, hhat*6? clap*2, ~ kk*8?}%4")
+  $ s "{ss*2 ~!4 [kk hhat kk*2?]}%4"
+  # distort (range 0.6 0.9 $ square)
+  # shape (range 0.3 0.6 $ rand)
+  # rvb' 0.4 0.8
+
+d2 silence
+
+d3
+  $ loopAt "0.1"
+  $ superimpose (
+      (|* speed rand)
+      .(#pan perlin)
+      .(sometimes (#del' 0.43 0.32 0.21))
+      .(rarely (# accelerate (rand*2 - 1)))
+  )
+  $ stut' 4 0.5 (# coarse 2)
+  $ s "syntho:7?"
+  # speed "<1 1 10.3 1 0.1 0.9 0.7 1.2 1.4 0.84 0.67>"
+
+d4
+  $ fast 1.2
+  $ s "werkit"
+  # n (scale "pelog" "<0 2 3 5>")
+  # legato 2
+  # octave 8
+  # smear 0.9
+  # hp' 1500 0.1
+  # rvb' 0.6 0.9
+  # distort (trigger 4 $ range 0 1 $ slow 20 $ envL)
+
+d1 silence
+d3 silence
+d4 silence
