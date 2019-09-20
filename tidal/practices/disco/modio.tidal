@@ -8,7 +8,7 @@ d1
   # rvb' 0.15 0.23
   # hpf 4000
 
-d2
+xfadeIn 2 8
   $ loopAt 2
   $ sometimesBy 0.32 (stut 2 0.5 0.1)
   $ rarely (# squiz 4)
@@ -41,10 +41,12 @@ d4
   # lpf 600
 
 d5
+  $ slice 32 "[0..32]"
   $ loopAt 32
   $ s "modem"
-  # lpf 400
-  # lpq 0.1
-  # shape 0.5
+  # hp' 60 0.3
+  # shape 0.3
+
+d6 $ s "modem"
 
 hush

@@ -1,0 +1,25 @@
+bpm (120)
+
+-- xfadeIn 1 8
+d1
+  $ slow 2
+  $ rarely (iter 4)
+  $ every 4 (rev)
+  $ every 8 (fast 2)
+  $ superimpose (
+      (|* speed 40)
+      .(degradeBy 0.4)
+      .(# rmod' 0.7 80 0.6)
+      .(stut (irand 3) 0.5 0.1)
+  )
+  $ sound "incoming? incoming*4 hoover*3"
+  # pan "[0.2,0.4,0.6,0.8]"
+  # rvb' 0.7 0.8
+  # speed ((perlin + 1) / (range 1.2 2.4 $ slow 14 $ (tri+cosine)/2))
+  # del' 0.89 0.23 0.12
+  # sdel' (range 140 300 $ slow 31 $ saw) (choose [140, 200, 240])
+  # scram (range 0 0.4 $ slow 80 $ cosine)
+  # oct' 0.5 0.7 0.95
+  # hp' 80 0.3
+
+hush

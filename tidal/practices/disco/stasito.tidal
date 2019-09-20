@@ -6,7 +6,7 @@ d1
   $ layer [
     (striate' 24 (range 0.85 0.95 $ slow 10 $ (saw+tri)/2))
     .(rarely (# vowel "o"))
-    .(# lpf (range 320 390 $ slow 20 $ (isaw+sine)/2))
+    .(# lpf (range 320 690 $ slow 20 $ (isaw+sine)/2))
     .(# begin (range 0 0.4 $ slow 4 $ sine))
     .(# comb 0.86)
     .(# legato 25)
@@ -25,6 +25,15 @@ d1
         .(every 3 (# smear (choose [0.1,0.5,0.9,0,0.7])))
       )
     )
+    .(#hp' 80 0.3)
+    ,
+    (|* speed (rand * 4 + 19))
+    .(rand ~>)
+    .(stut 6 0.4 0.1)
+    .(# gain 0.6)
+    .(degradeBy 0.85)
+    .(#rvb' 0.1 0.4)
+    .(#pan rand)
   ]
   $ n "0"
   # s "sitar"

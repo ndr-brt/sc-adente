@@ -35,9 +35,9 @@ d1
       $ rarely (scramble 2)
       $ s "kk*2 ~ [kk*2]? ~!3"
       -- $ "kk*6"
-      # shape 0.5
+      # shape 0.7
       # rvb' 0.2 0.8
-      # n (segment 1 $ irand 3)
+      # n (segment 1 $ irand 3 - 2)
     ,
     degradeBy 0.2
       $ sometimes (brak)
@@ -67,9 +67,10 @@ d1
         # lp' (range 1200 4000 $ slow 4 $ saw) 0.1
     ,
     euclid 4 6
-      $ stut' 3 0.1 (# lpf 300)
+      $ stut' 3 0.1 ((0.3 <~).(# lp' 300 0.1))
       $ s "pmsin"
       # n (scale "iwato" "3 5 1 0")
+      # lp' 500 (rand)
       # octave 3
   ]
   # nudge 0.2

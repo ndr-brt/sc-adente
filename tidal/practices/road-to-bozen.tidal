@@ -159,7 +159,6 @@ d1
 d1 $ silence
 
 d2
-  $ degradeBy (trigger 2 $ range 0.1 1 $ slow 10 $ envL)
   $ rarely ((swing 7).(iter 3))
   $ every 6 (linger 0.5)
   $ rarely ((fast 2).(rev))

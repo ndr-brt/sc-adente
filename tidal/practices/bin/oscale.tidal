@@ -18,17 +18,18 @@ d1
   # legato 6
   # gain 0.9
   # lpf (range 700 4600 $ slow 4 $ sine)
+  # nudge (range 0 0.3 $ rand)
 
 d1 silence
 
 d2
-  $ slow 2
-  $ whenmod 7 5 (brak)
+  $ slow 1.5
+  $ sometimes (iter 3)
+  $ whenmod 7 5 ((brak).(rev))
   $ rarely (# del' 0.56 0.23 0.15)
   $ "[kk*2 ~ kk ss*2?, hh(5,8)]"
-  # nudge 0.4
   # distort (range 0.1 0.4 $ slow 11 $ saw)
-  # shape 0.4
+  # shape 0.2
   # rvb' 0.2 0.5
   # crush (segment 1 $ range 2 8 $ slow 4 $ sine)
 

@@ -2,13 +2,16 @@ bpm (115)
 
 d1
   $ "feelfx*2"
-  # n (irand 10)
+  # n (irand 8)
   # legato 4
   # rvb' 0.09 0.4
   # speed (range 0.07 0.09 $ rand)
+  # hp' 50 0.3
 
 d1 silence
 
+-- OCCHIO! USA IL FADE IN SOLO LA PRIMA VOLTA!
+-- xfadeIn 2 12
 d2
   $ juxBy
     (range 0 1 $ slow 10 $ sine)
@@ -20,23 +23,25 @@ d2
   # speed (range 0.8 1 $ slow 20 $ perlin)
   # crush 5
   # begin (range 0 0.8 $ slow 20 $ cosine)
-  # gain 0.5
-  # bp' 3000 4
+  # gain 0.55
+  # legato 10
+  # rvb' 0.3 0.6
+  # bp' 2000 4
   # pan (slow 8 $ perlin)
 
 d2 silence
 
 d3
-  $ slow 2
+  $ often (slow 2)
   $ every 8 (fast 2)
   $ whenmod 6 5 ((# accelerate "-1").(stut 4 0.5 0.1))
-  $ rarely (plyWith (choose [2, 4]) ((# lpf 400).(# pan rand)))
-  $ striate 2
-  $ sometimesBy 0.6 (# del' 0.56 0.32 0.13)
+  $ rarely (plyWith (choose [2, 4]) ((# hp' 400 0.4).(# pan rand)))
+  $ often (striate 2)
+  $ sometimesBy 0.6 (# del' 0.52 0.32 0.13)
   $ n (run 10)
-  # s "haw haw:5?"
-  # gain 0.68
-  # crush 6
-  # distort 0.1
+  # s "haw"
+  # gain 0.70
+  # crush "[6 3 7]"
+  # distort 0.2
 
 hush

@@ -44,7 +44,7 @@ d3
   # speed (range "0.018" "0.021" $ slow 14 $ perlin)
   # release 0.5
   # attack (range 0.5 0.2 $ slow 18 $ saw)
-  # legato 15
+  # legato 12
   # lp' 300 0.04
   # shape 0.3
 
