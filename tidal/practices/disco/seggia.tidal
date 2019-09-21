@@ -1,6 +1,6 @@
 bpm (114)
 
---xfadeIn 1 8
+-- clutchIn 1 8
 d1
   $ rarely (# n (ri 8))
   $ layer [
@@ -22,8 +22,7 @@ d1
       .(|* speed 4)
       .(rarely (stut 3 0.5 0.1))
       .(# pan rand)
-      .(# hpf 3000)
-      .(# hpq 0.6)
+      .(# hp' 3000 0.6)
       .(# binshift "[0.5 0 0.9]")
   ]
   $ n (run 8)
@@ -36,12 +35,12 @@ d2
 -- clutchIn 2 8
   $ slow 2
   $ every 6 ((linger 0.5).(swing 3))
-  $ rarely (plyWith 3 (striate 12))
+  $ rarely (plyWith 2 (striate 2))
   $ s "[chair:15/2 chair:10?] chair:12*2"
   # rvb' 0.3 0.3
   # nudge 0.65
   # oct' 0.3 0.3 0.8
-  # hp' 60 0.4
+  # hp' 60 0.35
 
 d2 silence
 

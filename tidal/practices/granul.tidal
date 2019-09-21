@@ -1,0 +1,106 @@
+setcps(1)
+
+d1
+  $ loopAt 2
+  $ chop 32
+  $ s "industrial"
+  # n (irand 2)
+  # hp' 80 0.4
+
+d2 $ jux (rev) $ sound "[808? 808? 808?]*20"
+    # speed (range 0.11 0.21 $ sine)
+    # gain "0.9"
+    # hp' "90" 0.1
+    # cut "0"
+    # room "0.5"
+    # size "0.9"
+
+
+-- ou yeah
+
+d1
+  $ jux (rev)
+  $ sound "speech:6*10"
+  # speed (range 0.15 0.25 $ rand)
+  # hp' (range 20 (range 200 400 $ sine) $ rand) 0.8
+  # gain 0.6
+
+d2
+  $ every 2 (rev)
+  $ every 4 (slow 1.5)
+  $ n (irand 8)
+  # sound "808bd*2 808ht? 808sd*2 808hc*3"
+  # gain 0.9
+  # room 1
+  # size 0.5
+
+d2 silence
+
+d3
+  $ jux (rev)
+  $ slow 3
+  $ n (run 12)
+  # s "speech"
+  # crush (irand 16)
+  # gain 0.9
+  # del' 2 0 0
+
+d3 silence
+
+d4
+  $ jux (fast 3)
+  $ s "supersquare*12? superpiano*6?"
+  # n (range (irand 10 + 8) ((range 25 50 $ slow 8 $ saw)-15) $ rand)
+  # room 0.3
+  # cutoff 300
+
+d4 silence
+
+hush
+
+d2
+  $ every 4 (fast 2)
+  $ every 4 (rev)
+  $ jux (rev)
+  $ n (run 5)
+  # s "breaks125"
+  # speed 0.9
+  # attack 0.1
+  # release 2
+  # delay 0.4
+
+d2 silence
+
+d3
+  $ slow 2
+  $ n (rand * saw)
+  # s "supersaw"
+  # cutoff (range 300 2500 $ fast 4 $ sine)
+  # attack 0.4
+  # delay 1
+  # size 0.2
+  # gain 0.6
+
+d3 silence
+
+d4
+  $ jux (rev)
+  $ slow 1.5
+  $ n (run 8)
+  # s "industrial:5"
+  # gain 0.6
+  # room 0.5
+  # orbit 1
+  # stretch 1
+
+d4 silence
+
+hush
+
+
+d1
+  $ loopAt "0.1"
+  $ s "crzydrn"
+  # lp' (range 200 800 $ slow 32 $ sine) 0.1
+
+hush

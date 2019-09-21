@@ -1,8 +1,9 @@
+setcps(0.7)
+
 d1
   -- $ striate' 64 (1 - (rand/5))
   $ n (run (12))
   # s "msg"
-  # nudge 0.4
   # hpf (range (irand 200 + 100) (irand 100 + 1000) $ slow 32 $ sine)
   # hpq (rand/3)
   # crush (range 16 4 $ slow 8 $ saw)
@@ -12,25 +13,28 @@ d1
 
 d1 silence
 
-
 d2
   $ every 2 (slow 2.5)
   $ every 3 (jux (rev))
+  $ superimpose (
+      (|+ octave 5)
+      .(degradeBy 0.2)
+      .(0.5 ~>)
+      .(#gain 0.6)
+  )
   $ n (scale "iwato" "{0 2 4}")
   # s "supersaw supersquare*2 supergong?"
   # room (rand)
   # octave 2
-  # nudge 0.4
   # gain 0.8
 
 d2 silence
 
 d3
   $ jux (rev)
-  $ fast 4
+  $ fast 2
   $ s "metal:2*4 metal:0*2 metal:1*5"
   # gain (1 - (rand/3))
-  # cps (rand/4)
   # hpf ((irand 400 + 200) + irand 300)
   # hpq (range 0.5 1 $ slow 3 $ rand)
   # waveloss (range 20 80 $ slow 4 $ sine)
@@ -55,7 +59,7 @@ d5
   # begin (range 0.1 0.4 $ perlin)
   # vowel "o e a"
   # end (range 0.6 0.9 $ rand)
-  # gain 0.1
+  # gain 0.6
   # cps (range 0.2 0.8 $ rand)
 
 d5 silence

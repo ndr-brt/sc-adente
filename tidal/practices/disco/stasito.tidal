@@ -29,9 +29,9 @@ d1
     ,
     (|* speed (rand * 4 + 19))
     .(rand ~>)
-    .(stut 6 0.4 0.1)
+    .(stut' 6 0.3 (# comb 0.8))
     .(# gain 0.6)
-    .(degradeBy 0.85)
+    .(degradeBy 0.86)
     .(#rvb' 0.1 0.4)
     .(#pan rand)
   ]

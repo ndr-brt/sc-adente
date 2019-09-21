@@ -2,6 +2,7 @@ bpm(120)
 
 -- clutchIn 1 16
 d1
+  $ whenmod 20 16 (degradeBy 0.5)
   $ whenmod 8 6 (scramble 4)
   $ whenmod 15 13 (swing 3)
   $ rarely (
@@ -26,7 +27,7 @@ d1
       # distort 0.4
       # shape 0.3
       # up "-1"
-      # hp' 40 0.6
+      # hp' 40 0.4
     ,
     degradeBy 0.5
       $ sometimes (# smear 0.5)
@@ -34,6 +35,7 @@ d1
       $ rarely (# crush 3)
       $ s "clap"
       # rvb' 0.12 0.5
+      # distort 0.5
       # shape (range 0 0.3 $ slow 3 $ perlin)
     ,
     whenmod 8 6 (# accelerate "-2")
@@ -46,7 +48,7 @@ d1
       $ sometimes (
         (|* speed 3)
         .(stutWith 6 0.5 ((# binshift 0.8).(# vowel "o")))
-        .(# accelerate (range "-8" "-4" $ slow 8 $ cosine))
+        .(# accelerate (range "-4" "-2" $ slow 8 $ cosine))
       )
       $ s "syntho:6"
       # speed 4

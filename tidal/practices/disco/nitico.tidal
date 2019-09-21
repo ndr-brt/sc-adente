@@ -6,7 +6,7 @@ d1
   # legato 4
   # rvb' 0.09 0.4
   # speed (range 0.07 0.09 $ rand)
-  # hp' 50 0.3
+  # hp' 60 0.3
 
 d1 silence
 
@@ -18,15 +18,15 @@ d2
     ((|* speed 0.65).(0.13 ~>))
   $ striate' 16 (0.98)
   $ s "juno:2*6"
-  # comb 0.21
-  # sdel' 101 17
-  # speed (range 0.8 1 $ slow 20 $ perlin)
+  # comb (range 0.18 0.54 $ rand)
+  # sdel' 111 14
+  # speed (range 0.78 0.82 $ slow 20 $ (sine+tri+isaw)/3)
   # crush 5
   # begin (range 0 0.8 $ slow 20 $ cosine)
-  # gain 0.55
+  # gain 0.57
   # legato 10
   # rvb' 0.3 0.6
-  # bp' 2000 4
+  # bp' 2000 2
   # pan (slow 8 $ perlin)
 
 d2 silence
@@ -40,8 +40,9 @@ d3
   $ sometimesBy 0.6 (# del' 0.52 0.32 0.13)
   $ n (run 10)
   # s "haw"
-  # gain 0.70
+  # gain 0.65
   # crush "[6 3 7]"
   # distort 0.2
+  # rvb' (rand/2 + 0.3) 0.8
 
 hush

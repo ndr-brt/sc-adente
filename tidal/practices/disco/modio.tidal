@@ -40,13 +40,24 @@ d4
   # oct' 0.7 0.6 0.9
   # lpf 600
 
-d5
+--d5
+xfadeIn 5 16
   $ slice 32 "[0..32]"
   $ loopAt 32
   $ s "modem"
   # hp' 60 0.3
   # shape 0.3
 
-d6 $ s "modem"
+d6
+  -- $ slow 2
+  -- $ slow 3
+  -- $ slow 4
+  $ s "modem"
+
+d1 silence
+d2 silence
+d3 silence
+d4 silence
+d5 silence
 
 hush
