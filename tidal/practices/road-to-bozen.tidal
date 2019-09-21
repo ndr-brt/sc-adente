@@ -11,7 +11,6 @@ d1
   $ loopAt 1
   $ s "emhard:2"
   # shape 0.2
-  # waveloss 99
 
 d1 silence
 
@@ -197,3 +196,58 @@ d4
 d1 silence
 d3 silence
 d4 silence
+
+hush
+
+-- pacco 44100
+d1
+  $ layer [
+    id
+    .(always ((slice 8 "[6..4] 3 1 2").(# del' 0.23 0.11 0.08)))
+    .(#lp' 3000 0.1)
+    ,
+    (# speed 0.1)
+    .(# begin 0.3)
+    .(juxBy 0.4 (# begin 0.5))
+    .(#end 0.8)
+    .(# lp' 50 0.5)
+    ,
+    (|* speed (13 + rand))
+    .(ply 2)
+    .(#freeze 1)
+    .(degradeBy 0.3)
+    .(0.4 <~)
+    .(stut' 4 0.1 (# bp' 2000 0.4))
+  ]
+  $ s "emhard:1"
+  # legato 2
+  # waveloss 99
+
+d1 silence
+
+d2
+  $ slow 2
+  $ rarely (juxBy (irand 2 - 1) (# crush 2))
+  $ whenmod 14 10 (rev)
+  $ sometimesBy 0.3 (stutWith 1 0.5 (# coarse 4))
+  $ sometimesBy 0.6 ((fast 1.5).brak)
+  $ sometimes (plyWith 2 (stut 3 0.5 0.1))
+  $ s "[ss*3 [~ hhat*4]? [kk*2? kk]], clap(5,9)]"
+  # shape 0.3
+  # distort 0.4
+  # rvb' 0.2 0.8
+  # hp' 60 0.2
+  # crush 1
+
+d2 silence
+
+d3
+  $ loopAt (rand/2)
+  $ stut' 2 0.6 (# distort 0.7)
+  $ juxBy 0.3 ((|* speed "-1").(#accelerate ((run 8)* "-1")).(1.5 ~>))
+  $ s "syntho:7"
+  # sdel' 80 23
+  # begin (range 0 0.4 $ slow 6 $ tri)
+  # oct' 0.5 0.7 0.9
+
+hush
