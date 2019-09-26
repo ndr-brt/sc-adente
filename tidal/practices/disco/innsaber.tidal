@@ -1,0 +1,58 @@
+bpm(160)
+
+d1
+  $ every 3 (fast 1.5)
+  $ ply (run 3)
+  $ juxBy (slow 16 $ sine) ((2 ~>).(|* speed 2).(rev).(#scram 0.3).(#lp' 1600 0.1))
+  $ euclid 5 8
+  $ sound "percuo"
+  # n (irand 3)
+  # speed (rand/1.5 + 0.2)
+  # rvb' 0.5 0.8
+  # tremolo' rand rand
+  # gain 0.8
+
+d1 silence
+
+d2
+  $ slow 2
+  $ every 4 (rev . linger 0.5)
+  $ rarely (iter 3)
+  $ sometimesBy 0.05 (# rvb' 0.2 0.5)
+  $ sometimes (ply 2)
+  $ whenmod 16 14 (degradeBy 0.9)
+  $ sometimesBy 0.12 (stut 4 0.5 0.05)
+  $ stack [
+    slow 2 $ fastcat [
+      struct (binary (run 255)) $ s "clap",
+      struct (binary 143) $ s "kk",
+      struct (binary 178) $ s "ss"
+    ],
+    struct (binary 231) $ s "hhat"
+  ]
+  # crush 3
+  # shape 0.5
+  # distort 0.6
+  # nudge (range 0.3 0.6 $ slow 4 $ square)
+  # hp' 50 0.3
+  # gain 0.9
+
+d2 silence
+
+d3
+  $ loopAt "2.8 2.5 2.7 2.87 2.9"
+  $ striate 8
+  $ superimpose (
+      (|* speed 0.1)
+      .(#begin 0.1)
+      .(#end 0.5)
+      .(#pan 0.5)
+      .(#hp' 60 0.3)
+  )
+  $ s "magic"
+  |* speed "<0.9 1.1 0.98 1 1.05>"
+  # comb rand
+  # accelerate (range "-0.01" "-0.2" $ slow 8 $ saw)
+  # pan perlin
+
+hush

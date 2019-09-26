@@ -33,7 +33,7 @@ d1 silence
 
 d2
 -- clutchIn 2 8
-  $ slow 2
+  $ every 4 (slow 2)
   $ every 6 ((linger 0.5).(swing 3))
   $ rarely (plyWith 2 (striate 2))
   $ s "[chair:15/2 chair:10?] chair:12*2"

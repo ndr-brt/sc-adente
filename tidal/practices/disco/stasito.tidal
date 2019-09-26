@@ -1,45 +1,50 @@
 bpm (110)
 
---xfadeIn 1 8
-d1
-  $ whenmod 40 20 (|+ n "2")
-  $ layer [
-    (striate' 24 (range 0.85 0.95 $ slow 10 $ (saw+tri)/2))
-    .(rarely (# vowel "o"))
-    .(# lpf (range 320 690 $ slow 20 $ (isaw+sine)/2))
-    .(# begin (range 0 0.4 $ slow 4 $ sine))
-    .(# comb 0.86)
-    .(# legato 25)
-    .(# shape 0.4)
-    ,
-    (slow 4)
-    .(# gain 1.02)
-    .(|* speed 0.1)
-    .(juxBy
-      (range "-0.7" "0.7" $ slow 10 $ cosine)
-      (
-        ((range 0.3 0.7 $ slow 20 $ (isaw+square)/2) ~>)
-        .(|* speed "<2 4 2 2 4 2 4 8 4 2>")
-        .(sometimesBy 0.6 (stut 2 0.55 0.13))
-        .(rarely (# accelerate "-0.4"))
-        .(every 3 (# smear (choose [0.1,0.5,0.9,0,0.7])))
+do
+--  resetCycles
+--  xfadeIn 1 8
+  d1
+    $ whenmod 40 20 (|+ n "2")
+    $ layer [
+      (striate' 24 (range 0.85 0.95 $ slow 10 $ (saw+tri)/2))
+      .(rarely (# vowel "<o a>"))
+      .(# lpf (range 320 690 $ slow 20 $ (isaw+sine)/2))
+      .(# begin (range 0 0.4 $ slow 4 $ sine))
+      .(# comb 0.86) -- change THIS!
+      .(# legato 25)
+      .(# shape 0.4)
+      ,
+      degradeBy 0
+      .(slow 4)
+      .(# gain 1.02)
+      .(|* speed 0.1)
+      .(juxBy
+        (range "-0.7" "0.7" $ slow 10 $ cosine)
+        (
+          ((range 0.3 0.7 $ slow 20 $ (isaw+square)/2) ~>)
+          .(|* speed "<2 4 2 2 4 2 4 8 4 2>")
+          .(sometimesBy 0.6 (stut 2 0.55 0.13))
+          .(rarely (# accelerate (range "-0.35" "-0.45" $ rand)))
+          .(every 3 (# smear (choose [0.1,0.5,0.9,0,0.7])))
+          .(#hp' 200 0.4)
+        )
       )
-    )
-    .(#hp' 80 0.3)
-    ,
-    (|* speed (rand * 4 + 19))
-    .(rand ~>)
-    .(stut' 6 0.3 (# comb 0.8))
-    .(# gain 0.6)
-    .(degradeBy 0.86)
-    .(#rvb' 0.1 0.4)
-    .(#pan rand)
-  ]
-  $ n "0"
-  # s "sitar"
-  # rvb' 0.1 0.4
-  # shape 0.25
+      .(#hp' 80 0.4)
+      ,
+      (degradeBy 0.86)
+      .(|* speed (rand * 4 + 16))
+      .(rand ~>)
+      .(stut' 6 0.3 (# comb 0.8))
+      .(# gain 0.6)
+      .(#rvb' 0.1 0.4)
+      .(#pan rand)
+    ]
+    $ n "0"
+    # s "sitar"
+    # rvb' 0.13 0.45
+    # shape 0.28
+    # waveloss (trigger 1 $ range 0 100 $ slow 6 $ envL)
 
-xfadeIn 1 32 $ silence
+xfadeIn 1 6 $ silence
 
 hush

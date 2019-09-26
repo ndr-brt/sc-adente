@@ -7,6 +7,7 @@ d1
   # rvb' 0.09 0.4
   # speed (range 0.07 0.09 $ rand)
   # hp' 60 0.3
+-- # waveloss (trigger 1 $ range 0 100 $ slow 10 $ envL)
 
 d1 silence
 
@@ -14,24 +15,39 @@ d1 silence
 -- xfadeIn 2 12
 d2
   $ juxBy
-    (range 0 1 $ slow 10 $ sine)
+    (range "-1" "1" $ slow 10 $ (sine + isaw)/2)
     ((|* speed 0.65).(0.13 ~>))
-  $ striate' 16 (0.98)
-  $ s "juno:2*6"
-  # comb (range 0.18 0.54 $ rand)
-  # sdel' 111 14
+  $ striate' 16 (range 0.96 0.99 $ slow 5 $ cosine)
+  $ s "juno*6"
+  # n 2
+  # comb (range 0.08 0.44 $ rand)
+  # sdel' 101 14
   # speed (range 0.78 0.82 $ slow 20 $ (sine+tri+isaw)/3)
   # crush 5
   # begin (range 0 0.8 $ slow 20 $ cosine)
-  # gain 0.57
+  # gain 0.67
   # legato 10
   # rvb' 0.3 0.6
   # bp' 2000 2
   # pan (slow 8 $ perlin)
+  -- # waveloss (trigger 2 $ range 0 100 $ slow 10 $ envL)
 
 d2 silence
 
+d4
+  $ slow (irand 7 + 3)
+  $ rarely (ply 3)
+  $ s "hal"
+  # n (irand 4)
+  # gain 0.8
+  # speed ((rand / 4) + 0.75)
+  # crush (irand 6 + 3)
+  # del' 0.89 0.43 0.12
+-- # waveloss (trigger 4 $ range 0 100 $ slow 10 $ envL)
+
 d3
+-- clutchIn 3 12
+  $ foldEvery [13,15,17] (degradeBy (range 0.9 1 $ rand))
   $ often (slow 2)
   $ every 8 (fast 2)
   $ whenmod 6 5 ((# accelerate "-1").(stut 4 0.5 0.1))
@@ -40,9 +56,12 @@ d3
   $ sometimesBy 0.6 (# del' 0.52 0.32 0.13)
   $ n (run 10)
   # s "haw"
-  # gain 0.65
+  # gain 0.68
   # crush "[6 3 7]"
   # distort 0.2
-  # rvb' (rand/2 + 0.3) 0.8
+  # rvb' (rand/3 + 0.1) 0.6
+-- # waveloss (trigger 3 $ range 0 100 $ slow 10 $ envL)
+
+d3 silence
 
 hush

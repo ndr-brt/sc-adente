@@ -5,9 +5,11 @@ d1
   $ whenmod 20 16 (degradeBy 0.5)
   $ whenmod 8 6 (scramble 4)
   $ whenmod 15 13 (swing 3)
+  $ every 6 (iter 4)
+  $ plyWith 0 ((# waveloss 40).(#crush 3))
   $ rarely (
     superimpose (
-      ((range 0.01 0.03 $ rand) ~>)
+      ((range 0.005 0.02 $ rand) ~>)
       .(|* pan (rand))
       .(rarely (within (0, 0.6) (# waveloss 98)))
     )
@@ -48,7 +50,7 @@ d1
       $ sometimes (
         (|* speed 3)
         .(stutWith 6 0.5 ((# binshift 0.8).(# vowel "o")))
-        .(# accelerate (range "-4" "-2" $ slow 8 $ cosine))
+        .(# accelerate (range "-3" "-1" $ slow 8 $ cosine))
       )
       $ s "syntho:6"
       # speed 4

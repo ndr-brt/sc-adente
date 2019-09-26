@@ -1,7 +1,7 @@
 bpm(105)
 
 d1
-  $ juxBy 0.6 (|* accelerate (irand 6 * "-1"))
+  $ juxBy (range "-0.6" "0.6" $ slow 4 $ square) (|* accelerate (irand 6 * "-1"))
   $ sometimesBy 0.15 (fast 2)
   $ loopAt 1
   $ s "modem"
@@ -45,7 +45,7 @@ xfadeIn 5 16
   $ slice 32 "[0..32]"
   $ loopAt 32
   $ s "modem"
-  # hp' 60 0.3
+  # hp' 50 0.4
   # shape 0.3
 
 d6
@@ -53,11 +53,13 @@ d6
   -- $ slow 3
   -- $ slow 4
   $ s "modem"
+  #rvb' 0.1 0.6
 
 d1 silence
 d2 silence
 d3 silence
 d4 silence
 d5 silence
+d6 silence
 
 hush
