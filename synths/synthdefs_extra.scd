@@ -210,7 +210,7 @@ SynthDef(\cymbal808_ryan, { | out=0, baseFreq = 300, time = 250, amp=0.1, pan=0.
 }).add;
 
 // Originally found at http://ecmc.rochester.edu/ecmc/docs/supercollider/scbook/Ch21_Interface_Investigations/ixi%20SC%20tutorial/ixi_SC_tutorial_10.html
-SynthDef("flute", { | scl = 0.2, freq = 440, ipress = 0.9, ibreath = 0.09, ifeedbk1 = 0.4, ifeedbk2 = 0.4, dur = 1, gate = 1, amp = 2, pan=0.0 |
+SynthDef(\flute, { | scl = 0.2, freq = 440, ipress = 0.9, ibreath = 0.09, ifeedbk1 = 0.4, ifeedbk2 = 0.4, dur = 1, gate = 1, amp = 2, pan=0.0 |
 
 	var sr = SampleRate.ir;
 	var cr = ControlRate.ir;
@@ -339,7 +339,7 @@ SynthDef(\snare, { | out = 0, amp = 0.1, sinfreq = 180, att = 0.01, rel = 0.2, f
 	OffsetOut.ar(out, DirtPan.ar(sum, ~dirt.numChannels, pan, env))
 }).add;
 
-SynthDef("kick", { | out = 0, amp = 0.3, sinfreq = 70, glissf = 0.9, att = 0.01, rel = 0.45, pan = 0 |
+SynthDef(\kick, { | out = 0, amp = 0.3, sinfreq = 70, glissf = 0.9, att = 0.01, rel = 0.45, pan = 0 |
 	var gliss = XLine.kr(sinfreq, sinfreq*glissf, rel);
 	var snd = SinOsc.ar(gliss);
 	var env = EnvGen.kr(Env.perc(att, rel), doneAction: 2);
@@ -384,7 +384,7 @@ SynthDef(\justwannahavefun,{|out= 0 freq = 440 amp = 0.1 ringTime=10.0 pan=0.0|
 	OffsetOut.ar(out, DirtPan.ar((filter.softclip(0.9))*amp, ~dirt.numChannels, pan, env))
 }).add;
 
-SynthDef("kick_oto309", { | out=0, amp=0.5, pan=0 |
+SynthDef(\kick_oto309, { | out=0, amp=0.5, pan=0 |
 	var env0, env1, env1m, son;
 
 	env0 =  EnvGen.ar(Env.new([0.5, 1, 0.5, 0], [0.005, 0.06, 0.26], [-4, -2, -4]), doneAction:2);
@@ -409,7 +409,7 @@ http://www.sussex.ac.uk/Users/nc81/index.html
 under GNU GPL 3 as per SuperCollider license
 Minor modifications by Bruno Ruviaro, June 2015.
 */
-SynthDef("laserbeam", { | out = 0, pan = 0.0, freq = 440, amp = 0.1, att = 0.01 |
+SynthDef(\laserbeam, { | out = 0, pan = 0.0, freq = 440, amp = 0.1, att = 0.01 |
 	var freqenv = EnvGen.ar(Env([4, 0.5, 1, 1], [att, 0.01, 1.0]));
 	var ampenv = EnvGen.ar(
 		envelope: Env([0, 1, 0.5, 0.0], [0.02, 0.2, 0.1]),
@@ -428,7 +428,7 @@ SynthDef(\mrostinato,{|out= 0 freq = 440 amp = 0.1 gate=1 lforate = 10 lfowidth=
 	OffsetOut.ar(out, DirtPan.ar(pulse, ~dirt.numChannels, pan, env))
 }).add;
 
-SynthDef("noisy", { | out = 0, freq = 440, amp = 0.2, pan = 0.0 |
+SynthDef(\noisy, { | out = 0, freq = 440, amp = 0.2, pan = 0.0 |
 	var env = Env.perc(0.02, 0.1).kr(doneAction: 2);
 	var snd = Mix(LFPulse.ar(
 		freq: freq * [1, 5/2],
