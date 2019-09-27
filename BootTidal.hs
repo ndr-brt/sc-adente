@@ -80,6 +80,8 @@ let
   bpm b = setcps (b/2/120)
 
   adsr = grp [mF "attack",  mF "decay", mF "sustain", mF "release"]
+  asr = grp [mF "attack", mF "sustain", mF "release"]
+  ar = grp [mF "attack", mF "release"]
   del  = grp [mF "delay",   mF "delaytime", mF "delayfeedback"]
   scc  = grp [mF "shape",   mF "coarse", mF "crush"]
   lp  = grp [mF "lpf",  mF "lpq"]
@@ -103,6 +105,8 @@ let
 
   -- FX groups' function version
   adsr' a d s r = attack a # decay d # sustain s # release r
+  asr' a s r = attack a # sustain s # release r
+  ar' a r = attack a # decay d # release r
   del' l t f = delay l # delaytime t # delayfeedback f
   scc' s c c' = shape s # coarse c # crush c'
   lp' c r = cutoff c # resonance r
