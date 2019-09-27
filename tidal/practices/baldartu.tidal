@@ -1,29 +1,36 @@
 d1
-  $ juxBy 0.4 ((range 0.01 0.03 $ slow 7 $ cosine) ~>)
+  $ juxBy 0.4 ((range 0.01 0.05 $ slow 7 $ cosine) ~>)
   $ slow 4
-  $ s "bd ~ bd ~ sd:3 ~"
+  $ rarely (plyWith 7 (#crush 2))
+  $ s "[kk ~ kk ~ ss:3 ~, hhat]"
   # waveloss (range 0.1 50 $ slow 8 $ perlin)
   # crush 6
   # speed (range 0.6 0.8 $ slow 3 $ saw)
-  # room 0.2
-  # size 0.8
-  # delay 0.6
-  # delayt 0.5
-  # delayfb 0.8
+  # rvb' 0.2 0.9
+  # del' 0.8 0.5 0.2
+  # distort 0.6
+  # shape 0.3
+
+d1 $ silence
 
 xfadeIn 2 4
   $ slow 2
-  $ striate 8
-  $ stack [
-    n "<d2 d2 d2 c2>" # gain 0.9,
-    n "<as7 gs7 gs7 e7>" # gain 0.6 # hpf 2000
-  ]
+  $ juxBy (range "-0.5" "0.5" $ slow 8 $ square) (
+    (# n "<as7 gs7 gs7 e7>")
+    .(# gain 0.6)
+    .(# hpf 2000)
+  )
+  $ superimpose (
+    (0.5 ~>)
+  )
+  $ n "d2"
+  # gain 0.9
   # s "supersaw"
-  # attack 2
-  # sustain 2
-  # release 2
-  # lpf (range 300 3000 $ slow 17 $ sine)
-  # lpq (range 0.01 0.15 $ slow 13 $ (tri + isaw)/2)
+  # attack 0.5
+  -- # sustain 2
+  # hold 1
+  # release 0.5
+  # lp' (range 300 3000 $ slow 17 $ sine) (range 0.01 0.15 $ slow 13 $ (tri + isaw)/2)
 
 xfadeIn 2 43 $ silence
 

@@ -1,13 +1,16 @@
 bpm (115)
 
-d1
-  $ "feelfx*2"
-  # n (irand 8)
-  # legato 4
-  # rvb' 0.09 0.4
-  # speed (range 0.07 0.09 $ rand)
-  # hp' 60 0.3
--- # waveloss (trigger 1 $ range 0 100 $ slow 10 $ envL)
+do
+  resetCycles
+  d1
+    $ "feelfx*2"
+    # n (irand 8)
+    # legato 4
+    # rvb' 0.09 0.4
+    # speed (range 0.07 0.09 $ rand)
+    # gain 0.90
+    # hp' 60 0.3
+--    # waveloss (trigger 1 $ range 0 100 $ slow 10 $ envL)
 
 d1 silence
 
@@ -16,51 +19,56 @@ d1 silence
 d2
   $ juxBy
     (range "-1" "1" $ slow 10 $ (sine + isaw)/2)
-    ((|* speed 0.65).(0.13 ~>))
+    ((|* speed (segment 1 $ choose [2/3, 3/5, 8/9])).(0.25 ~>))
   $ striate' 16 (range 0.96 0.99 $ slow 5 $ cosine)
   $ s "juno*6"
   # n 2
-  # comb (range 0.08 0.44 $ rand)
-  # sdel' 101 14
+  # sdel' 172 14
   # speed (range 0.78 0.82 $ slow 20 $ (sine+tri+isaw)/3)
-  # crush 5
   # begin (range 0 0.8 $ slow 20 $ cosine)
-  # gain 0.67
+  # gain 0.60
   # legato 10
-  # rvb' 0.3 0.6
-  # bp' 2000 2
+  # rvb' 0.5 0.97
+  # bp' ((range 1800 2500 $ slow 7 cosine) * (range 0.5 1 $ slow 9 (isaw+sine)/2)) 2
   # pan (slow 8 $ perlin)
-  -- # waveloss (trigger 2 $ range 0 100 $ slow 10 $ envL)
+  # distort 0.7
+--  # waveloss (trigger 2 $ range 0 100 $ slow 10 $ envL)
 
 d2 silence
 
+-- clutchIn 4 8
 d4
-  $ slow (irand 7 + 3)
-  $ rarely (ply 3)
+  $ slow (irand 5 + 2)
+  $ sometimes ((ply 3).(# squiz (irand 25)))
+  $ rarely (# freeze 1)
   $ s "hal"
   # n (irand 4)
-  # gain 0.8
+  # gain 0.72
   # speed ((rand / 4) + 0.75)
   # crush (irand 6 + 3)
   # del' 0.89 0.43 0.12
--- # waveloss (trigger 4 $ range 0 100 $ slow 10 $ envL)
+  # shape 0.1
+--  # waveloss (trigger 4 $ range 0 100 $ slow 10 $ envL)
+
+d4 silence
 
 d3
 -- clutchIn 3 12
+--  $ ply 3
   $ foldEvery [13,15,17] (degradeBy (range 0.9 1 $ rand))
-  $ often (slow 2)
+  $ often ((slow 2).(linger 0.25))
   $ every 8 (fast 2)
-  $ whenmod 6 5 ((# accelerate "-1").(stut 4 0.5 0.1))
+  $ whenmod 6 5 ((# accelerate "-0.4").(stut 4 0.5 0.1))
   $ rarely (plyWith (choose [2, 4]) ((# hp' 400 0.4).(# pan rand)))
   $ often (striate 2)
   $ sometimesBy 0.6 (# del' 0.52 0.32 0.13)
   $ n (run 10)
   # s "haw"
-  # gain 0.68
+  # gain 0.69
   # crush "[6 3 7]"
-  # distort 0.2
+  # distort 0.4
   # rvb' (rand/3 + 0.1) 0.6
--- # waveloss (trigger 3 $ range 0 100 $ slow 10 $ envL)
+--  # waveloss (trigger 3 $ range 0 100 $ slow 10 $ envL)
 
 d3 silence
 

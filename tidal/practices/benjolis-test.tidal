@@ -1,4 +1,4 @@
-d1 
+d1
   $ every 12 (fast 2)
   $ every 8 (# n "[6,5,8]")
   $ n "[[8 5 ~!3 6], [7 ~ 8]]"
@@ -18,5 +18,5 @@ d1
   # delayt 0.45
   # delayfb 0.78
   # size 0.8
-  # crush 1
-  # waveloss 100
+
+hush

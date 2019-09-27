@@ -91,6 +91,8 @@ d2
 
 d2 silence
 
+hush
+
 -- druippo
 d1
   $ juxBy (range "-0.5" "0.5" $ slow 12 $ sine) ((|* speed 0.5).(#begin 0.25).(#end 0.75))
@@ -174,7 +176,7 @@ d3
   $ loopAt "0.1"
   $ superimpose (
       (|* speed rand)
-      .(#pan perlin)
+      .(# pan perlin)
       .(sometimes (#del' 0.43 0.32 0.21))
       .(rarely (# accelerate (rand*2 - 1)))
   )
@@ -221,7 +223,6 @@ d1
   ]
   $ s "emhard:1"
   # legato 2
-  # waveloss 99
 
 d1 silence
 
@@ -237,7 +238,6 @@ d2
   # distort 0.4
   # rvb' 0.2 0.8
   # hp' 60 0.2
-  # crush 1
 
 d2 silence
 

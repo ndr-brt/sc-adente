@@ -2,14 +2,11 @@ bpm (160)
 
 -- clutchIn 1 8
 d1
-  $ stack [
-    sometimesBy 0.70 (# crush 4)
-      $ degradeBy 0.3
-      $ s "superhex*3"
-      # octave (irand 6)
-      # cutoff (range 100 800 $ sine)
-      # n (irand 9)
-  ]
+  $ degradeBy 0.3
+  $ s "superhex*3"
+  # octave (irand 5 + 1)
+  # cutoff (range 100 800 $ sine)
+  # n (irand 9)
   # gain 0.76
 
 d2
