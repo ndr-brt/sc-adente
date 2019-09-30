@@ -106,7 +106,7 @@ let
   -- FX groups' function version
   adsr' a d s r = attack a # decay d # sustain s # release r
   asr' a s r = attack a # sustain s # release r
-  ar' a r = attack a # decay d # release r
+  ar' a r = attack a # release r
   del' l t f = delay l # delaytime t # delayfeedback f
   scc' s c c' = shape s # coarse c # crush c'
   lp' c r = cutoff c # resonance r
