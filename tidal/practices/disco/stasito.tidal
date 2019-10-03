@@ -1,8 +1,8 @@
 bpm (110)
 
 do
---  resetCycles
---  xfadeIn 1 8
+ -- resetCycles
+ -- xfadeIn 1 8
   d1
     $ whenmod 40 20 (|+ n "2")
     $ layer [
@@ -42,8 +42,24 @@ do
     $ n "0"
     # s "sitar"
     # rvb' 0.13 0.45
+    # gain 0.80
     # shape 0.28
-    # waveloss (trigger 1 $ range 0 100 $ slow 6 $ envL)
+    -- # waveloss (trigger 1 $ range 0 100 $ slow 6 $ envL)
+
+d1 silence
+
+d2
+  -- $ whenmod 8 6 (degradeBy 1)
+  $ gap 5
+  $ "sitar/2*2"
+  # n (irand 5)
+  |* speed "<1.333333 1.333333 1.125 2.250>"
+  # distort 0.87
+  # ar' 1.2 2.5
+  # del' 0.45 0.23 0.12
+  # gain 0.60
+  # lpf 4000
+  # rvb' 0.5 0.8
 
 xfadeIn 1 6 $ silence
 

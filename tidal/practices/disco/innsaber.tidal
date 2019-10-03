@@ -10,7 +10,7 @@ d1
   # speed (rand/1.5 + 0.2)
   # rvb' 0.5 0.8
   # tremolo' rand rand
-  # gain 0.8
+  # gain 0.7
 
 d1 silence
 
@@ -24,7 +24,7 @@ d2
   $ sometimesBy 0.12 (stut 4 0.5 0.05)
   $ stack [
     slow 2 $ fastcat [
-      struct (binary (run 255)) $ s "clap",
+      struct (binary (segment 2 $ run 255)) $ s "clap",
       struct (binary 143) $ s "kk",
       struct (binary 178) $ s "ss"
     ],
@@ -35,7 +35,7 @@ d2
   # distort 0.6
   # nudge (range 0.3 0.6 $ slow 4 $ square)
   # hp' 50 0.3
-  # gain 0.9
+  # gain 0.75
 
 d2 silence
 
@@ -44,15 +44,17 @@ d3
   $ striate 8
   $ superimpose (
       (|* speed 0.1)
-      .(#begin 0.1)
-      .(#end 0.5)
+      .(#begin 0.4)
+      .(#end 0.6)
       .(#pan 0.5)
-      .(#hp' 60 0.3)
+      .(#hp' 80 0.5)
+      .(|* gain 1.2)
   )
   $ s "magic"
   |* speed "<0.9 1.1 0.98 1 1.05>"
   # comb rand
   # accelerate (range "-0.01" "-0.2" $ slow 8 $ saw)
   # pan perlin
+  # gain 0.73
 
 hush

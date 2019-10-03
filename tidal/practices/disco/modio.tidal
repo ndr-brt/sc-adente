@@ -7,6 +7,7 @@ d1
   $ s "modem"
   # rvb' 0.15 0.23
   # hpf 4000
+  # gain 0.60
 
 xfadeIn 2 8
   $ loopAt 2
@@ -18,6 +19,7 @@ xfadeIn 2 8
   # binshift "<0.4 0.6 0.8 0.2>"
   # del' 0.7 0.34 0.21
   # pan (perlin)
+  # gain 0.55
 
 d3
   $ loopAt 8
@@ -32,6 +34,7 @@ d3
   $ s "modem"
   # bpf 1000
   # distort 0.6
+  # gain 0.7
 
 d4
   $ striate' 32 (0.9)
@@ -39,6 +42,7 @@ d4
   $ s "modem"
   # oct' 0.7 0.6 0.9
   # lpf 600
+  # gain 0.7
 
 --d5
 xfadeIn 5 16
@@ -47,13 +51,15 @@ xfadeIn 5 16
   $ s "modem"
   # hp' 50 0.4
   # shape 0.3
+  # gain 0.65
 
 d6
   -- $ slow 2
   -- $ slow 3
   -- $ slow 4
   $ s "modem"
-  #rvb' 0.1 0.6
+  # rvb' 0.1 0.6
+  # gain 0.8
 
 d1 silence
 d2 silence

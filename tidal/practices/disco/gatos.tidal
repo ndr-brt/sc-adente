@@ -16,7 +16,7 @@ d1
   )
   $ stack [
     every 2 (stut' 3 0.2 (# squiz 120))
-      $ euclid 13 16
+      $ euclid (choose [13, 15, 17]) 16
       $ s "hhat"
     ,
     every 4 (plyWith 2 (# crush 3))
@@ -61,15 +61,15 @@ d1
       # octave (choose [2,3])
       # legato 2
       # release 0.7
-      # gain 1.2
+      |* gain 1.2
       # pan (perlin)
       # sdel' 100 18
     ,
-    (0.1 <~)
-      $ s "droni:3"
-      # lp' 450 0.83
-      # freeze 1
-      # gain 0.9
+    loopAt 1.3
+    $ s "droni:3"
+      -- # lp' (range 300 450 $ slow 5 sine) 0.83
+      # shape 0.7
   ]
+  # gain 0.65
 
 hush

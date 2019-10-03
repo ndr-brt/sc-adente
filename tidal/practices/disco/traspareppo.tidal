@@ -1,7 +1,8 @@
+-- starts with d2 then d3 then d1
 bpm (100)
 
 d1
--- xfadeIn 1 9
+-- clutchIn 1 4
   $ whenmod 6 4 (brak . rev . fast 1.5)
   -- $ foldEvery [4,7] (# cut 1)
   $ whenmod 12 9 (# nudge 0.95)
@@ -16,44 +17,49 @@ d1
   $ n (run 8 + "<0 0 0 8>")
   # s "glass"
   # speed 1
-  # gain 0.65
+  # gain 0.62
   # hp' 1000 0.3
 
 d1 silence
 
-d2
-  $ degradeBy 0
-  $ slow 2
-  $ whenmod 8 4 (plyWith 4 ((stut 3 0.5 0.05).(|* speed 2)).(0.1 <~))
-  $ every 12 (degradeBy 0.9)
-  $ every 6 (rev)
-  $ sometimes (stut 2 0.6 0.05)
-  $ every 8 (linger 0.35)
-  $ n "[39(2,4), 35(3,8)]"
-  # s "glass"
-  # speed 0.08
-  # oct' 0.8 0.7 0.9
-  # legato 8
-  # release 0.5
-  # bp' 700 0.8
-  # gain 0.9
-  # shape 0.1
-  # rvb' 0.2 0.5
+do
+  -- resetCycles
+  d2
+    $ degradeBy 0
+    $ slow 2
+    $ whenmod 8 4 (plyWith 4 ((stut 3 0.5 0.05).(|* speed 2)).(0.1 <~))
+    $ every 12 (degradeBy 0.9)
+    $ every 6 (rev)
+    $ sometimes (stut 2 0.6 0.05)
+    $ every 8 (linger 0.35)
+    $ n "[39(2,4), 35(3,8)]"
+    # s "glass"
+    # speed 0.08
+    # oct' 0.8 0.7 0.9
+    # legato 8
+    # release 0.5
+    # bp' 700 0.8
+    # gain 0.87
+    # shape 0.1
+    # rvb' 0.2 0.5
 
 d3
+-- clutchIn 3 16
   $ juxBy (slow 8 $ ((sine+saw)/2 - 0.5)*1.8) (
-    (|* speed (range 0.5 1.5 $ slow 8 $ cosine)).(#accelerate "-8")
+    (|* speed (range 0.5 1.5 $ slow 8 $ cosine)).(#accelerate "-6")
   )
   $ striate' "<28 38 22 34 26 28>" (99.99/100)
-  $ sometimesBy 0.41 (# lpq (range 0.23 0.41 $ rand))
+  $ sometimesBy 0.41 (# lpq (range 0.23 0.51 $ rand))
   $ s "glass:34"
-  # speed (range "0.018" "0.021" $ slow 14 $ perlin)
-  # release 0.6
+  # speed (range "0.019" "0.023" $ slow 14 $ perlin)
+  # release 0.9
   # attack (range 0.5 0.2 $ slow 18 $ saw)
   # legato 12
-  # lp' 350 0.04
-  # shape 0.3
+  # lp' 450 0.04
+  # gain 0.9
+  # shape 0.28
 
+d3 silence
 
 clutchIn 2 16 $ silence
 xfadeIn 3 16 $ silence

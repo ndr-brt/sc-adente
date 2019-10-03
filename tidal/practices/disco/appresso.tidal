@@ -3,11 +3,13 @@ bpm (160)
 -- clutchIn 1 8
 d1
   $ degradeBy 0.3
+  $ stut' 4 0.8 (# lpf 800)
   $ s "superhex*3"
   # octave (irand 5 + 1)
   # cutoff (range 100 800 $ sine)
-  # n (irand 9)
-  # gain 0.76
+  # n (scale "yu" (irand 12))
+  # gain 0.54
+  # rvb' 0.4 0.89
 
 d2
 -- xfadeIn 2 9
@@ -15,7 +17,7 @@ d2
   $ juxBy 0.4 (#detune 2)
   $ superimpose (
       (# octave 2)
-      .(# gain 0.85)
+      .(# gain 0.70)
       .(0.5 <~)
   )
   $ whenmod 18 16 (degradeBy 1)
@@ -24,7 +26,7 @@ d2
   # legato 2
   # octave 3
   # rvb' 0.2 0.4
-  # gain 0.68
+  # gain 0.54
   # scram 0.17
   # lp' 3500 0.1
 
@@ -37,14 +39,14 @@ d3
   # pan (perlin2 (slow 4 $ sine))
   # del' "[0.25 0]" 0.23 0.12
   # rvb' 0.2 0.5
-  # gain 0.9
+  # gain 0.65
 
 d4
   $ slow 2
   $ cat [
     s "battles*2? tink . tink*2"
       # cutoff (range 100 1000 $ slow 4 $ saw)
-      # rvb' 0.99 0.99
+      # rvb' 0.79 0.99
       # binshift (range 0 0.7 $ slow 10 $ (saw+tri)/2)
     ,
     juxBy (slow 9 $ tri) (|* speed "-1.02")
@@ -57,7 +59,7 @@ d4
       # crush (irand 9 + 1)
       # speed (rand + 0.8)
   ]
-  # shape 0.4
+  # gain 0.65
   # del' 0.84 0.45 0.32
 
 
