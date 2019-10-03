@@ -16,8 +16,9 @@ do
       ,
       degradeBy 0
       .(slow 4)
-      .(# gain 1.02)
+      .(# gain 0.75)
       .(|* speed 0.1)
+      .(# legato 5)
       .(juxBy
         (range "-0.7" "0.7" $ slow 10 $ cosine)
         (
@@ -31,7 +32,7 @@ do
       )
       .(#hp' 80 0.4)
       ,
-      (degradeBy 0.86)
+      (degradeBy 0.76)
       .(|* speed (rand * 4 + 16))
       .(rand ~>)
       .(stut' 6 0.3 (# comb 0.8))
@@ -42,14 +43,13 @@ do
     $ n "0"
     # s "sitar"
     # rvb' 0.13 0.45
-    # gain 0.80
-    # shape 0.28
+    # gain 0.32
+    # shape 0.23
     -- # waveloss (trigger 1 $ range 0 100 $ slow 6 $ envL)
 
 d1 silence
 
 d2
-  -- $ whenmod 8 6 (degradeBy 1)
   $ gap 5
   $ "sitar/2*2"
   # n (irand 5)
@@ -61,6 +61,19 @@ d2
   # lpf 4000
   # rvb' 0.5 0.8
 
+d3
+  $ slow 4
+  $ sometimesBy 0.01 ((ply 2).(0.1 ~>))
+  $ sometimesBy 0.05 (fast 2)
+  $ stut' 5 0.1 (# lpf 700)
+  $ s "ss*3 ~!12"
+  # n "-3"
+  # rvb' 0.23 0.3
+  # gain 0.98
+
 xfadeIn 1 6 $ silence
+
+clutchIn 2 4 $ silence
+d1 silence
 
 hush

@@ -8,7 +8,7 @@ d1
   # octave (irand 5 + 1)
   # cutoff (range 100 800 $ sine)
   # n (scale "yu" (irand 12))
-  # gain 0.54
+  # gain 0.44
   # rvb' 0.4 0.89
 
 d2
@@ -39,7 +39,7 @@ d3
   # pan (perlin2 (slow 4 $ sine))
   # del' "[0.25 0]" 0.23 0.12
   # rvb' 0.2 0.5
-  # gain 0.65
+  # gain 0.55
 
 d4
   $ slow 2
@@ -59,7 +59,7 @@ d4
       # crush (irand 9 + 1)
       # speed (rand + 0.8)
   ]
-  # gain 0.65
+  # gain 0.55
   # del' 0.84 0.45 0.32
 
 

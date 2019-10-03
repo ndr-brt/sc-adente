@@ -16,9 +16,10 @@ d1
   $ every 4 (iter 8)
   $ n (run 8 + "<0 0 0 8>")
   # s "glass"
-  # speed 1
-  # gain 0.62
+  # speed 0.8
+  # gain 0.57
   # hp' 1000 0.3
+  # pan (slow 8 $ perlin)
 
 d1 silence
 
@@ -26,8 +27,8 @@ do
   -- resetCycles
   d2
     $ degradeBy 0
-    $ slow 2
-    $ whenmod 8 4 (plyWith 4 ((stut 3 0.5 0.05).(|* speed 2)).(0.1 <~))
+    $ ply 2
+    $ whenmod 16 8 (plyWith 4 ((stut 3 0.5 0.05).(|* speed 2)).(0.1 <~).(slow 2))
     $ every 12 (degradeBy 0.9)
     $ every 6 (rev)
     $ sometimes (stut 2 0.6 0.05)
@@ -38,26 +39,29 @@ do
     # oct' 0.8 0.7 0.9
     # legato 8
     # release 0.5
-    # bp' 700 0.8
-    # gain 0.87
-    # shape 0.1
-    # rvb' 0.2 0.5
+    # gain 0.60
+    # shape 0.5
+    # rvb' 0.3 0.8
 
-d3
--- clutchIn 3 16
-  $ juxBy (slow 8 $ ((sine+saw)/2 - 0.5)*1.8) (
+-- d3
+clutchIn 3 16
+  $ juxBy (slow 8 $ ((sine+square)/2 - 0.5)*1.8) (
     (|* speed (range 0.5 1.5 $ slow 8 $ cosine)).(#accelerate "-6")
   )
+  $ whenmod 16 8 ((degradeBy 0.5).(#comb 0.7))
   $ striate' "<28 38 22 34 26 28>" (99.99/100)
   $ sometimesBy 0.41 (# lpq (range 0.23 0.51 $ rand))
   $ s "glass:34"
   # speed (range "0.019" "0.023" $ slow 14 $ perlin)
   # release 0.9
+  # distort (range 0.4 0.7 $ slow 7 $ perlin)
   # attack (range 0.5 0.2 $ slow 18 $ saw)
+  -- # release 0.51
   # legato 12
-  # lp' 450 0.04
-  # gain 0.9
+  # lp' 550 0.04
+  # gain 0.56
   # shape 0.28
+  # hp' 60 0.3
 
 d3 silence
 

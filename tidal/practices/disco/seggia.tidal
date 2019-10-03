@@ -28,6 +28,7 @@ d1
   $ n (run 8)
   # s "chair"
   # del' 0.23 0.13 0.12
+  # gain 0.80
 
 d1 silence
 
@@ -39,8 +40,9 @@ d2
   $ s "[chair:15/2 chair:10?] chair:12*2"
   # rvb' 0.3 0.3
   # nudge 0.65
-  # oct' 0.3 0.3 0.8
+  # oct' 0.3 0.3 0.6
   # hp' 60 0.35
+  # gain 0.68
 
 d2 silence
 

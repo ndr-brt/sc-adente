@@ -44,8 +44,8 @@ d4
   # lpf 600
   # gain 0.7
 
---d5
-xfadeIn 5 16
+d5
+-- xfadeIn 5 16
   $ slice 32 "[0..32]"
   $ loopAt 32
   $ s "modem"
@@ -57,7 +57,8 @@ d6
   -- $ slow 2
   -- $ slow 3
   -- $ slow 4
-  $ s "modem"
+
+once $ s "modem"
   # rvb' 0.1 0.6
   # gain 0.8
 

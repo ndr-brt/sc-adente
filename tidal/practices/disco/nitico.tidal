@@ -55,8 +55,8 @@ d4 silence
 d3
 -- clutchIn 3 12
   $ every 8 ((ply 2).(degradeBy 0.5).(linger 0.5))
-  $ whenmod 6 5 ((# accelerate "-0.4").(stut 4 0.5 0.5))
-  $ whenmod 12 9 ((slow 3).(#del' 0.89 0.24 0.21))
+  $ whenmod 6 5 ((# accelerate "-0.4").(stut 4 0.5 0.2))
+  $ whenmod 12 9 ((slow 3).(#del' 0.59 0.14 0.11))
   $ rarely (striate 2)
   $ n (segment 8 $ irand 8)
   # s "haw"
@@ -71,5 +71,6 @@ d3
 d3 silence
 
 xfadeIn 2 4 $ silence
+clutchIn 3 8 $ silence
 
 hush
