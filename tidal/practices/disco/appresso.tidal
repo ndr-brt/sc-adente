@@ -3,32 +3,49 @@ bpm (160)
 -- clutchIn 1 8
 d1
   $ degradeBy 0.3
-  $ stut' 4 0.8 (# lpf 800)
-  $ s "superhex*3"
-  # octave (irand 5 + 1)
-  # cutoff (range 100 800 $ sine)
-  # n (scale "yu" (irand 12))
-  # gain 0.44
-  # rvb' 0.4 0.89
+  $ slow 3
+  $ sometimes (stut' 4 0.1 (# lpf 800))
+  $ superimpose (
+    (# octave 12)
+    .(ply (segment 1 $ irand 3 + 4))
+    .(0.17 ~>)
+    .(# hp' 3000 0.2)
+    .(# pan (slow 8 $ perlin))
+  )
+  $ rarely (fast 2)
+  $ n (scale "minor" (segment 1 $ (irand 2 * 2)))
+  # s "supercomparator"
+  # octave 5
+  # ar' 0.001 0.2
+  -- # lp' (range 100 1200 $ rand) 0.2
+  -- # del' 0.34 0.23 0.12
+  # gain 0.55
+  # shape 0.4
+  # rvb' 0.5 0.89
+
+d1 silence
 
 d2
 -- xfadeIn 2 9
   $ slow 2
-  $ juxBy 0.4 (#detune 2)
   $ superimpose (
-      (# octave 2)
-      .(# gain 0.70)
+      (# octave 1)
+      .(|* gain 0.70)
       .(0.5 <~)
+      .(juxBy (rand*2-1) (# octave 2))
   )
   $ whenmod 18 16 (degradeBy 1)
-  $ n (scale "yu" "<0 2 2 4 0 2 2 4 3 6 6 8 0 2 2 4>")
+  $ n (scale "minor" "<0 3 4 4 0 3 1 4 3 6 6 8 0 2 2 4>")
   # s "supersaw"
-  # legato 2
+  # legato 3
   # octave 3
-  # rvb' 0.2 0.4
-  # gain 0.54
-  # scram 0.17
-  # lp' 3500 0.1
+  # rvb' 0.4 0.8
+  # gain 0.52
+  # scram 0.12
+  # rmod' 0.7 10 0.8
+  # distort 0.30
+  # lp' 2000 0.3
+  # comb 0.3
 
 -- clutchIn 3 8
 d3
@@ -42,16 +59,17 @@ d3
   # gain 0.55
 
 d4
-  $ slow 2
-  $ cat [
+  $ slow 4
+  $ fastcat [
     s "battles*2? tink . tink*2"
       # cutoff (range 100 1000 $ slow 4 $ saw)
       # rvb' 0.79 0.99
       # binshift (range 0 0.7 $ slow 10 $ (saw+tri)/2)
     ,
-    juxBy (slow 9 $ tri) (|* speed "-1.02")
+    superimpose ((|* speed "8").(# pan rand))
       $ s "~ gabba bassfoo"
-      # speed 0.2
+      # speed 0.38
+      # hp' 50 0.35
     ,
     every 4 (rev)
       $ sound "voodoo percuo:2 diphone2:4"
@@ -61,10 +79,12 @@ d4
   ]
   # gain 0.55
   # del' 0.84 0.45 0.32
+  # comb 0.45
 
 
 d1 silence
 d2 silence
 d3 silence
+d4 silence
 
 hush
