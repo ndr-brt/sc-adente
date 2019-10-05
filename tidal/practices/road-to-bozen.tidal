@@ -251,3 +251,66 @@ d3
   # oct' 0.5 0.7 0.9
 
 hush
+
+-- pattume
+
+setcps(0.8)
+
+d1
+  $ loopAt "2"
+  $ juxBy 0.4 (|* speed "-1")
+  $ rarely ((chop 2).(# del' 0.36 0.23 0.12).(# coarse 4))
+  $ superimpose (
+    (|* speed (23 - rand))
+    .(0.1 ~>)
+    .(ply 4)
+    .(every 8 (rev))
+    .(degradeBy 0.2)
+    .(# distort 0.9)
+    .(# squiz 12)
+    .(stut' 4 0.2 ((# smear (rand - 0.5)).(#lpf 1000)))
+  )
+  $ s "emhard:1"
+  # lp' (range 300 1600 $ slow 12 $ tri) 0.1
+  # waveloss 90
+
+xfadeIn 1 6 $ silence
+
+d2
+  $ degradeBy 1
+  $ juxBy (slow 7 $ cosine) (rev)
+  $ slow 2
+  $ sometimes (iter 5)
+  $ s "ss*3 ~!6"
+  # shape 0.7
+  # distort 0.3
+  # rvb' 0.5 0.8
+  # cut 1
+
+d3
+  $ degradeBy 1
+  $ slow 1
+  $ every 4 (# rvb' 0.5 0.8)
+  $ s "~!6 kk*3?"
+  # shape 0.95
+  # hp' 60 0.8
+  # pan 0.5
+  # up "-3"
+
+d4
+  $ stut 5 0.6 0.3
+  $ layer [
+    id
+    ,
+    (|* speed 0.2)
+    .(# end 0.2)
+    .(# hp' 60 0.5)
+    ,
+    (|* speed 92).(#loop 7).(#pan rand).(ply 19)
+  ]
+  $ s "syntho:7"
+  # shape 0.8
+  # pan (perlin)
+  # speed 0.8
+
+  hush
