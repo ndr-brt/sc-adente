@@ -1,0 +1,31 @@
+d1
+  $ whenmod 12 8 (# n "0 ~ ~ 2 6 8")
+  $ n "0 ~ 0 4 ~ 8"
+  # s "uou"
+  # hold "0.8"
+  # distort 0.4
+  # accelerate "-2"
+  -- # nudge (range 0.3 0.8 $ slow 4 $ sine)
+  # octave 4
+  # lp' 2400 0.1
+  -- # hp' 80 0.3
+
+d2
+  $ rarely (|- octave "1")
+  $ s "uou*32"
+  # n 12
+  # octave 9
+  # ar' 0.4 0.4
+  # rvb' 0.4 0.6
+
+d3
+  $ every 4 ((zoom (0.25, 0.75)).(fast 2).(ply 3))
+  $ sometimes (brak.rev)
+  $ rarely (# crush 2)
+  $ s "[ss*2 kk ss kk*2, hhat(14,16)]"
+  # n (quantise 1 $ irand 6 - 3)
+  # shape 0.6
+  # crush 5
+  # hp' 50 0.4
+
+hush

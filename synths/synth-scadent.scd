@@ -64,4 +64,28 @@ SynthDef(\gfreeze, {
 	OffsetOut.ar(out, DirtPan.ar(signal / 10, ~dirt.numChannels, pan, env));
 }).add;
 
+SynthDef(\uou, { |freq=440,amp=1,attack=0.01,decay=0.3,sustain=0.5,release=0.4,out=0,pan=0,accelerate=0,hold=0.5|
+	var env = EnvGen.kr(Env.adsr(attack, decay, sustain, release), doneAction:2);
+	var modmod = LFNoise0.kr(2).range(2,20);
+	var mod = LFNoise1.kr(modmod).range(0.5,1.2).distort;
+	var sig = VarSaw.ar(freq*mod, accelerate, hold) * amp;
+
+	OffsetOut.ar(out, DirtPan.ar(sig, ~dirt.numChannels, pan, env));
+}).add;
+
+SynthDef(\zonta, { |out = 0, speed = 1, freq = 440, pan=0, detune=0, amp = 0.5, attack=0.0001, release 0.5, sustain=1|
+	var env = EnvGen.ar(Env.perc(attack, release, 8), doneAction: 2);
+	var width = LFNoise0.kr(20).range(0.2,0.8);
+	var sig = (
+		Pulse.ar(freq + (detune * 3), width) +
+		LFSaw.ar(freq/2 + (detune * 3), width.sin) +
+		SinOsc.ar(freq/2 + (detune * 3), pi/2) +
+		Phaser.ar(freq*2 + (detune * 3), width.cos)
+	)/4;
+
+	sig = MoogLadder.ar(sig, freq*8, width);
+
+	OffsetOut.ar(out, DirtPan.ar(sig * amp, ~dirt.numChannels, pan, env));
+}).add;
+
 )

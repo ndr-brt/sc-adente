@@ -1,8 +1,6 @@
-//Drifty noodle machine
-
 (
-SynthDef(\StereoModDelay, {
-    //Chorus delay with EQ in the feedback loop for that vintage tape echo mood
+
+SynthDef(\StereoModDelay, { //Chorus delay with EQ in the feedback loop for that vintage tape echo mood
 	|
 	bufferL, bufferR,
 	time = 1.5, fb = 0.8,
