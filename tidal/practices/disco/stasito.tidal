@@ -1,8 +1,8 @@
 bpm (110)
 
 do
- -- resetCycles
- -- xfadeIn 1 8
+  -- resetCycles
+  -- xfadeIn 1 8
   d1
     $ whenmod 40 20 (|+ n "2")
     $ layer [
@@ -51,13 +51,14 @@ d1 silence
 
 d2
   $ gap 5
+  $ juxBy 0.4 (|* speed "-1")
   $ "sitar/2*2"
   # n (irand 5)
   |* speed "<1.333333 1.333333 1.125 2.250>"
   # distort 0.87
   # ar' 1.2 2.5
-  # del' 0.45 0.23 0.12
-  # gain 0.60
+  # del' 0.48 0.23 0.12
+  # gain 0.52
   # lpf 4000
   # rvb' 0.5 0.8
 
@@ -65,15 +66,14 @@ d3
   $ slow 4
   $ sometimesBy 0.01 ((ply 2).(0.1 ~>))
   $ sometimesBy 0.05 (fast 2)
-  $ stut' 5 0.1 (# lpf 700)
+  $ stut' 5 0.1 (# lp' 700 0.15)
   $ s "ss*3 ~!12"
   # n "-3"
-  # rvb' 0.23 0.3
+  # rvb' 0.23 0.52
   # gain 0.98
 
 xfadeIn 1 6 $ silence
-
-clutchIn 2 4 $ silence
 d1 silence
+clutchIn 2 4 $ silence
 
 hush

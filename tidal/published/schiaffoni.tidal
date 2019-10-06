@@ -1,0 +1,29 @@
+bpm(112)
+
+do
+  -- resetCycles
+  d1
+    $ degradeBy 0.75
+    $ whenmod 12 10 (linger 0.5)
+    $ every 8 (swing 3)
+    $ layer [
+      id
+      .(#shape 0.4)
+      ,
+      (chop "<32 56 48>")
+      .(hurry 2)
+      .(always (#accelerate (segment 1 $ (rand*4 - 2))))
+      .(juxBy 0.5 (rev))
+      .(rarely (#del' 0.54 0.22 0.12))
+      .(|+ n (quantise 1 $ range 0 5 $ slow 8 $ sine))
+      ,
+      (|* speed 0.32)
+      .(striate' 8 0.99)
+      .(|* gain 0.7)
+      .(# rvb' 0.4 0.8)
+      .(# hp' 60 0.3)
+    ]
+    $ s "bsth*2? bsth:1 [~ bsth:2]? [bsth:4 ~!2]"
+    # crush 1
+
+hush

@@ -161,7 +161,8 @@ Apply function to a pattern with different possibility
 * (breaks each cycles and then delay every piece by n) **swingBy** (1/4)
 * (alias for swingBy (1/3)) **swing**
 * (play a portion of a pattern) **zoom** (0.25, 0.75)
-* (turn a continuous pattern into a discrete one) **segment** 2 $ range 0 32 $ sine
+* (turn a continuous pattern into a discrete one) **segment** 2 $ irand 23
+* (round a floating point value into an integer) **quantise** 1 $ range 0 7 $ sine
 
 ### Granularization
 * (cuts each sample into parts) **chop** 16

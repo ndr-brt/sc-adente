@@ -1,34 +1,36 @@
 bpm (114)
 
--- clutchIn 1 8
-d1
-  $ rarely (# n (ri 8))
-  $ layer [
-    (juxBy 0.8 (iter 5))
-      .(whenmod 7 5 ((# freeze 1).(# n 0)))
-      .(sometimes (brak.rev))
-      .(rarely (# accelerate (irand 4 - 2)))
-      .(# smear (range 0.1 0.8 $ slow 10 $ (cosine+square)/2))
-      .(rarely (stut 4 0.5 0.2))
-      .(# rvb' 0.2 0.5)
-    ,
-    (|* speed "<0.1 0.4 0.2>")
-      .(# binshift 0.25)
-      .(# comb (slow 4 $ sine))
-      .(# oct' 0.7 0.7 0.9)
-      .(# shape (slow 4 $ cosine/3 + 0.1))
-    ,
-    (slow 4)
-      .(|* speed 4)
-      .(rarely (stut 3 0.5 0.1))
-      .(# pan rand)
-      .(# hp' 3000 0.6)
-      .(# binshift "[0.5 0 0.9]")
-  ]
-  $ n (run 8)
-  # s "chair"
-  # del' 0.23 0.13 0.12
-  # gain 0.80
+do
+  -- resetCycles
+  -- clutchIn 1 8
+  d1
+    $ rarely (# n (ri 8))
+    $ layer [
+      (juxBy 0.8 (iter 5))
+        .(whenmod 7 5 ((# freeze 1).(# n 0)))
+        .(sometimes (brak.rev))
+        .(rarely (# accelerate (irand 4 - 2)))
+        .(# smear (range 0.1 0.8 $ slow 10 $ (cosine+square)/2))
+        .(rarely (stut 4 0.5 0.2))
+        .(# rvb' 0.2 0.5)
+      ,
+      (|* speed "<0.1 0.4 0.2>")
+        .(# binshift 0.25)
+        .(# comb (slow 4 $ sine))
+        .(# oct' 0.7 0.7 0.9)
+        .(# shape (slow 4 $ cosine/3 + 0.1))
+      ,
+      (slow 4)
+        .(|* speed 4)
+        .(rarely (stut 3 0.5 0.1))
+        .(# pan rand)
+        .(# hp' 3000 0.6)
+        .(# binshift "[0.5 0 0.9]")
+    ]
+    $ n (run 8)
+    # s "chair"
+    # del' 0.23 0.13 0.12
+    # gain 0.80
 
 d1 silence
 
@@ -42,7 +44,7 @@ d2
   # nudge 0.65
   # oct' 0.3 0.3 0.6
   # hp' 60 0.35
-  # gain 0.68
+  # gain 0.65
 
 d2 silence
 

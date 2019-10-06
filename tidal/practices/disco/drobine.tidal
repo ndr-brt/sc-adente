@@ -5,15 +5,18 @@ bpm (130)
 d1
   $ layer [
     id
+    .(whenmod 12 8 (#rmod' 0.9 (range 2 15 $ slow 15 $ sine) 0.7))
     .(almostNever (|+ n "2"))
     .(# octave 2)
-    .(# lp' (range 1400 3400 $ slow 12 $ (cosine+saw)/2) (range 0.1 0.4 $ slow 9 $ (square+isaw)/2))
+    .(# lp' (range 1400 3400 $ slow 12 $ (cosine+saw)/2) (range 0.05 0.3 $ slow 9 $ (square+isaw)/2))
     .(# hp' 60 0.4)
     .(# gain 0.9)
     .(# legato 4)
     ,
     id
+    .(whenmod 4 2 $ degradeBy 1)
     .(rarely (degradeBy 0.2))
+    .(sometimes (ply 2))
     .(sometimes (stut 5 0.9 0.13))
     .(every 4 (brak))
     .(# octave 11)
