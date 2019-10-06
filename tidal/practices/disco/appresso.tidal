@@ -2,7 +2,7 @@ bpm (160)
 
 -- clutchIn 1 8
 d1
-  $ degradeBy 0.3
+  $ degradeBy 0.1
   $ slow 3
   $ sometimes (stut' 4 0.1 (# lpf 800))
   $ superimpose (
@@ -17,6 +17,7 @@ d1
   # s "supercomparator"
   # octave 5
   # ar' 0.001 0.2
+  # distort 0.3
   -- # lp' (range 100 1200 $ rand) 0.2
   -- # del' 0.34 0.23 0.12
   # gain 0.55

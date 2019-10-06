@@ -42,4 +42,26 @@ SynthDef(\blow, { |out, decay=0, sustain=0.03, freq, pan, accelerate, voice = 0.
 	OffsetOut.ar(out, DirtPan.ar(sig, ~dirt.numChannels, pan, env))
 }).add;
 
+SynthDef(\gfreeze, {
+	| out = 0, amp = 1, freq = 440.0, gain,
+	trigRate = 60, grainDur = 0.35, pos = 0.3, rate = 1,
+	attack = 0.1, sustain = 1, release = 2, gate = 1,
+	lowPassCutoff = 4000, highPassCutoff = 100, pan = 0
+	|
+
+	var input = LFSaw.ar(freq).distort * gain;
+	var localBuf = LocalBuf.new(SampleRate.ir * 1, 1).clear;
+	var record = RecordBuf.ar(input, localBuf, loop: 0);
+
+	var grainTrig = Dust.ar(trigRate);
+	var granulation = GrainBuf.ar(1, grainTrig, grainDur, localBuf, rate, pos);
+
+	var lpf = LPF.ar(granulation, lowPassCutoff);
+	var signal = HPF.ar(lpf.distort, highPassCutoff);
+
+	var env = EnvGen.kr(Env.asr(attack, sustain, release), gate, amp, doneAction: 2);
+
+	OffsetOut.ar(out, DirtPan.ar(signal / 10, ~dirt.numChannels, pan, env));
+}).add;
+
 )

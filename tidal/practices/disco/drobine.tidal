@@ -1,0 +1,57 @@
+bpm (130)
+
+-- parti solo drone, poi dentro sbatta e poi quella robaccia
+
+d1
+  $ layer [
+    id
+    .(almostNever (|+ n "2"))
+    .(# octave 2)
+    .(# lp' (range 1400 3400 $ slow 12 $ (cosine+saw)/2) (range 0.1 0.4 $ slow 9 $ (square+isaw)/2))
+    .(# hp' 60 0.4)
+    .(# gain 0.9)
+    .(# legato 4)
+    ,
+    id
+    .(rarely (degradeBy 0.2))
+    .(sometimes (stut 5 0.9 0.13))
+    .(every 4 (brak))
+    .(# octave 11)
+    .(# n "<0 0 0 0 0 3 3>")
+    .(# ar' 0.01 0.42)
+    .(0.17 <~)
+    .(# distort 0.90)
+    .(# gain 0.84)
+    .(# pan (slow 8 $ sine))
+    .(# lp' 3000 0.4)
+  ]
+  $ s "gfreeze"
+  # rvb' 0.4 0.9
+
+do
+  -- resetCycles
+  d2
+    $ every 4 (iter 4)
+    $ rarely (ply 2)
+    $ every 3 (scramble 2)
+    $ every 10 (linger 0.25)
+    $ layer [
+      id
+      .(# lp' 1500 0)
+      .(# distort 0.5)
+      .(# shape 0.7)
+      ,
+      id
+      .(# hp' 1500 0)
+      .(# rvb' 0.3 0.8)
+      .(# del' "[0.54 0]" "0.23" "0.12")
+      .(0.02 ~>)
+      .(#pan rand)
+    ]
+    $ s "[kk ~ ss [~ ss?], hhat(3,4)]"
+    # gain 0.80
+
+d1 silence
+d2 silence
+
+hush
