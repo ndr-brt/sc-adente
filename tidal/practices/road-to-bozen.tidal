@@ -314,3 +314,59 @@ d4
   # speed 0.8
 
   hush
+
+
+d1 $ loopAt "2"
+  $ juxBy (range "-0.5" "0.5" $ slow 7 $ square)
+    ((# speed "-1").(# accelerate (range "-0.1" "-0.9" $ slow 8 $ sine)))
+  $ every 6 (superimpose ((plyWith 4 (# coarse 13)).(|* speed (irand 3 + 15))))
+  $ almostNever ((chop 9).(# del' 0.32 0.12 0.2))
+  $ s "emhard:1"
+  # waveloss 100
+
+d1 silence
+
+d2
+  $ degradeBy 0.95
+  $ slow 2
+  $ sometimes(
+    (stut' 4 0.05 (# crush 3))
+  )
+  $ whenmod 18 0 ((slow 4).(iter 3).(# distort 0.6))
+  $ rarely (ply 4)
+  $ s "[ss*3? ~ [kk ss]? kk*2,clap(7,16)]"
+  # rvb' 0.6 0.95
+  # shape 0.7
+  # up "-4"
+  # pan "[0.5, [0.2 0.8 0.5 1 0]]"
+  # hp' 50 0.5
+  # crush 1
+
+d3
+  $ layer [
+    id
+    .(almostNever (# accelerate "-0.3"))
+    .(# shape 0.5)
+    .(# binshift 0.3)
+    .(always (stut 4 0.5 0.1))
+    .(|* speed (rand + 0.5)),
+    id
+    .(|* speed 0.4)
+    .(# scram (range 0.2 0.6 $ slow 17 (tri+saw)/2))
+    .(chop "12 16 19 7")
+    .(# shape 0.4)
+    .(# distort 0.3)
+    .(sometimes (|* distort 2))
+    .(#lp' 300 0.2)
+    .(#hp' 60 0.4),
+    id
+    .(plyWith 32 (|* speed (rand + 0.9)))
+    .(|* speed (segment 1 $ choose [7, 13, 17, 21]))
+    .(|* speed 4)
+    .(#del' 0.7 0.31 (range 0.1 0.6 $ perlin))
+    .(# pan perlin)
+  ]
+  $ s "syntho:7"
+  # crush 1
+
+  hush
