@@ -48,4 +48,11 @@ d2
 
 d2 silence
 
+mute 1
+unmute 1
+
+do
+  clutchIn 1 4 $ silence
+  clutchIn 2 6 $ silence
+
 hush

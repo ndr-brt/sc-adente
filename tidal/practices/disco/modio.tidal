@@ -2,11 +2,11 @@ bpm(105)
 
 d1
   $ juxBy (range "-0.6" "0.6" $ slow 4 $ square) (|* accelerate (irand 6 * "-1"))
-  $ sometimesBy 0.15 (fast 2)
+  $ sometimesBy 0.25 (fast 2)
   $ loopAt 1
   $ s "modem"
   # rvb' 0.15 0.23
-  # hpf 4000
+  # hp' 4000 0.2
   # gain 0.60
 
 xfadeIn 2 8
@@ -26,7 +26,7 @@ d3
   $ superimpose (
     (0.1 ~>)
     .(# pan rand)
-    .(# accelerate 4)
+    .(# accelerate (irand 8 - 4))
   )
   $ sometimes (chop 4)
   $ rarely (# waveloss 23)

@@ -1,22 +1,28 @@
-d1
-  $ whenmod 12 8 (# n "0 ~ ~ 2 6 8")
-  $ n "0 ~ 0 4 ~ 8"
-  # s "uou"
-  # hold "0.8"
-  # distort 0.4
-  # accelerate "-2"
-  -- # nudge (range 0.3 0.8 $ slow 4 $ sine)
-  # octave 4
-  # lp' 2400 0.1
-  -- # hp' 80 0.3
+bpm(120)
+
+do
+  -- resetCycles
+  d1
+    $ whenmod 12 8 (# n "0 ~ ~ 2 6 8")
+    $ n "0 ~ 0 4 ~ 8"
+    # s "uou"
+    # hold "0.8"
+    # distort 0.4
+    # accelerate "-2"
+    # octave 4
+    # gain 0.8
+    # lp' 2400 0.1
 
 d2
+  $ whenmod 8 4 (# distort 0.2)
   $ rarely (|- octave "1")
+  $ almostNever (|- octave "2")
   $ s "uou*32"
   # n 12
   # octave 9
   # ar' 0.4 0.4
   # rvb' 0.4 0.6
+  # gain 0.8
 
 d3
   $ every 4 ((zoom (0.25, 0.75)).(fast 2).(ply 3))
@@ -27,5 +33,13 @@ d3
   # shape 0.6
   # crush 5
   # hp' 50 0.4
+  # gain 0.76
+  # hp' 50 0.4
+
+do
+  unmute 1
+  unmute 2
+  unmute 3
+
 
 hush

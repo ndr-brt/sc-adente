@@ -8,7 +8,7 @@ do
     # legato 4
     # rvb' 0.09 0.4
     # speed (range 0.07 0.09 $ rand)
-    # gain 0.75
+    # gain 0.70
     # hp' 60 0.3
    -- # waveloss (trigger 1 $ range 0 100 $ slow 10 $ envL)
 
@@ -26,11 +26,11 @@ d2
   # sdel' 102 6
   # speed (range 0.78 0.82 $ slow 20 $ (sine+tri+isaw)/3)
   # begin (range 0 0.8 $ slow 20 $ cosine)
-  # gain 0.46
+  # gain 0.47
   # legato 10
   # rvb' 0.5 0.98
   # pan (slow 8 $ perlin)
-  # distort 0.7
+  # distort 0.65
 --  # waveloss (trigger 2 $ range 0 100 $ slow 10 $ envL)
 
 d2 silence
@@ -48,7 +48,7 @@ d4
   # crush (irand 6 + 4)
   # del' 0.89 0.43 0.12
   # shape 0.1
- -- # waveloss (trigger 4 $ range 0 100 $ slow 10 $ envL)
+  -- # waveloss (trigger 4 $ range 0 100 $ slow 10 $ envL)
 
 d4 silence
 
@@ -67,8 +67,6 @@ d3
   # rvb' (rand/3) 0.3
   # hp' 100 0.6
   -- # waveloss (trigger 3 $ range 0 100 $ slow 10 $ envL)
-
-d3 silence
 
 xfadeIn 2 4 $ silence
 clutchIn 3 8 $ silence

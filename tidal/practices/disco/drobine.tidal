@@ -2,37 +2,48 @@ bpm (130)
 
 -- parti solo drone, poi dentro sbatta e poi quella robaccia
 
-d1
-  $ layer [
-    id
-    .(whenmod 12 8 (#rmod' 0.9 (range 2 15 $ slow 15 $ sine) 0.7))
-    .(almostNever (|+ n "2"))
-    .(# octave 2)
-    .(# lp' (range 1400 3400 $ slow 12 $ (cosine+saw)/2) (range 0.05 0.3 $ slow 9 $ (square+isaw)/2))
-    .(# hp' 60 0.4)
-    .(# gain 0.9)
-    .(# legato 4)
-    ,
-    id
-    .(whenmod 4 2 $ degradeBy 1)
-    .(rarely (degradeBy 0.2))
-    .(sometimes (ply 2))
-    .(sometimes (stut 5 0.9 0.13))
-    .(every 4 (brak))
-    .(# octave 11)
-    .(# n "<0 0 0 0 0 3 3>")
-    .(# ar' 0.01 0.42)
-    .(0.17 <~)
-    .(# distort 0.90)
-    .(# gain 0.84)
-    .(# pan (slow 8 $ sine))
-    .(# lp' 3000 0.4)
-  ]
-  $ s "gfreeze"
-  # rvb' 0.4 0.9
-
 do
   -- resetCycles
+  -- clutchIn 2 4 $ silence
+  -- xfadeIn 1 2
+  d1
+    $ layer [
+      id
+      .(every 7 ((#distort 0.55).(#gain 0.74)))
+      .(whenmod 12 8 (#rmod' 0.9 (range 2 15 $ slow 15 $ sine) 0.7))
+      .(almostNever (|+ n "2"))
+      .(juxBy (slow 4 $ sine/2 + 0.25) (# up "3"))
+      .(# octave 2)
+      .(# lp' (range 1400 3400 $ slow 12 $ (cosine+saw)/2) (range 0.05 0.3 $ slow 9 $ (square+isaw)/2))
+      .(# hp' 60 0.5)
+      .(# gain 0.9)
+      .(# legato 4)
+      .(# distort 0.05)
+      -- .(# crush 14)
+      ,
+      id
+      .(whenmod 6 4 $ degradeBy 1)
+      .(rarely (degradeBy 0.3))
+      .(often (ply 3))
+      .(sometimes (stut 7 0.9 0.13))
+      .(every 4 (brak))
+      .(# octave 11)
+      .(# n "<0 0 0 0 0 3 3>")
+      .(# ar' 0.01 0.42)
+      .(0.17 <~)
+      .(# distort 0.90)
+      .(# gain 0.85)
+      .(# pan (slow 8 $ sine))
+      .(# lp' 3000 0.5)
+    ]
+    $ s "gfreeze"
+    # rvb' 0.4 0.9
+    -- # waveloss 20
+    -- # crush 0
+
+do
+  -- resetCycles;
+  -- clutchIn 2 8
   d2
     $ every 4 (iter 4)
     $ rarely (ply 2)
@@ -40,21 +51,40 @@ do
     $ every 10 (linger 0.25)
     $ layer [
       id
-      .(# lp' 1500 0)
+      .(# lp' 1000 0)
       .(# distort 0.5)
       .(# shape 0.7)
+      .(# hp' 40 0.4)
       ,
       id
-      .(# hp' 1500 0)
+      .(# hp' 1000 0)
       .(# rvb' 0.3 0.8)
-      .(# del' "[0.54 0]" "0.23" "0.12")
+      .(# del' "[0.54 0]" "0.13" "0.12")
       .(0.02 ~>)
       .(#pan rand)
+      ,
+      id
+      .(# bp' 400 0.5)
+      .(# shape 0.5)
+      .(|* gain 1.32)
     ]
     $ s "[kk ~ ss [~ ss?], hhat(3,4)]"
-    # gain 0.80
+    # gain 0.79
+    -- # crush 1
+
+-- in ordine, da 0 a 4, salta il numero 1
+-- 0 e poi 3
+once
+  $ s "indagine:3"
+  # shape 0.43
+  # smear 0.1
+  # distort 0.05
+  # gain 0.95
+
 
 d1 silence
 d2 silence
+clutchIn 2 4 $ silence
+
 
 hush

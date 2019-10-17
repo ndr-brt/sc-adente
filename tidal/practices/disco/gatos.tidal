@@ -32,7 +32,7 @@ do
         # distort 0.5
         # shape 0.9
         # up "-3"
-        # hp' 40 0.4
+        # hp' 45 0.45
       ,
       degradeBy 0.5
         $ sometimes (# smear 0.5)

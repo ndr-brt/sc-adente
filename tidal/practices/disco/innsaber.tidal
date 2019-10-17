@@ -1,6 +1,7 @@
 bpm(160)
 
 d1
+  $ degradeBy 0.2
   $ every 3 (fast 1.5)
   $ ply (run 3)
   $ juxBy (slow 16 $ sine) ((2 ~>).(|* speed 2).(rev).(#scram 0.3).(#lp' 1600 0.1))
@@ -23,7 +24,7 @@ d2
   $ whenmod 16 14 (degradeBy 0.9)
   $ sometimesBy 0.12 (stut 4 0.5 0.05)
   $ stack [
-    slow 2 $ fastcat [
+    slow 4 $ fastcat [
       struct (binary (segment 2 $ run 255)) $ s "clap",
       struct (binary 143) $ s "kk",
       struct (binary 178) $ s "ss"
@@ -39,22 +40,24 @@ d2
 
 d2 silence
 
-d3
-  $ loopAt "2.8 2.5 2.7 2.87 2.9"
-  $ striate 8
-  $ superimpose (
-      (|* speed 0.1)
-      .(#begin 0.4)
-      .(#end 0.6)
-      .(#pan 0.5)
-      .(#hp' 80 0.5)
-      .(|* gain 1.2)
-  )
-  $ s "magic"
-  |* speed "<0.9 1.1 0.98 1 1.05>"
-  # comb rand
-  # accelerate (range "-0.01" "-0.2" $ slow 8 $ saw)
-  # pan perlin
-  # gain 0.73
+do
+  resetCycles
+  d3
+    $ loopAt "2.8 2.5 2.7 2.87 2.9"
+    $ striate 8
+    $ superimpose (
+        (|* speed 0.1)
+        .(#begin 0.4)
+        .(#end 0.6)
+        .(#pan 0.5)
+        .(#hp' 80 0.5)
+        .(|* gain 1.2)
+    )
+    $ s "magic"
+    |* speed "<0.9 1.1 0.98 1 1.05>"
+    # comb rand
+    # accelerate (range "-0.01" "-0.2" $ slow 8 $ saw)
+    # pan perlin
+    # gain 0.73
 
 hush

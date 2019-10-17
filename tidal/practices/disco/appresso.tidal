@@ -47,6 +47,7 @@ d2
   # distort 0.30
   # lp' 2000 0.3
   # comb 0.3
+  -- # crush 1
 
 -- clutchIn 3 8
 d3
@@ -59,33 +60,37 @@ d3
   # rvb' 0.2 0.5
   # gain 0.55
 
-d4
-  $ slow 4
-  $ fastcat [
-    s "battles*2? tink . tink*2"
-      # cutoff (range 100 1000 $ slow 4 $ saw)
-      # rvb' 0.79 0.99
-      # binshift (range 0 0.7 $ slow 10 $ (saw+tri)/2)
-    ,
-    superimpose ((|* speed "8").(# pan rand))
-      $ s "~ gabba bassfoo"
-      # speed 0.38
-      # hp' 50 0.35
-    ,
-    every 4 (rev)
-      $ sound "voodoo percuo:2 diphone2:4"
-      # n (irand 8)
-      # crush (irand 9 + 1)
-      # speed (rand + 0.8)
-  ]
-  # gain 0.55
-  # del' 0.84 0.45 0.32
-  # comb 0.45
+do
+  -- resetCycles
+  d4
+    $ slow 4
+    $ fastcat [
+      s "battles*2? tink . tink*2"
+        # cutoff (range 100 1000 $ slow 4 $ saw)
+        # rvb' 0.79 0.99
+        # binshift (range 0 0.7 $ slow 10 $ (saw+tri)/2)
+      ,
+      superimpose ((|* speed "8").(# pan (range 0.3 0.7 $ rand)))
+        $ s "~ gabba bassfoo"
+        # speed 0.38
+        # hp' 50 0.35
+      ,
+      every 4 (rev)
+        $ sound "voodoo percuo:2 diphone2:4"
+        # n (irand 8)
+        # crush (irand 9 + 1)
+        # speed (rand + 0.8)
+    ]
+    # gain 0.55
+    # del' 0.84 0.45 0.32
+    # comb 0.45
 
 
 d1 silence
 d2 silence
 d3 silence
 d4 silence
+
+solo 4
 
 hush

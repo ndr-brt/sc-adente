@@ -1,9 +1,9 @@
 bpm (110)
 
 do
-  -- resetCycles
-  -- xfadeIn 1 8
-  d1
+  resetCycles
+  xfadeIn 1 8
+  -- d1
     $ whenmod 40 20 (|+ n "2")
     $ layer [
       (striate' 24 (range 0.85 0.95 $ slow 10 $ (saw+tri)/2))
@@ -73,7 +73,9 @@ d3
   # gain 0.98
 
 xfadeIn 1 6 $ silence
-d1 silence
-clutchIn 2 4 $ silence
+
+do
+  clutchIn 2 4 $ silence
+  xfadeIn 3 4 $ silence
 
 hush
