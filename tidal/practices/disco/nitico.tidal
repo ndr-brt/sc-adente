@@ -10,7 +10,7 @@ do
     # speed (range 0.07 0.09 $ rand)
     # gain 0.70
     # hp' 60 0.3
-   -- # waveloss (trigger 1 $ range 0 100 $ slow 10 $ envL)
+   # waveloss (trigger 1 $ range 0 100 $ slow 10 $ envL)
 
 d1 silence
 
@@ -19,7 +19,7 @@ d1 silence
 d2
   $ juxBy
     (range "-1" "1" $ slow 10 $ (sine + isaw)/2)
-    ((|* speed (segment 1 $ slow 2 $ choose [2/3, 3/5, 8/9])).(0.25 ~>))
+    ((|* speed (slow 2 $ segment 1 $ choose [2/3, 3/5, 8/9])).(0.25 ~>))
   $ striate' 20 (range 0.97 0.99 $ slow 5 $ cosine)
   $ s "juno*6"
   # n 8 -- alla fine da 8 a 11
@@ -38,7 +38,7 @@ d2 silence
 -- clutchIn 4 8
 d4
   $ slow (irand 5 + 3)
-  $ sometimes ((ply 3).(# squiz (irand 25)))
+  $ sometimes (plyWith 3 (# accelerate (rand*2 - 1)))
   $ sometimesBy 0.67 (stut 8 0.6 0.02)
   $ rarely (# freeze 1)
   $ s "hal"
@@ -46,9 +46,9 @@ d4
   # gain 0.62
   # speed ((rand / 5) + 0.85)
   # crush (irand 6 + 4)
-  # del' 0.89 0.43 0.12
+  # del' 0.89 0.33 0.12
   # shape 0.1
-  -- # waveloss (trigger 4 $ range 0 100 $ slow 10 $ envL)
+  # waveloss (trigger 4 $ range 0 100 $ slow 10 $ envL)
 
 d4 silence
 
@@ -63,10 +63,10 @@ d3
   # gain 0.58
   # distort 0.2
   # shape 0.52
-  # ar' 0.01 0.4
+  # ar' 0.01 0.42
   # rvb' (rand/3) 0.3
   # hp' 100 0.6
-  -- # waveloss (trigger 3 $ range 0 100 $ slow 10 $ envL)
+  # waveloss (trigger 3 $ range 0 100 $ slow 10 $ envL)
 
 xfadeIn 2 4 $ silence
 clutchIn 3 8 $ silence
