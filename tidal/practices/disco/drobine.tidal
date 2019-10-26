@@ -1,35 +1,34 @@
 bpm (130)
 
--- parti solo drone, poi dentro sbatta e poi quella robaccia
-
 do
   -- resetCycles
-  -- clutchIn 2 4 $ silence
-  -- xfadeIn 1 2
+  -- clutchIn 2 6 $ silence
+  -- xfadeIn 1 6
   d1
     $ layer [
       id
-      .(every 7 ((#distort 0.55).(#gain 0.74)))
+      -- .(every 7 ((#distort 0.35).(#gain 0.74)))
       .(whenmod 12 8 (#rmod' 0.9 (range 2 15 $ slow 15 $ sine) 0.7))
-      .(almostNever (|+ n "2"))
+      .(rarely (|+ n "2"))
       .(juxBy (slow 4 $ sine/2 + 0.25) (# up "3"))
       .(# octave 2)
-      .(# lp' (range 1400 3400 $ slow 12 $ (cosine+saw)/2) (range 0.05 0.3 $ slow 9 $ (square+isaw)/2))
+      .(# lp' (range 1400 3400 $ slow 24 $ (cosine+saw)/2) (range 0.05 0.3 $ slow 18 $ (square+isaw)/2))
       .(# hp' 60 0.5)
       .(# gain 0.9)
       .(# legato 4)
       .(# distort 0.05)
-      -- .(# crush 14)
+      -- .(# crush 8)
       ,
       id
       .(whenmod 6 4 $ degradeBy 1)
       .(rarely (degradeBy 0.3))
       .(often (ply 3))
       .(sometimes (stut 7 0.9 0.13))
+      -- .(stut 4 0.5 0.1)
       .(every 4 (brak))
       .(# octave 11)
       .(# n "<0 0 0 0 0 3 3>")
-      .(# ar' 0.01 0.42)
+      .(# ar' 0.001 1.82)
       .(0.17 <~)
       .(# distort 0.90)
       .(# gain 0.85)
@@ -38,8 +37,8 @@ do
     ]
     $ s "gfreeze"
     # rvb' 0.4 0.9
-    -- # waveloss 20
-    -- # crush 0
+    # waveloss 20
+    -- # crush 1
 
 do
   -- resetCycles;
@@ -47,6 +46,7 @@ do
   d2
     $ every 4 (iter 4)
     $ rarely (ply 2)
+    $ almostNever (stutWith 8 0.06 (# pan (perlin)))
     $ every 3 (scramble 2)
     $ every 10 (linger 0.25)
     $ layer [
@@ -72,19 +72,18 @@ do
     # gain 0.79
     -- # crush 1
 
--- in ordine, da 0 a 4, salta il numero 1
--- 0 e poi 3
+-- solo il primo
 once
-  $ s "indagine:3"
+  $ s "indagine:0"
   # shape 0.43
   # smear 0.1
   # distort 0.05
   # gain 0.95
+  # orbit 3
 
 
 d1 silence
 d2 silence
 clutchIn 2 4 $ silence
-
 
 hush

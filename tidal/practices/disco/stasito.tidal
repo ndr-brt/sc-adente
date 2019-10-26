@@ -1,9 +1,8 @@
 bpm (110)
 
 do
-  resetCycles
-  xfadeIn 1 8
-  -- d1
+  -- resetCycles
+  d1
     $ whenmod 40 20 (|+ n "2")
     $ layer [
       (striate' 24 (range 0.85 0.95 $ slow 10 $ (saw+tri)/2))
@@ -12,13 +11,14 @@ do
       .(# begin (range 0 0.4 $ slow 4 $ sine))
       .(# comb 0.86) -- change THIS!
       .(# legato 25)
-      .(# shape 0.4)
+      .(# shape 0.44)
       ,
       degradeBy 0
       .(slow 4)
-      .(# gain 0.75)
+      .(# gain 0.67)
       .(|* speed 0.1)
       .(# legato 5)
+      .(#hp' 50 0.3)
       .(juxBy
         (range "-0.7" "0.7" $ slow 10 $ cosine)
         (
@@ -30,15 +30,14 @@ do
           .(#hp' 200 0.4)
         )
       )
-      .(#hp' 80 0.4)
       ,
       (degradeBy 0.76)
       .(|* speed (rand * 4 + 16))
       .(rand ~>)
       .(stut' 6 0.3 (# comb 0.8))
       .(# gain 0.6)
-      .(#rvb' 0.1 0.4)
-      .(#pan rand)
+      .(# rvb' 0.1 0.4)
+      .(# pan rand)
     ]
     $ n "0"
     # s "sitar"
@@ -49,28 +48,34 @@ do
 
 d1 silence
 
-d2
-  $ gap 5
-  $ juxBy 0.4 (|* speed "-1")
-  $ "sitar/2*2"
-  # n (irand 5)
-  |* speed "<1.333333 1.333333 1.125 2.250>"
-  # distort 0.87
-  # ar' 1.2 2.5
-  # del' 0.48 0.23 0.12
-  # gain 0.52
-  # lpf 4000
-  # rvb' 0.5 0.8
+-- xfadeIn 2 4
 
-d3
-  $ slow 4
-  $ sometimesBy 0.01 ((ply 2).(0.1 ~>))
-  $ sometimesBy 0.05 (fast 2)
-  $ stut' 5 0.1 (# lp' 700 0.15)
-  $ s "ss*3 ~!12"
-  # n "-3"
-  # rvb' 0.23 0.52
-  # gain 0.98
+do
+  -- resetCycles;
+  d2
+    $ gap 5
+    $ juxBy 0.4 (|* speed "-1")
+    $ "sitar/2*2"
+    # n (irand 5)
+    |* speed "<1.333333 1.333333 1.125 2.250>"
+    # distort 0.87
+    # ar' 1.2 2.5
+    # del' 0.48 0.23 0.12
+    # gain 0.52
+    # lpf 4000
+    # rvb' 0.5 0.8
+  d3
+    $ slow 4
+    $ sometimesBy 0.01 ((ply 2).(0.1 ~>))
+    $ sometimesBy 0.05 (fast 2)
+    $ stut' 5 0.1 (
+      (# lp' (range 700 1000 $ slow 16 $ tri) 0.15)
+      -- .(degradeBy 0.11)
+    )
+    $ s "ss*3 ~!12"
+    # n "-8"
+    # rvb' 0.73 0.82
+    # gain 0.89
 
 xfadeIn 1 6 $ silence
 
