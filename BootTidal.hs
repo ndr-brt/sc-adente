@@ -16,6 +16,7 @@ let p = streamReplace tidal
     solo = streamSolo tidal
     unsolo = streamUnsolo tidal
     once = streamOnce tidal
+    first = streamFirst tidal
     asap = once
     nudgeAll = streamNudgeAll tidal
     all = streamAll tidal
@@ -38,11 +39,6 @@ let p = streamReplace tidal
     anticipate i = transition tidal True (Sound.Tidal.Transition.anticipate) i
     anticipateIn i t = transition tidal True (Sound.Tidal.Transition.anticipateIn t) i
     forId i t = transition tidal False (Sound.Tidal.Transition.mortalOverlay t) i
-    setI = streamSetI tidal
-    setF = streamSetF tidal
-    setS = streamSetS tidal
-    setR = streamSetI tidal
-    setB = streamSetB tidal
     d1 = p 1 . (|< orbit 0)
     d2 = p 2 . (|< orbit 1)
     d3 = p 3 . (|< orbit 2)
@@ -59,6 +55,14 @@ let p = streamReplace tidal
     d14 = p 14
     d15 = p 15
     d16 = p 16
+:}
+
+:{
+let setI = streamSetI tidal
+    setF = streamSetF tidal
+    setS = streamSetS tidal
+    setR = streamSetI tidal
+    setB = streamSetB tidal
 :}
 
 -- benjolis params
