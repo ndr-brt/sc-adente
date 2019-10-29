@@ -1,0 +1,18 @@
+let mar = markovPat 4 2 [[9,5,2,1], [4,5,3,5], [4,6,9,3], [4,1,14,7], [5,14,3,10]]
+
+d2
+  $ slow 2
+  $ juxBy (sine - 0.5) ((|+ octave 1).(fast 2))
+  $ superimpose (
+    (# octave 2)
+    .(slow 3)
+    .(every 4 (fast 2))
+    .(# n (scale "pelog" (fmap ([0, 3, 2, 5]!!) $ mar)))
+  )
+  $ n (scale "pelog" (fmap ([0, 2, 4, 6]!!) $ mar))
+  # s "superpiano"
+  # legato 1
+  # nudge 0.4
+  # octave 5
+
+d2 silence

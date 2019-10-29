@@ -1,7 +1,14 @@
 setcps(0.7)
 
 d1
-  -- $ striate' 64 (1 - (rand/5))
+  $ whenmod 8 5 (
+      superimpose (
+          (striate' 64 (1 - (rand/10)))
+          .(|* gain 0.6)
+          .(# speed 0.18)
+          .(# hp' 70 0.4)
+      )
+  )
   $ n (run (12))
   # s "msg"
   # hpf (range (irand 200 + 100) (irand 100 + 1000) $ slow 32 $ sine)
@@ -12,23 +19,6 @@ d1
   # lesl' 2 3 2.5
 
 d1 silence
-
-d2
-  $ every 2 (slow 2.5)
-  $ every 3 (jux (rev))
-  $ superimpose (
-      (|+ octave 5)
-      .(degradeBy 0.2)
-      .(0.5 ~>)
-      .(#gain 0.6)
-  )
-  $ n (scale "iwato" "{0 2 4}")
-  # s "supersaw supersquare*2 supergong?"
-  # room (rand)
-  # octave 2
-  # gain 0.8
-
-d2 silence
 
 d3
   $ jux (rev)
@@ -54,7 +44,7 @@ d4 silence
 
 d5
   $ striate' (8) (1)
-  $ n (run 8)
+  $ n (run 12)
   # s "kurt"
   # begin (range 0.1 0.4 $ perlin)
   # vowel "o e a"
@@ -65,21 +55,3 @@ d5
 d5 silence
 
 hush
-
-
-let mar = markovPat 4 2 [[9,5,2,1], [4,5,3,5], [4,6,9,3], [4,1,14,7], [5,14,3,10]]
-
-d1
-  $ slow 2
-  $ juxBy (sine - 0.5) ((|+ octave 1).(fast 2))
-  $ superimpose (
-    (# octave 2)
-    .(slow 3)
-    .(every 4 (fast 2))
-    .(# n (scale "pelog" (fmap ([0, 3, 2, 5]!!) $ mar)))
-  )
-  $ n (scale "pelog" (fmap ([0, 2, 4, 6]!!) $ mar))
-  # s "superpiano"
-  # legato 1
-  # nudge 0.4
-  # octave 5

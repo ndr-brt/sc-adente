@@ -12,6 +12,7 @@ do
       .(# comb 0.86) -- change THIS!
       .(# legato 25)
       .(# shape 0.44)
+      .(# orbit 0)
       ,
       degradeBy 0
       .(slow 4)
@@ -30,6 +31,7 @@ do
           .(#hp' 200 0.4)
         )
       )
+      .(#orbit 3)
       ,
       (degradeBy 0.76)
       .(|* speed (rand * 4 + 16))
@@ -38,17 +40,17 @@ do
       .(# gain 0.6)
       .(# rvb' 0.1 0.4)
       .(# pan rand)
+      .(# orbit 4)
     ]
     $ n "0"
     # s "sitar"
     # rvb' 0.13 0.45
     # gain 0.32
     # shape 0.23
-    -- # waveloss (trigger 1 $ range 0 100 $ slow 6 $ envL)
+    # orbit 0
+    # waveloss (trigger 1 $ range 0 100 $ slow 6 $ envL)
 
 d1 silence
-
--- xfadeIn 2 4
 
 do
   -- resetCycles;
@@ -64,18 +66,20 @@ do
     # gain 0.52
     # lpf 4000
     # rvb' 0.5 0.8
+    # orbit 1
   d3
+    $ degradeBy 0
     $ slow 4
     $ sometimesBy 0.01 ((ply 2).(0.1 ~>))
     $ sometimesBy 0.05 (fast 2)
     $ stut' 5 0.1 (
       (# lp' (range 700 1000 $ slow 16 $ tri) 0.15)
-      -- .(degradeBy 0.11)
     )
     $ s "ss*3 ~!12"
     # n "-8"
     # rvb' 0.73 0.82
     # gain 0.89
+    # orbit 2
 
 xfadeIn 1 6 $ silence
 
