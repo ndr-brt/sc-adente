@@ -1,3 +1,5 @@
-shape(6.0, 0.1, 0)
+shape([6.0, 3.0], 0.1, 0.8)
   .mult(osc(10).rotate(({time}) => time % 360))
+  .pixelate([163.4, 85.6, 1102.5], 175.9)
+  .scrollX(340.9, ({time}) => Math.sin(time*0.03)*0.03)
   .out()
