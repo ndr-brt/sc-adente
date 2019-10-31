@@ -1,0 +1,25 @@
+d1
+  $ superimpose (
+    (|* accelerate "12")
+    .(every 4 (# binshift 0.4))
+    .(rarely (|* speed 0.8))
+    .(stut 12 0.7 0.09)
+  )
+  $ juxBy 0.7 (
+    (# end 0.1)
+    .(plyWith 8
+      (
+        ((slow 5 $ sine/2) ~>)
+        .(# accelerate "-0.8")
+        .(# distort 0.2)
+      )
+    )
+  )
+  $ almostNever (chew 3 4)
+  $ sometimesBy 0.05 (bite 2 8)
+  $ every 3 (|* speed "-1")
+  -- $ stut' 2 0.6 (# pan 1)
+  $ "osc:3"
+  # crush (trigger 1 $ range 16 0 $ slow 16 $ envL)
+
+hush

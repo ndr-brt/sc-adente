@@ -1,6 +1,23 @@
 bpm (87)
 
 d1
+  $ n "0 ~ 2 3 2 0 ~ 0 ~ 3 2"
+  # s "goeysynth"
+  # sustain 0.5
+  # octave 2
+
+d2
+  $ every 2 (superimpose ((|+ octave 2).(0.1 ~>).(stut 5 0.6 0.03).(striate ("[5 70 120 500 165 6 2]"))))
+  $ n (segment 16 $ irand 14)
+  # s "plucking"
+  # octave 4
+  # ar' 0.001 1.6
+  # rmod' 0.99 (range 5 150 $ slow 2 $ sine) 0.5
+
+hush
+--
+
+d1
   $ juxBy (range 0.1 0.9 $ slow 13 $ cosine) (# octave 3)
   $ every 5 (# s "flute*6")
   $ whenmod 10 8 (|+| octave 1)
@@ -58,55 +75,5 @@ d4
   # distort 0.4
 
 d4 silence
-
-hush
-
-
--- implementascion
-
-d1
-  -- $ stut 7 0.4 0.2
-  $ juxBy (range 0.1 0.9 $ slow 16 $ saw) (|+ octave 1)
-  $ superimpose (
-    (# octave 8)
-    .(# gain 0.76)
-    .(# lpf 2000)
-    .(# n "<0 7 9 2>")
-    .(stut 2 0.3 0.1)
-  )
-  $ s "flute*4"
-  # n (scale "kumai" (irand 8))
-  # octave 1
-  # legato 4
-  # lpf (1400)
-
-d1 silence
-
-d2
-  $ slow 4
-  $ every 5 (swing 3)
-  $ whenmod 10 9 (iter 4)
-  $ every 9 (palindrome)
-  $ s "[kk*2 kk ~ ss ss?, hh(5,8)]"
-  # shape 0.4
-  # del' 0.55 0.34 0.21
-  # distort 0.7
-  # up "-2"
-  # rvb' 0.09 0.4
-
-d2 silence
-
-d3
-  $ stut' 3 0.24 ((# octave 7).(stut' 2 0.12 (# comb 0.1)))
-  $ s "spook2/6"
-  # octave 8
-  # n (choose [2, 6, 9])
-  # del' 0.43 0.23 0.18
-  # rvb' 0.2 0.6
-  # pan rand
-  # gain 0.8
-  # sustain 4
-
-d3 silence
 
 hush

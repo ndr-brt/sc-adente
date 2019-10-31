@@ -1,7 +1,5 @@
 bpm(80)
 
-hush
-
 d1
   $ stack [
     every 2 ((# crush 5).(striate "12 8 7 15").(juxBy 0.6 (rev)))
@@ -35,3 +33,5 @@ d1
       # rvb' 0.1 0.3
   ]
   # legato 2
+
+hush

@@ -1,0 +1,21 @@
+d1
+  $ superimpose (
+      (|* speed 12)
+      .(degradeBy 0.3)
+      .(0.60 ~>)
+      .(# del' 0.4 0.2 0.12)
+  )
+  $ juxBy (range "-0.5" "0.5" $ slow 7 $ square) (
+    (# end 0.1)
+    .(plyWith 16 (
+      (# lpf (range 1500 6000 $ saw))
+      .(# accelerate (range "-12" "9" $ (saw + square + cosine)/3)))
+    )
+  )
+  $ s "syntho:12*5"
+  # begin (slow 3 $ sine/2)
+  # loop 2
+  # scram 0.02
+  -- # crush (trigger 1 $ range 16 0 $ slow 16 $ envL)
+
+hush

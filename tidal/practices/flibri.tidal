@@ -1,0 +1,33 @@
+d1
+  $ n "[1,5,8]*16"
+  # s "superpiano"
+  # octave 6
+  # legato 2
+  # lp' (range 800 (range 1000 3000 $ slow 32 $ saw) $ cosine) (range 0 0.2 $ sine)
+
+d2
+  $ fast (6)
+  $ juxBy 0.3 ((# n 1).(0.03 ~>))
+  $ every 5 ((bite 3 2).(|- n 3))
+  $ every 7 ((chew 2 5).(|+ n 3))
+  $ superimpose (
+    (# n 8).(slow 3).(|+ octave 1).(sometimes (stut 3 0.6 0.15))
+  )
+  $ s "superpiano"
+  # n 5
+  # octave 2
+  # legato 2
+
+do
+  let mar = markovPat 12 2 [[9,5,2,1], [4,5,3,5], [4,6,12,3], [4,2,14,7], [5,14,3,10]]
+  d3
+    $ degradeBy 0.2
+    $ rarely (plyWith 6 (0.2 ~>))
+    $ jux (0.04 ~>)
+    $ n (scale "hexSus" (fmap ([2, 4, 8, 5]!!) $ mar))
+    # s "superpiano"
+    # legato 2
+    # octave 4
+    # rvb' 0.1 0.3
+
+hush

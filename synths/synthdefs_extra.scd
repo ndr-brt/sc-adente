@@ -156,7 +156,7 @@ SynthDef(\babbl, { |out=0, amp=0.1, pan=0.0|
 	OffsetOut.ar(out, DirtPan.ar(son * (amp * 20), ~dirt.numChannels, pan))
 }).add;
 
-SynthDef(\bd, { | out=0, pan=0.0, freq=440 |
+SynthDef(\bbdd, { | out=0, pan=0.0, freq=440 |
 	var osc = FSinOsc.ar(freq);
 	var env = EnvGen.ar(Env.perc(0, 0.55), doneAction: 2);
 
