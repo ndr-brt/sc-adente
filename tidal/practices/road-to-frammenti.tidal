@@ -1,25 +1,71 @@
+bpm(113)
+
+-- prattino
+d1
+  $ every 3 (chew 3 4)
+  $ superimpose (
+      (# accelerate "15")
+      .(|* speed 0.5)
+      .((range 0.5 4 $ slow 4 $ sine) ~>)
+      .(|+ n "3")
+      .(# scram 0.3)
+  )
+  $ every 4 (iter 3)
+  $ rarely (stut 6 0.6 0.18)
+  $ n "[[1,8,13] 14 ~!3 [0,17,12], ~!4 7*2 22*3?]"
+  # s "stab"
+  # hp' 60 0.3
+  # crush (trigger 1 $ range 16 0 $ slow 32 $ envL)
+
+d2
+  -- $ rarely (ply 3)
+  $ superimpose (
+    (# octave 2)
+    .(slow 2)
+  )
+  $ euclid (choose [3,5]) 6
+  $ rarely (|+ n "3")
+  $ n "[[1,5,8],[4,8,11]]"
+  # s "superpiano"
+  # gain 0.8
+  # octave 4
+  # waveloss 99
+
+d2 silence
+
+d3
+  $ gap 4
+  $ juxBy (range "-1" "1" $ slow 4 $ perlin)
+    ((rev).(2.99 ~>))
+  $ plyWith 6 ((|* speed 3).(# scram 0.5))
+  $ scramble (run 7)
+  $ brak
+  $ n "3*6"
+  # s "osc"
+  # speed (range 2 12 $ slow 2 $ saw)
+  # accelerate (range "-1" "1" $ slow 2 isaw)
+  # del' "[0 0.43 0.88]" 0.31 0.12
+  # waveloss (trigger 3 $ range 0 100 $ slow 20 $ envL)
+
+hush
+
+
+-- carizzatide (sssplode)
 d1
   $ superimpose (
-    (|* accelerate "12")
-    .(every 4 (# binshift 0.4))
-    .(rarely (|* speed 0.8))
-    .(stut 12 0.7 0.09)
+      (fast 6)
+      .(|* speed (((irand 13)+7)*3))
+      .(degradeBy 0.6)
+      .(# pan rand)
+      .(#del' 0.39 0.21 0.12)
+      .(sometimes (#freeze 1))
   )
-  $ juxBy 0.7 (
-    (# end 0.1)
-    .(plyWith 8
-      (
-        ((slow 5 $ sine/2) ~>)
-        .(# accelerate "-0.8")
-        .(# distort 0.2)
-      )
-    )
-  )
-  $ almostNever (chew 3 4)
-  $ sometimesBy 0.05 (bite 2 8)
-  $ every 3 (|* speed "-1")
-  -- $ stut' 2 0.6 (# pan 1)
-  $ "osc:3"
-  # crush (trigger 1 $ range 16 0 $ slow 16 $ envL)
+  $ rarely (iter 3)
+  $ every 3 (chew 3 6)
+  $ almostNever (# crush 3)
+  $ sometimes (striate 6)
+  $ n "[0*3, [12/3] [15 ~]*2 [17 21]*3 23, 10*7?]"
+  # s "stab"
+  # pan "[0,-0.6,0.6]"
 
 hush
