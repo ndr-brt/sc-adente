@@ -1,0 +1,22 @@
+bpm(170)
+
+-- xfadeIn 1 4
+d1
+  $ juxBy 0.3 (|* speed 0.8)
+  $ rarely ((chew 3 4).(stut 4 0.5 0.1))
+  $ almostNever (
+      superimpose (
+        (|* speed 27)
+        .(ply (run 8 * 8))
+        .(# rvb' 0.1 0.2)
+        .(# comb 0.3)
+      )
+  )
+  $ striate' 32 (range 0.93 0.99 $ rand)
+  $ s "battles:3"
+  # lp' (range 1000 5000 $ slow 43 $ (tri+saw)/2) (range 0.0 0.2 $ rand)
+  # gain 0.6
+
+xfadeIn 1 16 $ silence
+
+hush

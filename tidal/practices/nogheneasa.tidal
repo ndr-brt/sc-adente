@@ -1,0 +1,71 @@
+bpm(180)
+
+d1
+  $ rot "0 0 2 4 4"
+  $ jux ((|/ sustain 4).(ply 5))
+  $ slow 4
+  $ n "c2 as2 f2"
+  # s "supersaw"
+  # pitch2 (range 1 12 $ slow 4 $ sine)
+  # vowel "e o o u"
+
+d2
+  $ slow 2
+  $ cat [
+    every 3 (slow 2.4)
+      $ every 5 (rev)
+      $ sound "industrial industrial odx? incoming"
+      # rvb' 0.5 0.4
+      # speed 0.8
+    ,
+    s "bottle . bottle*2 ~"
+      # speed 1
+      # delay "[1 0 1 0]"
+    ,
+    euclid 12 16
+      $ s "rs"
+      # speed 0.75
+      # rvb' 0.8 0.6
+      # resonance 0.9
+    ,
+    every 2 (fast 3)
+      $ sound "realclaps*5?"
+      # n (irand 5)
+      # speed (slow 2 $ sine)
+      # orbit 2
+      # rvb' 0.1 (tri)
+  ]
+  # orbit 1
+  # pan (slow 8 $ tri)
+
+d3
+  $ slow 2
+  $ juxBy 0.7 rev
+  $ chunk 4 (fast 2 . (|- n 12))
+  $ off 0.25 (|+ 7)
+  $ struct (iter 4 "t(5,8)")
+  $ n (scale "ritusen" "0 .. 7")
+  # s "superpiano"
+  # waveloss 32
+  # crush (run 17)
+
+d4
+  $ sometimes (rot (irand 4 - 2))
+  $ n (scale "marva" (reven 8))
+  # s "supergrind"
+  # room 0.3
+  # comb 0.6
+  # binshift (range 0.3 0.8 $ slow 4 cosine)
+  # del' 0.5 0.9 0.1
+
+d5
+  $ every 4 ((zoom (0.25, 0.75).(# del' 0.66 0.11 0.09)))
+  $ n "2*8 [3,7]*9 [5*8 ~] [3,7]?"
+  # s "superzow"
+  # octave 4
+  |/ n (range 0.8 1.6 $ rand)
+  # detune (run 8)
+  # room (range 0 0.4 $ sine)
+  # lpf (range 1100 2100 $ slow 2 $ saw)
+
+hush
