@@ -77,4 +77,15 @@ d1
 
 d1 $ silence
 
+-- spasmodiocan
+
+d1
+  $ every 4 (iter 2)
+  $ every 6 (shuffle 2)
+  $ rarely (brak)
+  $ s "[kk kk*2 [~ ss]*2, hh(5,8)]"
+  # del' 0.12 0.1 "0 0.5"
+  # rvb' "0.2 0.04" "0.41 0.1"
+  # distort "0.6"
+
 hush

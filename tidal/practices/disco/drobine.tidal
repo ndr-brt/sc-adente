@@ -6,12 +6,12 @@ once
   # smear 0.1
   # distort 0.05
   # gain 0.95
-  # orbit 2
+  # orbit 3
 
 do
-  -- resetCycles;
-  -- clutchIn 2 8
-  d2
+  resetCycles;
+  clutchIn 2 8
+  -- d2
     $ every 4 (iter 4)
     $ rarely (ply 2)
     $ almostNever (stutWith 8 0.06 (# pan (perlin)))
@@ -39,7 +39,7 @@ do
     $ s "[kk ~ ss [~ ss?], hhat(3,4)]"
     # gain 0.79
     # orbit 0
-    # crush 1
+    -- # crush 1
 
 do
   -- clutchIn 2 6 $ silence
@@ -48,7 +48,7 @@ do
     $ layer [
       id
       .(whenmod 12 8 (#rmod' 0.9 (range 2 15 $ slow 15 $ sine) 0.7))
-      .(rarely (|+ n "2"))
+      .(rarely (|+ n "3"))
       .(juxBy (slow 4 $ sine/2 + 0.25) (# up "3"))
       .(# octave 2)
       .(# lp' (range 1400 3400 $ slow 24 $ (cosine+saw)/2) (range 0.05 0.3 $ slow 18 $ (square+isaw)/2))
@@ -56,30 +56,28 @@ do
       .(# gain 0.9)
       .(# legato 4)
       .(# distort 0.05)
-      -- .(# crush 3)
+      .(# orbit 2)
+      -- .(# crush 12)
       ,
       id
-      .(whenmod 6 4 $ degradeBy 1)
-      .(rarely (degradeBy 0.3))
-      .(often (ply 3))
-      .(sometimes (stut 7 0.9 0.13))
-      -- .(stut 4 0.5 0.1)
-      .(every 4 (brak))
+      -- .(degradeBy 1)
       .(# octave 11)
-      .(# n "<0 0 0 0 0 3 3>")
-      .(# ar' 0.001 1.82)
+      .(# n "<0 0 0 0 0 3 8>")
+      .(# ar' 0.001 0.82)
+      .(# del' 0.89 0.60 0.89)
+      -- .(# lp' 3900 0.3)
+      .(stut' 6 0.09 (# lp' 3800 0.23))
       .(0.17 <~)
-      .(# rmod' 0.8 (range 2 180 $ slow 8 $ saw) 0.7)
-      .(# distort 0.90)
-      .(# gain 0.85)
+      .(# rmod' 0.8 (range 2 100 $ slow 8 $ saw) 0.8)
+      .(# shape 0.79)
       .(# pan (slow 8 $ sine))
-      .(# lp' 3000 0.5)
+      .(# legato 3)
+      .(# orbit 1)
     ]
     $ s "gfreeze"
     # rvb' 0.4 0.9
-    # waveloss 20
-    # orbit 1
-    # crush 1
+    -- # waveloss 20
+    -- # crush 1
 
 d1 silence
 d2 silence

@@ -1,20 +1,20 @@
 
 d1
-    $ stut' 4 0.25 (#speed (slow 8 $ sine))
+    $ stut' 4 0.25 (#speed (slow 8 $ (sine/2) + 0.5))
     $ every 8 (off 0.25 ( 0.125 ~>))
     $ within (0, 1.25) (fast 4)
-    $ jux (#up 4)
+    $ jux (# up 4)
     $ slow 2
     $ foldEvery[8, 16, 24] (rev)
     $ chop (choose [50, 4, 6, 8, 10, 12]*2)
     $ s "percuo"
-    # lpf (range 80 3000 $ slow 2 $ sine )
-    # resonance 0.4
+    # lp' (range 1000 3000 $ slow 2 $ sine) 0.2
+    # hp' 80 0
+    # gain 0.50
+    # orbit 0
 
-hush
-
-d1
-    $ n (fromIntegral <$> markovPat 4 3 [
+d2
+    $ n (fromIntegral <$> markovPat 6 3 [
         [0.25, 0.45, 0.3],
         [0.3, 0, 0.7],
         [0.7, 0.3, 0],
@@ -22,54 +22,22 @@ d1
     ])
     # s "plucking"
     # legato 2
-    # room 0.2
-    # size 0.8
+    # rvb' 0.2 0.8
+    # del' 0.34 0.23 0.33
+    # gain 0.63
+    # orbit 1
 
-    # delay 0.34
-    # delayt 0.23
-    # delayfb 0.33
-
-hush
-
-d2
+d3
     $ slow 2
     $ stack [
         struct (binary "19") $ s "kick_oto309",
-        struct (binary "79") $ s "hihat" # gain 0.8,
-        struct (binary "121") $ s "snare_stein"
+        struct (binary "79") $ s "hhat" # gain 0.8,
+        struct (binary "121") $ s "snare"
     ]
-    # nudge 0.4
 
-d2 silence
+d3 silence
 
-d2
-$ s "benjolis"
-# oscA "400"
-# oscB "25"
-# runB 0.9
-# runA (range 0 1 $ slow 8 $ sine)
-# runF (range 0 1 $ slow 8 $ cosine)
-# gain 0.9
-# loop 45
-# res 0.6
-# offset 0.4
-# freq (range 80 160 $ slow 16 $ cosine)
-# lp' 1200 0.01
-# n 8
-# legato 2
-
-
--- marunn che flou
-
-d1
-  $ every 4 (iter 2)
-  $ every 6 (shuffle 2)
-  $ rarely (brak)
-  $ s "[kk kk*2 [~ ss]*2, hh(5,8)]"
-  # del' 0.12 0.1 "0 0.5"
-  # rvb' "0.2 0.04" "0.41 0.1"
-  # distort "0.6"
-  # nudge 0.4
+hush
 
 
 d1
