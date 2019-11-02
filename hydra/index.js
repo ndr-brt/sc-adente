@@ -4,8 +4,8 @@ const loop = require('raf-loop')
 function init () {
   const canvas = document.createElement('canvas')
   canvas.style.backgroundColor = "#000"
-  canvas.width = 1024
-  canvas.height = 768
+  canvas.width = 1280
+  canvas.height = 800
   canvas.style.width = '100%'
   canvas.style.height = '100%'
 
@@ -23,10 +23,14 @@ function init () {
   a.setScale(1)
   a.setBins(6)
 
-  voronoi(4, 1.8)
-    .modulate(noise(()=> a.fft[1]*110 + 0.01).scale(5,0.1))
-    .rotate(1.57, 0.0)
-    .thresh(0.3)
+  s0.initCam()
+
+  src(s0)
+    .blend(
+      voronoi(4, 1.8)
+        .rotate(0.8)
+    )
+    .modulate(noise(() => a.fft[1] + 0.01).scale(5,0.1))
     .out(o1)
 
   src(o1)
@@ -46,6 +50,7 @@ function init () {
       .rotate(0.8), -0.3)
       .out()
 
+// prints o0 o1 o2 o3
 // render()
 
   loop((dt) => {
