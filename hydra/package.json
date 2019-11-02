@@ -1,0 +1,16 @@
+{
+  "name": "sc-hydra",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "budo ./index.js:bundle.js --css ./style.css --open --live --port 8000-- -t [ babelify --presets [env] ]"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "budo": "^11.6.3",
+    "hydra-synth": "^1.0.25",
+    "raf-loop": "^1.1.3"
+  }
+}
