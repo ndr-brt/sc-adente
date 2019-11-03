@@ -1,3 +1,5 @@
+setcps(1)
+
 d1
   $ juxBy 0.4 ((range 0.01 0.05 $ slow 7 $ cosine) ~>)
   $ slow 4

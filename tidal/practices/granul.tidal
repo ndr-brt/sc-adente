@@ -96,11 +96,3 @@ d4
 d4 silence
 
 hush
-
-
-d1
-  $ loopAt "0.1"
-  $ s "crzydrn"
-  # lp' (range 200 800 $ slow 32 $ sine) 0.1
-
-hush

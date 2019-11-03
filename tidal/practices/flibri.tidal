@@ -1,3 +1,5 @@
+bpm (80)
+
 d1
   $ n "[1,5,8]*16"
   # s "superpiano"

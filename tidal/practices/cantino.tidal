@@ -1,3 +1,5 @@
+setcps(0.5)
+
 d1
   $ superimpose (
       (|* speed 12)

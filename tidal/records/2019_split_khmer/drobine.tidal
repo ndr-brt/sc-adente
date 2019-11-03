@@ -9,7 +9,7 @@ once
   # orbit 3
 
 do
-  resetCycles;
+  resetCycles
   clutchIn 2 8
   -- d2
     $ every 4 (iter 4)
@@ -42,8 +42,8 @@ do
     -- # crush 1
 
 do
-  -- clutchIn 2 6 $ silence
-  -- xfadeIn 1 6
+  -- clutchIn 2 8 $ silence
+  -- xfadeIn 1 7
   d1
     $ layer [
       id
@@ -57,16 +57,15 @@ do
       .(# legato 4)
       .(# distort 0.05)
       .(# orbit 2)
-      -- .(# crush 12)
+      -- .(# crush 9)
       ,
       id
       -- .(degradeBy 1)
       .(# octave 11)
       .(# n "<0 0 0 0 0 3 8>")
       .(# ar' 0.001 0.82)
-      .(# del' 0.89 0.60 0.89)
-      -- .(# lp' 3900 0.3)
-      .(stut' 6 0.09 (# lp' 3800 0.23))
+      .(# del' 0.99 0.60 0.79)
+      .(stut' 1 0.09 (# lp' 3800 0.89))
       .(0.17 <~)
       .(# rmod' 0.8 (range 2 100 $ slow 8 $ saw) 0.8)
       .(# shape 0.79)
@@ -76,11 +75,6 @@ do
     ]
     $ s "gfreeze"
     # rvb' 0.4 0.9
-    -- # waveloss 20
     -- # crush 1
-
-d1 silence
-d2 silence
-clutchIn 2 4 $ silence
 
 hush

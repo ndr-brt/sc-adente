@@ -25,6 +25,7 @@ d1
   ]
   $ s "plucking"
   # rvb' 0.3 0.5
+  # gain 0.8
 
 d2
   $ every 3 ((iter 3).(ply 3))
@@ -34,13 +35,14 @@ d2
   # n "-3"
   # rvb' 0.2 0.5
   # hp' 40 0.4
+  # gain 0.84
 
 d2 silence
 
 d3
   $ (0.02 <~)
   $ s "~ pitchednoise/2"
-  # gain 1.65
+  # gain 1.45
   # shape 0.3
   # ar' 0.001 1.5
   # rvb' 0.4 0.5
@@ -55,5 +57,6 @@ d4
   # shape 0.35
   # n (range 10 13 $ rand)
   # pan "[0 1 0.4 0.7]"
+  # gain 0.8
 
 hush
