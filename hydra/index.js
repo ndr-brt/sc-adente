@@ -23,32 +23,22 @@ function init () {
   a.setScale(1)
   a.setBins(6)
 
-  s0.initCam()
-
-  src(s0)
+  osc(100)
     .blend(
-      voronoi(4, 1.8)
-        .rotate(0.8)
+      shape(3, () => a.fft[2] * 6.28, a.fft[3]/3)
+        .rotate(({time})=>Math.sin(time/5)*0.5)
     )
     .modulate(noise(() => a.fft[1] + 0.01).scale(5,0.1))
-    .out(o1)
-
-  src(o1)
     .mult(
-      osc(1, 0.12)
-      .rotate(1.58))
-    .out(o2)
-
-  src(o2)
-    .modulateRotate(o3, 2)
-    .out(o3)
-
-  src(o3)
-    .scale(2.2)
+      osc(1, 0.12, 0.2)
+      .rotate(a.fft[3]*360)
+    )
+    .scale(() => a.fft[2] / 2)
     .modulateRotate(
-      osc(2000, -0.02)
-      .rotate(0.8), -0.3)
-      .out()
+      osc(2000, -0.02).rotate(() => a.fft[4]*360), 
+      -0.3
+    )
+    .out()
 
 // prints o0 o1 o2 o3
 // render()
