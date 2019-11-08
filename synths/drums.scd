@@ -14,9 +14,9 @@ SynthDef(\kk, { |out=0, amp, pan, distort=0.3, n, attack=0.0001, release=0.09, a
 	OffsetOut.ar(out, DirtPan.ar(sound, ~dirt.numChannels, pan, env));
 }).add;
 
-SynthDef(\ss, { |out=0, amp, pan, attack=0.0005, release=0.2, freq|
+SynthDef(\ss, { |out=0, amp, pan, attack=0.0005, release=0.2, freq, speed=1|
 	var filtWhite = LPF.ar(WhiteNoise.ar(amp*4), freq*16);
-	var env = EnvGen.ar(Env.perc(attack, release), doneAction: 2);
+	var env = EnvGen.ar(Env.perc(attack/speed, release/speed), doneAction: 2);
 	var snare =
 	    (SinOsc.ar(30,0,0.25) * EnvGen.ar(Env.perc(attack,0.055))) +
 	    (SinOsc.ar(285,0,0.25) * EnvGen.ar(Env.perc(attack,0.075))) +
