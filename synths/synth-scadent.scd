@@ -88,4 +88,33 @@ SynthDef(\zonta, { |out = 0, speed = 1, freq = 440, pan=0, detune=0, amp = 0.5, 
 	OffsetOut.ar(out, DirtPan.ar(sig * amp, ~dirt.numChannels, pan, env));
 }).add;
 
+SynthDef(\pingz, { |out,pan,freq=440,attack=0.00001,release=0.2|
+	var env = EnvGen.ar(Env.perc(attack, release), doneAction:2);
+	var signal = Resonz.ar(env, freq, 0.99);
+
+	OffsetOut.ar(out, DirtPan.ar(signal * 2 , ~dirt.numChannels, pan));
+}).add;
+
+SynthDef(\pingm, { |out,pan,freq=440,attack=0.00001,release=0.2|
+	var env = EnvGen.ar(Env.perc(attack, release), doneAction:2);
+	var signal = MoogLadder.ar(env, freq, 0.99);
+
+	OffsetOut.ar(out, DirtPan.ar(signal*2, ~dirt.numChannels, pan));
+}).add;
+
+SynthDef(\pingr, { |out,pan,freq=440,attack=0.00001,release=0.2|
+	var env = EnvGen.ar(Env.perc(attack, release), doneAction:2);
+	var signal = RLPFD.ar(env, freq, 0.99, 0.4);
+
+	OffsetOut.ar(out, DirtPan.ar(signal*2, ~dirt.numChannels, pan));
+}).add;
+
+SynthDef(\pings, { |out,pan,freq=440,attack=0.00001,release=0.2|
+	var env = EnvGen.ar(Env.perc(attack, release), doneAction:2);
+	var signal = Streson.ar(env, 1/freq, 0.99, 0.4);
+
+	OffsetOut.ar(out, DirtPan.ar(signal/5, ~dirt.numChannels, pan));
+}).add;
+
+
 )

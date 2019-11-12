@@ -1,0 +1,40 @@
+bpm(80)
+
+d1
+  $ whenmod 10 8 (linger 0.25)
+  $ stack [
+    s "[ss ss@3]*4",
+    euclid 20 8 $ s "hhat"
+  ]
+  # shape 0.3
+  # rvb' 0.2 0.7
+
+d2
+  $ every 5 (|+ n "5")
+  $ superimpose (
+      (|+ octave 3)
+      .(0.25 ~>)
+      .(# lp' 3000 0.1)
+      .(# orbit 6)
+  )
+  $ n "0 3/2"
+  # s "supergrind"
+  # octave 3
+  # ar' 0.3 0.9
+  # del' 0.99 0.66 0.40
+  # hp' 50 0.4
+  -- # oct' 0.7 0.8 0.6
+
+d3
+  $ superimpose (
+    (# octave 4)
+    .(3 ~>)
+    .(rarely (iter 5))
+  )
+  $ ply 4
+  $ n "[0 0 3 0]*4"
+  # s "superchip"
+  # octave 7
+  # lp' 3000 0.1
+  # ar' 0.01 0.4
+  # nudge (range 0 1 $ slow 2 sine)

@@ -1,43 +1,44 @@
 setcps(0.5)
 
-let synths = ["superwavemechanics", "superpiano", "supergrind", "superprimes", "superzow", "supervibe", "superpwm", "supergong"]
-
-d1
-  $ layer [
-    id
-    .(rarely (# scram 0.2))
-    ,
-    id
-    .(# s (segment 1 $ choose synths))
-    .(# octave 1)
-    .(juxBy (range "-1" "1" $ slow 8 $ tri) (# octave 2))
-    .(3 ~>)
-    .(# accelerate "0.5")
-    .(# n 0)
-    .(# pan 0)
-    .(# oct' 0.8 0.8 0.8)
-    .(# hp' 50 0.6)
-    ,
-    id
-    .(# s (segment 1 $ choose synths))
-    .(degradeBy 0.5)
-    .(# octave 10)
-    .(# distort 0.4)
-    -- .(# shape 0.9)
-  ]
-  $ n 32
-  # s (segment 1 $ choose synths)
-  # octave 4
-  # legato 4
-  # accelerate (slow 12 $ cosine*2 - 1)
-  # speed (slow 8 $ sine*4 + 0.5)
-  # n (range "-12" "12" $ slow 40 $ rand)
-  # binshift (range 0.1 0.7 $ slow 16 $ isaw)
-  # waveloss (range 0 40 $ slow 24 $ tri)
-  # pan (tri/2 + 0.25)
-  # del' 0.9 0.52 0.34
-  -- # rmod' (range 0 1 $ slow 24 $ cosine) (range 2 25 $ slow 18 $ tri) (range 0 1 $ slow 28 $ sine)
-  # rvb' 0.6 0.9
-  # gain 0.6
+do
+  let synths = ["superwavemechanics", "superpiano", "supergrind", "superprimes", "superzow", "supervibe", "superpwm", "supergong"]
+  d1
+    $ layer [
+      id
+      .(rarely (# scram 0.2))
+      .(# s (segment 1 $ choose synths))
+      .(# octave 4)
+      ,
+      id
+      .(# s (segment 1 $ choose synths))
+      .(# octave 1)
+      .(juxBy (range "-1" "1" $ slow 8 $ tri) (# octave 2))
+      .(3 ~>)
+      .(# accelerate "0.5")
+      .(# n 0)
+      .(# pan 0)
+      .(# oct' 0.8 0.8 0.8)
+      .(# hp' 50 0.6)
+      .(# lp' (range 400 2000 $ slow 32 $ (sine+tri)/2) (range 0 0.2 $ rand))
+      ,
+      id
+      .(# s (segment 1 $ choose synths))
+      .(degradeBy 0.5)
+      .(# octave 10)
+      .(# distort 0.4)
+      -- .(# shape 0.9)
+    ]
+    $ almostNever (# rmod' (range 0 1 $ slow 24 $ cosine) (range 2 25 $ slow 18 $ tri) (range 0 1 $ slow 28 $ sine))
+    $ n (segment 1 $ run 32)
+    # legato 6
+    # accelerate (slow 12 $ cosine*2 - 1)
+    # speed (slow 8 $ sine*4 + 0.5)
+    # n (range "-12" "12" $ slow 40 $ rand)
+    # binshift (range 0.1 0.7 $ slow 16 $ isaw)
+    # waveloss (range 0 40 $ slow 24 $ tri)
+    # pan (tri/2 + 0.25)
+    # del' (rand-0.1) ((rand-0.1)/2) ((rand-0.1)/2)
+    # rvb' 0.6 0.9
+    # gain 0.33
 
 hush
