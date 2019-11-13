@@ -1,13 +1,15 @@
 bpm (120)
 
 do
- resetCycles;
- xfadeIn 1 8
+  resetCycles;
+  xfadeIn 1 8
   -- d1
     $ slow 2
     $ rarely (iter 4)
     $ every 4 (rev)
+    $ every 7 (linger 0.2)
     $ every 8 (fast 2)
+    $ every 9 (bite 3 5)
     $ sometimes (plyWith 2 (# hp' (range 1000 3000 $ slow 10 (square + isaw)/2) 0.2))
     $ almostNever (ply 3)
     $ superimpose (
@@ -19,11 +21,11 @@ do
     )
     $ s "incoming? incoming*4 hoover*3"
     # pan "[0.2,0.5,0.8]"
-    # rvb' 0.7 0.8
+    # rvb' 0.6 0.75
     # speed ((perlin + 1) / (range 1.2 2.4 $ slow 14 $ (tri+cosine)/2))
-    # del' 0.79 0.23 0.12
+    # del' (slow 8 sine) 0.23 0.12
     # sdel' (range 100 200 $ slow 31 $ saw) (choose [140, 200, 240])
-    # scram (range 0 0.4 $ slow 80 $ cosine)
+    # scram (range 0 0.2 $ slow 80 $ cosine)
     # oct' 0.5 0.7 0.95
     # hp' 80 0.3
     # gain 0.60

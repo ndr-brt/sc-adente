@@ -11,7 +11,7 @@ do
     # gain 0.67
     # hp' 60 0.2
     # orbit 0
-   # waveloss (trigger 1 $ range 0 100 $ slow 10 $ envL)
+    # waveloss (trigger 1 $ range 0 100 $ slow 10 $ envL)
 
 d1 silence
 

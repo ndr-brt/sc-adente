@@ -1,10 +1,13 @@
 bpm(120)
 
 do
-  -- resetCycles
+  resetCycles
   d1
-    $ whenmod 12 8 (# n "0 ~ ~ 2 6 8")
-    $ n "0 ~ 0 4 ~ 8"
+    -- $ degradeBy 1
+    $ whenmod 6 4 (striate (segment 1 $ run 4 + 2))
+    $ rarely (|+ n "3")
+    $ whenmod 12 8 (slow 4)
+    $ n "[0|3] ~ [7 0]*2 ~ 7"
     # s "uou"
     # hold "0.8"
     # distort 0.4
@@ -12,34 +15,43 @@ do
     # octave 4
     # gain 0.8
     # lp' 2400 0.1
-
-d2
-  $ whenmod 8 4 (# distort 0.2)
-  $ rarely (|- octave "1")
-  $ almostNever (|- octave "2")
-  $ s "uou*32"
-  # n 12
-  # octave 9
-  # ar' 0.4 0.4
-  # rvb' 0.4 0.6
-  # gain 0.8
-
-d3
-  $ every 4 ((zoom (0.25, 0.75)).(fast 2).(ply 3))
-  $ sometimes (brak.rev)
-  $ rarely (# crush 2)
-  $ s "[ss*2 kk ss kk*2, hhat(14,16)]"
-  # n (quantise 1 $ irand 6 - 3)
-  # shape 0.6
-  # crush 5
-  # hp' 50 0.4
-  # gain 0.76
-  # hp' 50 0.4
+    # orbit 0
+  d2
+    $ whenmod 8 4 (# distort 0.2)
+    $ rarely (|- octave "1")
+    $ sometimesBy (perlin) (|- octave "2")
+    $ every 9 (degradeBy 0.6)
+    $ s "uou*32"
+    # n 12
+    # octave 9
+    # distort (rand/2)
+    # ar' 0.4 0.4
+    # rvb' 0.8 0.9
+    # gain 0.7
+    # pan (slow 2 $ cosine)
+    # orbit 1
+  d3
+    -- $ degradeBy 1
+    $ every 4 ((zoom (0.25, 0.75)).(fast 2).(ply 3))
+    $ whenmod 12 8 (slow 4)
+    $ sometimes (brak.rev)
+    $ rarely (# crush 2)
+    $ s "[ss*2 kk ss kk*2, hhat(14,16)]"
+    # n (quantise 1 $ irand 6 - 3)
+    # shape 0.6
+    # crush 5
+    # hp' 50 0.4
+    # gain 0.76
+    # orbit 2
 
 do
+  -- mute 1
   unmute 1
   unmute 2
+  -- mute 2
   unmute 3
+  -- mute 3
 
+all $ (# waveloss 100)
 
 hush

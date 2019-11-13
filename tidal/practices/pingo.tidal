@@ -2,7 +2,7 @@ d1
   $ fast 2
   $ jux (rev.(|- n 3))
   $ n (scale "enigmatic" "8 2 ~ 5*2 9 ~ 1 0")
-  # s "pings"
+  # s "pingr"
   # octave 6
   # rvb' 0.5 0.9
   # distort 0.82

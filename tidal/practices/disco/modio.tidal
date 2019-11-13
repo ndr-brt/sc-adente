@@ -8,6 +8,7 @@ d1
   # rvb' 0.15 0.23
   # hp' 4000 0.2
   # gain 0.60
+  # orbit 0
 
 xfadeIn 2 8
   $ loopAt 2
@@ -19,22 +20,28 @@ xfadeIn 2 8
   # binshift "<0.4 0.6 0.8 0.2>"
   # del' 0.7 0.34 0.21
   # pan (perlin)
-  # gain 0.55
+  # gain 0.57
+  # orbit 1
 
-d3
-  $ loopAt 8
-  $ superimpose (
-    (0.1 ~>)
-    .(# pan rand)
-    .(# accelerate (irand 8 - 4))
-  )
-  $ sometimes (chop 4)
-  $ rarely (# waveloss 23)
-  $ every 8 (# crush 6)
-  $ s "modem"
-  # bpf 1000
-  # distort 0.6
-  # gain 0.7
+do
+  resetCycles
+  -- d3
+  xfadeIn 3 4
+    $ loopAt 8
+    $ superimpose (
+      (0.1 ~>)
+      .(# pan rand)
+      .(# accelerate (irand 8 - 4))
+    )
+    $ sometimes (chop 4)
+    $ rarely (# waveloss 23)
+    $ every 8 (# crush 6)
+    $ s "modem"
+    # bpf 1000
+    # distort 0.6
+    # comb 0.24
+    # gain 0.72
+    # orbit 2
 
 d4
   $ striate' 32 (0.9)
@@ -42,31 +49,32 @@ d4
   $ s "modem"
   # oct' 0.7 0.6 0.9
   # lpf 600
-  # gain 0.7
+  # gain 0.67
+  # orbit 3
 
 d5
 -- xfadeIn 5 16
   $ slice 32 "[0..32]"
   $ loopAt 32
   $ s "modem"
-  # hp' 50 0.4
+  # hp' 50 0.5
   # shape 0.3
+  # lp' (range 400 2000 $ slow 10 $ perlin) (range 0.2 0.6 $ slow 5 $ cosine)
   # gain 0.65
-
-d6
-  -- $ slow 2
-  -- $ slow 3
-  -- $ slow 4
+  # orbit 4
 
 once $ s "modem"
   # rvb' 0.1 0.6
   # gain 0.8
+  # orbit 5
 
 d1 silence
 d2 silence
 d3 silence
 d4 silence
-d5 silence
+xfadeIn 5 8 $ silence
 d6 silence
+
+
 
 hush
