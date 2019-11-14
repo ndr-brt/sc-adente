@@ -1,0 +1,43 @@
+d1
+  $ superimpose (
+      (|- octave 2)
+  )
+  $ juxBy 0.4 (
+    (# octave 6)
+    .(|/ n "1.3333")
+    .(# lp' 1800 0.1)
+    .(0.3333 ~>)
+    .(sometimesBy (range 0 1 $ slow 18 $ tri) (# release 0.1))
+    -- .(# distort 0.8)
+  )
+  $ n (segment 32 $ range "0" "1" $ slow 8 $ sine)
+  # s "pulsa"
+  # octave 5
+  # legato 2
+  # rvb' 0.4 0.7
+  # gain 0.85
+
+d2
+  $ slow 2
+  $ every 2 (ply 3)
+  $ every 3 (swing 3)
+  $ every 5 (brak)
+  $ rarely (stut (irand 5) 0.6 0.1)
+  $ s "pingm"
+  # n (segment 4 $ choose [0, 3, 4, 8])
+  # octave 8
+  # rvb' 0.9 0.9
+
+d3
+  -- $ ((range 0.2 1.4 $ slow 4 sine) ~>)
+  -- $ gap (segment 1 $ run 16)
+  $ rarely (superimpose ((# accelerate "-0.5").(stutWith 5 0.12 (# speed (range "1.5" "3" $ rand))).(0.3 ~>)))
+  $ rarely (stut 5 0.4 0.1)
+  $ every (run 8) (euclid 3 5)
+  $ s "censor:0"
+  # rvb' 0.8 0.8
+  # end 0.44
+  # lp' 2800 0.1
+  # gain 0.7
+
+hush

@@ -116,5 +116,15 @@ SynthDef(\pings, { |out,pan,freq=440,attack=0.00001,release=0.2|
 	OffsetOut.ar(out, DirtPan.ar(signal/5, ~dirt.numChannels, pan));
 }).add;
 
+SynthDef(\pulsa, { |out=0, freq=220, attack=0.1, release=1, pan=0|
+	var env = EnvGen.kr(Env.perc(attack, release), doneAction: 2);
+	var signal = Pulse.ar(freq, SinOsc.kr(3000/freq));
+	signal = (LocalIn.ar(1).distort) + (Delay1.ar(signal));
+	signal = MoogLadder.ar(signal, freq*2.7, 0);
+
+	LocalOut.ar(signal);
+
+	Out.ar(out, Pan2.ar(signal, pan) * env);
+}).add;
 
 )
