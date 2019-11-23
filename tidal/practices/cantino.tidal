@@ -21,3 +21,6 @@ d1
   -- # crush (trigger 1 $ range 16 0 $ slow 16 $ envL)
 
 hush
+
+d1 $ s "bd*32"
+once $ s "playbuf"
