@@ -160,6 +160,14 @@ let
   cl4 p  = clutchIn p 4
   cl8 p  = clutchIn p 8
   cl16 p = clutchIn p 16
+
+  sin = sine
+  cos = cosine
+  sq  = square
+  pulse w = sig $ \t -> if ((snd $ properFraction t) >= w) then 1.0 else 0.0
+  pulse' w = liftA2 (\a b -> if (a>=b) then 1.0 else 0.0) saw w
+  pw = pulse
+  pw' = pulse'
 :}
 
 :set prompt "tidal> "
