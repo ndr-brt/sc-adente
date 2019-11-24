@@ -165,9 +165,7 @@ let
   cos = cosine
   sq  = square
   pulse w = sig $ \t -> if ((snd $ properFraction t) >= w) then 1.0 else 0.0
-  pulse' w = liftA2 (\a b -> if (a>=b) then 1.0 else 0.0) saw w
   pw = pulse
-  pw' = pulse'
 :}
 
 :set prompt "tidal> "
