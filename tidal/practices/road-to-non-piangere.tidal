@@ -431,6 +431,7 @@ do
         (striate 16)
         .(|* speed (ac+1))
         .(# gain 0.9)
+        .(# pan perlin)
         .(# lp' (range 400 1800 $ slow 4 $ tri) (0.1))
     )
     $ s "osc"
@@ -441,16 +442,19 @@ do
     $ stutWith 3 0.52 (
       (|* speed (ac/3))
       .(striate ac)
+      .(|* pan "-1")
       .(rarely (# squiz (ac*2)))
     )
     $ every (1 + ac) (# accelerate "-1")
     $ s "censor"
     # gain 0.6
     # lesl' 2 5 6
+    # pan (range "-0.8" "0.8" $ slow 2 $ square)
     # coarse ac
   all $ (# rvb' 0.49 0.6)
     .(# del' 0.6 0.15 0.19)
-    .(# waveloss 12)
+    -- .(# lbrick 0.71)
+    -- .(# waveloss 52)
     -- .(# crush (trigger 1 $ range 16 0 $ slow 30 $ envL))
 
   hush

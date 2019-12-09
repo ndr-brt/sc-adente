@@ -1,0 +1,58 @@
+bpm(135)
+
+do
+  let ac = "<3 3 [1|5] [2|4] 3 3 3 6 7>"
+  d1
+    $ juxBy (slow 13 $ sine/2) ((range 0.005 0.02 $ rand) ~>)
+    $ every ac (iter ac)
+    $ often (|+ n (irand 6))
+    $ superimpose (
+        (# octave 3)
+        .(fast 1.5)
+        .(almostNever (fast ac))
+    )
+    $ almostNever (
+        (
+          superimpose (
+            ((ac*1.1) ~>)
+            .(# octave 8)
+            .(ply ac)
+          )
+        )
+    )
+    $ euclid ac 5
+    $ s "pingz"
+  d2
+    $ loopAt 1
+    $ every ac (# accelerate ((1/ac) - 0.5))
+    $ superimpose (
+        (striate 16)
+        .(|* speed (ac+1))
+        .(# gain 0.9)
+        .(# pan perlin)
+        .(# lp' (range 400 1800 $ slow 4 $ tri) (0.1))
+    )
+    $ s "osc"
+    # n ac
+    # hp' 40 0.3
+    # lp' 400 0.2
+  d3
+    $ stutWith 3 0.52 (
+      (|* speed (ac/3))
+      .(striate ac)
+      .(|* pan "-1")
+      .(rarely (# squiz (ac*2)))
+    )
+    $ every (1 + ac) (# accelerate "-1")
+    $ s "censor"
+    # gain 0.6
+    # lesl' 2 5 6
+    # pan (range "-0.8" "0.8" $ slow 2 $ square)
+    # coarse ac
+  all $ (# rvb' 0.49 0.6)
+    .(# del' 0.6 0.15 0.19)
+    -- .(# lbrick 0.71)
+    -- .(# waveloss 52)
+    -- .(# crush (trigger 1 $ range 16 0 $ slow 30 $ envL))
+
+hush

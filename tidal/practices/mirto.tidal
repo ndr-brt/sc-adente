@@ -6,6 +6,8 @@ d1
     every 8 ((fast 3).(# crush 6).(stut 3 0.4 0.2))
       $ s "kk"
       # lpf "800"
+      # n (range 0 8 $ slow 2 $ sine)
+      # hp' 40 0.4
     ,
     every 6 ((0.1 <~).(# accelerate "-1"))
       $ sometimesBy 0.12 ((# delay 0.5).(# delayt 0.2).(# delayfb 0.2))
@@ -18,11 +20,9 @@ d1
     ,
     every 4 (# loop 4) $ s "clap/4" # speed 0.5
   ]
-  # nudge 0.2
   # cps 0.8
-  # room 0.05
-  # size 0.6
-  # shape 0.1
+  # rvb' 0.09 0.6
+  # shape 0.2
 
 hush
 
@@ -73,7 +73,6 @@ d1
       # lp' 500 (rand)
       # octave 3
   ]
-  # nudge 0.2
 
 d1 $ silence
 
