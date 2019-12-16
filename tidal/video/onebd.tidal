@@ -1,0 +1,15 @@
+do
+  d1
+    $ every 8 (fast 0.8)
+    $ superimpose ((|* speed 4.5).(# pan (slow 1.2 $ sine)))
+    $ rarely ((|* speed 11).(# pan (segment 1 $ choose [0, 1])).(stut 4 0.4 0.1))
+    $ s "bd*100"
+    # gain (fast 8 $ sine)
+    # speed (saw + 0.5)
+    # room (slow 1.5 $ tri/2)
+    # size (slow 1.7 $ cosine)
+    # distort (slow 1.4 $ range 0.1 0.3 $ tri)
+    # crush (slow 1.1 $ range 10 3 $ isaw)
+  all $ (|* crush (trigger 1 $ slow 12 $ range 1 0 $ envL))
+
+hush
