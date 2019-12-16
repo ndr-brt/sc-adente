@@ -127,4 +127,20 @@ SynthDef(\pulsa, { |out=0, freq=220, attack=0.1, release=1, pan=0|
 	Out.ar(out, Pan2.ar(signal, pan) * env);
 }).add;
 
+SynthDef(\addi, { |out=0, pan=0, freq=440, attack=0.01, release=0.4, sustain=1|
+	var env = EnvGen.kr(Env.asr(attack, sustain, release), doneAction: 2);
+	var comp = 350; // numero dei componenti
+	var res = 0.1; // risoluzione in semitoni
+	var signal = Mix.new(Array.fill(comp, { |i|
+		SinOsc.ar(freq: ((freq/7.333)+(i*res)).midicps, phase: i/2pi, mul: 4.0/comp )}
+	));
+
+	OffsetOut.ar(out, DirtPan.ar(signal, ~dirt.numChannels, pan, env));
+}).add;
+
+SynthDef(\sbaum, { |out=0,freq=440,pan=0|
+	var sig = Impulse.ar(freq, SinOsc.kr(freq/4), 0.5) + Saw.ar(freq/2, 0.5);
+	sig = LPF18.ar(sig, 2400, 0.7);
+	OffsetOut.ar(out, DirtPan.ar(sig, ~dirt.numChannels, pan));
+}).add;
 )

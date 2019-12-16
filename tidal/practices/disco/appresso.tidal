@@ -1,61 +1,6 @@
 do
-  bpm (160)
+  -- bpm(150)
   -- resetCycles
-  -- clutchIn 1 8
-  d1
-    $ degradeBy 0.1
-    $ slow 3
-    $ sometimes (stut' 4 0.1 (# lpf 800))
-    $ superimpose (
-      (# octave 12)
-      .(ply (segment 1 $ irand 3 + 4))
-      .(0.17 ~>)
-      .(# hp' 3000 0.2)
-      .(# pan (slow 8 $ perlin))
-    )
-    $ rarely (fast 2)
-    $ n (scale "lydianMinor" (segment 1 $ (irand 2 * 2)))
-    # s "supercomparator"
-    # octave 5
-    # ar' 0.001 0.2
-    # distort 0.3
-    -- # lp' (range 100 1200 $ rand) 0.2
-    -- # del' 0.34 0.23 0.12
-    # gain 0.55
-    # shape 0.4
-    # rvb' 0.5 0.89
-  d2
-  -- xfadeIn 2 9
-    $ slow 2
-    $ superimpose (
-        (# octave 1)
-        .(|* gain 0.70)
-        .(0.5 <~)
-        .(juxBy (rand*2-1) (# octave 2))
-    )
-    $ whenmod 18 16 (degradeBy 1)
-    $ n (scale "lydianMinor" "<0 3 4 4 0 3 1 4 3 6 6 8 0 2 2 4>")
-    # s "supersaw"
-    # legato 3
-    # octave 3
-    # rvb' 0.4 0.8
-    # gain 0.52
-    # scram 0.12
-    # rmod' 0.7 10 0.8
-    # distort 0.30
-    # lp' 2000 0.3
-    # comb 0.3
-    -- # crush 1
-    -- clutchIn 3 8
-  d3
-    $ degradeBy 0.7
-    $ swing (slow 8 $ run 3 + 1)
-    $ s "chink*20"
-    # speed (range 0.3 1.2 $ rand)
-    # pan (perlin2 (slow 4 $ sine))
-    # del' "[0.25 0]" 0.23 0.12
-    # rvb' 0.2 0.5
-    # gain 0.55
   d4
     $ slow 4
     $ fastcat [
@@ -75,8 +20,8 @@ do
           # n (irand 8)
           # speed (rand + 0.8)
           ,
-          s "orrore:1?"
-          # n (run 4)
+          s "orrore?"
+          -- # n (run 4)
           # speed (rand/3 + 0.7)
         ]
         # crush (irand 8 + 1)
@@ -85,12 +30,75 @@ do
     # del' 0.84 0.45 0.32
     # comb 0.45
 
+-- clutchIn 1 8
+d1
+  $ degradeBy 0.1
+  $ slow 3
+  $ sometimes (stutWith 4 0.1 (# lpf 800))
+  $ superimpose (
+    (# octave 12)
+    .(ply (segment 1 $ irand 3 + 4))
+    .(0.17 ~>)
+    .(# hp' 3000 0.2)
+    .(# pan (slow 8 $ perlin))
+    .(|/ ar' 4 4)
+  )
+  $ rarely (fast 2)
+  $ n (scale "lydianMinor" "<0 2 [3|4]>")
+  # s "supercomparator"
+  # octave 3
+  # ar' 0.01 0.3
+  # distort 0.2
+  # lp' 800 0.1
+  -- # del' 0.34 0.23 0.12
+  # gain 0.55
+  # shape 0.4
+  # rvb' 0.5 0.89
+
+-- xfadeIn 2 9
+d2
+  $ slow 2
+  $ layer [
+    id
+    .(# octave 1)
+    .(|* gain 0.52)
+    -- .(0.5 <~)
+    .(juxBy (rand*2-1) (# octave 2))
+    ,
+    id
+    .(whenmod 10 8 (superimpose (|+ n "5").(# pan rand)))
+    .(whenmod 18 16 (degradeBy 1))
+    .(# octave 3)
+    .(|* gain 0.46)
+  ]
+  $ n (scale "lydianMinor" "<0>")
+  # s "supersaw"
+  # legato 3
+  # rvb' 0.7 0.8
+  -- # scram 0.12
+  # shape 0.2
+  # lp' 800 0.2
+  # comb 0.15
+  # crush 0
+
+-- clutchIn 3 8
+d3
+  $ degradeBy 0.7
+  $ swing (slow 8 $ run 3 + 1)
+  $ s "chink*20"
+  # speed (range 0.3 1.2 $ rand)
+  # pan (perlin2 (slow 4 $ sine))
+  # del' "[0.25 0]" 0.23 0.12
+  # rvb' 0.2 0.5
+  # gain 0.55
+
+
+clutchIn 3 24 $ silence
+clutchIn 1 24 $ silence
 
 d1 silence
 d2 silence
 d3 silence
 d4 silence
-
-unsolo 4
 
 hush

@@ -1,16 +1,14 @@
 do
-  resetCycles
-  bpm(70)
-
-do
+  -- bpm(60)
+  -- resetCycles
   let fund = (quantise 1 $ slow 132 $ range 0 6 $ (isaw + sine) / 2) - 5
-  -- let gainMult = (trigger 1 $ range "0" "1" $ slow 40 $ envL)
-  let gainMult = 1
-  -- let gainMult = (trigger 1 $ range "1" "0" $ slow 40 $ envL)
+  -- let gainMult = (trigger 1 $ range "0" "1" $ slow 20 $ envL)
+  -- let gainMult = 1
+  let gainMult = (trigger 1 $ range "1" "0" $ slow 20 $ envL)
   d1
     $ stutWith 3 0.12 (
       (# pan (slow 57 $ sine))
-      .(sometimesBy (0.42) (# s "inr").(# accelerate (range 0 1.5 $ slow 53 $ sine)))
+      .(sometimesBy (0.35) (# s "inr").(# accelerate (range 0 1.5 $ slow 53 $ sine)))
     )
     $ s "in"
     # del' 0.9 0.21 0.21
@@ -47,7 +45,7 @@ do
     # n (scale "enigmatic" "4 3 6 2 1 6 2 3" + fund)
     # rvb' 0.9 0.9
     # legato 8
-    # gain ((range 0.3 0.52 $ slow 36 $ sine) * gainMult)
+    # gain ((range 0.22 0.48 $ slow 36 $ sine) * gainMult)
     # octave "[6|7]"
     # pan (sine)
     # accelerate (range "-2" "2" $ rand)
@@ -71,7 +69,7 @@ do
     # legato 4
     # octave 3
     # lp' (range 200 510 $ slow 145 $ cosine) (range 0.09 0.13 $ slow 32 $ pulse 0.13)
-    # hp' 60 0.5
+    # hp' 60 0.45
     # orbit 4
     # gain (0.87 * gainMult)
     # rmod' (slow 67 $ saw / 2) (range 1 15 $ slow 48 $ cosine) (slow 67 (saw+square)/3)
@@ -85,7 +83,7 @@ do
     # pan (slow 37 $ perlin)
     # orbit 5
   d7
-    $ sometimesBy 0.12 (# accelerate (rand - 0.7))
+    $ sometimesBy 0.11 (# accelerate (rand - 0.7))
     $ speed (segment 2 $ slow 6 $ (sine + square + isaw)/6 + 0.7)
     # s "censor"
     # gain ((range 0.1 0.65 $ slow 35 $ sine) * gainMult)
@@ -96,22 +94,24 @@ do
     $ striate (run 16 + 24)
     $ s "chair"
     # n fund
-    # gain ((range 0.2 0.74 $ slow 47 $ sine) * gainMult)
+    # gain ((range 0.3 0.76 $ slow 47 $ sine) * gainMult)
     # pan (perlin)
     # rvb' 0.4 0.6
     # lp' 1500 0.1
     # speed (slow 4 $ sine/2 + 0.3)
     # orbit 7
-  -- all $ (# crush (16))
+  all $ (every 33 (# crush (4)))
 
 do
   unmute 1
-  unmute 2
-  unmute 3
-  unmute 4
-  unmute 5
-  unmute 6
-  unmute 7
-  unmute 8
+  mute 2
+  mute 3
+  mute 4
+  mute 5
+  mute 6
+  mute 7
+  mute 8
+
+all $ (#crush 1)
 
 hush
