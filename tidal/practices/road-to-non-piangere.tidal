@@ -709,3 +709,62 @@ do
   all $ (# waveloss (100/vv)).(# crush vv)
 
 hush
+
+-- destrino
+
+bpm(105)
+
+do
+  let xc = "3"
+  d1
+    $ every (xc*2) (linger 0.25)
+    $ superimpose (
+        (# octave 2)
+        .(fast (xc/2))
+    )
+    $ every 4 (slow xc)
+    $ euclid xc 5
+    $ s "pingz"
+    # rvb' 0.5 0.8
+    -- # crush xc-1
+  d2
+    $ every xc (|+ n xc)
+    $ juxBy (range "-0.7" "0.7" $ slow xc $ square) (
+      (|+ n 3).(striate' (xc*3) 0.92)
+    )
+    $ s "santoor*2"
+    # gain 0.46
+    # rvb' 0.5 0.7
+    -- # waveloss 90
+  d3
+    $ every (xc+2) (# crush 3)
+    $ loopAt 1
+    $ sometimes (
+      superimpose (
+        (|* speed ((1/xc)+(xc*2)))
+        -- .(stutWith (xc+2) 0.15 (# coarse 2))
+        .(plyWith (xc*xc) (# squiz (run 8 * xc)))
+        .(# del' 0.87 0.12 0.23)
+        .(# crush (irand 3 + 2))
+        .(# scram 0.8)
+      )
+    )
+    $ s "osc:6"
+    # gain 0.54
+    # speed "<0.8 0.8 1 1.166667>"
+    # hp' 50 0.34
+    -- # waveloss 90
+  d4
+    $ rarely (striate (xc*3))
+    $ almostNever (chop (xc*4))
+    -- $ slice 32 "[0..32]"
+    $ juxBy (range "-1" "1" $ slow 12 $ sine)(|* speed "0.92")
+    $ loopAt 0.5
+    $ sometimes (|* speed "-1")
+    $ s "emhard:3*2"
+    -- # gain 0.78
+    # gain 0.28
+    # rvb' 0.6 0.8
+    -- # crush 1
+
+hush
