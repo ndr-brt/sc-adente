@@ -1,0 +1,30 @@
+d1
+  $ every 8 (|+ n 3)
+  $ layer [
+    id
+    .(superimpose (
+        (0.5 ~>)
+        .(|+ n 3)
+        .(# pan perlin)
+    ))
+    .(# pan "0.2 0.8")
+    .(# orbit 0)
+    ,
+    id
+    .(# distort 0.99)
+    .(# pan 0.5)
+    .(degradeBy 0.78)
+    .(# crush 5)
+    .(# speed 4)
+    .(# rvb' 0.7 0.8)
+    .(# orbit 6)
+    .(# del' 0.99 0.63 0.83)
+    .(|* shape 0.7)
+    ,
+    id
+    .(|* speed 0.5)
+  ]
+  $ s "sax"
+  # shape 0.8
+
+hush
