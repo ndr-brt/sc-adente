@@ -1,4 +1,5 @@
 d1
+  $ every 7 (|+ n 2)
   $ every 8 (|+ n 3)
   $ layer [
     id
@@ -6,13 +7,16 @@ d1
         (0.5 ~>)
         .(|+ n 3)
         .(# pan perlin)
+        .(sometimes (# rmod' 0.9 8 0.7))
     ))
     .(# pan "0.2 0.8")
     .(# orbit 0)
+    -- .(degradeBy 1)
     ,
     id
     .(# distort 0.99)
-    .(# pan 0.5)
+    .(gap "<4 6 8>/2")
+    .(# pan (range 0.4 0.6 $ slow 13 $ sine))
     .(degradeBy 0.78)
     .(# crush 5)
     .(# speed 4)
@@ -20,11 +24,17 @@ d1
     .(# orbit 6)
     .(# del' 0.99 0.63 0.83)
     .(|* shape 0.7)
+    -- .(degradeBy 1)
     ,
     id
-    .(|* speed 0.5)
+    .(juxBy (range "-0.6" "0.6" $ slow 16 $ tri) (|* speed (5/4)))
+    .(|* speed 0.18)
+    .(|* gain 0.9)
+    .(# hp' 60 0.6)
+    .(# orbit 2)
   ]
   $ s "sax"
   # shape 0.8
+  # speed 0.95
 
 hush
