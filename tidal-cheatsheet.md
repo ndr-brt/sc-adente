@@ -97,8 +97,9 @@
 
 ### Hi Order
 * (apply another function conditionally) **every** 3 (fun)
-* (apply function to some cycles) **whenmod** 4 3 (fast 4) $ s "bd sn"
 * (add offset to every) **every'** 3 1 (fun)
+* (apply a function according to the boolean pattern) **while** "[f t]/2" (# crush 3) $ s "bd"
+* (apply function to some cycles) **whenmod** 4 3 (fast 4) $ s "bd sn"
 * (applies another function to matching events in a pattern) **fix** (# crush 3) (n "[1,4]")
 * (run every with different arguments) **foldEvery** [3,4,5] (fast 2)
 * (apply one or another function conditionally) **ifp** (rand > 0.7) (striate 4) (# coarse "24 48")
