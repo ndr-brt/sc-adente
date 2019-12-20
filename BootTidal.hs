@@ -166,6 +166,23 @@ let
   sq  = square
   pulse w = sig $ \t -> if ((snd $ properFraction t) >= w) then 1.0 else 0.0
   pw = pulse
+
+  -- range shorthands
+  range' from to p = (p*to - p*from) + from
+  rg' = range'
+  rg = range -- old: scale
+  rgx = rangex -- old: scalex
+
+  -- continuous at freq
+  sinf  f = fast f $ sin -- sine at freq
+  cosf  f = fast f $ cos -- cosine at freq
+  trif  f = fast f $ tri -- triangle at freq
+  sawf  f = fast f $ saw -- saw at freq
+  isawf f = fast f $ isaw -- inverted saw at freq
+  sqf   f = fast f $ sq -- square at freq
+  pwf w f = fast f $ pw w -- pulse at freq
+  pwf' w f = fast f $ pw' w -- pulse' at freq
+  randf f = fast f $ rand -- rand at freq
 :}
 
 :set prompt "tidal> "

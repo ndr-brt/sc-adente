@@ -1,37 +1,11 @@
 module BootTidalCustom where
 
--- import Sound.Tidal.SpectralTricks
-
 import qualified Sound.Tidal.Scales as Scales
-
 import qualified Sound.Tidal.Chords as Chords
-
 import Sound.Tidal.Utils
-
 import Sound.Tidal.Params
-
 import Data.Maybe
-
 import Control.Applicative
-
-:def hoogle (\x -> return $ ":!/Users/jarm/Library/Haskell/bin/hoogle --info "++x)
-
--- range shorthands
-range' from to p = (p*to - p*from) + from
-rg' = range'
-rg = range -- old: scale
-rgx = rangex -- old: scalex
-
--- continuous at freq
-sinf  f = fast f $ sin -- sine at freq
-cosf  f = fast f $ cos -- cosine at freq
-trif  f = fast f $ tri -- triangle at freq
-sawf  f = fast f $ saw -- saw at freq
-isawf f = fast f $ isaw -- inverted saw at freq
-sqf   f = fast f $ sq -- square at freq
-pwf w f = fast f $ pw w -- pulse at freq
-pwf' w f = fast f $ pw' w -- pulse' at freq
-randf f = fast f $ rand -- rand at freq
 
 -- ranged continuous
 rsin i o = rg' i o sin -- ranged' sine
@@ -146,18 +120,6 @@ keyL p = (\name -> fromMaybe [] $ lookup name keyTable) <$> p
 chord p = flatpat $ Chords.chordL p
 harmonise ch p = scale ch p + chord (flip (!!!) <$> p <*> keyL ch)
 
--- midi
--- cc = grp [mF "ccn", mF "ccv"]
--- ccn :: Pattern Double -> ControlPattern
--- ccn = pF "ccn"
--- ccv :: Pattern Double -> ControlPattern
--- ccv = pF "ccv"
--- m val = range 0 127 $ val
-toM val = rg 0 127 val
-cc' p n = ccv (toM p) # ccn n
-
-oldm p = (const $ sound "~") p
-
 -- mute/solo
 mutePatterns g = mapM (streamMute tidal) g
 muteIntPatterns g = mutePatterns (map show g)
@@ -216,75 +178,3 @@ tr'' = track''
 
 -- apply function from map
 f fs n = fromJust $ lookup n fs
-
--- custom instrument params
-bowforce = pF "force" -- gil.fuser bow superbow
-bowrate = pF "tremrate" -- gil.fuser bow superbow
-bowdepth = pF "tremdepth" -- gil.fuser bow superbow
-
-modind = pF "modind" -- gil.fuser rhodes superrhodes
--- mix = pF "mix" -- gil.fuser rhodes superrhodes
-lfospeed = pF "lfospeed" -- gil.fuser rhodes superrhodes
-lfodepth = pF "lfodepth" -- gil.fuser rhodes superrhodes
-
-losslo = pF "losslo" -- gil.fuser stiff string superstring
-losshi = pF "losshi" -- gil.fuser stiff string superstring
-inharm = pF "inharm" -- gil.fuser stiff string superstring
-
--- getters and setters
-setI = streamSetI tidal
-setF = streamSetF tidal
-setS = streamSetS tidal
-setR = streamSetI tidal
-setB = streamSetB tidal
-
--- ableton link
--- https://tidalcycles.org/index.php/Link_synchronisation
--- link = do sock <- carabiner tidal 4 (-0.1) . putStrLn "Starting Link synchronisation..."
-
--- old custom params to convert
-
--- custom param names
--- (accel,_)      = pF "accel"      (Just 0)
--- (bits,_)       = pI "bits"       (Just 0)
--- (carPartial,_) = pF "carPartial" (Just 0)
--- (detune,_)     = pF "detune"     (Just 0)
--- (fm,_)         = pF "fm"         (Just 0)
--- (fmf,_)        = pF "fmf"        (Just 0)
--- (fmod,_)       = pF "fmod"       (Just 0)
--- (freq,_)       = pI "freq"       (Just 80)
--- (index,_)      = pI "index"      (Just 0)
--- (kcutoff,_)    = pF "kcutoff"    (Just 0)
--- (krush,_)      = pF "krush"      (Just 0)
--- (modPartial,_) = pF "modPartial" (Just 0)
--- (modFreq,_)    = pF "modFreq"    (Just 100) -- bassfm
--- (modAmount,_)  = pF "modAmount"  (Just 100) -- bassfm
--- (mul,_)        = pF "mul"        (Just 0)
--- (nharm,_)      = pI "nharm"      (Just 0)
--- (noisy,_)      = pF "noisy"      (Just 0)
--- (rate,_)       = pI "rate"       (Just 1)
--- (ring,_)       = pF "ring"       (Just 0)
--- (ringf,_)      = pF "ringf"      (Just 0)
--- (slide,_)      = pI "slide"      (Just 0)
--- (slidefrom,_)  = pI "slidefrom"  (Just 1)
--- (vib,_)        = pI "vib"        (Just 0)
--- (wah,_)        = pF "wah"        (Just 0)
--- (wahf,_)       = pF "wahf"       (Just 0)
--- TODO: turn ^ intro groups
-
--- GlobalDirtEffect(\dirt_hall, [\hall, \hallfb, \hallpredelay, \hallcutoff, \halltail, \hallshift, \halldelay, \halldelayt, \halldelayfb]),
--- (hall, hall_p)                 = pF "hall"         (Nothing)
--- (hallfb, hallfb_p)             = pF "hallfb"       (Nothing)
--- (hallpredelay, hallpredelay_p) = pF "hallpredelay" (Nothing)
--- (hallcutoff, hallcutoff_p)     = pF "hallcutoff"   (Nothing)
--- (halltail, halltail_p)         = pF "halltail"     (Nothing)
--- (hallshift, hallshift_p)       = pF "hallshift"    (Nothing)
--- (halldelay, halldelay_p)       = pF "halldelay"    (Nothing)
--- (halldelayt, halldelayt_p)     = pF "halldelayt"   (Nothing)
--- (halldelayfb, halldelayfb_p)   = pF "halldelayfb"  (Nothing)
---
--- hallgrp h f c t s = hall h # hallfb f # hallcutoff c # halltail t # hallshift s
--- halldel p d t f   = hallpredelay p # halldelay d # halldelayt t # halldelayfb f
-
--- laurel
--- (string, string_p) = pF "string" (Nothing)
