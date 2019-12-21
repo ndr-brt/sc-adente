@@ -1,0 +1,52 @@
+bpm(105)
+
+do
+  let cc = "<3 3 3 3 3 3 2 2 4>/3"
+  d1
+    $ every 2 (# del' 0.42 0.14 0.12)
+    $ superimpose (
+        (# octave 2)
+        .(fast (cc/2))
+    )
+    $ every cc (slow (cc/2))
+    $ euclid cc 5
+    $ s "pingz"
+    # rvb' 0.6 0.8
+    # crush 1
+    # gain 0.88
+  d2
+    $ juxBy
+      (range "-0.5" "0.5" $ slow 14 $ sine)
+      ((|+ n cc).(striateBy (cc*cc) 0.92))
+    $ degradeBy 1
+    $ s "santoor*2"
+    -- # gain (trigger 2 $ range 0.43 0 $ slow 4 $ envL)
+    -- # crush 8
+  d3
+    $ sometimes (
+        (superimpose (
+            (|* speed ((range "4.2" "4.5" $ slow 17 $ isaw)*cc))
+            .(|* gain 0.87)
+            .(stut 5 0.6 0.15)
+            .(sometimesBy 0.12 (ply cc))
+            .(# pan (choose [0, 1]))
+            .(# orbit 6)
+            .(# scram (range 0.2 0.6 $ slow 13 $ (tri+sine)/2))
+            .(# rvb' 0.8 0.9)
+        ))
+    )
+    $ loopAt 1
+    $ s "osc:6"
+    # gain 0.47
+    # speed "<0.8 0.8 1 1.125>/2"
+    # hp' 50 0.6
+    # waveloss 90
+  d4
+    $ jux (|* speed "-0.98")
+    $ gap 8
+    $ while "[t f t t f!2]/2" (|* speed "0.92")
+    $ loopAt 1.4
+    $ s "emhard"
+    # waveloss (range 40 80 $ slow 19 $ (sine))
+    # crush (range 2 6 $ slow 19 sine)
+    # gain 0.78

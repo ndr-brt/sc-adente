@@ -775,7 +775,7 @@ bpm(105)
 do
   -- let cc = "<3 3 3 3 3 3 2 2 4>/3"
   let cc = "3"
-  let ga = 1.5
+  let ga = 1
   d1
     $ every cc (|+ n cc)
     $ superimpose (
@@ -784,29 +784,29 @@ do
     )
     $ euclid cc 5
     $ s "pingz"
-    # rvb' 0.9 0.89
+    # rvb' 0.7 0.8
     # shape 0.8
-    # crush (range 3 8 $ slow 8 $ sine)
+    # crush (range 3 7 $ slow 8 $ (sine+isaw)/2)
   d2
     $ every (cc*2) (|+ n cc)
-    $ degradeBy 1
+    -- $ degradeBy 1
     $ juxBy
       (range "-1" "1" $ slow (cc*cc) $ (tri + sine)/2)
       ((|+ n cc).(striateBy (cc*3) 0.92))
     $ s "santoor*2"
-    # gain (0.48*ga)
+    # gain (0.55*ga)
     # rvb' 0.6 0.8
     -- # waveloss (98)
   d3
     $ loopAt 1
-    $ degradeBy 1
+    -- $ degradeBy 1
     $ almostNever (
         superimpose (
-          (|* speed (cc*cc))
+          (|* speed ((cc*cc)+rand))
           .(|* gain 0.71)
           .(# pan rand)
           .(# distort 0.46)
-          .(stutWith (cc*2) (1/cc) ((# coarse cc).(# accelerate (rand - 0.5))))
+          .(stutWith (cc*2) (1/cc) ((# coarse cc).(# accelerate (rand))))
           .(ply cc)
           .(#orbit 6)
           .(# rvb' 0.8 0.7)
@@ -814,21 +814,20 @@ do
     )
     $ s "osc:6"
     # gain (0.62*ga)
-    # hp' 40 0.5
+    # hp' 50 0.6
     # rmod' 0.8 (cc*3) 0.5
     # speed "<0.8 0.8 1 1.125>/3"
     -- # waveloss 95
   d4
     $ while "[t t f t f]/2" ((gap (cc*cc).(# del' 0.88 0.33 0.44)))
-    -- $ sometimes (# crush 5)
     $ jux (|* speed "-1")
     $ loopAt 0.6
-    $ degradeBy 1
+    $ degradeBy 0.1
     $ s "emhard:3"
-    # gain (0.46*ga)
-    # rvb' 0.9 0.9
+    # gain (0.52*ga)
+    # rvb' 0.9 0.99
     # distort 0.3
-    -- # crush 0
+    # crush (range 1 3 $ slow 5 $ tri)
 
   hush
 
@@ -836,10 +835,11 @@ d1
   $ loopAt 1.4
   $ jux (|* speed "-1")
   $ gap 8
+  $ degradeBy (range 1 0 $ slow 12 $ envL)
   $ sometimes (# coarse "<20 15 25 34>")
   $ s "emhard"
   # distort (range 0.1 0.5 $ slow 9 $ sine)
-  # crush (range 2 8 $ slow 9 $ sine)
+  # crush (range 1 4 $ slow 9 $ sine)
   # del' 0.66 0.44 0.55
 
 hush
