@@ -169,9 +169,9 @@ let
 
   -- range shorthands
   range' from to p = (p*to - p*from) + from
+  rg = range
   rg' = range'
-  rg = range -- old: scale
-  rgx = rangex -- old: scalex
+  rgx = rangex
 
   -- continuous at freq
   sinf  f = fast f $ sin -- sine at freq
@@ -182,6 +182,73 @@ let
   sqf   f = fast f $ sq -- square at freq
   pwf w f = fast f $ pw w -- pulse at freq
   randf f = fast f $ rand -- rand at freq
+
+  -- ranged continuous
+  rsin i o = rg' i o sin -- ranged' sine
+  rcos i o = rg' i o cos -- ranged' cosine
+  rtri i o = rg' i o tri -- ranged' triangle
+  rsaw i o = rg' i o saw -- ranged' saw
+  risaw i o = rg' i o isaw -- ranged' inverted saw
+  rsq i o = rg' i o sq -- ranged' square
+  rrand i o = rg' i o rand -- ranged' rand
+  rxsin i o = rgx i o sin -- ranged' exponential sine
+  rxcos i o = rgx i o cos -- ranged' exponential cosine
+  rxtri i o = rgx i o tri -- ranged' exponential triangle
+  rxsaw i o = rgx i o saw -- ranged' exponential saw
+  rxisaw i o = rgx i o isaw -- ranged' exponential inverted saw
+  rxsq  i o = rgx i o sq -- ranged' exponential sqaure
+  rxpw i o w = rgx i o pw w -- ranged' exponential pulse
+  rxrand i o = rgx i o rand -- ranged' exponential rand
+
+  -- ranged continuous at freq
+  rsinf i o f = fast f $ rsin i o -- ranged' sine at freq
+  rcosf i o f = fast f $ rcos i o -- ranged' cosine at freq
+  rtrif i o f = fast f $ rtri i o -- ranged' triangle at freq
+  rsawf i o f = fast f $ rsaw i o -- ranged' saw at freq
+  risawf i o f = fast f $ risaw i o  -- ranged' inverted saw at freq
+  rsqf i o f = fast f $ rsq i o  -- ranged' square at freq
+  rrandf i o f = fast f $ rrand i o -- ranged' rand at freq
+  rxsinf i o f = fast f $ rxsin i o -- ranged' exponential sine at freq
+  rxcosf i o f = fast f $ rxcos i o -- ranged' exponential cosine at freq
+  rxtrif i o f = fast f $ rxtri i o -- ranged' exponential triangle at freq
+  rxsawf i o f = fast f $ rxsaw i o -- ranged' exponential saw at freq
+  rxisawf i o f = fast f $ rxisaw i o -- ranged' exponential inverted saw at freq
+  rxsqf i o f = fast f $ rxsq i o -- ranged' exponential square at freq
+  rxpwf i o w f = fast f $ rxpw i o w -- ranged' exponential pulse at freq
+  rxrandf i o f = fast f $ rxrand i o  -- ranged' exponential random at freq
+
+  -- random shit
+  screw l c p = loopAt l $ chop c $ p
+  toggle t f p = if (1 == t) then f $ p else id $ p
+  tog = toggle
+
+  -- shortcuts
+  str = striate
+  strBy = striateBy
+  fE = foldEvery
+  ev = every
+  oa = offadd
+  sp = speed
+  ac = accelerate
+  sl = slow
+  fa = fast
+  m = mute
+  i = id
+  g = gain
+  o = orbit
+  u = up
+  deg = degrade
+  degBy = degradeBy
+  seg = segment
+
+  -- convert continuous functions to floats, ints, melodies x / x' (struct version)
+  c2f  t p = seg t $ p -- continuous to floats
+  c2f' t p = struct t $ p -- continuous to structured floats
+  c2i  t p = quantise 1 $ c2f t p -- continuous to ints
+  c2i' t p = quantise 1 $ c2f' t p -- continuous to structured ints
+  c2m  s t p = scale s $ round <$> (c2f t p) -- continuous to melodic scale
+  c2m' s t p = scale s $ round <$> (c2f' t p) -- continuous to structured melodic scale
+
 :}
 
 :set prompt "tidal> "
