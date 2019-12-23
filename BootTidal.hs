@@ -181,7 +181,6 @@ let
   isawf f = fast f $ isaw -- inverted saw at freq
   sqf   f = fast f $ sq -- square at freq
   pwf w f = fast f $ pw w -- pulse at freq
-  pwf' w f = fast f $ pw' w -- pulse' at freq
   randf f = fast f $ rand -- rand at freq
 :}
 

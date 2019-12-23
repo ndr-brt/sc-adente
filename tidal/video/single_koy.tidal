@@ -1,0 +1,36 @@
+d1
+  $ layer [
+    id
+    .(juxBy 0.5 (|* speed "<0.98 1.02>/8"))
+    .(striateBy 12 0.9)
+    .(# lp' (range 600 1200 $ slow 6 $ sine) 0.1)
+    .(# rvb' 0.3 0.5)
+    .(# orbit 5)
+    .(every 3 (# crush 5))
+    ,
+    id.(|* speed 20)
+      .(almostNever (|* speed ((rand + 0.5)/2)))
+      .(euclid "<5 7 6>" 8)
+      .(every 6 (iter 3))
+      .(#del' 0.66 0.21 0.13)
+      .(#orbit 6)
+    ,
+    id
+    .(|* speed 10)
+    .(euclid 3 8)
+    .(# shape 0.3)
+    .(rarely (# distort 0.99))
+    .(rarely (# accelerate "0.2"))
+    ,
+    id
+    .(jux (rev.((range 0.02 0.52 $ slow 6 $ isaw) ~>)))
+    .(|* speed 30)
+    .(sometimesBy 0.12 (stut 6 0.6 0.06))
+    .(# binshift (range 0.2 0.8 $ slow 12 $ ((tri + sine)/2)))
+    .(every 4 (slow 3))
+    .(euclid "<9 10 11>/2" 4)
+  ]
+  $ s "koy"
+  # waveloss (trigger 1 $ range 0 100 $ slow 16 $ envL)
+
+hush

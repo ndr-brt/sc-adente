@@ -11,7 +11,7 @@ do
     # gain 0.67
     # hp' 60 0.2
     # orbit 0
-    # waveloss (trigger 1 $ range 0 100 $ slow 10 $ envL)
+    -- # waveloss (trigger 1 $ range 0 100 $ slow 10 $ envL)
 
 d1 silence
 
@@ -23,7 +23,7 @@ d2
     ((|* speed (slow 2 $ segment 1 $ choose [2/3, 3/5, 8/9])).(0.25 ~>))
   $ striate' 20 (range 0.97 0.99 $ slow 5 $ cosine)
   $ s "juno*6"
-  # n 11 -- alla fine da 8 a 11
+  # n 8 -- alla fine da 8 a 11
   # sdel' 102 6
   # speed (range 0.78 0.82 $ slow 20 $ (sine+tri+isaw)/3)
   # begin (range 0 0.8 $ slow 20 $ cosine)
@@ -39,20 +39,21 @@ d2 silence
 
 -- clutchIn 4 8
 d4
-  -- $ degradeBy 0.39
-  $ degradeBy 0.79
+  $ degradeBy 0.52
+  -- $ degradeBy 0.79
   $ sometimes (plyWith 3 (# accelerate (rand*2 - 1)))
   $ sometimesBy 0.27 (stut 16 0.6 0.01)
   $ sometimesBy 0.62 (# del' 0.89 0.33 0.12)
   $ rarely (# freeze 1)
   $ s "hal"
   # n (irand 4)
-  # gain 0.60
+  |* gain 0.56
   # speed ((rand / 5) + 0.85)
   # crush (irand 6 + 4)
   # shape 0.1
+  # rvb' 0.3 0.6
   # orbit 3
-  # waveloss (trigger 4 $ range 0 100 $ slow 10 $ envL)
+  -- # waveloss (trigger 4 $ range 0 100 $ slow 10 $ envL)
 
 d4 silence
 
@@ -64,14 +65,14 @@ d3
   $ rarely (striate 2)
   $ n (segment 8 $ irand 8)
   # s "haw"
-  # gain 0.56
+  |* gain 0.56
   # distort 0.2
   # shape 0.52
   # ar' 0.01 0.42
   # rvb' (rand/3) 0.3
-  # hp' 100 0.6
+  # hp' 68 0.4
   # orbit 2
-  # waveloss (trigger 3 $ range 0 100 $ slow 10 $ envL)
+  -- # waveloss (trigger 3 $ range 0 100 $ slow 10 $ envL)
 
 xfadeIn 2 4 $ silence
 clutchIn 3 8 $ silence

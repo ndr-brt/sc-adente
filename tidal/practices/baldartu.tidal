@@ -1,0 +1,71 @@
+setcps(1)
+
+do
+  let g_sbatta = 1
+  let g_lead = 1
+  let g_dron = 1
+  d1
+    -- $ juxBy 0.2 ((0.35 ~>).(|* speed 2))
+    -- $ every
+    $ slow 4
+    $ rarely (plyWith 7 (#crush 2))
+    $ stack [
+      s "kk ~ kk ~ ss:3 ~",
+      euclid "[3|6|12]" 8 $ s "hhat" # pan (slow 2 $ sine)
+    ]
+    # waveloss (range 0 40 $ slow 8 $ perlin)
+    # crush 6
+    # speed (range 0.6 0.8 $ slow 3 $ saw)
+    # rvb' 0.2 0.9
+    # del' 0.8 0.48 0.4
+    # distort 0.6
+    # shape 0.3
+    |* gain 0.75 * g_sbatta
+    # orbit 0
+  d2
+    $ slow 2
+    $ juxBy (range "-0.5" "0.5" $ slow 8 $ square) (
+      (# n "<as7 gs7 gs7 e7>")
+      .(|+ n 0.52)
+      .(|* gain 0.66)
+      .(# hpf 2000)
+      .(# rvb' 0.5 0.8)
+      .(# orbit 4)
+      .(# rmod' (slow 6 $ tri) 10 0.2)
+      .(# lp' 1400 0.6)
+      -- .(# waveloss 80)
+    )
+    $ superimpose (
+      (0.5 ~>)
+      .(# orbit 5)
+      .(# pan (slow 4 $ perlin))
+    )
+    $ n "d2"
+    |* gain 0.75
+    |* gain g_lead
+    # s "supersaw"
+    # ar' 0.5 0.5
+    -- # sustain 2
+    # hold 1
+    # lp' (range 300 2000 $ slow 17 $ sine) (range 0.01 0.12 $ slow 13 $ (tri + isaw)/2)
+    # orbit 1
+  d3
+    $ jux (|* speed (3/4))
+    $ s "moog:4*6"
+    # n (irand 4)
+    # coarse "<22 33 44 55 66 77 88 77 66 55 44 33>/2"
+    # hp' (range 100 800 $ slow 4 $ sine) (range 0.01 0.25 $ slow 42 $ perlin)
+    # rmod' 1 (range 0 1500 $ slow 12 $ (cosine+isaw)/2) 1.5
+    # end 0.5
+    # lp' 1200 0.1
+    |* gain 0.48
+    |* gain g_dron
+    # crush 6
+    -- # binshift 0.2
+    # orbit 2
+
+d3 silence
+
+d2 silence
+
+hush
