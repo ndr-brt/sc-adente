@@ -1,0 +1,49 @@
+setcps(0.5)
+
+do
+  let gh = (slow 13 $ sine)
+  resetCycles
+  d1
+    $ ply "<1 2 3 3 3 4 4 4 4 5 5 5 5 5 4 4 4 3 3 3 2 2 1>/2"
+    $ layer [
+        id
+        .(degradeBy gh)
+        .(|* speed 12)
+        .(degradeBy (0.3*gh))
+        .((1-gh) ~>)
+        .(# del' "[0.7 0]" 0.23 0.32)
+        .(# orbit 5)
+        .(# distort (1-gh))
+        ,
+        id
+        .(degradeBy 0)
+        .(juxBy
+          (range "-0.7" "0.7" $ slow 7 $ sine)
+          (
+            (# end 0.1)
+            .(plyWith 16 (
+              (# lpf (range 1500 6000 $ saw))
+              .(# accelerate (range "-12" "9" $ (saw + square + cosine)/3)))
+            )
+          )
+        )
+        .(# scram (gh/10))
+        ,
+        id
+        .(|* speed 0.1)
+        .(striate "<72 88 45 92 63>")
+        .(#hp' 40 0.4)
+        .(# orbit 4)
+        .(# rvb' 0.2 0.4)
+        -- .(degradeBy (0.-gh))
+        -- .(scramble 28)
+    ]
+    $ s "syntho:12"
+    # begin (slow 5 $ sine/2)
+    # loop 2
+    -- # crush (trigger 1 $ range 16 0 $ slow 16 $ envL)
+    |* gain 0.6
+
+clutchIn 1 4 $ silence
+
+hush
