@@ -129,7 +129,7 @@ SynthDef(\pulsa, { |out=0, freq=220, attack=0.1, release=1, pan=0|
 
 SynthDef(\addi, { |out=0, pan=0, freq=440, attack=0.01, release=0.4, sustain=1|
 	var env = EnvGen.kr(Env.asr(attack, sustain, release), doneAction: 2);
-	var comp = 350; // numero dei componenti
+	var comp = 35; // numero dei componenti
 	var res = 0.1; // risoluzione in semitoni
 	var signal = Mix.new(Array.fill(comp, { |i|
 		SinOsc.ar(freq: ((freq/7.333)+(i*res)).midicps, phase: i/2pi, mul: 4.0/comp )}
