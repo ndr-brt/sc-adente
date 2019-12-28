@@ -1,30 +1,46 @@
-d1
-  $ superimpose (
-      (|+ octave 2)
-      .(slow 4)
-      .(# legato 1)
-      .(rarely (|- octave 1))
-      .(# rmod' 0.7 44 0.7)
-      .(# ar' 0.01 0.8)
-  )
-  $ s "addi*8"
-  # legato 4
-  # n (irand 14)
-  # octave "3"
-  # rvb' 0.4 0.8
-  # shape (rand/4)
+bpm(153)
 
-d2
-  $ superimpose (
-      (# octave 3)
-      .(# hp' 40 0.6)
-      .(|* ar' "4" "4")
+do
+  let si = 0.0
+  d1
+    $ layer [
+      id
+      .(sometimesBy ((1-si)/2) (|+ octave 1))
+      -- .(# hp' 100 0.3)
+      -- .(# distort 0.05)
+      ,
+      id
+      .(degradeBy (1-si))
+      .(|+ octave 2)
+      .(slow 4)
       .(# legato 2)
-  )
-  $ n (scale "superLocrian" (segment 12 $ irand 12))
-  # "sbaum"
-  # octave "[5|6|7]"
-  # ar' 0.05 0.2
-  # rvb' 0.4 0.6
+      .(rarely (|- octave 1))
+      .(# rmod' "[0.7 0 0.4]" (irand 45) 0.7)
+      .(# ar' 0.01 0.8)
+      .(# pan (segment 1 $ choose [0, 0.2, 0.8, 1]))
+      .(sometimes (# distort 0.5))
+    ]
+    $ s "addi*8"
+    # legato 4
+    # n (irand 14)
+    # octave 4
+    # rvb' "[0.4 0]" 0.8
+    # shape (rand/4)
+    |* gain 0.8
+  d2
+    $ superimpose (
+        (# octave 3)
+        .(# hp' 40 0.6)
+        .(|* ar' "4" "4")
+        .(# legato 2)
+    )
+    $ n (scale "superLocrian" (segment 12 $ irand 12))
+    # "sbaum"
+    # octave "[5|6|7]"
+    # ar' 0.05 0.2
+    # rvb' 0.4 0.6
+    |* gain 0.7
+
+d2 silence
 
 hush

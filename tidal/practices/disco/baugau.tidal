@@ -55,4 +55,6 @@ do
     # rvb' 0.2 0.4
     |* gain 0.87
 
+all $ id
+
 hush

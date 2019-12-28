@@ -19,25 +19,24 @@ d2
   $ slow 2
   $ s "kk*3 ~!3"
   # shape 0.35
-  # nudge 0.2
   # rvb' 0.4 0.8
   # hp' 60 0.4
 
 d3
   $ rarely (ply 2)
   $ every 8 (fast 2)
-  $ s "~!2 ss*2"
-  # nudge 0.2
+  $ s "[~!2 ss*2]"
   # rvb' 0.2 0.4
   # distort 0.4
 
 d4
-  $ s "babbl/1"
+  $ s "babbl/2"
   # ar' 0.4 0.9
   # pan (rand)
   # distort 0.9
-  # nudge 0.2
 
 d4 silence
+
+all $ id
 
 hush

@@ -3,6 +3,7 @@ bpm (90)
 d1
   $ fast 2
   $ every 4 (bite 3 5)
+  $ every 3 (chew 2 7)
   $ n "0 ~ 2 3 2 0 ~ 0 ~ 3 2"
   # s "goeysynth"
   # sustain 0.1

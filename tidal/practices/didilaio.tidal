@@ -1,10 +1,21 @@
 bpm(80)
 
 d1
-  $ whenmod 10 8 (linger 0.25)
+  -- $ slow 4
+  $ while "[f f f t]/4" (# distort 0.7)
+  $ every 6 (linger 0.25)
   $ stack [
-    s "[ss ss@3]*4",
-    euclid 20 8 $ s "hhat"
+    s "[ss ss@3.5]*4"
+    ,
+    euclid 20 8
+      $ s "hhat"
+    ,
+    (every 3 (fast 2))
+      $ s "~ kk/4"
+      # distort 0.9
+      # shape 0.99
+      # orbit 8
+      # del' 0.9 0.4 0.4
   ]
   # shape 0.3
   # rvb' 0.2 0.7
@@ -26,15 +37,22 @@ d2
   -- # oct' 0.7 0.8 0.6
 
 d3
+  $ slow 8
   $ superimpose (
-    (# octave 4)
-    .(3 ~>)
+    (|- octave 2)
+    -- .(0.5 ~>)
     .(rarely (iter 5))
+    .(# pan (slow 4 $ tri))
   )
   $ ply 4
-  $ n "[0 0 3 0]*4"
+  $ n "[0 0 3 0]*16"
   # s "superchip"
-  # octave 7
+  # legato 2
+  # octave 8
   # lp' 3000 0.1
-  # ar' 0.01 0.4
-  # nudge (range 0 1 $ slow 2 sine)
+  # ar' 0.1 0.4
+  |* gain 0.65
+  # rvb' 0.7 0.8
+  -- # nudge (slow 2 sine)
+
+hush
