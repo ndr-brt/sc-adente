@@ -3,18 +3,20 @@ bpm(180)
 do
   -- resetCycles
   let le = 1
+  let ba = 1
   let me = 1
   let sb = 1
   d1
-    $ degradeBy (1-me)
     $ every 3 (|+ n 3)
     $ while "[f f f t t]/2" (chew 3 4)
     $ layer [
       id
+      .(degradeBy (1-ba))
       .(# octave 2)
       .(# hp' 50 0.3)
       ,
       id
+      .(degradeBy (1-me))
       .(gap 2)
       .(sometimes (ply 3))
       .(every 4 (linger 0.1))
@@ -39,7 +41,6 @@ do
     ]
     $ n (scale "minor" "3 1@q [0 1]@q 5@h")
     # s "supergrind"
-    -- |* gain 0
   d2
     $ degradeBy (1-sb)
     $ juxBy ((sine-0.5)*2) (
@@ -66,8 +67,8 @@ do
     # crush 7
     # rvb' 0.4 0.5
   all $
-    (while "[f t]/12" (rev))
-    .(every 13 ((swing 3).(slow 1.5))) -- teniamo?
+    -- (while "[f t]/12" (rev)) -- teniamo?
+    (every 13 ((swing 3).(slow 4))) -- teniamo?
     .(|* gain 0.87)
     -- .(degradeBy (trigger 1 $ range 0 1 $ slow 8 $ envL))
 

@@ -1,0 +1,12 @@
+
+
+do
+  let aa = (slow 1.25 $ sine/2 + 0.5)
+  d1
+    $ stack [
+      chop 8 $ s "sf*2" # speed aa,
+      jux (hurry 2) $ (0.25 ~>) $ s "sf*8" # gain 0.55 # speed aa/(segment 1 $ choose [2,3,4])
+    ]
+
+clutchIn 1 4 $ silence
+hush

@@ -39,13 +39,13 @@ do
       sometimesBy (range 0 1 $ slow 35 $ (saw + square)/2) (|- n "3")
       $ every 3 (rev)
       $ almostNever (stut 4 0.5 0.12)
-      $ n "0*8 3*2@2 0*2"
+      $ n "0*8 3*2@2 2*2"
       # s "pingr"
       # detune (range "0" "12" $ slow 19 $ perlin)
       # octave 5
       # distort (range 0 0.5 $ slow 25 $ (cosine+tri)/2)
       # pan (rand)
-      |* gain (range 0 1 $ slow 10 $ tri)
+      -- |* gain (range 0 1 $ slow 10 $ tri)
       # lp' (range 300 1900 $ slow 40 $ sine) 0.06
       # orbit 2
       -- # rvb' 0.99 0.99
@@ -56,3 +56,6 @@ do
 clutchIn 1 8 $ silence
 
 hush
+
+
+d1 $ s "bd"

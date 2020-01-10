@@ -1,12 +1,14 @@
+bpm(140)
+
 d1
   $ slow 2
   $ superimpose ((0.01 ~>).(# lpf 800))
   $ every 4 ((linger 0.25).(fast 2))
   $ whenmod 12 10 (brak)
   $ stack [
-    struct (binary 199) $ s "super808" # lpf 800,
+    struct (binary 199) $ s "kk" # lpf 800,
     struct (binary 96) $ s "supersnare",
-    struct (binary 65) $ s "superhat",
+    jux (rev) $ struct (binary 65) $ s "superhat",
     superimpose ((0.01 ~>).(#pan 1)) $ struct (binary 123) $ s "supergong" # pan 0
   ]
   # room 0.2
@@ -25,3 +27,5 @@ d2
   # gain 0.7
   # lpf (choose [800, 1001, 954])
   # lpq (range 0 0.4 $ slow 213 $ sine)
+
+hush
