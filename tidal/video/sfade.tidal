@@ -1,11 +1,19 @@
-
-
 do
   let aa = (slow 1.25 $ sine/2 + 0.5)
   d1
     $ stack [
-      chop 8 $ s "sf*2" # speed aa,
-      jux (hurry 2) $ (0.25 ~>) $ s "sf*8" # gain 0.55 # speed aa/(segment 1 $ choose [2,3,4])
+      chop "<4 4 8 4>" $ s "sf*2" # speed aa,
+      jux (hurry 2)
+        $ (0.25 ~>)
+        $ s "sf*8"
+        # gain 0.55
+        # speed aa/(segment 1 $ choose [2,3,4]),
+      chunk 4 (# accelerate 0.5)
+        $ juxBy (range 0.1 0.3 $ slow 8 $ sine) rev
+        $ fast 2
+        $ scramble "[1|2|4]"
+        $ n "1 2*2 3 [~ 4]"
+        # s "sf"
     ]
 
 clutchIn 1 4 $ silence

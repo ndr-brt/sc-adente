@@ -1,4 +1,4 @@
-bpm(180)
+bpm(165)
 
 do
   -- resetCycles
@@ -6,6 +6,9 @@ do
   let ba = 1
   let me = 1
   let sb = 1
+  -- let sb = (trigger 2 $ range 0 1 $ slow 4 $ envL)
+  let strum = 1
+  -- let strum = (trigger 1 $ range 0 1 $ slow 4 $ envL)
   d1
     $ every 3 (|+ n 3)
     $ while "[f f f t t]/2" (chew 3 4)
@@ -14,6 +17,7 @@ do
       .(degradeBy (1-ba))
       .(# octave 2)
       .(# hp' 50 0.3)
+      .(# orbit 4)
       ,
       id
       .(degradeBy (1-me))
@@ -23,15 +27,18 @@ do
       .(while (binary "<75 112 43 194 56 12>") (degradeBy 1))
       .(bite 3 5)
       .(# octave 9)
-      .(# del' 0.43 0.21 0.24)
+      .(# del' 0.83 0.21 0.24)
+      .(# rvb' 0.6 0.7)
       .(# shape 0.4)
       .(# binshift (range 0 0.3 $ slow 3 (saw)))
+      .(# orbit 5)
+      .(|* gain 0.9)
       ,
       id
       .(degradeBy (1-le))
       .(juxBy 0.5 (rev))
       .(slow 4)
-      .(# octave 5)
+      .(# octave 6)
       .(# legato 1.1)
       .(# distort (range 0.2 0.7 $ slow 6 $ (tri+cosine)/2))
       .(# rmod' 0.4 12 0.7)
@@ -39,8 +46,11 @@ do
       .(# rvb' 0.7 0.8)
       .(# orbit 6)
     ]
-    $ n (scale "minor" "3 1@q [0 1]@q 5@h")
+    $ n (scale "minor" "3 1@q [0]@q 5@h")
     # s "supergrind"
+    # accelerate "[-0.04]"
+    # detune (range 0 1 $ slow 16 $ sine)
+    |* gain strum
   d2
     $ degradeBy (1-sb)
     $ juxBy ((sine-0.5)*2) (
@@ -64,12 +74,13 @@ do
         # ar' 0.001 0.3
     ]
     # shape 0.8
-    # crush 7
-    # rvb' 0.4 0.5
+    # crush 6
+    # rvb' 0.6 0.7
   all $
     -- (while "[f t]/12" (rev)) -- teniamo?
-    (every 13 ((swing 3).(slow 4))) -- teniamo?
-    .(|* gain 0.87)
+    (whenmod 18 16 ((swing 3).(slow 4).(#ar' 0.1 0.45).(#rvb' 0.95 0.97))) -- teniamo?
+    -- .(# crush 1)
+    .(|* gain 0.82)
     -- .(degradeBy (trigger 1 $ range 0 1 $ slow 8 $ envL))
 
 hush
