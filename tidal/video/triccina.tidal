@@ -1,18 +1,74 @@
 
 
 
+
 d1
+  $ every 6 (linger "h")
   $ layer [
     (slice "8" "3 5 7 1")
+    .(every 3 (|* speed (9/8)))
+    .(every 5 (|* speed (4/5)))
     ,
-    (|* speed 0.4).(slow 2)
+    (|* speed 0.4)
+    .(slow 2)
+    .(rarely (chop 3))
+    .(# waveloss 5)
     ,
-    (|* speed 5.5).(euclid 7 8).(|* gain 0.6).(slow 4)
+    (|* speed 5.5)
+    .(|* gain 0.55)
+    .(euclid 7 8)
+    .(slow 4)
+    .(# pan (choose [0.3, 0.7]))
+    .(#del' 0.96 0.47 0.73)
+    .(# orbit 4)
     ,
-    (|* speed 7.9).(striateBy 16 0.99).(# gain 0.5)
+    (|* speed 7.9)
+    .(striateBy 16 0.99)
+    .(|* gain 0.4)
+    .(# orbit 5)
+    .(# lp' (range 1000 5000 $ slow 16 $ tri) 0.1)
+    .(# rvb' 0.7 0.8)
   ]
   $ s "gtr:2"
+  # waveloss (trigger 1 $ range 0 100 $ slow 30 $ envL)
 
-all $ (# waveloss 20)
+hush
+
+
+d1
+  $ every 9 (linger "h")
+  -- $ while "[f f f f]" (slow 4)
+  $ layer [
+    (id)
+    .(slice 8 "4 7 8 3")
+    .(every 3 (|* speed (9/8)))
+    .(every 5 (|* speed (4/5)))
+    ,
+    id
+    .(rarely (chop 3))
+    .(|* speed 0.4)
+    .(every 4 (|* speed (5/4)))
+    .(# orbit 4)
+    ,
+    id
+    .(|* speed 5)
+    .(# gain 0.50)
+    .(euclid 8 8)
+    .(slow 4)
+    .(# orbit 6)
+    .(# rvb' 0.5 0.7)
+    .(# del' 0.98 0.34 0.5)
+    .(# pan (choose [0.3,0.7]))
+    ,
+    id
+    .(|* speed 8)
+    .(# orbit 5)
+    .(# rvb' 0.5 0.6)
+    .(striateBy "<16 24 18>" "<0.9 0.87>")
+    .(# gain 0.45)
+    .(# lp' (range 2000 5000 $ slow 16 $ (tri+saw)/2) 0.1)
+  ]
+  $ s "gtr:2"
+  -- # waveloss (trigger 1 $ range 0 100 $ slow 64 $ envL)
 
 hush

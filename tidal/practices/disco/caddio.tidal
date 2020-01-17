@@ -1,7 +1,7 @@
 bpm(120)
 
 do
-  resetCycles
+  -- resetCycles
   d1
     -- $ degradeBy 1
     $ whenmod 6 4 (striate (segment 1 $ run 4 + 2))
@@ -43,15 +43,6 @@ do
     # hp' 50 0.4
     # gain 0.76
     # orbit 2
-
-do
-  -- mute 1
-  unmute 1
-  unmute 2
-  -- mute 2
-  unmute 3
-  -- mute 3
-
-all $ (# waveloss 100)
+  all $ (# crush (trigger 1 $ range 16 0 $ slow 12 $ envL))
 
 hush
