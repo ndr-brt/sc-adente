@@ -1,0 +1,47 @@
+bpm(130)
+
+d1
+  $ every 8 (linger "h")
+  $ layer [
+    id
+    -- .(degradeBy 1)
+    .(every 3 (linger "q"))
+    .(euclid "<32 48 16 32>" 32)
+    .(jux ((1.125 ~>).(# accelerate ((rand-0.5)*(slow 8 $ tri*2))).(# orbit 4)))
+    .(sometimes (# crush (irand 3 + 4)))
+    .(|* speed (slow 6 $ (sine + 0.5)))
+    .(|* gain 0.68)
+    .(# rvb' 0.8 0.9)
+    .(# orbit 0)
+    ,
+    id
+    -- .(degradeBy 1)
+    .(fast "<1 1 2>")
+    .(# hp' 55 0.2)
+    .(# shape 0.4)
+    .(stutWith "2" 0.15 (
+      (# pan (rand))
+      .(# binshift "<0.42 0.52 0.34>")
+      .(# lp' 1200 0.1)
+      .(# orbit 5)
+      .(# rvb' 0.99 0.90)
+      .(|* gain 0.62)
+      )
+    )
+    .(|* speed 0.05)
+    .(whenmod 6 4 (|* speed (9/8)))
+    .(# orbit 1)
+    .(# crush (range 5 10 $ slow 12 $ (tri + saw)/2))
+    ,
+    id
+    -- .(degradeBy 1)
+    .(euclid 4 6)
+    .(# del' 0.93 0.16 (range 0.2 0.6 $ slow 8 $ cosine))
+    .(almostNever ((#rvb' 0.4 0.6).(juxBy 0.5 ((# freeze 1).(# orbit 3)))))
+    .(|* gain 0.9)
+    .(# orbit 2)
+  ]
+  $ s "808"
+  -- # waveloss (trigger 1 $ range 0 100 $ slow 40 $ envL)
+
+hush

@@ -1,0 +1,13 @@
+
+d1
+  -- $ every 2 (fast 2)
+  -- $ every 3 (fast 2)
+  $ every 2 (|+ n "[1 0 2 4]")
+  $ n (scale "minor" "[0 4 2 5]*2")
+  # s "dk"
+  # lp' (range 200 5000 $ slow 4 $ sine) 0.2
+  # rvb' 0.8 0.96
+  # octave 5
+  -- # legato 2
+
+hush

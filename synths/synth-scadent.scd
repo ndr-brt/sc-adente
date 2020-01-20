@@ -143,4 +143,21 @@ SynthDef(\sbaum, { |out=0,freq=440,pan=0|
 	sig = LPF18.ar(sig, 2400, 0.7);
 	OffsetOut.ar(out, DirtPan.ar(sig, ~dirt.numChannels, pan));
 }).add;
+
+SynthDef(\dk, { |out=0, freq=440, pan=0, attack=0.01, release=0.5|
+	var sub = Pulse.ar(freq/2);
+	var noise = PinkNoise.ar(1);
+
+	//var ani = Fold.ar(LFTri.ar(freq, 0), 0.2, 1);
+	var ani = Pulse.ar(freq, SinOsc.kr(0.8).range(0.2,0.8));
+	var sig = (sub * 0.45) + (noise * 0.05) + (ani * 0.5);
+
+	var env = EnvGen.ar(Env.perc(attack, release));
+
+	var cutoff = 2500.0;
+	sig = LPF.ar(sig, cutoff + ((cutoff/10) * LFNoise0.kr(5).range(-2,2)));
+
+	OffsetOut.ar(out, DirtPan.ar(sig, ~dirt.numChannels, pan, env));
+}).add;
+
 )
