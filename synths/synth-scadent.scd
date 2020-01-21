@@ -160,4 +160,24 @@ SynthDef(\dk, { |out=0, freq=440, pan=0, attack=0.01, release=0.5|
 	OffsetOut.ar(out, DirtPan.ar(sig, ~dirt.numChannels, pan, env));
 }).add;
 
+// metallic bouncing marbles: from Bana on Patch and Tweak book
+SynthDef(\mbm, { |out=0, freq=440, pan=0, attack=0.01, release=0.4|
+	var env = EnvGen.ar(Env.perc(attack, release * LFTri.kr(2).range(0.5, 1.5)));
+	var carrier = SinOsc.ar(freq*16);
+	var signal = SinOsc.ar(freq);
+	var sig = signal * carrier;
+
+	OffsetOut.ar(out, DirtPan.ar(sig, ~dirt.numChannels, pan, env));
+}).add;
+
+SynthDef(\cuerda, { |out=0, freq=440, pan=0, attack=0.01, release=0.4|
+	var env = EnvGen.ar(Env.asr, doneAction: 2);
+
+	var sig = ((Pulse.ar(freq, LFSaw.kr(200/freq).range(0.2, 0.8)) * SinOsc.ar(freq*8)) * 0.5)
+	  + ((Saw.ar(freq)) * 0.47)
+	  + WhiteNoise.ar(0.03);
+
+	OffsetOut.ar(out, DirtPan.ar(sig, ~dirt.numChannels, pan, env));
+}).add;
+
 )
