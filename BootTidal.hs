@@ -1,6 +1,5 @@
 :set -XOverloadedStrings
 :set prompt ""
-:set prompt-cont ""
 
 import Sound.Tidal.Context
 import System.IO (hSetEncoding, stdout, utf8)
@@ -254,3 +253,4 @@ let
 :}
 
 :set prompt "tidal> "
+:set prompt-cont ""
