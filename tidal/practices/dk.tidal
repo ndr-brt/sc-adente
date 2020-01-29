@@ -1,39 +1,72 @@
-
-d2
-  -- $ every 2 (fast 2)
-  -- $ every 3 (fast 2)
-  $ every 2 (|+ n "[1 0 2 4]")
-  $ n (scale "minor" "[0 4 2 5]*2")
-  # s "dk"
-  # lp' (range 200 5000 $ slow 4 $ sine) 0.2
-  # rvb' 0.8 0.96
-  # octave 5
-  -- # legato 2
+do
+  let octRange = 8
+  d1
+    $ slow 2
+    $ every 3 (swing 3)
+    $ jux (rev.(#octave (rev (run octRange + 1))))
+    -- $ sometimesBy 0.22 (# squiz (irand 100))
+    $ n "[-36 .. 36]"
+    # s "cuerda"
+    # lp' (range 400 2000 $ saw) 0.8
+    # octave (run octRange + 1)
+    # rvb' 0.3 0.5
+    |* gain 0.50
+    # pan (saw/2)
+    -- # nudge sine
+    # legato 4
+    -- # lp' 5000 0
+  d2
+    $ every 4 (|+ n 2)
+    $ almostNever (slow 2)
+    $ n "0 3*2"
+    # s "mbm"
+    # del' 0.99 0.20 0.77
+    |* gain 0.74
+    # lp' 3600 0.1
+    # rvb' 0.4 0.5
+  d3
+    $ jux ((rev).(# octave 6))
+    $ rarely (scramble 3)
+    $ every 4 (iter 3)
+    $ n "[0 0 0? 0*2 4 3]"
+    # s "dk"
+    # octave 4
+    # rvb' 0.2 0.4
+    # shape 0.2
+    # lp' (range 400 1200 $ slow 4 $ saw) 0.1
+  d4 $ stack [
+      every 3 ((fast 3).(scramble 4)) $ s "kk" # hp' 50 0.3,
+      s "~ ss" # bp' 1200 0.8 # distort 0.4 # del' 0.9 0.2 0.73 # orbit 6,
+      every 4 (swing 5) $ every 4 (slow (8/6)) $ s "hh*8",
+      s "crash/4" # ar' 0.01 0.5 # distort 0.99 |* gain 0.8
+    ]
+    # shape 0.2
+    # rvb' 0.6 0.8
 
 hush
 
 
 d1
-  $ every 3 (swing 3)
-  $ jux (rev)
-  $ n "[-36 .. 36]"
-  # s "cuerda"
-  # lp' (range 400 2000 $ saw) 0.8
-  # octave 5
-  -- # rvb' 0.5 0.7
-  # gain 0.5
-  # pan (saw/2)
-  -- # nudge sine
-  # legato 8
-  -- # del' 0.65 0.34 0.45
-
-d2 $ stack [
-    every 3 ((fast 3).(scramble 4)) $ s "kk" # hp' 50 0.3,
-    s "~ ss" # bp' 1200 0.8 # distort 0.4 # del' 0.9 0.2 0.73 # orbit 6,
-    every 4 (swing 5) $ every 4 (slow (8/6)) $ s "hh*8",
-    s "crash/4" # ar' 0.01 0.5 # distort 0.99 |* gain 0.8
+  $ slow 4
+  $ every 4 (superimpose (|+ n 8))
+  $ rarely (superimpose (|+ n 5))
+  $ layer [
+    id
+    .(# octave 5)
+    .(rarely (#rmod' 0.99 (run 10 + 1) 0.9))
+    .(juxBy (range "-1" "1" $ slow 16 $ sine) (|+ n 3))
+    ,
+    id
+    .(# octave 2)
+    .(#hp' 48 0.4)
+    ,
+    id
+    .(# octave 8)
   ]
-  # shape 0.2
-  # rvb' 0.6 0.8
+  $ s "cuerda"
+  # lp' (range 1100 1500 $ slow 8 $ sine) 0.2
+  # shape 0.3
+  # legato 2
+  # rvb' 0.99 0.99
 
 hush

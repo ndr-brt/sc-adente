@@ -1,0 +1,41 @@
+bpm(120)
+
+do
+  let vel = "<2 2 2 2 4 4 8 8>"
+  d1
+    $ superimpose (
+        (|* sp vel)
+        .(degradeBy (1/vel))
+        .(fast vel)
+        .(# pan perlin)
+        .(# orbit 7)
+        .(rarely (# accelerate ((rand - 0.5)*2)))
+    )
+    $ fast (vel/2)
+    $ s "elea-sounds:3"
+    # pan rand
+    # shape 0.2
+    # rvb' 0.6 0.6
+    |* g 0.8
+
+do
+  let sam = 2
+  once
+    $ layer [
+      id
+      .(#pan 0.2)
+      .(# waveloss 3)
+      .(# orbit 6)
+      .(0.05 ~>)
+      ,
+      id
+      .(#pan 0.8)
+      .(# orbit 5)
+    ]
+    $ s "elea-voice"
+    # n sam
+    |* g 0.52
+    # shape 0.86
+    # rvb' 0.5 0.8
+
+hush
