@@ -1,21 +1,38 @@
 bpm(120)
 
 do
+  -- resetCycles
+  -- let vel = 1
   let vel = "<2 2 2 2 4 4 8 8>"
   d1
-    $ superimpose (
-        (|* sp vel)
-        .(degradeBy (1/vel))
-        .(fast vel)
-        .(# pan perlin)
-        .(# orbit 7)
-        .(rarely (# accelerate ((rand - 0.5)*2)))
-    )
     $ fast (vel/2)
+    $ layer [
+      id
+      .(# orbit 0)
+      .(# pan rand)
+      .(# shape 0.3)
+      .(# lp' 4000 0)
+      .(# rvb' 0.6 0.6)
+      ,
+      id
+      .(|* sp vel)
+      .(degradeBy (1/vel))
+      .(fast vel)
+      .(# pan perlin)
+      .(# orbit 1)
+      .(|* gain 0.90)
+      .(rarely (# accelerate ((rand - 0.5)*vel)))
+      .(# rvb' 0.6 0.6)
+      ,
+      id
+      .(|* sp (1/(choose [6,7,8,9])))
+      .(# orbit 2)
+      .(# begin 0.2)
+      .(# end 0.6)
+      .(# shape 0.4)
+      .(# hp' 50 0.3)
+    ]
     $ s "elea-sounds:3"
-    # pan rand
-    # shape 0.2
-    # rvb' 0.6 0.6
     |* g 0.8
 
 do
@@ -24,18 +41,27 @@ do
     $ layer [
       id
       .(#pan 0.2)
-      .(# waveloss 3)
-      .(# orbit 6)
+      .(# waveloss 2)
+      .(# orbit 7)
+      .(|* sp 1.02)
       .(0.05 ~>)
       ,
       id
-      .(#pan 0.8)
+      .(# pan 0.8)
+      .(# shape 0.4)
+      .(# del' 0.4 0.33 0.2)
+      .(# orbit 6)
+      .(0.10 ~>)
+      ,
+      id
+      .(# pan 0.5)
       .(# orbit 5)
+      .(|* sp 0.97)
     ]
     $ s "elea-voice"
     # n sam
-    |* g 0.52
+    |* g 0.46
     # shape 0.86
-    # rvb' 0.5 0.8
+    # rvb' 0.8 0.8
 
 hush
