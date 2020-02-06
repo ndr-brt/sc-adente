@@ -1,9 +1,23 @@
+-- d1 con vel a 1 ottimo outro anche
 bpm(120)
 
+hush
+
 do
-  -- resetCycles
-  -- let vel = 1
-  let vel = "<2 2 2 2 4 4 8 8>"
+  resetCycles
+  let
+    vel = 1
+    sam = "~"
+    final = 0
+    -- vel = "<2 2 2 2 4 4 8 8>"
+    -- sam = "<0 1 2>*8"
+    -- final = 0
+    -- vel = 8
+    -- sam = "~"
+    -- final = 0
+    -- vel = 8
+    -- sam = "0"
+    -- final = 1
   d1
     $ fast (vel/2)
     $ layer [
@@ -32,36 +46,44 @@ do
       .(# shape 0.4)
       .(# hp' 50 0.3)
     ]
+    $ sometimesBy final ((jux rev).(# squiz (trigger 1 $ range 0 100 $ slow 12 $ envL )))
     $ s "elea-sounds:3"
     |* g 0.8
-
-do
-  let sam = 2
-  once
+  d2
+    $ slow "8"
+    $ ("0.333" ~>)
     $ layer [
       id
       .(#pan 0.2)
       .(# waveloss 2)
       .(# orbit 7)
       .(|* sp 1.02)
-      .(0.05 ~>)
       ,
       id
       .(# pan 0.8)
       .(# shape 0.4)
-      .(# del' 0.4 0.33 0.2)
+      .(# del' 0.6 0.33 0.2)
       .(# orbit 6)
-      .(0.10 ~>)
       ,
       id
       .(# pan 0.5)
       .(# orbit 5)
       .(|* sp 0.97)
     ]
+    $ sometimesBy final (
+      (# end 0.4)
+      .((0.33) <~)
+      .(slow 2)
+      -- .(stutWith 64 (range 0.0125 0.0002 $ fast 32 $ saw) ((|* sp (1.05)).(# pan rand).(|+ coarse 1)))
+    )
     $ s "elea-voice"
     # n sam
     |* g 0.46
+    # hp' 150 0.2
     # shape 0.86
     # rvb' 0.8 0.8
+
+hush
+
 
 hush
