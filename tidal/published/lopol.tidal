@@ -1,0 +1,36 @@
+d1
+  $ striateBy 4 0.92
+  $ sometimes (
+      superimpose ((# o 2)
+      .(|+ note "<12 16 20 24>")
+      .(# pan rand)
+      .(#rvb' 0.9 0.9)
+      .(|* g 1.22))
+  )
+  -- $ superimpose (
+  --   (|* sp (range 0.98 1.02 $ slow 12 $ sine))
+  --   .(# o 1)
+  --   .(# lp' 800 0.2)
+  --   .(|* g 0.35)
+  -- )
+  $ s "elea-sounds:2"
+  # lp' 1500 0.11
+  |* sp 0.6
+  # rvb' 0.6 0.9
+  # o 0
+  |* g 0.8
+
+d2
+  $ s "elea-sounds*24"
+  # o 3
+  |* sp (range 8.08 8.28 $ slow 8 $ (saw+tri)/2)
+  -- # distort 0.12
+  # binshift (slow 25 $ sine)
+  # lp' 5000 0.12
+  |* g 0.58
+  |* del' 0.6 0.3 0.34
+  # pan perlin
+
+all $ (# waveloss (trigger 1 $ range 0 100 $ slow 60 $ envL))
+
+hush
