@@ -13,3 +13,6 @@ Update samples:
 
 ## Synths
 `synthdefs_extra.scd` taken from https://github.com/pierstu/tidalcycles/blob/master/synthdefs_extra.scd
+
+other synthdefs and effects:
+https://github.com/Olbos/Tidal-Olbos
