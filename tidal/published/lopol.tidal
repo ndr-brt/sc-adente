@@ -1,3 +1,5 @@
+bpm(130)
+
 d1
   $ striateBy 4 0.92
   $ sometimes (
