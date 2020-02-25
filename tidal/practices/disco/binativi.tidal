@@ -1,4 +1,4 @@
-bpm(135)
+bpm(130)
 
 do
   -- resetCycles
@@ -8,8 +8,8 @@ do
     $ every 4 ((linger 0.25).(fast 2))
     $ whenmod 12 10 (brak)
     $ stack [
-      struct (binary 199) $ s "kk" # lpf 800 # hp' 40 0.42,
-      struct (binary 96) $ s "ss",
+      struct (binary 199) $ s "kk" # lp' 870 0.1 # hp' 40 0.42,
+      struct (binary "<96 97>") $ s "ss",
       jux (rev) $ struct (binary "<65 68>") $ s "hhat",
       juxBy 0.5 (0.02 ~>) $ struct (binary 123) $ s "superchip" # distort "0.13 0.08" |* g 0.92
     ]
@@ -27,10 +27,17 @@ do
     $ every 4 (# up (scale "minor" "2"))
     $ juxBy 0.4 (# speed "-1")
     $ s "droni:1"
-    |* g 0.60 * 1
+    |* g 0.58 * 1
     # lp' ((choose [800, 1001, 954]) + 400) (range 0 0.4 $ slow 213 $ sine)
-  -- all $ (# waveloss (trigger 1 $ slow 60 $ range 0 100 $ envL))
+  all $
+    (# waveloss (trigger 1 $ slow 120 $ range 0 100 $ envL))
+    .(# distort (trigger 1 $ slow 120 $ range 0 2 $ envL))
+
 
 -- all $ id
+
+do
+  clutchIn 1 12 $ silence
+  clutchIn 2 12 $ silence
 
 hush
