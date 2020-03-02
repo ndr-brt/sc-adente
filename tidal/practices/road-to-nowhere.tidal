@@ -61,3 +61,52 @@ do
     # del' 0.99 0.33 0.66
 
 hush
+
+
+
+bpm(123)
+
+do
+  let gat = "<3 3 3 3 2 4 4 1>"
+  d1
+    $ superimpose (
+        (# octave 2)
+        .(fast (gat/2))
+    )
+    $ every gat (slow (gat/2))
+    $ euclid gat 5
+    $ s "pingz" # rvb' 0.7 0.9
+    # crush 2
+  d2
+    $ juxBy (slow 7 $ range "-1" "1" $ sine) (striateBy gat 0.92)
+    $ every 3 (|* sp 0.98)
+    $ rarely (|* sp 1.02)
+    $ s "santoor:2"
+    |* g 0.67
+    # rvb' 0.4 0.7
+    # waveloss 93
+  d3
+    $ superimpose (
+        (# orbit 7)
+        .(|* sp 8)
+        .(rarely (|* sp 1.25))
+        .(sometimes (fast 2))
+        .(|* del' 0.67 0.66 0.43)
+        .(|* g 0.65)
+        .(# rvb' 0.5 0.6)
+    )
+    $ jux (# distort 0.3)
+    $ loopAt 1
+    $ s "osc:6"
+    |* g 0.87
+    |* sp "<0.8 0.8 1 1.25>"
+    # crush 1
+  d4
+    $ sometimes ((gap 2).(#rvb' 0.95 0.97).(|* g 0.8))
+    $ loopAt 2
+    $ superimpose ((|* sp 20).(ply 3).(euclid gat 4).(|* g 0.87).(#distort 0.78))
+    $ s "emsoft:2"
+    |* g 0.99
+    # rvb' 0.6 0.7
+
+hush
