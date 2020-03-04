@@ -2,6 +2,7 @@ bpm(130)
 
 do
   -- resetCycles
+  let final = 135
   d1
     $ slow 2
     $ superimpose ((0.01 ~>).(# lpf 800))
@@ -30,14 +31,10 @@ do
     |* g 0.58 * 1
     # lp' ((choose [800, 1001, 954]) + 400) (range 0 0.4 $ slow 213 $ sine)
   all $
-    (# waveloss (trigger 1 $ slow 120 $ range 0 100 $ envL))
-    .(# distort (trigger 1 $ slow 120 $ range 0 2 $ envL))
-
-
--- all $ id
-
-do
-  clutchIn 1 12 $ silence
-  clutchIn 2 12 $ silence
+    (# waveloss (trigger 1 $ slow final $ range 0 100 $ envL))
+    .(# distort (trigger 1 $ slow final $ range 0 2 $ envL))
+    .(|* gain (trigger 1 $ slow final $ range 1 0.8 $ envL))
 
 hush
+
+all $ id
