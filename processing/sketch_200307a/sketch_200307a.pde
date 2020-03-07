@@ -6,25 +6,21 @@ import netP5.*;
 OscP5 osc;
 
 ArrayList<Orbit> orbits = new ArrayList<Orbit>();
-PFont font;
 float cps = 0;
-float showCycles = 4;
-int orbitn = 3;
+float showCycles = 1.5; // 1/speed
+int orbitn = 4;
 float lastCycle = 0;
 float lastTime = 0;
-int sizeX = 1024;
-int sizeY = 180;
+int sizeY = 800;
 int orbitHeight = sizeY / orbitn;
 int h = orbitHeight - 4;
 
 void setup() {
   surface.setTitle("");
   smooth();
-  size(sizeX, sizeY);
+  size(400, 800);
   textSize(40);
   osc = new OscP5(this, 2020);
-  font = loadFont("Inconsolata-48.vlw");
-  textFont(font,48);
   synchronized(orbits) {
     for (int i = 0; i < orbitn; ++i) {
       orbits.add(new Orbit());
@@ -33,7 +29,7 @@ void setup() {
 }
 
 void draw() {
-  background(255);
+  background(125);
   float now = millis();
   float elapsed = now - lastTime;
   float cycle = ((elapsed * cps)/1000) + lastCycle;
@@ -41,7 +37,9 @@ void draw() {
     pushMatrix();
     for (int i = 0; i < orbitn; ++i) {
       Orbit o = orbits.get(i);
-      translate(0,orbitHeight);
+      if (i > 0) {
+        translate(0,orbitHeight);
+      }
       o.draw(cycle);
     }
     popMatrix();
@@ -53,7 +51,6 @@ void oscEvent(OscMessage m) {
   int i;
   int orbit = -1;
   float cycle = -1;
-
 
   for(i = 0; i < m.typetag().length(); ++i) {
     String name = m.get(i).stringValue();
