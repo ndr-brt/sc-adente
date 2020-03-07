@@ -1,0 +1,8 @@
+40 times with i
+  rotate(i*time/100)
+  fill(15+i, i*5, i)
+  cube(i*40/time)
+  background(i*time,(time+i)/100,80)
+  move(i)
+    fill(time*i, 255-i, 3)
+    sphere(2)

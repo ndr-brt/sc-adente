@@ -70,3 +70,11 @@ d1
   # rvb' 0.99 0.99
 
 hush
+
+d1 $ every 4 (ply (irand 4)) $ stut 5 0.4 0.1 $ s "bd"
+
+d2 $ sometimes (hurry 2) $ s "sn*3@h"
+
+d3 $ striate 16 $ every 2 (ply (irand 3)) $ every 3 (stut 3 0.6 0.2) $ s "cp"
+
+d4 $ every 5 (fast 2.3) $ s "808*16"
