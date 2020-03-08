@@ -9,7 +9,6 @@ OscP5 osc;
 Map<Integer, Orbit> orbits = new HashMap<Integer, Orbit>();
 float cps = 0;
 float showCycles = 2; // 1/speed
-int orbitn = 4;
 float lastCycle = 0;
 float lastTime = 0;
 int sizeY = 800;
