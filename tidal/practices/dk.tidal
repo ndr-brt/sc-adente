@@ -104,3 +104,9 @@ d4 $ every 5 (fast 2) $ every 2 (hurry 1.5) $ sometimes (gap 2) $ s "808*8" # ga
 
 
 d1 $ s "bd*2"
+d2 $ s "~ sn*3"
+d3 $ striate 12 $ s "industrial"
+d4 $ s "bd*7"
+d5 $ superimpose ((fast 3).(#orbit 5)) $ s "cp"
+
+hush

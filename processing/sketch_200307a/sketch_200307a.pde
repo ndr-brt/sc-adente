@@ -1,30 +1,24 @@
 import java.util.Iterator;
+import java.util.Map;
 
 import oscP5.*;
 import netP5.*;
 
 OscP5 osc;
 
-ArrayList<Orbit> orbits = new ArrayList<Orbit>();
+Map<Integer, Orbit> orbits = new HashMap<Integer, Orbit>();
 float cps = 0;
 float showCycles = 2; // 1/speed
 int orbitn = 4;
 float lastCycle = 0;
 float lastTime = 0;
 int sizeY = 800;
-int orbitHeight = sizeY / orbitn;
-int h = orbitHeight - 4;
 
 void setup() {
   surface.setTitle("");
   smooth();
   size(400, 800);
   osc = new OscP5(this, 2020);
-  synchronized(orbits) {
-    for (int i = 0; i < orbitn; ++i) {
-      orbits.add(new Orbit());
-    }
-  }
 }
 
 void draw() {
@@ -34,10 +28,10 @@ void draw() {
   float cycle = ((elapsed * cps)/1000) + lastCycle;
   synchronized(orbits) {
     pushMatrix();
-    for (int i = 0; i < orbitn; ++i) {
-      Orbit o = orbits.get(i);
-      if (i > 0) {
-        translate(0,orbitHeight);
+    for (Integer orbitIndex : orbits.keySet()) {
+      Orbit o = orbits.get(orbitIndex);
+      if (orbitIndex > 0) {
+        translate(0, orbitHeight());
       }
       o.draw(cycle);
     }
@@ -66,10 +60,17 @@ void oscEvent(OscMessage m) {
     }
     ++i;
   }
+
+  if (!orbits.containsKey(orbit)) {
+    synchronized(orbits) {
+      orbits.put(orbit, new Orbit());
+    }
+  }
+
   if (orbit >= 0 && cycle >= 0) {
     synchronized(orbits) {
       Event event = new Event(cycle, t);
-      Orbit o = orbits.get(orbit % orbitn);
+      Orbit o = orbits.get(orbit);
       lastCycle = cycle;
       lastTime = t;
       o.add(event);
@@ -103,14 +104,20 @@ class Orbit {
         i.remove();
       }
       else {
-        vertex(width * pos, state ? 0 : h);
+        vertex(width * pos, state ? 0 : orbitHeight());
         //vertex(width * pos, state ? h : 0); triangles!
         state = !state;
       }
     }
-    vertex(0, state ? 0 : h);
+    vertex(0, state ? 0 : orbitHeight());
     endShape();
   }
+}
+
+int orbitHeight() {
+  return orbits.size() > 0
+    ? sizeY / orbits.size()
+    : 0;
 }
 
 class Event {
