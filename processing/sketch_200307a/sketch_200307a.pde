@@ -7,7 +7,7 @@ OscP5 osc;
 
 ArrayList<Orbit> orbits = new ArrayList<Orbit>();
 float cps = 0;
-float showCycles = 1.5; // 1/speed
+float showCycles = 2; // 1/speed
 int orbitn = 4;
 float lastCycle = 0;
 float lastTime = 0;
@@ -19,7 +19,6 @@ void setup() {
   surface.setTitle("");
   smooth();
   size(400, 800);
-  textSize(40);
   osc = new OscP5(this, 2020);
   synchronized(orbits) {
     for (int i = 0; i < orbitn; ++i) {
@@ -89,11 +88,13 @@ class Orbit {
 
   void draw(float cycle) {
     Boolean state = this.state;
-    noFill();
+    int roundedCycle = Math.round(cycle);
+    //noFill();
     beginShape();
-    strokeWeight(2);
-    stroke(0);
-    vertex(width, state ? 0 : h);
+    fill(color(roundedCycle%255, (roundedCycle%126)*2, (roundedCycle*3)%255));
+    strokeWeight(5);
+    stroke(roundedCycle%255);
+    //vertex(width, state ? 0 : h);
     Iterator<Event> i = events.iterator();
     while (i.hasNext()) {
       Event event = i.next();
@@ -103,7 +104,7 @@ class Orbit {
       }
       else {
         vertex(width * pos, state ? 0 : h);
-        vertex(width * pos, state ? h : 0);
+        //vertex(width * pos, state ? h : 0); triangles!
         state = !state;
       }
     }
