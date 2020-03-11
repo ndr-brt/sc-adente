@@ -1,0 +1,14 @@
+d1 $ s "[[bd*2|bd] ~]*2"
+
+d2 $ s "[~ sn]*2"
+
+d3 $ s "hh(7,8)"
+
+d4 $ every 2 (linger 0.5)
+  $ s "cp(3,6)" |* g 0.8
+
+all $ (euclid 2 2).(jux (rev)).(swing 5).(degradeBy 1)
+
+hush
+
+queryArc "bd"

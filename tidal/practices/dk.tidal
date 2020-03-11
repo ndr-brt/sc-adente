@@ -103,10 +103,12 @@ d3 $ striate 16 $ every 2 (ply (irand 3)) $ every 3 (stut 3 0.6 0.2) $ s "cp" # 
 d4 $ every 5 (fast 2) $ every 2 (hurry 1.5) $ sometimes (gap 2) $ s "808*8" # gain 0.7 # sp "[0.5 0.6 0.7]"
 
 
-d1 $ s "bd*2"
-d2 $ s "~ sn*3"
-d3 $ striate 12 $ s "industrial"
-d4 $ s "bd*7"
-d5 $ superimpose ((fast 3).(#orbit 5)) $ s "cp"
+d1 $ every 3 (euclid 3 4) $ s "bd*2" # shape 0.7
+d2 $ every 4 (zoom (0, 0.5)) $  s "~ sn*3"
+d3 $ every 3 (fast 2) $ striate 12 $ s "industrial" # n "<0 1 2>" # del' 0.8 0.12 0.23
+d4 $ superimpose (|* sp "0.5") $ gap 2 $ s "bd*12"
+d5 $ superimpose ((fast 3).(#orbit 5)) $ every (choose [2,3]) (hurry 3) $ s "cp"
+
+all $ (|* g 1)
 
 hush

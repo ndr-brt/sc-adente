@@ -8,23 +8,23 @@ OscP5 osc;
 
 Map<Integer, Orbit> orbits = new HashMap<Integer, Orbit>();
 float cps = 0;
-float showCycles = 2; // 1/speed
+float showCycles = 4; // 1/speed
 float lastCycle = 0;
 float lastTime = 0;
-int sizeY = 800;
 
 void setup() {
   surface.setTitle("");
   smooth();
-  size(400, 800);
+  size(960, 1020);
   osc = new OscP5(this, 2020);
 }
 
 void draw() {
-  background(125);
   float now = millis();
   float elapsed = now - lastTime;
   float cycle = ((elapsed * cps)/1000) + lastCycle;
+  // background(sin(now/20, 0.0, 205.0));
+  background(0);
   synchronized(orbits) {
     pushMatrix();
     for (Integer orbitIndex : orbits.keySet()) {
@@ -62,7 +62,7 @@ void oscEvent(OscMessage m) {
 
   if (!orbits.containsKey(orbit)) {
     synchronized(orbits) {
-      orbits.put(orbit, new Orbit());
+      orbits.put(orbit, new Orbit(orbit));
     }
   }
 
@@ -80,6 +80,11 @@ void oscEvent(OscMessage m) {
 class Orbit {
   Boolean state = false;
   ArrayList<Event> events = new ArrayList<Event>();
+  final int number;
+
+  Orbit(int number) {
+    this.number = number;
+  }
 
   void add (Event event) {
     events.add(0,event);
@@ -89,12 +94,13 @@ class Orbit {
   void draw(float cycle) {
     Boolean state = this.state;
     int roundedCycle = Math.round(cycle);
+    int orbitFactor = roundedCycle + (number*15);
     //noFill();
     beginShape();
-    fill(color(roundedCycle%255, (roundedCycle%126)*2, (roundedCycle*3)%255));
-    strokeWeight(5);
-    stroke(roundedCycle%255);
-    //vertex(width, state ? 0 : h);
+    fill(color(orbitFactor%255, (orbitFactor%126)*2, (orbitFactor*3)%255));
+    // strokeWeight(4);
+    // stroke(orbitFactor%255);
+    vertex(width-(orbitFactor % width), state ? 0 : heightLfo(cycle));
     Iterator<Event> i = events.iterator();
     while (i.hasNext()) {
       Event event = i.next();
@@ -103,19 +109,23 @@ class Orbit {
         i.remove();
       }
       else {
-        vertex(width * pos, state ? 0 : orbitHeight());
-        //vertex(width * pos, state ? h : 0); triangles!
+        vertex(width * pos, state ? 0 : heightLfo(cycle));
+        vertex(width * pos, state ? heightLfo(cycle) : 0); // triangles!
         state = !state;
       }
     }
-    vertex(0, state ? 0 : orbitHeight());
+    vertex(0, state ? 0 : heightLfo(cycle));
     endShape();
+  }
+
+  float heightLfo(float cycle) {
+    return sin((cycle + number)*15, orbitHeight()/500, orbitHeight());
   }
 }
 
 int orbitHeight() {
   return orbits.size() > 0
-    ? sizeY / orbits.size()
+    ? height / orbits.size()
     : 0;
 }
 
@@ -127,4 +137,8 @@ class Event {
     this.cycle = cycle;
     this.start = start;
   }
+}
+
+float sin(float value, float from, float to) {
+  return Math.round((Math.sin(Math.toRadians(value)) + from) * (to - from));
 }
