@@ -14,7 +14,7 @@ do
         id
         .(# o 0)
         -- .(|* g (trigger 1 $ range 1 0 $ slow 16 $ envL))
-        .(degradeBy 1)
+        -- .(degradeBy 1)
         ,
         id
         .(|* sp (10 + rand))
@@ -37,7 +37,7 @@ do
       # sp "1"
       ,
       sometimes (# rvb' 0.5 0.7)
-      $ degradeBy 1
+      -- $ degradeBy 1
       -- $ degradeBy (trigger 1 $ range 1 0 $ slow 8 $ envL)
       -- $ degradeBy (trigger 1 $ range 0 1 $ slow 8 $ envL)
       $ every 4 (stut' 5 (1/6) (# smear 0.8))
@@ -58,7 +58,7 @@ do
       -- $ degradeBy (1/4)
       -- $ degradeBy (trigger 1 $ range 1 (1/4) $ slow 8 $ envL)
       -- $ degradeBy (trigger 1 $ range 0 (1/4) $ slow 8 $ envL)
-      $ degradeBy 1
+      -- $ degradeBy 1
       $ rarely (|+ n 1)
       $ n "0*3"
       # s "pingr"

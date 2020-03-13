@@ -15,7 +15,7 @@ d1
   --   .(# lp' 800 0.2)
   --   .(|* g 0.35)
   -- )
-  $ s "elea-sounds:2"
+  $ s "eleas:2"
   # lp' 1500 0.11
   |* sp 0.6
   # rvb' 0.6 0.9
@@ -23,7 +23,7 @@ d1
   |* g 0.8
 
 d2
-  $ s "elea-sounds*24"
+  $ s "eleas*24"
   # o 3
   |* sp (range 8.08 8.28 $ slow 8 $ (saw+tri)/2)
   -- # distort 0.12

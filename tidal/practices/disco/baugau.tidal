@@ -1,7 +1,7 @@
 bpm (144)
 
 do
--- resetCycles
+  -- resetCycles
   let nn = (slow 24 $ saw)
   let cc = (slow 24 $ pulse 0.1)
   d1

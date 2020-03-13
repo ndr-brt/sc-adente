@@ -47,7 +47,7 @@ do
       .(# hp' 50 0.3)
     ]
     $ sometimesBy final ((jux rev).(# squiz (trigger 1 $ range 0 100 $ slow 12 $ envL )))
-    $ s "elea-sounds:3"
+    $ s "eleas:3"
     |* g 0.8
   d2
     $ slow "8"
@@ -76,7 +76,7 @@ do
       .(slow 2)
       -- .(stutWith 64 (range 0.0125 0.0002 $ fast 32 $ saw) ((|* sp (1.05)).(# pan rand).(|+ coarse 1)))
     )
-    $ s "elea-voice"
+    $ s "eleav"
     # n sam
     |* g 0.46
     # hp' 150 0.2
