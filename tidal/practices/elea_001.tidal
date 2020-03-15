@@ -1,0 +1,41 @@
+bpm(135)
+
+d1
+  $ every 5 (iter 3)
+  $ layer [
+    (|* sp 0.2)
+    .(# note "<0 0 3 3 6>")
+    .(while "[f!8 t]/2" (|- n 2))
+    .(# hp' 55 0.4)
+    .(# end 0.5)
+    .(# crush 12)
+    .(|* g 0.95)
+    ,
+    (every 2
+      (slice 2 "0 1 1 1 1 2 2 2 0 0")
+      .(# squiz "[0 <12 34 76 94>]")
+      .(# del' 0.0 0.33 0) -- play with this!
+    )
+    .(# o 5)
+    .(|* sp 12)
+    .(euclid "[1|2|3]" (segment 1 $ (irand 4)+2))
+    .(sometimesBy (slow 3 $ sine) (#accelerate "-0.5"))
+    .(# pan ((sine + saw)/2))
+    ,
+    (while "[f t]/7" (degradeBy 0.8))
+    .(rarely (superimpose ((hurry ("[2.5 2.2666 2.66]")).("h" ~>).(# pan (slow 4 $ square)))))
+    .(every 2 (|* sp "[s 1 q]"))
+    ,
+    (while "[t t t f f f]/4" (degradeBy (slow 6 $ sine)))
+    .(euclid 8 1).(|* sp 24).(jux (rev.(hurry 3)))
+    .(# o 6)
+    .(|* g (0.8 * (slow 6 $ cosine)))
+    .(#rvb' 0.3 0.4)
+  ]
+  $ sometimesBy 0.5 (|* speed "-1")
+  $ degradeBy 1
+  $ "eleas:35*8"
+  |* g 0.95
+
+
+hush

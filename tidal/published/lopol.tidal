@@ -20,7 +20,7 @@ d1
   |* sp 0.6
   # rvb' 0.6 0.9
   # o 0
-  |* g 0.8
+  |* g 0.73
 
 d2
   $ s "eleas*24"
@@ -29,7 +29,7 @@ d2
   -- # distort 0.12
   # binshift (slow 25 $ sine)
   # lp' 5000 0.12
-  |* g 0.58
+  |* g 0.54
   |* del' 0.6 0.3 0.34
   # pan perlin
 

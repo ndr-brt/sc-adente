@@ -87,6 +87,8 @@ let
 -- shortcuts taken from BootTidalCustom, improved
 :{
 let
+  cyc = (toRational . floor) <$> sig id
+
   bps b = setcps (b/2)
   bpm b = setcps (b/2/120)
 
