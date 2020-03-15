@@ -1,0 +1,64 @@
+bpm(130)
+
+do
+  let ar = "<3 3 3 4 1 2 2 4 1>"
+  d1
+    $ rarely (stut ar 0.6 0.1)
+    $ superimpose (
+      (# o 4)
+      .(# octave 3)
+      .(slow (ar/2))
+    )
+    $ euclid ar 5
+    $ s "pingz"
+    # rvb' 0.5 0.7
+    # crush 6
+  d2
+    $ every 4 (|/ sp (5/4))
+    $ every 3 (|* sp (4/3))
+    $ juxBy (slow 5 $ square) (
+      (striateBy ar 0.92)
+      .("q" ~>)
+      .(|* sp (9/8))
+    )
+    $ s "santoor:2"
+    |* g 1.2
+    # rvb' 0.8 0.9
+  d3
+    $ superimpose (
+      (|* sp 12)
+      .(ply 4)
+      .(rarely (hurry ar))
+      .(# pan (rand))
+      .(degradeBy 0.4)
+      .(# o 5)
+      .(# del' 0.6 0.33 0.3)
+    )
+    $ superimpose (
+      (|* sp 8)
+      .(euclid ar 7)
+      .(|* g 0.8)
+      .(every ar (|* sp "-1"))
+      .(rarely (ply ar))
+      .(every ar (stut ar 0.8 (1/(ar*ar))))
+      .(sometimesBy (1/ar) (# accelerate (1/ar)))
+      .(# pan (slow ar $ sine))
+    )
+    $ repeatCycles 2
+    $ loopAt 1
+    $ s "osc"
+    # n ar
+    |* g 0.83
+    |* sp "<0.8 0.8 1 1.25>"
+    |* shape 0.7
+  d4
+    $ juxBy 0.7 ((|* sp "-1").(ply 2))
+    $ slice 4 "3 0 1 1"
+    $ s "emsoft:2"
+    |* g 0.97
+    # del' 0.5 0.66 0.4
+    # distort 1.3
+
+all $ (# waveloss (trigger 1 $ range 0 100 $ slow 35 $ envL))
+
+hush

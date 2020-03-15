@@ -95,12 +95,12 @@ class Orbit {
     Boolean state = this.state;
     int roundedCycle = Math.round(cycle);
     int orbitFactor = roundedCycle + (number*15);
-    //noFill();
+    // noFill();
     beginShape();
     fill(color(orbitFactor%255, (orbitFactor%126)*2, (orbitFactor*3)%255));
     // strokeWeight(4);
     // stroke(orbitFactor%255);
-    vertex(width-(orbitFactor % width), state ? 0 : heightLfo(cycle));
+    vertex(width-(orbitFactor % width), state ? heightLfo(cycle)/10 : heightLfo(cycle));
     Iterator<Event> i = events.iterator();
     while (i.hasNext()) {
       Event event = i.next();
@@ -109,12 +109,12 @@ class Orbit {
         i.remove();
       }
       else {
-        vertex(width * pos, state ? 0 : heightLfo(cycle));
-        vertex(width * pos, state ? heightLfo(cycle) : 0); // triangles!
+        vertex(width * pos * pos, state ? heightLfo(cycle)/10 : heightLfo(cycle));
+        vertex(width * pos, state ? heightLfo(cycle) : heightLfo(cycle)/10); // triangles!
         state = !state;
       }
     }
-    vertex(0, state ? 0 : heightLfo(cycle));
+    vertex(0, state ? heightLfo(cycle) : heightLfo(cycle)/10);
     endShape();
   }
 

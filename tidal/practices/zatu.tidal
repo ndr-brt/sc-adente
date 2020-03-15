@@ -1,0 +1,35 @@
+d1
+  $ every 2 (gap 8)
+  $ every 3 (|+ note 3)
+  $ superimpose (
+    (striate 2)
+    .(# o 1)
+    .(# lp' 800 0.1)
+    .(every 3 (|+ note 3))
+    .(every 4 (|+ note 1))
+  )
+  $ superimpose (
+      (|* sp 4)
+      .(every 5 (# accelerate "-0.8"))
+      .(euclid 2 6)
+      .(stut 6 0.7 0.3)
+      .(sometimes (|+ note (choose ([1, 3, 5]))))
+      .(|* g 0.8)
+      .(# o 2)
+  )
+  $ superimpose (
+      (|* sp 8)
+      .(euclid 7 8)
+      .(# pan perlin)
+      .(every 2 (rev).(#accelerate (rand/2 + 0.5)))
+      .(every 3 (|+ n 3))
+      .(# o 3)
+      .(#del' 0.5 0.33 0.3)
+  )
+  $ s "gtr:2"
+  # rvb' 0.4 0.6
+
+all $ (jux (|+ sp "-1"))
+  .(# waveloss (trigger 1 $ range 0 100 $ slow 30 $ envL))
+
+hush
