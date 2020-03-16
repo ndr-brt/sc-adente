@@ -1,0 +1,77 @@
+-- hi to everyone, this is u-mano u-dito
+
+bpm(129)
+
+do
+  let ar = "<3 3 3 1 3 4 1 2 2 3 4>"
+  d1
+    $ superimpose (
+      (|- n 24)
+      .(slow (1/ar))
+    )
+    $ euclid ar 5
+    $ s "pingz"
+    # rvb' 0.6 0.8
+    # crush 5
+    # shape 0.7
+  d2
+    $ every 5 (|* sp (5/4))
+    $ superimpose (
+      (|* sp (4/3))
+      .(jux (
+        (striateBy ar 0.92)
+        .(|* sp (9/8))
+        .(rarely (#accelerate "-0.1"))
+      ))
+    )
+    $ s "santoor:2"
+    |* g 0.98
+    # rvb' 0.7 0.72
+  d3
+    $ superimpose (
+      (# o 4)
+      .(|* sp 12)
+      .(euclid ar 7)
+      .(sometimes (ply (4-ar)))
+      .(rarely (|* sp "-1"))
+      .(degradeBy 0.7)
+      .(# del' (slow 5 $ (cosine/2)+0.33) 0.33 0.33)
+    )
+    $ superimpose (
+      (# o 5)
+      .(|* sp 8)
+      .((1/ar) ~>)
+      .(almostNever (# accelerate ((sine-0.5)/4)))
+      .(|* g 0.8)
+      .(sometimesBy (1/ar) (
+        stut (ar*(ri 4)) 0.6 (
+          range 0.01 0.09 $ slow 5 $ saw
+        )
+      ))
+    )
+    $ repeatCycles 4
+    $ loopAt 1
+    $ s "osc"
+    # n ar
+    |* g 0.97
+    # shape 0.45
+    |* sp "<0.8 0.8 1 1.25>"
+  d4
+    $ juxBy 0.666 ((striate 4).(# o 6).(stut 6 0.3 0.167))
+    $ gap "<2 3 3 2 6>"
+    $ s "emsoft:2"
+    # distort 1.9
+    # shape 0.6
+
+all $ (# waveloss (trigger 1 $ range 0 100 $ slow 120 $ envL))
+
+hush
+
+-- ok, i'm done
+-- now the machine will do all the work!
+-- thanks for watching
+-- enjoy.
+-- pump up the volume!
+-- "smarmellare"
+-- the code will be available on my github
+-- check user "ndr_brt"
