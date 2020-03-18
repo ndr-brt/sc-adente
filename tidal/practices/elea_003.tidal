@@ -1,0 +1,36 @@
+bpm(126)
+
+do
+  let magic = 0
+  let modul = (fast (magic*2) $ sine)
+  -- let modul = 0
+  d1
+    $ sometimes (juxBy (choose [-1,1]) ((hurry magic).(rev)))
+    $ chunk magic (
+      (rev)
+      .(iter magic)
+      .(|* sp 2.5)
+      .(# ac (range "-0.2" "0.2" $ slow (magic*3) $ sine))
+      .(striate magic)
+    )
+    $ stack [
+      loopAt 2
+        $ sometimesBy modul (# rmod' 0.8 (magic*2) 0.6)
+        $ s "eleas:30",
+      sometimesBy (slow magic $ modul) (iter magic)
+        $ s "[eleas:29*3 ~]"
+        # shape 0.8
+        # o 7
+        |* g 0.9 #
+        hp' 55 0.45,
+      sometimesBy (slow (magic+3) $ modul) ((striate (magic*2)).(stut (magic*2) 0.7 0.04))
+        $ s "eleas:28"
+        |* speed (magic/2),
+      sometimesBy (slow (magic+4) $ modul) (|* sp "-1")
+        $ s "~ eleas:31"
+        # o 8
+        # rvb' 0.4 0.8
+    ]
+    |* g 0.9
+
+hush
