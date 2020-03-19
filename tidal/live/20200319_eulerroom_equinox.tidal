@@ -1,0 +1,78 @@
+
+-- hi to everyone, this is u-mano u-dito
+-- enjoy Eulerroom Equinox all day long!
+-- I will start at 07:30 GMT
+-- This is a single.sample.run
+-- And I will do it with the "subroc3d"
+-- sample from the tidal base sample library
+-- the code will be available on my github
+-- user: ndr.brt
+
+-- ok, I'm done, I will let this fade out for
+-- 5 minutes then leave place for other streams
+-- hope you enjoyed.
+-- github.com/ndr.brt
+-- soundcloud.com/umanoudito
+-- umanoudito.bandcamp.com
+-- ndr_brt.gitlab.io
+
+-- Eulerroom Equinox 2020
+
+-- bye!
+hush
+
+all $ (#waveloss (trigger 1 $ range 0 100 $ slow 100 $ envL))
+
+bpm(129)
+
+do
+  let ar = 3
+  d1
+    $ chunk ar (
+      (iter ar)
+      .(hurry ar)
+      .(gap (ar+1))
+      .(chew ar 7)
+    )
+    $ every (ar*2) (linger "h")
+    $ layer [
+      id
+      ,
+      (#o 1)
+      .(hurry ar)
+      .("q" ~>)
+      ,
+      (# o 2)
+      .(hurry (ar*3))
+      .(|* g 0.9)
+      .(rand ~>)
+      .(every 3 (|* sp (5/4)))
+      .(#del' 0.3 0.33 0.33)
+      .(bite 2 ar)
+      .(degradeBy 0.2)
+      .(juxBy (slow 6 $ cosine) ((rev).(|* sp "-1")))
+      ,
+      (|* sp 0.11)
+      .(|* g 0.8)
+      .(# end 0.3)
+      .(# hp' 50 0.2)
+      .(# o 3)
+      .(every 5 (|* sp (5/4)))
+      .(every 7 (|* sp (4/3)))
+      .(almostNever (# ac "-1"))
+      .(juxBy 0.5 (|* sp (9/8)))
+      .(# distort 1.2)
+      ,
+      (|* sp "[12 16 18 10]")
+      .(euclid 9 10)
+      .(swing ar)
+      .(# pan (slow 3 $ (cosine+saw)/2))
+      .(# ac ((sine/2)-0.5))
+      .(sometimes (stutWith 5 0.03 (|* ac ar)))
+      .(rarely (fast 2))
+      .(# o 4)
+      .(almostNever (# coarse ar))
+      .(sometimesBy 0.08 (# squiz (ar^2)))
+    ]
+    $ s "subroc3d"
+    # rvb' 0.4 0.6

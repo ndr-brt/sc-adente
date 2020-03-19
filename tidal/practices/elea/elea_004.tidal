@@ -1,0 +1,14 @@
+let ca = 2
+
+d1
+  -- $ rarely ((iter 2).rev)
+  $ superimpose (
+    (hurry 2)
+    .(jux (hurry 4))
+    .(|* g 0.9)
+  )
+  $ loopAt 0.65
+  $ every 4 (linger "[q|s|h]")
+  $ s "eleas:17"
+
+hush

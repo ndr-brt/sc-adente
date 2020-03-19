@@ -1,0 +1,74 @@
+bpm(129)
+
+d1
+  $ chunk 3 ((rev).(hurry 2).(slice 2 "0 0").(# pan rand))
+  $ every 4 (linger "q")
+  $ layer [
+    id
+    .(#distort 0.3)
+    .(sometimesBy 0.23 (|+ note 3))
+    .(rarely (ply 5))
+    ,
+    (hurry 2)
+    .("[h|q|s]" ~>)
+    .(jux (|* sp (9/8)).((slow 3 $ sine) ~>))
+    .(# o 7).(#del' 0.4 0.33 0.33)
+    ,
+    (hurry 6)
+    .(sometimesBy 0.7 (superimpose ((hurry 2).(# pan perlin))))
+    .(# comb (slow 4 isaw))
+    .(superimpose ((#binshift saw).(swing 4)))
+    ,
+    (fast 8)
+    .(|* g 0.7)
+    .(# o 8)
+    .(striate 7)
+    .(rarely (|* sp (5/4)))
+    .(# rvb' 0.5 0.7)
+    .(jux (|* sp (9/8)))
+  ]
+  $ s "subroc3d"
+  # waveloss (trigger 1 $ range 0 100 $ slow 10 $ envL)
+
+hush
+
+
+
+
+do
+  -- let cr = "<1 4 4 3 2 1 5>"
+  let cr = "1"
+  d1
+    $ chunk 2 ((rev).(hurry cr).(gap (cr*3)).(chew 3 6))
+    $ every 4 (linger "q")
+    $ layer [
+      id
+      .(|* sp 4.2)
+      .(euclid 3 8)
+      .(striate 7)
+      ,
+      (hurry (cr-1))
+      .("q" ~>)
+      .(juxBy 0.5 (("q" ~>).(#comb 0.5)))
+      ,
+      (hurry (cr*2))
+      .(rarely (# squiz 2))
+      .(sometimesBy 0.3 (# ac (rand-0.5)))
+      ,
+      (|* sp 0.1)
+      .(jux (|* sp (9/8)))
+      .(# end 0.3)
+      .(#distort 0.1)
+    ]
+    $ s "subroc3d"
+
+clutchIn 1 8 $ silence
+
+hush
+
+
+d1
+  $ superimpose ((hurry 2).("q" ~>))
+  $ s "subroc3d"
+
+hush
