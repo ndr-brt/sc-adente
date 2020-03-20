@@ -1,14 +1,47 @@
-let ca = 2
+bpm (200)
 
-d1
-  -- $ rarely ((iter 2).rev)
-  $ superimpose (
-    (hurry 2)
-    .(jux (hurry 4))
-    .(|* g 0.9)
-  )
-  $ loopAt 0.65
-  $ every 4 (linger "[q|s|h]")
-  $ s "eleas:17"
+do
+  let can = 5
+  d1
+    $ layer [
+      id
+      .(every can (linger "[h]"))
+      .(# lp' 2000 0.1)
+      .(# hp' 65 0.6)
+      -- .(degradeBy 1)
+      ,
+      (hurry 2)
+      .(while "<f f f t>/8" (euclid 2 4))
+      .(chop 8)
+      .(juxBy (slow 4 $ sine) ((hurry 4)))
+      .("0.06" <~)
+      .(almostNever (stutWith 12 0.02 (# coarse (10 - can))))
+      .(|* g 0.8)
+      -- .(degradeBy 1)
+    ]
+    $ s "eleas:17"
+  d2
+    $ layer [
+      id
+      .(# rvb' 0.3 0.4)
+      .(# comb (rand/2 + 0.25))
+      -- .(degradeBy 1)
+      ,
+      (hurry 2)
+      .(# pan perlin)
+      .(# o 8)
+      .(0.06 <~)
+      .(|+ binshift (slow can $ sine))
+      .(every can (|+ binshift (rand-0.5)))
+      .(# del' 0.3 0.66 0.33)
+      -- .(degradeBy 1)
+    ]
+    $ loopAt 1
+    $ every can (gap 4)
+    $ s "eleas:5"
+
+all $ (# ac "-1")
 
 hush
+
+all $ id

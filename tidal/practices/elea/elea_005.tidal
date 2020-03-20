@@ -1,0 +1,59 @@
+bpm(125)
+
+hush
+
+do
+  -- resetCycles
+  let max = 10
+  let slowness = 25
+  let cr = (slow slowness $ ((cat[r max, ri max]) + 1))
+  let raising = slow slowness $ tri
+  let falling = slow slowness $ (1-tri)
+  d1
+    $ stack [
+      spread ($) [chew 3 5, chew 2 5, chew 4 5]
+        $ superimpose(
+            (# bp' 6000 0.4)
+            .(|* g 1.2)
+            .(#pan perlin)
+        )
+        $ s "eleas:14"
+        # hp' 70 0.3
+        # shape 0.4
+        # distort (range 0 0.2 $ raising)
+        |* g (range 0.75 0.8 $ falling)
+      ,
+      chunk 5 (
+        (hurry (cr))
+        .(gap cr)
+        .(iter cr)
+        .(stut (cr*3) 0.7 (range 0.03 0.13 $ rand))
+        -- .(juxBy (perlin) ((|* sp (4/5))))
+        -- .(rarely (|* sp (5/4)))
+        .(sometimesBy (1-(cr/max)) (
+          (|* sp (segment 1 $ choose [2,4])).(ply 2))
+        )
+        .(#pan rand)
+        .(# del' (range 0.1 0.8 $ falling) 0.167 0.167)
+        .(# rvb' 0.2 0.3)
+        .(|* g (range 0.75 0.8 $ falling))
+        )
+        $ fast 2
+        $ s "eleas:13"
+        |* sp "<1.2 1 1 1>"
+        # o 1
+        |* g (range 0.75 0.85 $ falling)
+      ,
+      loopAt 1
+        $ juxBy (slow cr $ square) (("h" ~>))
+        $ s "eleas:12"
+        # bp' 1800 0.2
+        |* g 0.68
+        # rvb' 0.85 0.95
+        # o 2
+    ]
+    |* g 0.9
+
+clutchIn 1 10 $ silence
+
+hush
