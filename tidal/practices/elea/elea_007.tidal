@@ -1,0 +1,68 @@
+bpm(122)
+
+hush
+
+do
+  let vel = "<8 8 8 4 8 8 8 12 16>"
+  -- let vel = 4
+  let halfVel = fromIntegral.floor <$> ((vel/2) :: Pattern Double)
+  d1
+    $ every vel (rev)
+    $ layer [
+      (every ((1 ~>) $ 3) (
+          off "t" (
+            (hurry halfVel)
+            .(# del' "0.33" "0.166" "0.1666")
+            .(# o 6)
+            .(# lpf 2000)
+          )
+      ))
+      .(|* sp 8)
+      .(stutWith 3 0.125 (
+        (|+ note "[1|3|5]")
+        .(#pan (slow vel sine)))
+      )
+      .(euclid "[3|6]" vel)
+      .(# o 8)
+      -- .(degradeBy 1)
+      ,
+      (striate (vel))
+      .(# triode 0.4)
+      .(# shape 0.7)
+      .(rarely (|- note 2))
+      .(|+ note ("<0 2 5>"))
+      -- .(degradeBy 1)
+    ]
+    $ s "eleas:20"
+    |* g 0.8
+  d2
+    -- $ degradeBy 1
+    $ every 2 (gap halfVel)
+    $ s "eleas:21*3"
+    |/ sp "-2"
+    # begin 0.43
+    # end 0.75
+    |* g 0.82
+    # rvb' 0.4 0.5
+    # lpf 1000
+    # hp' 59 0.8
+  d3
+    $ layer [
+      (while "<t t t t t f>" (degradeBy 1))
+      .(while "<f f f f f t>" (
+        (hurry 2)
+        .(# pan (sometimesBy 0.5 rev ("[0 1]")))
+        .(# binshift (slow 5 $ cosine))
+        .(# rvb' 0.3 0.4)
+        .(# o 7)
+      ))
+      -- .(degradeBy 1)
+      ,
+      (every 5 (linger "h"))
+      -- .(degradeBy 1)
+    ]
+    $ splice 4 "3 1 0 [2|1]"
+    $ s "eleas:27"
+
+
+hush
