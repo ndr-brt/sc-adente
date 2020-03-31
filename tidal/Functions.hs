@@ -27,8 +27,8 @@ u = up
 cyc = (toRational . floor) <$> sig id
 
 -- plays a sample in reverse at speed a every b cycles, timing the playback so it ends exactly when the next cycle begins.
-rinse a b p = ((1/a) <~) $ struct (slow b "t") $ loopAt (-1/a) $ p
-rinse' a b c = every b (const $ ((1/a) <~) $ slow a $ loopAt (-1/a) $ sound (c))
+-- rinse a b p = ((1/a) <~) $ struct (slow b "t") $ loopAt (-1/a) $ p
+-- rinse' a b c = every b (const $ ((1/a) <~) $ slow a $ loopAt (-1/a) $ sound (c))
 -- rinse a b c d = every b (const $ ((1/a) <~) $ slow a $ loopAt (-1/a) $ sound c # n (irand d))
 
 bps b = setcps (b/2)

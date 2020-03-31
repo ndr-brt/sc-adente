@@ -1,9 +1,11 @@
 bpm(132)
 
+d1 silence
 hush
 
 do
   -- resetCycles
+  let oscVal = 1.5
   d1
     $ superimpose (
       (|* sp 8)
@@ -12,33 +14,40 @@ do
       .(# o 6)
       .(while "<f f t>" (stut (run 4 + 11) 0.7 (range 0.02 0.08 $ slow 6 $ saw)))
       .(while "<t t f>" (# del' (1/3) (1/6) (1/3)))
+      .(|* g 0.9)
+      -- .(degradeBy 1)
     )
     $ while "<f f t>/2" (|+ note 2)
     $ s "eleas:24"
-    # oct' 1 1 1
+    |+ oct oscVal oscVal oscVal
+  d2
+    $ every 5 (|+ note 2)
+    $ loopAt 2
+    $ layer [
+      (|/ sp 16)
+      .(# begin 0)
+      .(# pan (range 0.45 0.55 $ rand))
+      .(# end 0.22)
+      .(|* g 0.75)
+      .(# shape 0.94)
+      .(# crush 4)
+      .(# rvb 0.2 0.4)
+      -- .(degradeBy 1)
+      ,
+      (# pan (slow 4 $ sine))
+      .(# o 3)
+      -- .(degradeBy 1)
+      ,
+      (1 ~>)
+      .(|/ sp 2)
+      .(# pan (slow 4 $ cosine))
+      .(# o 4)
+      -- .(degradeBy 1)
+    ]
+    $ rarely (# rmod 0.6 8 0.54)
+    $ s "eleas:25"
+    |* g 0.7
 
-d2
-  $ every 5 (|+ note 2)
-  $ loopAt 2
-  $ layer [
-    (|/ sp 16)
-    .(# begin 0)
-    .(# pan (range 0.45 0.55 $ rand))
-    .(# end 0.22)
-    .(|* g 0.75)
-    .(# shape 0.94)
-    .(# crush 4)
-    ,
-    (# pan (slow 4 $ sine))
-    ,
-    (1 ~>)
-    .(|/ sp 2)
-    .(# pan (slow 4 $ cosine))
-  ]
-  $ rarely (# rmod' 0.6 8 0.54)
-  $ s "eleas:25"
-  |* g 0.7
-
-all $ degradeBy (trigger 1 $ range 0 1 $ slow 6 $ envL)
-
-hush
+-- clutchIn 1 10 $ silence
+-- all $ degradeBy (trigger 1 $ range 0 1 $ slow 10 $ envL)
+-- all $ id

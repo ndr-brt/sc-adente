@@ -72,7 +72,8 @@ let setI = streamSetI tidal
     setB = streamSetB tidal
 :}
 
-:script tidal/Functions.hs
+-- TODO: fix relative path
+:script /home/andrea/Code/livecoding/sc-adente/tidal/Functions.hs
 
 :set prompt "tidal> "
 :set prompt-cont ""
