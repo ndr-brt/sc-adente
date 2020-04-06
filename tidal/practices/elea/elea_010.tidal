@@ -1,0 +1,32 @@
+bpm(112)
+
+do
+  d1
+    $ ("h" ~>)
+    $ euclid 3 4
+    $ slow 3
+    $ s "eleas:8"
+    # pan rand
+    |+ note (choose [1,3,5])
+    # del "t" "s" "t"
+    |* g 0.8
+  d2
+    $ stutWith 32 "0.005" (
+      (|+ dis 0.02).(# pan (fast 3 $ sine)).(rarely (rand <~))
+    )
+    $ slow 2
+    $ every 3 (|+ note 12)
+    $ s "eleas:11"
+    # pan rand
+    |* g 0.8
+  d3
+    $ while "<f f f f t>" (|+ note 2)
+    $ juxBy 0.5 (while "<t f f>/3" (|+ note 3))
+    $ every 4 (# rmod 0.8 12 0.6)
+    $ rarely (|+ note 2)
+    $ s "eleas:15"
+    |* sp 0.8
+    # rvb 0.3 0.4
+    # hp 50 0.4
+
+hush

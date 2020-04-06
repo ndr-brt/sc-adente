@@ -6,11 +6,13 @@ import System.IO (hSetEncoding, stdout, utf8)
 hSetEncoding stdout utf8
 
 tidal <- startTidal (superdirtTarget {oLatency = 0.15, oAddress = "127.0.0.1", oPort = 57120}) (defaultConfig {cFrameTimespan = 1/20})
+-- tidal <- startTidal (superdirtTarget {oLatency = 0.15, oAddress = "127.0.0.1", oPort = 51000}) (defaultConfig {cFrameTimespan = 1/20})
 
 -- :{
 -- tidal <- startMulti [
---     superdirtTarget {oLatency = 0.2, oAddress = "127.0.0.1", oPort = 57120},
---     superdirtTarget {oLatency = 0.2, oAddress = "127.0.0.1", oPort = 2020, oTimestamp = NoStamp}
+--     superdirtTarget {oLatency = 0.15, oAddress = "127.0.0.1", oPort = 57120},
+--     -- superdirtTarget {oLatency = 0.15, oAddress = "127.0.0.1", oPort = 2020, oTimestamp = NoStamp}
+--     superdirtTarget {oLatency = 0.15, oAddress = "127.0.0.1", oPort = 51000, oTimestamp = NoStamp}
 --   ] (defaultConfig {cFrameTimespan = 1/20})
 -- :}
 

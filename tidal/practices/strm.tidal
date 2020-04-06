@@ -126,10 +126,4 @@ do
 all $
   (# waveloss (trigger 1 $ range 0 100 $ slow 150 $ envL))
 
--- ok, finished,
--- now we'll let the machine do the dirt job
--- thanks for watching, see you
--- umanoudito.bandcamp.com
--- soundcloud.com/umanoudito
-
 hush
