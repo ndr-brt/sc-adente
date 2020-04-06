@@ -65,6 +65,10 @@ export default class Sketch {
     console.log(`DESTROOOOY ${this.udpPort}`)
     if (this.udpPort) {
       this.udpPort.close()
+<<<<<<< HEAD
+=======
+
+>>>>>>> Stuff
     }
   }
 }
@@ -118,8 +122,8 @@ class Orbit {
     let roundedCycle = Math.round(cycle);
     let orbitFactor = roundedCycle + (this.number*15);
     let width = window.innerWidth;
-    // let height = this.heightLfo(cycle);
-    let height = window.innerHeight;
+    let height = this.heightLfo(cycle);
+    //let height = window.innerHeight;
 
     p.beginShape();
     p.fill(p.color(orbitFactor%255, (orbitFactor%126)*2, (orbitFactor*3)%255));
@@ -131,7 +135,7 @@ class Orbit {
       if (pos < 0) {
         const index = this.events.indexOf(event);
         if (index > -1) {
-          events.splice(index, 1);
+          this.events.splice(index, 1);
         }
       }
       else {
@@ -151,11 +155,12 @@ class Orbit {
 }
 
 function orbitHeight() {
-  return orbits.size() > 0
-    ? window.innerHeight / orbits.size()
+  let orbitCount = Object.keys(orbits).length
+  return orbitCount > 0
+    ? window.innerHeight / orbitCount
     : 0;
 }
 
 function sin(value, from, to) {
-  return Math.round((Math.sin(value) + from) * (to - from));
+  return Math.round((Math.sin(value/10) + from) * (to - from));
 }
