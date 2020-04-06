@@ -12,10 +12,13 @@ export default class Sketch {
 
   handle(p) {
     let self = this;
-    this.udpPort = new osc.UDPPort({
-      localAddress: "0.0.0.0",
-      localPort: 2020
-    });
+    if (!this.udpPort) {
+      this.udpPort = new osc.UDPPort({
+        localAddress: "0.0.0.0",
+        localPort: 2020
+      });
+    }
+
 
     this.udpPort.on("ready", function () {
       console.log("Listening for OSC over UDP.");
@@ -58,17 +61,6 @@ export default class Sketch {
 
     p.windowResized = () => {
       p.resizeCanvas(p.windowWidth, p.windowHeight);
-    }
-  }
-
-  destroy() {
-    console.log(`DESTROOOOY ${this.udpPort}`)
-    if (this.udpPort) {
-      this.udpPort.close()
-<<<<<<< HEAD
-=======
-
->>>>>>> Stuff
     }
   }
 }
