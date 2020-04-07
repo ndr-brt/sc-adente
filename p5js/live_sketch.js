@@ -11,28 +11,32 @@ let lastTimestamp = 0;
 export default class Sketch {
 
   handle(p) {
-    let self = this;
     if (!this.udpPort) {
       this.udpPort = new osc.UDPPort({
         localAddress: "0.0.0.0",
         localPort: 2020
       });
+
+      this.udpPort.on("ready", function () {
+        console.log("Listening for OSC over UDP.");
+      });
+
+      this.udpPort.on("error", function (err) {
+        console.log(err);
+      });
+
+      this.udpPort.open()
     }
 
+    if (this.messageListener) {
+      this.udpPort.removeListener("message", this.messageListener)
+    }
 
-    this.udpPort.on("ready", function () {
-      console.log("Listening for OSC over UDP.");
-    });
-
-    this.udpPort.on("message", function (oscMessage) {
+    this.messageListener = function(oscMessage) {
       onMessage(oscMessage);
-    });
+    }
 
-    this.udpPort.on("error", function (err) {
-      console.log(err);
-    });
-
-    this.udpPort.open()
+    this.udpPort.on("message", this.messageListener);
 
     p.setup = (() => {
       p.smooth();
@@ -84,7 +88,7 @@ function onMessage(oscMessage) {
         break;
     }
   }
-  console.log(`Message parsed: orbit ${orbit}, cycle ${cycle}, cps ${cps}`)
+  // console.log(`Message parsed: orbit ${orbit}, cycle ${cycle}, cps ${cps}`)
 
   if (!(orbit in orbits)) {
     orbits[orbit] = new Orbit(orbit)
