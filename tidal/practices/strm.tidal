@@ -134,4 +134,7 @@ d2 $ s "~ sn*3"
 
 d3 $ chop 16 $ s "cp"
 
+d1 silence
+d2 silence
+
 hush
