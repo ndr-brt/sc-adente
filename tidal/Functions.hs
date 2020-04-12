@@ -16,6 +16,7 @@ g = gain
 i = id
 m = mute
 o = orbit
+oc = octave
 oa = offadd
 seg = segment
 sl = slow

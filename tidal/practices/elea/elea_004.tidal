@@ -7,7 +7,7 @@ do
       id
       .(every can (linger "[h]"))
       .(# lp' 2000 0.1)
-      .(# hp' 65 0.6)
+      .(# hp' 59 0.6)
       -- .(degradeBy 1)
       ,
       (hurry 2)
