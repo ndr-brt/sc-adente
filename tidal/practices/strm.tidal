@@ -127,15 +127,3 @@ all $
   (# waveloss (trigger 1 $ range 0 100 $ slow 150 $ envL))
 
 hush
-
-d1 $ s "bd"
-
-d2 $ s "~ sn*3"
-
-d3 $ chop 16 $ s "cp"
-
-d1 silence
-d2 silence
-d3 silence
-
-hush

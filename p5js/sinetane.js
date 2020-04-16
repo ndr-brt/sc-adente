@@ -13,12 +13,11 @@ export default function(p) {
     p.background(20);
 
     p.stroke(255);
-    p.strokeWeight(8);
+    p.strokeWeight(3);
 
     let a = 0.0;
     let inc = p.TWO_PI / 25.0;
     let factor = 24
-    // p.translate(p.frameCount, 0)
     for (let i = 0; i < p.windowWidth/factor; i++) {
       let sine = p.sin((i * p.frameCount)/(p.pow(factor, 2)))
       p.line(
