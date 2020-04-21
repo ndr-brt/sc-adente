@@ -1,0 +1,52 @@
+bpm(119)
+
+do
+  d1
+    $ jux (rev)
+    $ superimpose (
+      (|- oc 2)
+      .(every 4 (stut 8 0.8 0.015))
+      .(fast 1.5)
+      .(# legato 2)
+      .(# hp 58 0.4)
+    )
+    $ euclid 3 5
+    $ s "pingz:0"
+    # oc 5
+    # rvb 0.4 0.6
+  d2
+    $ superimpose (
+      (euclid 5 8)
+      .(|+ oc 4)
+      .(# ar 0.01 1)
+      .(# o 4)
+      .(stutWith 3 "t" ((|+ n 3).(|* g 0.9).(stut 3 0.8 0.167)))
+      .(# rvb 0.2 0.3)
+    )
+    $ superimpose (|- n 3)
+    $ slow 4
+    $ s "sbaum:0 sbaum:3"
+    # oc 3
+    |* g 0.8
+    # hp 62 0.6
+    # rvb 0.4 0.7
+  d3
+    $ chunk 3 (hurry 2)
+    $ superimpose (
+      (slow 4)
+      .(|+ oc 5)
+      .(|- detune (range 2 22 $ slow 4 $ cosine))
+      .(# ar 0.001 0.5)
+    )
+    $ every 3 (fast 3)
+    $ ply 3
+    $ n "[0 [0 3@h] 4*2, -23*5]"
+    # s "tubes"
+    # pan (perlin)
+    # oc 2
+    # detune "[-8 16 3]"
+
+hush
+
+d1 $ s "bd*4"
+hush

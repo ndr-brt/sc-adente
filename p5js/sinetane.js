@@ -20,7 +20,7 @@ export default function(p) {
     let factorUp = factor * 2 * p.tan(p.sqrt(p.frameCount/16)) / (p.cos(p.sqrt(p.frameCount/25) % 5) + 3)
     let factorDown = factor * factor / (1 + (p.tan(p.sqrt(a) * ((p.frameCount/p.pow(factor,3)) % factor)+factor)))
     for (let i = 0; i < p.windowWidth/factor; i++) {
-      let sine = p.sin((i * p.frameCount)/(p.pow(factor, 2)))
+      let sine = p.sin((i * p.frameCount)/(p.pow(factor, 3)))
 
       p.line(
         i * factor,

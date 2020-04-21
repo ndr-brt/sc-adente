@@ -1,0 +1,29 @@
+d1
+  $ rarely (|- n 3)
+  $ layer [
+    id
+    .(every 3 (|- detune "30"))
+    .(every 4 (fast 2))
+    .(jux ((|+ n 2).("t" ~>)))
+    ,
+    (euclid "[3 6 5]" 8)
+    .(# pan rand)
+    .(stut 4 0.8 0.12)
+    .(|- octave 3)
+    .(# rvb 0.4 0.8)
+    .(# o 4)
+    .(plyWith 1 (|+ n 8))
+    ,
+    (|+ octave 3)
+    .(slow 2)
+    .(|- detune 30)
+    .(# hp 50 0.6)
+    .(# del 0.4 "s" "t")
+    .(# o 3)
+  ]
+  $ s "tubes"
+  # octave 4
+  # n "<4 8 6>/2"
+  # detune "[37 56 34 24]"
+
+hush
