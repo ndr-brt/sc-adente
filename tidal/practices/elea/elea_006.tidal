@@ -1,55 +1,68 @@
 bpm(150)
 
 do
+  -- let rep = 0
+  let rep = (slow 4 $ saw)
   d1
     $ layer [
-      (juxBy 0.3 (rev.brak))
+      (# o 0)
+      -- .(shut) -- 5. cicacica
+      .(juxBy 0.3 (rev.brak))
       .(every 4 (iter 2))
       .(every 5 (linger "h"))
       .(rarely ((hurry 2).(# coarse (segment 1 $ ceven 10))))
       .(almostNever (ply 2))
-      .(#bp' 3800 0.6)
+      .(# bp' 3400 0.2)
+      .(# lpf 3200)
+      .(|* g 0.96)
       .(# rvb' 0.2 0.3)
-      .(degradeBy 1)
       ,
-      (# sp "0.1")
-      .(# o 8)
-      .(sometimesBy 0 (superimpose (("q" ~>).(#pan (c [0,1]))))) -- this is the shit!
+      (# o 8)
+      -- .(shut) -- 2. kick
+      .(sometimesBy rep (superimpose (("q" ~>).(#pan (c [0,1])).(stut 3 "h" "s")))) -- this is the shit!
+      .(# sp "0.1")
       .(euclid 3 8)
       .(trunc "q")
-      .(# hp' 70 0.9)
-      .(# ar' 0.001 0.3)
-      .(|* g 1.05)
+      .(# hp' 69 0.87)
+      .(# ar' 0.001 0.26)
+      .(# shape 0.4)
       .(# rvb' 0.3 0.4)
-      -- .(degradeBy 1)
     ]
     $ sp "1 [2*2 [1|1s]?]"
     # s "eleas:22"
-    |* g 0.9
+    |* g 0.75
   d2
     $ layer [
-      (loopAt "<1 1 1 1 2>")
+      (# o 1)
+      -- .(shut) -- 4. brass
+      .(loopAt "<1 1 1 1 2>")
       .(# shape 0.2)
-      .(degradeBy 1)
+      .(# hp 75 0.2)
+      .(|* g 0.93)
       ,
-      (|/ sp 2)
+      (# o 7)
+      -- .(shut) -- 3. frog
+      .(|/ sp 2)
       .(|+ note (24*2))
       .(|+ note "<0 3 1 5>/3")
       .(striate 32)
       .(# pan (slow 5 $ sine))
       .(# hp' 400 0.2)
-      .(degradeBy 1)
     ]
     $ s "eleas:23"
-    |* g 0.85
+    |* g 0.82
   d3
+    -- $ shut -- 1. drone
     $ juxBy (range "0.5" "-0.5" $ slow 5 $ square) (rev.(striate "<15 13>"))
     $ every 3 (iter 2)
     $ splice 8 "4 2 3 2 [7|0] 6"
-    $ degradeBy 1
     $ s "eleas:26"
-    |* g 0.87
+    |* g 0.84
 
 all $ (# crush 0)
+all $ id
+
+xfadeIn 3 4 $ silence
+d2 $ silence
 
 hush

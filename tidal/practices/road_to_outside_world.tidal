@@ -48,5 +48,181 @@ do
 
 hush
 
-d1 $ s "bd*4"
+bpm(119)
+
+do
+  let elo = 3
+  d1
+    $ euclid elo 5
+    $ stut 3 "s" (1/6)
+    $ superimpose (
+      (|- oc 2)
+      .(fast (elo/2))
+      .(# hp 54 0.6)
+    )
+    $ s "pingz:0"
+    # rvb 0.4 0.6
+    # crush 8
+  d2
+    -- $ (0.03 ~>)
+    $ layer [
+      id
+      .(every 8 (degradeBy 1))
+      -- ,
+      -- (|+ oc 3)
+    --   .(# ar 0.1 1)
+    --   .(euclid "<3 6>/3" 8)
+    --   .(stutWith 3 "0.06" ((|+ n elo).(#pan perlin).(stutWith 3 "0.18" (|+ n elo))))
+    --   .(|* g 0.8)
+    --   .(#o 6)
+      ,
+      (|+ oc 4).(|* g 0.8).(#o 7)
+    ]
+    $ jux (|- n elo)
+    $ slow 4
+    $ s "sbaum:0 sbaum:3"
+    # oc 4
+    # rvb 0.4 0.6
+    # hp 56 0.6
+    |* g 0.7
+  d3
+    $ every 8 (fast 2)
+    $ juxBy 0.5 (# detune "-8")
+    $ s "tubes/2"
+    |* g 0.8 # detune 3
+    # del 0.5 "t" 0.2
+
 hush
+
+
+
+bpm(119)
+
+do
+  d1
+    $ every 6 (linger "h")
+    $ superimpose(
+      (|- oc 1)
+      .(fast 1.5)
+      .(# hp 62 0.6)
+      .(#o 5)
+      .(# tanh 0.9)
+    )
+    $ euclid 3 5
+    $ s "pingz:0"
+    # rvb 0.5 0.6
+    # crush 8
+  d2
+    $ layer [
+      id
+      .(slow 4)
+      ,
+      (|+ oc 4)
+      .(slow 8)
+      .(|* g 0.7)
+      .(# o 6)
+      ,
+      (|+ oc 6)
+      .(fast 2)
+      .(|* g 0.72)
+      .(stutWith 5 "t" ((stut 2 "h" "t").(sometimes (# coarse (choose [2,4,8,16,32])))))
+      .(# ar 0.01 0.4)
+      .(# o 7)
+    ]
+    $ jux (|- n 3)
+    $ s "sbaum:3 sbaum:0"
+    # oc 4 |* g 0.73
+    # rvb 0.4 0.6
+    # hp 56 0.5
+
+hush
+
+
+bpm(119)
+
+do
+  d1
+    $ superimpose (
+      (# o 4)
+      .(|- oc 3)
+      -- .(|- n 24)
+      .(slow 1.5)
+      .(# hp 50 0.3)
+    )
+    $ euclid "<4 4 3 5>/2" 7
+    $ s "pingz:0"
+    # oc 5
+    # rvb 0.4 0.6
+    # shape 0.4
+  d2
+    $ layer [
+      id
+      ,
+      (|+ oc 4)
+      .(slow 2)
+      .(|* g 0.8)
+      .(# rmod 0.6 12 0.8)
+      .(# o 5)
+      -- .(degBy 1)
+      ,
+      (|+ oc 2)
+      .(fast 4)
+      .(chunk 3 ((|+ oc 1).(fast 2).(# coarse (choose [2,4,8,16])).(|* g 0.8)))
+      .(euclid 3 8)
+      .(stutWith 3 "t" ((|- n 3).(#pan rand).(stutWith 3 "t" ((|+ n 6).(#pan perlin))).(|* g 0.9)))
+      .(every 3 (iter 3))
+      .(# ar 0.1 0.8)
+      .(# o "<7 6 8>")
+      .(# legato 4)
+      .(|* g 0.9)
+      -- .(degBy 1)
+    ]
+    $ jux (|+ n 3)
+    $ n "<0 3>/4"
+    # s "sbaum"
+    # oc 4
+    |* g 0.72
+    # hp 56 0.5
+    # rvb 0.4 0.3
+  d3
+    $ stut 5 0.65 0.08
+    $ sometimes (|+ oc 3)
+    -- $ rarely (|- oc 2)
+    $ s "tubes:0(2,7,1)"
+    # oc 8
+    # rvb 0.5 0.8
+    # legato 2
+    # detune (range 10 138 $ slow 7 $ cosine)
+
+d2 silence
+d3 silence
+
+all $ (# waveloss 100)
+all $ id
+
+hush
+
+d1
+  $ layer [
+    id
+    ,
+    (|- oc 1)
+    .(slow (5/4))
+    .(stut 3 0.7 "t")
+    .(# hp 56 0.6)
+    .(# o 3)
+    ,
+    (|+ oc 2)
+    .(fast 4)
+    .(ply 2)
+    .(|* g 0.7)
+    .(|+ n "<0 3>/4")
+    .(# o 4)
+  ]
+  $ s "mbm:0"
+  # del "h" "t" "h"
+
+d1 $ s "bd"
+hush
+
+once $ s "a" # lpf "110"

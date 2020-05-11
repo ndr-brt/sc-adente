@@ -19,6 +19,7 @@ o = orbit
 oc = octave
 oa = offadd
 seg = segment
+shut = degBy 1
 sl = slow
 sp = speed
 str = striate

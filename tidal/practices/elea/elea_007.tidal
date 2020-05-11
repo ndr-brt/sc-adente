@@ -24,31 +24,33 @@ do
       )
       .(euclid "[3|6]" vel)
       .(# o 8)
-      -- .(degradeBy 1)
+      .(shut) -- 1.
       ,
       (striate (vel))
       .(# triode 0.4)
       .(# shape 0.7)
+      .(# bp 2300 1.3)
       .(rarely (|- note 2))
       .(|+ note ("<0 2 5>"))
-      -- .(degradeBy 1)
+      .(# del "0.25" "0.1667" "s")
+      .(shut) -- 3.
     ]
     $ s "eleas:20"
-    |* g 0.8
+    |* g 0.78
   d2
-    -- $ degradeBy 1
+    $ shut -- 2.
     $ every 2 (gap halfVel)
     $ s "eleas:21*3"
     |/ sp "-2"
     # begin 0.43
     # end 0.75
-    |* g 0.82
-    # rvb' 0.4 0.5
+    |* g 0.80
+    # rvb' 0.5 0.5
     # lpf 1000
-    # hp' 59 0.8
+    # hp 56 0.9
   d3
     $ layer [
-      (while "<t t t t t f>" (degradeBy 1))
+      (while "<t t t t t f>" (shut))
       .(while "<f f f f f t>" (
         (hurry 2)
         .(# pan (sometimesBy 0.5 rev ("[0 1]")))
@@ -56,13 +58,14 @@ do
         .(# rvb' 0.3 0.4)
         .(# o 7)
       ))
-      -- .(degradeBy 1)
+      -- .(shut) -- 4. final
       ,
       (every 5 (linger "h"))
-      -- .(degradeBy 1)
+      .(shut) -- 5
     ]
     $ splice 4 "3 1 0 [2|1]"
     $ s "eleas:27"
+    |* g 0.98
 
 
 hush
