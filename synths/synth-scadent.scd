@@ -180,4 +180,5 @@ SynthDef(\cuerda, { |out=0, freq=440, pan=0, attack=0.01, release=0.4|
 	OffsetOut.ar(out, DirtPan.ar(sig, ~dirt.numChannels, pan, env));
 }).add;
 
+
 )

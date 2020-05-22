@@ -4,10 +4,11 @@ hush
 
 do
   -- resetCycles
-  let magic = 2
+  let magic = 0
   -- let modul = 0
   let modul = (fast (magic*2) $ sine)
-  let calma = 0
+  -- let calma = 1
+  let calma = (slow magic $ saw)
   d1
     $ sometimes (juxBy (choose [-1,1]) ((hurry magic).(rev)))
     $ chunk magic (
@@ -31,6 +32,7 @@ do
       sometimesBy (slow (magic+3) $ modul) ((striate (magic*2)).(stut (magic*2) 0.7 0.04))
         $ degradeBy calma
         $ s "eleas:28"
+        # o 5
         |* speed (magic/2),
       sometimesBy (slow (magic+4) $ modul) (|* sp "-1")
         $ degradeBy calma
@@ -38,6 +40,6 @@ do
         # o 8
         # rvb 0.4 0.8
     ]
-    |* g 0.9
+    |* g 0.74
 
 hush

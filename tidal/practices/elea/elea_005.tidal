@@ -33,7 +33,7 @@ do
         .(sometimesBy (1-(cr/max)) (
           (|* sp (segment 1 $ choose [2,4])).(ply 2))
         )
-        .(#pan rand)
+        .(# pan rand)
         .(# del' (range 0.1 0.8 $ falling) 0.167 0.167)
         .(# rvb' 0.2 0.3)
         .(|* g (range 0.75 0.8 $ falling))
@@ -52,7 +52,7 @@ do
         # rvb' 0.85 0.95
         # o 2
     ]
-    |* g 0.9
+    |* g 0.88
 
 clutchIn 1 10 $ silence
 

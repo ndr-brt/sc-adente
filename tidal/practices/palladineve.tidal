@@ -1,0 +1,53 @@
+bpm(133)
+
+do
+  d1
+    $ superimpose (
+      (slow 2)
+      .(|/ sp 16)
+      .(|* g 0.5)
+      .(# o 5)
+      .(# hp 56 0.4)
+      .(# rvb 0.2 0.4)
+    )
+    $ stut 5 "t" "e"
+    $ s "eleas:22*8"
+    |+ note "[2 5 8 9]"
+    # binshift (snowball 4 (*) (fast 4) $ (sine*(run 3+1)))
+  d2
+    $ shut
+    $ ("s" <~)
+    $ s "tubes/2"
+    # detune ((irand 120)*(-1))
+    # oc 2
+  d3
+    $ layer [
+      (# oc 7)
+      .(#ar 0.01 0.7)
+      .(while ("<t f f>") (|+ n "[3 5 0]"))
+      .(euclid 7 8)
+      .(# pan rand)
+      .(|* g 0.74)
+      .(# o 8)
+      ,
+      (# oc 5)
+      .(fast 2)
+      .(# scr (slow 8 $ sine))
+      .(#rmod (slow 13 $ cosine) 20 0.8)
+      .(# pan (slow 8 $ perlin))
+      .(|* g 0.6)
+      .(# o 7)
+      ,
+      (# oc 2)
+      .(#shape 0.3)
+      .(|* g 0.75)
+      .(# lpf (range 900 2000 $ slow 22 $ tri))
+      .(# hp 56 0.6)
+      .(# o 6)
+    ]
+    $ n "<0 3 8>/2"
+    # s "cuerda"
+    # rvb 0.8 0.9
+
+
+hush
