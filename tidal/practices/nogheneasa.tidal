@@ -18,10 +18,6 @@ d2
       # rvb' 0.5 0.4
       # speed 0.8
     ,
-    s "bottle . bottle*2 ~"
-      # speed 1
-      # delay "[1 0 1 0]"
-    ,
     euclid 12 16
       $ s "rs"
       # speed 0.75
