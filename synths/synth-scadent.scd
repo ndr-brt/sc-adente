@@ -1,6 +1,5 @@
 (
 
-(
 SynthDef(\entropy, { |out, sustain=1, pan, decay=0, width=0.3, attack, release|
 	var env = EnvGen.kr(Env.new([0,1,1,0],[attack, sustain, release], -8),doneAction: 2);
 	var caboos = LFNoise0.kr(15);
@@ -25,7 +24,6 @@ SynthDef(\entropy, { |out, sustain=1, pan, decay=0, width=0.3, attack, release|
 
 	OffsetOut.ar(out, DirtPan.ar(sig, ~dirt.numChannels, pan, env));
 }).add;
-);
 
 SynthDef(\blow, { |out, decay=0, sustain=0.03, freq, pan, accelerate, voice = 0.5, semitone=12, resonance=0.3, lfo=1, pitch1=1, width = 0.3|
 	var imp = LFNoise1.kr(80);
@@ -64,13 +62,14 @@ SynthDef(\gfreeze, {
 	OffsetOut.ar(out, DirtPan.ar(signal / 10, ~dirt.numChannels, pan, env));
 }).add;
 
-SynthDef(\uou, { |freq=440,amp=1,attack=0.01,decay=0.3,sustain=0.5,release=0.4,out=0,pan=0,accelerate=0,hold=0.5|
-	var env = EnvGen.kr(Env.adsr(attack, decay, sustain, release), doneAction:2);
-	var modmod = LFNoise0.kr(2).range(2,20);
-	var mod = LFNoise1.kr(modmod).range(0.5,1.2).distort;
-	var sig = VarSaw.ar(freq*mod, accelerate, hold) * amp;
+SynthDef(\uou, { |out=0,freq=440,sustain=1,pan=0,accelerate=0,hold=0.5,begin=0,end=1|
+  var line = Line.ar(begin, end, sustain*(end-begin), doneAction: Done.freeSelf);
+	var env = Env.adsr;
+  var volume = IEnvGen.ar(env, line);
+	var mod = LFNoise1.kr(LFNoise0.kr(8).range(10,20)).range(0.9,1.1).distort;
+	var sig = VarSaw.ar(freq*mod, accelerate, hold) * volume;
 
-	OffsetOut.ar(out, DirtPan.ar(sig, ~dirt.numChannels, pan, env));
+	OffsetOut.ar(out, DirtPan.ar(sig, ~dirt.numChannels, pan, volume));
 }).add;
 
 SynthDef(\zonta, { |out = 0, speed = 1, freq = 440, pan=0, detune=0, amp = 0.5, attack=0.0001, release 0.5, sustain=1|
@@ -180,5 +179,17 @@ SynthDef(\cuerda, { |out=0, freq=440, pan=0, attack=0.01, release=0.4|
 	OffsetOut.ar(out, DirtPan.ar(sig, ~dirt.numChannels, pan, env));
 }).add;
 
+SynthDef(\bassta, {|out=0,freq=440,sustain=1,pan=0,begin=0,end=1|
+  var line = Line.ar(begin, end, sustain*(end-begin), doneAction: Done.freeSelf);
+  var env = Env.asr;
+  var volume = IEnvGen.ar(env, line);
+  var sig = (
+    Impulse.ar(freq)
+    + VarSaw.ar(freq/2)
+    + (Impulse.ar(freq, LFTri.kr(line*4)))
+    )/2;
+
+  OffsetOut.ar(out, DirtPan.ar(sig * volume, ~dirt.numChannels, pan, volume));
+}).add;
 
 )

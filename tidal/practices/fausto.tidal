@@ -1,0 +1,45 @@
+bpm(112)
+
+do
+  let fasto = 1
+  let fausto = 1
+  let lfoo = (slow (8*fausto) $ tri)
+  let midd = ("h" ~>).(|+ n "3").(fast (fausto)).(# o 7).(|* g 0.95)
+  d1
+    -- $ rarely (|+ n (choose [3,5,8]))
+    $ fast fasto
+    $ sometimesBy (1-lfoo) (superimpose ((|+ oc 5).(|* g 0.7).(jux id).(# o 5)))
+    $ sometimesBy
+      lfoo
+      (superimpose ((|+ oc 2).(fast 2).(# o 6).(#del "h" "t" "s").(|* g 0.75)))
+    $ layer [
+      (slow 2)
+      .(|- oc 1)
+      .(# sustain (8))
+      .(|* g 0.9)
+      .(# o 8)
+      .(# hp 56 0.3)
+      ,
+      midd
+      ,
+      (every 3 (|+ n 3))
+      .(fast (fausto))
+      .("t" ~>)
+      .(|+ n "5")
+      .(# o 4)
+      -- , -- mortale!
+      -- (midd)
+      -- .(degradeBy (fast (fausto+fasto) $ (lfoo/2 + 0.5)))
+      -- .("s" ~>)
+      -- .(|+ oc 3)
+      -- -- .(jux (rev.(|+ oc 2)))
+      -- .(stutWith 2 (1/6) ((|+ oc 2).(|* g 0.8)))
+    ]
+    $ s "bassta:0"
+    # oc 5
+    # lp (range 3000 5000 $ slow 4 $ sine) (range 0 0.3 $ slow (6*fausto) tri)
+    # rvb 0.6 0.9
+    # legato 1
+    |* g 0.80
+
+hush
