@@ -222,23 +222,22 @@ SynthDef(\xenharp, { arg out, pan, freq = 440, tuning = 19, attack = 0.001, rele
 //Tubes: a physical-modelling of two tubes based on the TwoTube Ugen plugin. SynthDef developed with Nesso for the Ambix duo project.
 
 (
-SynthDef(\tubes, { |out, pan, depth=0.3, freq=440, detune=0|
-	var f1 = freq.clip(3, 5000);
-	var f2 = (freq.cpsmidi - detune).midicps.clip(3, 5000);
-	var source = WhiteNoise.ar(0.5)*EnvGen.ar(Env([1,1,0],[(f1+f2)/SampleRate.ir,0.0]));
-	var dummyenv = EnvGen.ar(Env([0, 0], [5], [0]), doneAction:2);
-	var sig = TwoTube.ar(
-		source,
-		depth.linlin(0, 1, -1, 1),
-		0.999,
-		f1,
-		f2
-	);
-	OffsetOut.ar(out, DirtPan.ar(sig, ~dirt.numChannels, pan));
+SynthDef(\tubes, { |out=0, pan=0, depth=0.3, freq=440, detune=0, begin=0, end=1, sustain=1|
+  var line = Line.ar(begin, end, sustain*(end-begin), doneAction: Done.freeSelf);
+  var f1 = freq.clip(3, 5000);
+  var f2 = (freq.cpsmidi - detune).midicps.clip(3, 5000);
+  var source = WhiteNoise.ar(0.5) * EnvGen.ar(Env([1,1,0],[(f1+f2)/SampleRate.ir,0.0]));
+  var volume = IEnvGen.ar(Env.asr, line);
+  var sig = TwoTube.ar(
+    source,
+    depth.linlin(0, 1, -1, 1),
+    0.999,
+    f1,
+    f2
+  );
+  OffsetOut.ar(out, DirtPan.ar(sig, ~dirt.numChannels, pan, volume));
 }).add;
 );
-
-
 
 // The Waveblender SynthDef, made of 4 buffers and a waveshaper
 (

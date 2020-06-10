@@ -116,14 +116,14 @@ SynthDef(\pings, { |out,pan,freq=440,attack=0.00001,release=1|
 }).add;
 
 SynthDef(\pulsa, { |out=0, freq=220, attack=0.1, release=1, pan=0|
-	var env = EnvGen.kr(Env.perc(attack, release), doneAction: 2);
-	var signal = Pulse.ar(freq, SinOsc.kr(3000/freq));
-	signal = (LocalIn.ar(1).distort) + (Delay1.ar(signal));
-	signal = MoogLadder.ar(signal, freq*2.7, 0);
+  var env = EnvGen.kr(Env.perc(attack, release), doneAction: 2);
+  var signal = Pulse.ar(freq, SinOsc.kr(3000/freq));
+  signal = (LocalIn.ar(1).distort) + (Delay1.ar(signal));
+  signal = MoogLadder.ar(signal, freq*2.7, 0);
 
-	LocalOut.ar(signal);
+  LocalOut.ar(signal);
 
-	Out.ar(out, Pan2.ar(signal, pan) * env);
+  Out.ar(out, DirtPan.ar(signal, ~dirt.numChannels, pan) * env);
 }).add;
 
 SynthDef(\addi, { |out=0, pan=0, freq=440, attack=0.01, release=0.4, sustain=1|
@@ -179,7 +179,7 @@ SynthDef(\cuerda, { |out=0, freq=440, pan=0, attack=0.01, release=0.4|
 	OffsetOut.ar(out, DirtPan.ar(sig, ~dirt.numChannels, pan, env));
 }).add;
 
-SynthDef(\bassta, {|out=0,freq=440,sustain=1,pan=0,begin=0,end=1|
+SynthDef(\friab, {|out=0,freq=440,sustain=1,pan=0,begin=0,end=1|
   var line = Line.ar(begin, end, sustain*(end-begin), doneAction: Done.freeSelf);
   var env = Env.asr;
   var volume = IEnvGen.ar(env, line);
@@ -189,7 +189,7 @@ SynthDef(\bassta, {|out=0,freq=440,sustain=1,pan=0,begin=0,end=1|
     + (Impulse.ar(freq, LFTri.kr(line*4)))
     )/2;
 
-  OffsetOut.ar(out, DirtPan.ar(sig * volume, ~dirt.numChannels, pan, volume));
+  Out.ar(out, DirtPan.ar(sig * volume, ~dirt.numChannels, pan));
 }).add;
 
 )

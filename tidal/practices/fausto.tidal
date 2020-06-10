@@ -15,7 +15,7 @@ do
     $ layer [
       (slow 2)
       .(|- oc 1)
-      .(# sustain (8))
+      .(# sustain 8)
       .(|* g 0.9)
       .(# o 8)
       .(# hp 56 0.3)
@@ -27,19 +27,24 @@ do
       .("t" ~>)
       .(|+ n "5")
       .(# o 4)
-      -- , -- mortale!
-      -- (midd)
-      -- .(degradeBy (fast (fausto+fasto) $ (lfoo/2 + 0.5)))
-      -- .("s" ~>)
-      -- .(|+ oc 3)
-      -- -- .(jux (rev.(|+ oc 2)))
-      -- .(stutWith 2 (1/6) ((|+ oc 2).(|* g 0.8)))
+      , -- mortale!
+      (midd)
+      .(degradeBy (fast (fausto+fasto) $ (lfoo/2 + 0.5)))
+      .("t" ~>)
+      .(jux rev.(|+ oc 1))
+      .(stutWith 3 (1/6) (
+        (|* g 0.7)
+        .(# crush 3)
+        .(# squiz (4 * (choose [0,1,2,3,4])))
+        .(# lpf 2000)
+        .(# pan rand)
+        ))
     ]
-    $ s "bassta:0"
+    $ s "friab:0"
     # oc 5
     # lp (range 3000 5000 $ slow 4 $ sine) (range 0 0.3 $ slow (6*fausto) tri)
     # rvb 0.6 0.9
-    # legato 1
+    # legato 2
     |* g 0.80
 
 hush

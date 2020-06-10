@@ -90,3 +90,63 @@ d5
 d5 silence
 
 hush
+
+
+d1
+  $ fast 8
+  $ sometimesBy (slow 8 $ sine) (
+    (superimpose (
+        (slow 4)
+        .(|+ n 24)
+        .(|* sustain 12)
+        .(|* g 0.8)
+        .(# o 8)
+        .(# hp 57 0.6)
+    ))
+  )
+  $ rarely (|- n 5)
+  $ superimpose (
+    (|- n 36)
+    .(sometimes $ fast 4)
+    .(slow 2)
+    .(|* sustain 4)
+    .(sometimes ("s" <~))
+    .(# o 7)
+    .(# rvb 0.4 0.6)
+    .(|* g 0.8)
+  )
+  $ sometimes (fast 2)
+  $ s "tubes:0" # sustain 0.4 # detune "0 -3 5 2"
+
+
+d1
+  $ sometimesBy (slow 6 $ saw) (|+ oc 1)
+  $ sometimesBy (slow 10 $ isaw) (|- oc 1)
+  $ s "tubes:0*64"
+  # legato ((slow 4 $ perlin+1)*4)
+  # pan (fast 2 $ perlin)
+  # detune (range "-24" "24" $ slow 16 $ tri)
+  # rvb 0.1 0.3
+
+bpm(120)
+
+do
+  d1
+    $ fast 4
+    $ n (scale "minor" "{4 [5|7] 2 8, 0 1 0, 3 7 6}")
+    # s "friab"
+    # legato (slow 2 $ sine + 1)
+    -- # nudge (slow 4 $ sine/2)
+    -- # del "h" "t" "t"
+  d2
+    $ superimpose ((|+ oc 3).(|* g 0.8).(stutWith 5 "s" ((|+ n 3).(|* g 0.9))).(# pan perlin))
+    $ (sine ~>)
+    $ n "{0 1 0}"
+    # s "friab"
+    # oc 4
+    # lp 3000 (slow 3 $ cosine/2)
+
+all $ juxBy 0.5 (rev.(|- n 3).(slow 2))
+all $ id
+
+hush
