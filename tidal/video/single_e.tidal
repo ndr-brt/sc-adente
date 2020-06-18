@@ -1,0 +1,28 @@
+bpm(143)
+hush
+
+d1
+  -- $ degradeBy 1
+  $ every 5 (iter 3)
+  $ every 3 (rev)
+  $ layer [
+    id
+    .(# pan (choose [0,1]))
+    .(sometimes ((jux (|/ sp 3)).(# del 0.5 "s" "s").(# squiz ((segment 1 $ irand 2)*2))))
+    .(sometimesBy (slow 6 $ cosine) ((# crush 4).(chop 24)))
+    ,
+    (slow 4)
+    .(|* sp 0.3)
+    .(#hp 60 0.4)
+    .(# shape 0.3)
+    ,
+    (|/ sp 10)
+    .(|* g 0.8)
+    .(striateBy "<6 6 12>/2" 0.98)
+    .(# rvb 0.8 0.9)
+    .(# o 8)
+  ]
+  $ stut "5 3" 0.8 "[t,s]"
+  $ s "e*2"
+  |* sp "1 0.4"
+  # rvb 0.4 0.5

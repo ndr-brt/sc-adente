@@ -149,4 +149,6 @@ do
 all $ juxBy 0.5 (rev.(|- n 3).(slow 2))
 all $ id
 
+
+d1 $ s "bd"
 hush

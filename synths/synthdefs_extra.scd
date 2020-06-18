@@ -259,11 +259,16 @@ SynthDef(\forestbird, { |out=0, pan=0|
 	OffsetOut.ar(out, DirtPan.ar(signal, ~dirt.numChannels, pan))
 }).add;
 
-SynthDef(\goeysynth, { | freq=440, amp=0.1, sustain=0.1, pan=0.0 |
-	var source = LPF.ar(Mix(LFPar.ar(freq*[0.999,1.001],0,amp)).distort,EnvGen.kr(Env([10000,2000,4000,1000],[0.005,Rand(0.009,0.05),0.005])));
-	var env = EnvGen.kr(Env([0,1,0.4,0.7,0],[Rand(0.001,0.005),0.005,0.005,sustain]), doneAction:2);
+SynthDef(\goeysynth, { |out=0,freq=440,sustain=1,pan=0,begin=0,end=1,amp=0.1|
+  var line = Line.ar(begin, end, sustain*(end-begin), doneAction: Done.freeSelf);
+  var env = Env([0,1,0.4,0.7,0],[Rand(0.001,0.005),0.005,0.005,sustain]);
+  var volume = IEnvGen.ar(env, line);
+  var source = LPF.ar(
+    Mix(LFPar.ar(freq*[0.999,1.001],0,amp)).distort,
+    EnvGen.kr(Env([10000,2000,4000,1000],[0.005,Rand(0.009,0.05),0.005]))
+  );
 
-	OffsetOut.ar(0, DirtPan.ar(source, ~dirt.numChannels, pan, env))
+  Out.ar(0, DirtPan.ar(source*volume, ~dirt.numChannels, pan))
 }).add;
 
 //adapted from JmC reverb
