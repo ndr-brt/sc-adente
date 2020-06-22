@@ -1,0 +1,52 @@
+
+
+bpm(98)
+
+do
+  d1
+    $ every 5 (iter 3)
+    $ layer [
+      id
+      .(# oc 5)
+      .(# o 5)
+      ,
+      (# oc 3)
+      .(slow 2)
+      .(# rvb 0.5 0.8)
+      .(# o 8)
+      ,
+      (# oc 7)
+      .(|* g 0.58)
+      .(fast 2)
+      .(every 4 (stut 3 "0.8" "s"))
+      ,
+      (# o 4)
+      .(# oc 2)
+      .(slow 4)
+      .(# hp 56 0.3)
+    ]
+    $ n "[0 0, ~ 7 ~] [3 5?, ~*3 9]"
+    # s "goeysynth"
+    # sustain 1
+  d2
+    $ fast 2
+    -- $ every 4 (linger "t")
+    $ rarely (stut 2 0.8 "0.1")
+    $ s "kk/4 [~*2 kk*2]/2"
+    # shape 0.3
+    # rvb 0.6 0.7
+  d3
+    $ superimpose (
+      (fast 4)
+      .(sometimes (fast 2))
+      .(|+ oc 2)
+      .(# o 6)
+      .(# pan perlin)
+      .(# del "h" "t" "t")
+    )
+    $ slow 2
+    $ s "hh(7,8)"
+    # oc 5
+
+all $ (# crush 0)
+hush

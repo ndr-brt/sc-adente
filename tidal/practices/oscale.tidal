@@ -4,8 +4,10 @@ d1
   $ every 5 (rev)
   $ superimpose (
     (|+ oc 3)
+    .(|- n 3)
     .(slow 2)
-    .(stutWith 2 "h" ((# lp 100 0.8).(jux (|- n 3)).("0.05" ~>).(#pan rand).(# o 8)).(stutWith 2 "q" (|- n 5)))
+    .(shut)
+    .(stutWith 1 "h" ((# lp 100 0.8).(jux (|- n 3)).("0.05" ~>).(#pan rand).(# o 8)).(stutWith 2 "q" (|- n 5)))
     .(# legato 2)
     .(|* g 0.7)
   )
@@ -16,6 +18,20 @@ d1
   # s "goeysynth:0"
   # sustain 0.4
   # oc 3
+
+hush
+
+d1
+  $ superimpose (
+    (|- oc 1)
+    .(slow 2)
+  )
+  $ n "[0 [0 ~ 6], ~ 7 ~] [3 [5? [6|8]]]"
+  # s "goeysynth"
+  # oc 4
+  # sustain 1
+  # rvb 0.7 0.8
+  # legato 2
 
 do
   resetCycles
