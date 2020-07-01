@@ -1,0 +1,37 @@
+bpm(131)
+
+d1
+  $ rarely (|+ note 3)
+  $ every 4 (fast 2)
+  $ every 6 (linger "q")
+  $ superimpose (
+    (hurry "h")
+    .(# pan (sine))
+    .(stutWith 6 "[e|q]" (
+      (|+ note 4).(|* g 0.87).(# coarse 4)
+    ))
+  )
+  $ superimpose (
+    (hurry "q")
+    .(sometimes (|+ note 3))
+  )
+  $ superimpose (
+    (hurry 2)
+    .(degradeBy "h")
+    .(# o 8)
+    .(|* g 0.85)
+    .(rarely (# squiz 8))
+    .(# ac (range "-0.5" "0.5" $ slow 6 $ cosine))
+    .(# pan (segment 1 $ choose [0,1]))
+    .(# rvb 0.4 0.6)
+  )
+  $ chunk 5 (|- note 8)
+  $ chunk 3 (|- note 3)
+  $ degradeBy 0.9
+  $ note "{0*4 5*4 3*4}%2"
+  # s "uxay"
+  |* sp 4
+  # dis 0.5
+  # waveloss (trigger 1 $ range 0 100 $ slow 16 $ envL)
+
+hush

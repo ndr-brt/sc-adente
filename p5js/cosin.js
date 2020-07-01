@@ -35,8 +35,8 @@ export default function(p) {
     }
 
     if (p.frameCount % maxPoints == 0) {
-      divisorX = p.random(10) + 5
-      divisorY = p.random(10) + 5
+      divisorX = p.random(12) + 4
+      divisorY = p.random(12) + 4
     }
 
     if (points.length > maxPoints) {

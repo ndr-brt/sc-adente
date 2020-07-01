@@ -64,27 +64,29 @@ SynthDef(\gfreeze, {
 
 SynthDef(\uou, { |out=0,freq=440,sustain=1,pan=0,accelerate=0,hold=0.5,begin=0,end=1|
   var line = Line.ar(begin, end, sustain*(end-begin), doneAction: Done.freeSelf);
-	var env = Env.adsr;
+  var env = Env.adsr;
   var volume = IEnvGen.ar(env, line);
-	var mod = LFNoise1.kr(LFNoise0.kr(8).range(10,20)).range(0.9,1.1).distort;
-	var sig = VarSaw.ar(freq*mod, accelerate, hold) * volume;
+  var mod = LFNoise1.kr(LFNoise0.kr(8).range(10,20)).range(0.9,1.1).distort;
+  var sig = VarSaw.ar(freq*mod, accelerate, hold) * volume;
 
-	OffsetOut.ar(out, DirtPan.ar(sig, ~dirt.numChannels, pan, volume));
+  Out.ar(out, DirtPan.ar(sig, ~dirt.numChannels, pan, volume));
 }).add;
 
-SynthDef(\zonta, { |out = 0, speed = 1, freq = 440, pan=0, detune=0, amp = 0.5, attack=0.0001, release 0.5, sustain=1|
-	var env = EnvGen.ar(Env.perc(attack, release, 8), doneAction: 2);
-	var width = LFNoise0.kr(20).range(0.2,0.8);
-	var sig = (
-		Pulse.ar(freq + (detune * 3), width) +
-		LFSaw.ar(freq/2 + (detune * 3), width.sin) +
-		SinOsc.ar(freq/2 + (detune * 3), pi/2) +
-		Phaser.ar(freq*2 + (detune * 3), width.cos)
-	)/4;
+SynthDef(\zonta, { |out=0,freq=440,pan=0,detune=0,attack=0.001,release=0.5,sustain=1,begin=0,end=1|
+  var line = Line.ar(begin, end, sustain*(end-begin), doneAction: Done.freeSelf);
+  var env = Env.perc(attack, release, 8);
+  var volume = IEnvGen.ar(env, line);
+  var width = LFNoise0.kr(0.5).range(0.3,0.7);
+  var sig = (
+    Pulse.ar(freq + (detune * 3), width) +
+    Saw.ar(freq/4 + (detune * 3), width.sin) +
+    SinOsc.ar(freq/2 + (detune * 3), pi/2) +
+    Phaser.ar(freq*4 + (detune * 3), width.cos)
+  )/4;
 
-	sig = MoogLadder.ar(sig, freq*8, width);
+  sig = MoogLadder.ar(sig, freq*8, width);
 
-	OffsetOut.ar(out, DirtPan.ar(sig * amp, ~dirt.numChannels, pan, env));
+  Out.ar(out, DirtPan.ar(sig, ~dirt.numChannels, pan, volume));
 }).add;
 
 SynthDef(\pingz, { |out,pan,freq=440,attack=0.00001,release=1|
@@ -137,10 +139,14 @@ SynthDef(\addi, { |out=0, pan=0, freq=440, attack=0.01, release=0.4, sustain=1|
 	OffsetOut.ar(out, DirtPan.ar(signal, ~dirt.numChannels, pan, env));
 }).add;
 
-SynthDef(\sbaum, { |out=0,freq=440,pan=0|
-	var sig = Impulse.ar(freq, SinOsc.kr(freq/4), 0.5) + Saw.ar(freq/2, 0.5);
-	sig = LPF18.ar(sig, 2400, 0.7);
-	OffsetOut.ar(out, DirtPan.ar(sig, ~dirt.numChannels, pan));
+SynthDef(\sbaum, { |out=0,freq=440,pan=0,attack=0.001,release=0.5,sustain=1,begin=0,end=1|
+  var line = Line.ar(begin, end, sustain*(end-begin), doneAction: Done.freeSelf);
+  var env = Env.perc(attack, release, 8);
+  var volume = IEnvGen.ar(env, line);
+  var sig = Impulse.ar(freq, SinOsc.kr(freq/4), 0.5) + Saw.ar(freq/2, 0.5);
+  sig = LPF18.ar(sig, 2400, 0.7);
+
+  Out.ar(out, DirtPan.ar(sig*volume, ~dirt.numChannels, pan));
 }).add;
 
 SynthDef(\dk, { |out=0, freq=440, pan=0, attack=0.01, release=0.5|

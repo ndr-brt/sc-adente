@@ -1,0 +1,52 @@
+bpm(130)
+
+do
+  d1
+    $ every 6 (linger "h")
+    $ fast 2
+    $ every 5 (iter 3)
+    $ every 3 (|+ n "[3, 5]")
+    $ n "[0 4, [-12 -10] ~ 3]"
+    # s "uou"
+    # lp 1900 0.1
+    # shape 0.8
+    # crush (range 5 10 $ slow 7 $ saw)
+    |* g 0.95
+  d2
+    $ superimpose (
+      (|+ oc 5)
+      .(# scr "0.2")
+      .(every 5 (|- n 3))
+      .(sometimes (|+ n 5))
+      .(juxBy (slow 3 $ (sine*2-1)) (|- n 3))
+      .(rarely (degradeBy 0.4))
+      .(|* g 0.76)
+      .(# dis 0.7)
+      .(rarely (superimpose ((# binshift 0.3).(|* g 1.2).(# pan "[0|1]"))))
+    )
+    $ striateBy 12 0.94
+    $ s "uou:0"
+    # oc 4
+    # note "<0 3.2*2 [4.2|3.9] 2>"
+    # ar 0.2 1
+    # legato 2
+    # hp 72 0.35
+    # distort 0.25
+    |* g 0.83
+    # rvb 0.5 0.6
+  d3
+    $ chunk 3 ((hurry 2).(# smear 0.7).(|* g 1.4).rev)
+    $ n "[0 [~ 5] 7 [3 4]]"
+    # s "uou:0"
+    # oc 8
+    |* g 0.84
+    # legato 2
+    # del "h" "t" "s"
+    # lp 5000 0.2
+
+all $ (chew 3 8)
+all $ (linger "q")
+all $ (# crush 4)
+all $ id
+
+hush

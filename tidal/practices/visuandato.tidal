@@ -1,0 +1,103 @@
+bpm(120)
+
+do
+  d1
+    $ fast 16
+    $ s "zonta:0"
+    # oc 3
+    # legato 3
+    # hp 64 0.3
+  d2
+    $ superimpose ((|- oc 4).(|* g 1).(# n "<0*4 3*2>").(# dis 0.3))
+    $ rarely (# rmod 0.8 18 0.3)
+    $ s "zonta:0"
+    # oc 8
+    # sustain 32
+    |* g 0.6
+    # rvb 0.4 0.5
+  d3
+    $ superimpose ((|+ squiz 64).("s" ~>).(# shape 0.3).(# hp 66 0.3).(# pan rand))
+    $ sometimes (jux ("h" <~))
+    $ every 3 (iter 5)
+    $ squiz "<2 4 8 12 24 48 96>"
+    # s "zonta:0"
+    |* g 0.9
+    # pan (perlin)
+    # del "h" "t" "x"
+
+hush
+
+
+
+
+
+bpm(111)
+
+do
+  d1
+    $ every 3 (|+ n 5)
+    $ stutWith 6 "[t|x|f]" (
+      (|* g 0.87)
+      .(|+ n "[3 5 8 5]")
+      .(ply "1 2 1")
+      .(# pan (range 0.3 0.7 $ rand))
+      .("[0|x|f]" <~)
+    )
+    $ n "<[0 3 1 5] [3 0]>"
+    # s "zonta"
+    # oc 3
+    -- # binshift (slow 4 $ sine/2)
+    -- # scram (range 0.1 0.3 $ slow 3 $ sine)
+    # legato 1.8
+    # dis 0.4
+  d2
+    $ every 4 (iter 3)
+    $ every 3 (hurry 2)
+    $ every 5 ((slow 2).(ply 2))
+    $ chunk 3 (|+ n 3)
+    $ s "[[kk*4?|kk*8] [ss|ss*4?], hh(7,8), hh(3,8,3), clap(1,4,3)]"
+    # rvb 0.4 0.6
+    # shape 0.4
+    # dis 0.3
+    |* g 0.9
+    # legato 2
+    # crush 8
+
+hush
+
+
+
+bpm(135)
+
+d1
+  $ superimpose (
+    (hurry "h")
+    .(sometimesBy 0.5 ((|* sp 6).("[e|q]" <~).(stutWith 6 "[q|e]" ((|+ note (segment 1 $ choose [2,4])).(|* g 0.88)))))
+    .(# o 8)
+    .(# pan (slow 3 $ sine))
+  )
+  $ superimpose (
+    (hurry "q")
+    .(sometimes (|+ note 3))
+    .(# hp 64 0.3)
+  )
+  $ superimpose (
+    (hurry 2)
+    .(degradeBy 0.5)
+    .(|* g 0.8)
+    .(# bpf 4500 )
+    .(# o 7)
+    .(# rvb 0.4 0.6)
+    .(# pan (choose [0,1]))
+  )
+  $ rarely (|+ note 3)
+  $ rarely (fast 2)
+  $ chunk 4 (|- note 8)
+  $ chunk 3 (|- note 3)
+  $ note "{0*4 2*4 3*4}%2"
+  # s "uxay"
+  |* sp "[4 10 5]"
+  # shape 0.4
+  # dis 0.5
+
+hush
