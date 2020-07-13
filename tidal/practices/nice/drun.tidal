@@ -1,0 +1,45 @@
+bpm(122)
+
+do
+  d1
+    $ every 4 (rev)
+    $ layer [
+      id
+      .(sometimes (iter 3))
+      ,
+      (striate' 8 (0.9))
+      .(degradeBy 0.1)
+      .(|* gain 0.4)
+      .(# end 0.2)
+      .(|* sp 0.17)
+      .(# hp' 65 0.5)
+      .(# o 8)
+      .(# rvb 0.5 0.5)
+      .(# del "0.5" "t" "t")
+    ]
+    $ n (run (12))
+    # s "msg"
+    # hpf (range (irand 200 + 100) (irand 100 + 1000) $ slow 32 $ sine)
+    # hpq (rand/3)
+    # crush (range 16 4 $ slow 8 $ (square + saw)/2)
+    # shape (perlin / 2)
+    # pan (rand)
+    # lesl' 2 3 2.5
+    |* g 0.9
+  d2
+    $ superimpose (
+      (|* sp 22)
+      .(stutWith 8 "[2s|1s]" ((|* g 0.9).(# crush 2)))
+      .(|* g 0.8)
+      .(# pan "[0|1]")
+    )
+    $ rarely (# cut 0)
+    $ s "outdoor:2*3?"
+    # coarse (irand (8))
+    |* sp (0.3)
+    # hp 66 0.7
+    # scram (range 0.1 0.4 $ slow 8 $ sine)
+    # rvb 0.6 0.7
+    |* g 0.65
+
+hush

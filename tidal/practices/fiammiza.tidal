@@ -1,3 +1,5 @@
+bpm(132)
+
 d1
   $ stack [
     every 4 (degradeBy 0.5)

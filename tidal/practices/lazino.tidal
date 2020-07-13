@@ -2,27 +2,28 @@ bpm (182)
 
 d1
   $ slow 2
+  $ every 3 (chunk 3 (hurry "2"))
   $ layer [
     id
-    .(jux (# up "3"))
-    .(# bp' 1200 0.8)
+    .(jux (|+ note "<3 5 -1>"))
+    .(# bp' (range 800 2000 $ slow 6 $ (cosine+square)/2) 0.8)
     .(# rmod' 0.99 10 0.6)
       -- .(degradeBy 1)
     ,
     id
     .(# octave 2)
-    .(# legato 2)
+    .(# legato (slow 3 sine + 1))
     .(# shape 0.9)
     .(|* gain 0.8)
       -- .(degradeBy 1)
     ,
-    (# octave 6)
+    (# oc 6)
     .(sometimes (|+ n "-5"))
-    .(ply 24)
+    .(ply "<24!3 12>")
     .(# sustain 0.08)
     .(|* gain 0.72)
     .(# distort 0.4)
-    .(# scram 0.4)
+    .(# scram (slow 3 saw))
       -- .(degradeBy 1)
     ,
     (slow 4)

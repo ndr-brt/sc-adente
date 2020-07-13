@@ -1,0 +1,68 @@
+bpm(111)
+
+do
+  d1
+    $ jux (slow 2)
+    $ plyWith 16 (
+      (|* g 1.03)
+      .(|+ note "2 [-1 5] -2")
+      .(|+ pan (range "-0.2" "0.2" $ cosine))
+      .(|/ end (4/3))
+    )
+    $ s "osc:1"
+    |* g 0.55
+    # rvb 0.4 0.6
+    # begin (slow 2 $ range 0 0.2 sine)
+    |* dis 0.2
+  d2
+    $ rarely rev
+    $ plyWith 16 (
+      (|* g 1.02)
+      .(|+ note ((irand 10)-7))
+      .(|/ end (5/4))
+      .(|* binshift (rand))
+      .(|+ coarse 4)
+    )
+    $ s "osc:2"
+    |* g 0.65
+    |* dis 0.2
+    # pan (slow 4 $ saw)
+    # scram 0.3
+    # binshift 1
+    # crush 6
+  d3
+    $ every 2 (rev)
+    $ degradeBy 0.2
+    $ almostNever (iter 2)
+    $ stack [
+      s "kk(3,4)" # crush 3 # dis 0.7,
+      stut 3 "0.8" "0.05" $ s "ss(3,6,1)" # shape 0.6,
+      degradeBy 0.2
+        $ rarely (plyWith 2 (# pan rand))
+        $ sometimes (fast 2)
+        $ s "hhat(8,9)"
+        # ar 0.001 0.1
+    ]
+    # rvb 0.2 0.3
+    |* g 0.9
+
+all $ (chunk 2 ((hurry "1.5").("h" <~)))
+all $ id
+
+hush
+
+bpm(140)
+
+-- spacca tutto (la cpu intendo)
+d1
+  -- $ splice 4 "3*3 1 0"
+  $ striate "<0 2 3 1>"
+  $ plyWith 8 (
+    (|* g 0.95)
+    .(|+ pan rand)
+    .(sometimesBy rand (hurry 2))
+    .(|- note "<3 5 -2>")
+    .(|* sp (1.58 * rand))
+  )
+  $ s "percuo:2"
+  # rvb 0.3 0.5

@@ -1,13 +1,28 @@
+bpm(122)
+
 d1
+  $ layer [
+    id
+    (jux (rev.(|- n 3)))
+    ,
+    (|+ oc 7)
+    .(slow "<3!3 2 1!2 0>")
+    .(|* g 0.8)
+    .(stutWith 3 "<0.3!3 0.2 0.1!2 0>" (
+      (|* g 0.9).(# lp (range 600 1200 $ slow 7 sine) (slow 5 $ cosine - 0.1)))
+    )
+    .("0.05" ~>)
+    .(# pan (perlin))
+  ]
   $ fast 2
-  $ jux (rev.(|- n 3))
-  $ n (scale "enigmatic" "8 2 ~ 5*2 9 ~ 1 0")
+  $ n (scale "enigmatic" "8 2 ~ 5*2 9 ~ 1")
   # s "pingr"
-  # octave 6
-  # rvb' 0.5 0.9
-  # distort 0.82
+  # oc 4
+  # rvb' 0.5 0.7
+  # distort 0.7
   # gain 0.6
-  # del' 0.43 0.21 0.23
+
+hush
 
 d2
   $ fast 2
@@ -20,7 +35,7 @@ d2
 
 hush
 
-setcps (0.5)
+bpm(77)
 
 do
   -- resetCycles
@@ -29,17 +44,17 @@ do
     $ every 5 (|+ n 5)
     $ superimpose (
       (# orbit 1)
-      .(# octave 7)
-      .(fast 2)
+      .(# oc 7)
+      .(fast 1.5)
       .(every 3 (|+ n 5))
-      .(0.4 ~>)
+      .("t" ~>)
       .(scramble 3)
+      .(# lp 1800 0.5)
     )
     $ almostNever (superimpose ((# octave 10).(1.2 ~>).(stut 6 0.6 0.1)))
     $ slow 4
     $ n "0 ~!2 3 ~!3"
     # s "pingm"
     # rvb' 0.99 0.99
-    # orbit 0
     # del' 0.22 0.22 0.22
-    # distort (range 0 0.99 $ slow 125 $ envL)
+    # distort (range 0 0.3 $ slow 125 $ sine)

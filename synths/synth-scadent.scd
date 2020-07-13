@@ -150,29 +150,29 @@ SynthDef(\sbaum, { |out=0,freq=440,pan=0,attack=0.001,release=0.5,sustain=1,begi
 }).add;
 
 SynthDef(\dk, { |out=0, freq=440, pan=0, attack=0.01, release=0.5|
-	var sub = Pulse.ar(freq/2);
-	var noise = PinkNoise.ar(1);
+  var sub = Pulse.ar(freq/2);
+  var noise = PinkNoise.ar(1);
 
-	//var ani = Fold.ar(LFTri.ar(freq, 0), 0.2, 1);
-	var ani = Pulse.ar(freq, SinOsc.kr(0.8).range(0.2,0.8));
-	var sig = (sub * 0.45) + (noise * 0.05) + (ani * 0.5);
+  //var ani = Fold.ar(LFTri.ar(freq, 0), 0.2, 1);
+  var ani = Pulse.ar(freq, SinOsc.kr(0.8).range(0.2,0.8));
+  var sig = (sub * 0.45) + (noise * 0.05) + (ani * 0.5);
 
-	var env = EnvGen.ar(Env.perc(attack, release));
+  var env = EnvGen.ar(Env.perc(attack, release));
 
-	var cutoff = 2500.0;
-	sig = LPF.ar(sig, cutoff + ((cutoff/10) * LFNoise0.kr(5).range(-2,2)));
+  var cutoff = 2500.0;
+  sig = LPF.ar(sig, cutoff + ((cutoff/10) * LFNoise0.kr(5).range(-2,2)));
 
-	OffsetOut.ar(out, DirtPan.ar(sig, ~dirt.numChannels, pan, env));
+  OffsetOut.ar(out, DirtPan.ar(sig, ~dirt.numChannels, pan, env));
 }).add;
 
 // metallic bouncing marbles: from Bana on Patch and Tweak book
 SynthDef(\mbm, { |out=0, freq=440, pan=0, attack=0.01, release=0.4|
-	var env = EnvGen.ar(Env.perc(attack, release * LFTri.kr(2).range(0.5, 1.5)));
-	var carrier = SinOsc.ar(freq*16);
-	var signal = SinOsc.ar(freq);
-	var sig = signal * carrier;
+  var env = EnvGen.ar(Env.perc(attack, release * LFTri.kr(2).range(0.5, 1.5)));
+  var carrier = SinOsc.ar(freq*16);
+  var signal = SinOsc.ar(freq);
+  var sig = signal * carrier;
 
-	OffsetOut.ar(out, DirtPan.ar(sig, ~dirt.numChannels, pan, env));
+  Out.ar(out, DirtPan.ar(sig, ~dirt.numChannels, pan, env));
 }).add;
 
 SynthDef(\cuerda, { |out=0, freq=440, pan=0, attack=0.01, release=0.4|

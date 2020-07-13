@@ -1,0 +1,48 @@
+bpm(92)
+
+do
+  d1
+    $ sometimesBy (slow 13 $ (sine-saw+square)/2) (|* legato 4)
+    $ sometimesBy (rand) ("s" <~)
+    $ n "0!3 1.7 0!5 2.3 0!6"
+    # s "dk"
+    # lp (range 400 900 $ rand) (range 0 0.3 $ slow 7 $ cosine)
+    # legato 0.2
+    |* g 0.9
+    # del (range 0 0.87 $ slow 9 $ (perlin+cos)/2) "h" "0.2"
+  d2
+    $ ("[e|q]" ~>)
+    $ stutWith 3 "[h|q]" (
+      (|* g 0.95)
+      .(|- n 3)
+      .(# lp (range 300 800 $ slow 7 $ (saw+square)/2) 0.5)
+    )
+    $ degradeBy 0.2
+    $ s "dk:0?"
+    # oc 3
+    # ar 0.01 4
+    # shape 0.4
+    # rvb 0.9 0.8
+    |* g 0.8
+  d3
+    $ jux (|- n 5)
+    $ s "dk:3*8"
+    # ar 0.8 1
+    # oc 7
+    |* g 0.55
+    # rvb 0.4 0.5
+    # hp (range 2000 4000 $ slow 17 $ (perlin + saw)/2) 0.4
+    # legato 3
+  d4
+    $ while "<t t f t t t f>" (shut)
+    $ euclid 3 4
+    $ stutWith 8 "q" ((|* g 1).(|* coarse 8).(|* binshift (range 0.9 1.1 $ rand)))
+    $ n "-5"
+    # oc 5
+    # s "dk"
+    # legato 0.4
+    # lp 1400 0
+    # binshift (slow 27 $ (sine+square+isaw)/3)
+    |* g 0.8
+
+hush
