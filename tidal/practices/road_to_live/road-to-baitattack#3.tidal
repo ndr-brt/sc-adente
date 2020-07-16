@@ -1,0 +1,134 @@
+bpm(99)
+
+do
+  d1
+    $ every 5 (rev)
+    $ layer [
+      id
+      .(degBy 0.2)
+      ,
+      (hurry "0.2")
+      .(# o 8)
+      .(# hp 56 0.3)
+      ,
+      (hurry 5)
+      .(|* g 0.45)
+      .(degBy 0.9)
+      .(stutWith 5 "3s" (
+        (|* g 0.95).(|+ note (irand 4 - 3)).(# pan rand))
+        .(# binshift (slow 9 $ cos))
+      )
+      -- .(# del "h" "t" "t")
+      .(# pan (slow 8 $ perlin))
+    ]
+    $ slice 20 (repeatCycles 8 $ segment "<14 16 15 12>" $ irand 16)
+    $ s "gtr"
+    # rvb 0.2 0.2
+    |* g 0.92
+    # dis 0.4
+  d2
+    $ chunk 2 ((hurry 2).(slice 2 "1 0"))
+    $ superimpose (
+      (hurry 8)
+      .(|* g 0.8)
+      .(jux ((|* sp (4/3)).("e" ~>).(fast 2)))
+      .(# del "h" "t" "t")
+      .(# dis 0.2)
+      .(rarely (|* sp (5/4)))
+    )
+    $ s "gtr:2/4"
+    |* g 0.40
+    # rvb 0.5 0.8
+
+all $ (#waveloss 100)
+
+hush
+
+
+bpm(99)
+
+do
+  d1
+    $ sp "[1 1.333?, [t|q|0.36666]/3]"
+    # s "gtr"
+    |* g 0.88
+    # hp 56 0.7
+    # rvb 0.7 0.5
+  d2
+    $ superimpose (
+      (hurry 5)
+      .(|* g 0.5)
+      .(# pan (slow 8 perlin))
+      .(# binshift (slow 6 $ cos))
+    )
+    $ slice 24 (repeatCycles 4 $ segment "<24 20 22 21>/8" $ irand 24)
+    $ s "gtr:1"
+    |* g 0.62
+    # rvb 0.7 0.9
+  d3
+    $ superimpose (
+      (hurry 8)
+      .(# o 7)
+      .(# pan (segment 1 $ choose [0,1]))
+    )
+    $ stutWith 6 "t" ((|* g 0.97).(|+ coarse 8))
+    $ s "gtr:2/3"
+    |* g 0.48
+    |* sp "[q|t|e]"
+    # rvb 0.9 0.9
+    # dis 0.2
+    # lp 1000 (range 0.1 0.4 $ slow 7 $ (sine+square)/2)
+
+all $ ((#waveloss 99).(|* g 0.95))
+
+hush
+
+d1
+  $ slow 2
+  $ rarely (|* sp (8/9))
+  $ superimpose (
+    (slow 8)
+    .(|* sp "0.014")
+    .(# hp 56 0.3)
+    .(|* g 0.9)
+  )
+  $ chunk 2 ((|* sp (4/5)).(|+ coarse 16))
+  $ superimpose (
+    (hurry "e")
+    .(chunk 3 ((slow 2).(|+ coarse 4)))
+    .(# del "0.7" "t" "t")
+    .(# o 7)
+  )
+  $ superimpose (
+    (hurry "h")
+    .(degradeBy "t")
+    .(jux ((|* sp "h").("4s" ~>)))
+  )
+  $ s "msg*32"
+  # lp (range 800 1200 $ slow 8 $ cosine) 0.2
+  # rvb 0.6 0.8
+  # shape 0.4
+
+bpm(99)
+
+d1
+  $ while "<f t>/8" (|* sp (4/5))
+  $ superimpose (
+    (hurry "[e|s]")
+    .(stutWith 6 "t" (
+      (|* g 0.95)
+      .(|+ coarse 2)
+      .(# pan rand))
+    )
+    .(# o 7)
+  )
+  $ chunk 3 (|* sp (8/9))
+  $ superimpose (
+    (hurry "[t|x]")
+    .(jux ((|* sp "h").("t" <~).(slow 2)))
+  )
+  $ s "msg*16"
+  # rvb 0.6 0.8
+  # shape 0.3
+
+hush
