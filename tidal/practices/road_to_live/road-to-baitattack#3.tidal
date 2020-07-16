@@ -167,3 +167,61 @@ d1
   # shape 0.3
 
 hush
+
+
+do
+  -- d1
+  --   $ superimpose (
+  --       (hurry 4)
+  --       .(|* g (0.8 * (fast 4 $ sine)))
+  --       .(|* sp (range 0.9 1.1 $ rand))
+  --   )
+  --   $ superimpose (
+  --     (hurry "2s")
+  --     .(# o 8)
+  --   )
+  --   $ chop 4
+  --   $ s "eleas:22*8"
+  --   |* sp "[1 1.333 1.25]"
+  --   # lp (range 1800 3000 $ slow 12 $ cosine) 0.1
+  --   # rvb 0.3 0.5
+  --   |* g 0
+  -- d2
+  --   $ superimpose (
+  --     (slow 4)
+  --     .(|* sp "h")
+  --     .(# pan (segment 1 $ choose [0,1]))
+  --   )
+  --   $ every 3 (rev)
+  --   $ sp "[1, ~ 8*3] 1 [2 3] 4"
+  --   # s "eleas:18"
+  --   |* g 0.4
+  --   # binshift 0.5
+  --   # rvb 0.3 0.5
+  --   # del "t" "t" "t"
+  -- d3
+  --   $ every 3 ((slow 2).(stutWith 4 "3s" (|* g 0.95)))
+  --   $ rarely (|* sp "1.25")
+  --   $ every 5 (|* sp (1 + (5/4)))
+  --   $ superimpose (
+  --     (fast 8)
+  --     .(chop 4)
+  --     .(|* sp 2)
+  --     .(|* g 0.8)
+  --     .(# pan (slow 8 $ sine))
+  --   )
+  --   $ s "eleas:11*6"
+  --   # rvb 0.3 0.5
+  --   |+ note "[0 0 3!3 1]"
+  d4
+    $ chunk 3 (|* sp 1.333)
+    $ superimpose ((hurry 3).(|* g 0.7).(#pan rand))
+    $ superimpose ((hurry "0.1").(ply 1).(# hp 56 0.4))
+    $ plyWith 5 (|+ coarse 4)
+    $ slice "<8 9 6>" "4 2"
+    $ s "eleas:21"
+    |* g 0.9
+
+all $ (# rvb 0.3 0.5).(# crush 0)
+
+hush
