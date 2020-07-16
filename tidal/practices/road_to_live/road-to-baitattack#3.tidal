@@ -1,3 +1,38 @@
+bpm(95)
+
+do
+  d1
+    $ layer [
+      id
+      .(# hp 62 0.7)
+      .(rarely (# rmod 0.9 12 0.6))
+      ,
+      (rarely (|* sp (4/3)))
+      .(hurry "0.1")
+      ,
+      (hurry "<4 6 5>/10")
+      .(|* g 0.64)
+      .(|/ sp (5/4))
+      .(jux (|* sp (9/8)))
+    ]
+    $ ply "<16 20 18>/16"
+    $ slice "<32 30 29 31>/3" (repeatCycles 7 $ segment 28 $ irand 32)
+    $ s "gtr:2"
+    |* g 0.7
+    # rvb 0.1 0.1
+  d2
+    $ every 2 (|* sp (4/3))
+    $ every 3 (|* sp (5/4))
+    $ slow 4
+    $ stutWith 10 "1s" ((|* g 0.97).(|+ coarse 1).(|+ note (irand 5 - 2)))
+    $ s "gtr:2"
+    |* sp 10
+    # pan (slow 4 (perlin))
+    |* g 0.7
+    # binshift (slow 8 $ sine)
+    # del "h" "t" "t"
+
+
 bpm(99)
 
 do

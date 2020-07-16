@@ -18,6 +18,28 @@ d2
 
 hush
 
+d1
+  $ superimpose (
+    (hurry 5)
+    .(|* g 0.50)
+    .(# coarse (slow 32 (ri 16 + r 16)))
+    .(# o 8)
+    .(# rvb 0.4 0.4)
+    .(rarely (# ac 0.8))
+    .(#pan (slow 12 $ perlin))
+  )
+  $ superimpose (
+    (hurry "0.12")
+    .(# o 6)
+    .(# hp 66 0.4)
+    .(rarely (# rmod 0.8 8 0.5))
+  )
+  $ ply "<22 26 32 24 30>/5"
+  $ slice 32 (repeatCycles 8 $ segment 28 $ irand 32)
+  $ s "gtr:2"
+  |* g 0.6
+
+hush
 -- ou yeah
 
 do
