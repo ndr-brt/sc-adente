@@ -224,4 +224,76 @@ do
 
 all $ (# rvb 0.3 0.5).(# crush 0)
 
+
+bpm(98)
+
+do
+  -- d1
+  --   $ chop 2
+  --   $ superimpose ((hurry "h").("h" ~>))
+  --   $ superimpose (
+  --     (striate 2)
+  --     .(hurry 2)
+  --     .("q" ~>)
+  --     .(jux ((|* sp "-1").("[0|3s]" <~)))
+  --   )
+  --   $ sp "[1 1.333/3, [h|q]/2]"
+  --   # s "gtr:0"
+  --   # rvb 0.4 0.5
+  --   # del "t" "t" "t"
+  --   |* g 0.30
+  d1 silence
+  d2 silence
+  -- d2
+  --   $ rarely (|* sp (5/4))
+  --   $ stutWith 3 "2s" ((|* g 0.95).(# coarse 8))
+  --   $ almostNever (|* sp (4/3))
+  --   $ superimpose ((hurry "e").(|* g 0.9))
+  --   $ superimpose (
+  --     (|* sp 4)
+  --     .(ply 2)
+  --     .(# pan (slow 8 cosine))
+  --   )
+  --   $ slice "<12!3 8>" (segment 12 $ irand 12)
+  --   $ s "gtr:1"
+  --   |* g 0.40
+  --   # scram (slow 12 $ tri)
+  -- d3
+  --   $ chop 2
+  --   $ chunk 3 (# coarse 4)
+  --   $ superimpose ((hurry 4).(|* g 0.6).(fast 4).(# pan (slow 4 perlin)))
+  --   $ sp "[1 1.333/3, [q/2] ~ 1.25/5]"
+  --   # s "gtr:2"
+    -- |* g 0.7
+
 hush
+  
+
+all $ (#rvb 0.5 0.5)
+
+
+
+
+bpm 98
+let si = superimpose
+
+do
+  d1
+    $ jux (chew "<3 5>" 8)
+    $ si ((hurry 12).(|* g 0.6).(# pan (slow 12 $ tri)))
+    $ superimpose ((hurry "h").("q" <~))
+    $ s "eleas:18"
+    |* sp "h"
+    # loop 2
+    |* g 0.8
+    # coarse 120
+    # hp 66 0.5
+  d2 silence
+
+once $ off "0.05" (# dis 0.2) $ s "eleav:22" |* g 0.8 # o 10
+
+hush
+
+all $ (#rvb 0.6 0.8)
+
+15 (splice 16)
