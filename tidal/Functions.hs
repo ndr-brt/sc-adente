@@ -26,6 +26,7 @@ sp = speed
 str = striate
 strBy = striateBy
 u = up
+wl = waveloss
 
 cyc = (toRational . floor) <$> sig id
 

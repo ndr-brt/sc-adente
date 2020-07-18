@@ -267,7 +267,7 @@ do
     -- |* g 0.7
 
 hush
-  
+
 
 all $ (#rvb 0.5 0.5)
 
@@ -297,3 +297,26 @@ hush
 all $ (#rvb 0.6 0.8)
 
 15 (splice 16)
+
+
+bpm 98
+
+do
+  d1
+    $ jux (|* sp (5/4))
+    $ si ((hurry 8).(|* g 0.9).(euclid 2 4).("h" ~>).(ply 2))
+    $ si ((|+ note (segment 1 $ c [0, 48, 40, 36])).(|* sp "h").(# sustain 2).(slow 2).(|* g 0.88))
+    $ s "eleas:2"
+    |* g 0.95
+    |* sp 0.6
+    # shape 0.4
+    # lpf (range 1000 2000 $ slow 8 $ cosine)
+    # dis 0.2
+    # waveloss (trigger 1 $ range 0 100 $ slow 20 $ envL)
+  d2 silence
+
+once $ off "0.05" ((# dis 0.2).(#pan rand)) $ s "eleav:33" |* g 0.8 # o 8
+
+
+all $ (# rvb 0.4 0.5)
+hush
