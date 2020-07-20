@@ -320,3 +320,171 @@ once $ off "0.05" ((# dis 0.2).(#pan rand)) $ s "eleav:33" |* g 0.8 # o 8
 
 all $ (# rvb 0.4 0.5)
 hush
+
+
+bpm(98)
+
+do
+  d1 silence
+    -- $ rarely (chop 2)
+    -- $ chunk 3 ((rev).(|* sp "-1"))
+    -- $ superimpose (
+    --   (hurry "q")
+    --   .(# lp 400 0.2)
+    -- )
+    -- $ superimpose (
+    --   (hurry 4)
+    --   .(|*g 0.7)
+    --   .(|* sp (range 1.1 1.4 $ slow 7 sine))
+    -- )
+    -- $ slice 6 "3 0"
+    -- $ s "eleas:7"
+    -- |* sp "t"
+    -- |* g 0.3
+  d2 silence
+    -- $ superimpose (
+    --   (hurry 3)
+    --   .(sometimesBy 0.15 (stut 6 "0.9" "x"))
+    --   .(|* g 0.7).(# ac "-0.1")
+    --   .(|* sp "1.1 1.05")
+    -- )
+    -- $ superimpose ((|* sp 8).("h" ~>).(|* g 0.7).(# coarse 8))
+    -- $ sp "1 q/2"
+    -- # s "eleas:5"
+    -- |* g 0.5
+  d1 silence
+    -- $ every 4 (rev)
+    -- $ splice 8 (segment 8 $ ri 8)
+    -- $ chunk 3 (# crush 3)
+    -- $ superimpose ((*| sp "4!6").(|* g 0.6).(#lp (range 800 5000 $ slow 4 $ cosine) 0.3))
+    -- $ over (hurry "q")
+    -- $ s "eleas:14"
+    -- |* g 0.5
+  d2 silence
+    -- $ every 4 (iter 3)
+    -- $ every 3 (linger "q")
+    -- $ over ((hurry "4").(# pan (slow 8 $ sine)).(rarely (|+ note "-5")).(# coarse 4))
+    -- $ jux (rev)
+    -- $ chop 2
+    -- $ sp "1 1*2"
+    -- # s "eleas:17"
+    -- # hp 66 0.5
+    -- # shape 0.3
+    -- # scram 0.2
+    -- # end 0.4
+    -- |* g 0.4
+  d1 silence
+    -- $ rarely (bite 2 5)
+    -- $ foldEvery [3, 5] (slow 2)
+    -- $ chunk 5 ((hurry 2).(# pan rand))
+    -- $ chunk 2 (# coarse 16)
+    -- $ chop 4
+    -- $ over ((hurry 12).(|* g 0.6).(degradeBy "q").(rarely (|* sp "h")).(# pan (slow 4 perlin)))
+    -- $ over (hurry "q")
+    -- $ s "eleas:27"
+    -- |* g 0.5
+  d2 silence
+    -- $ chop 4
+    -- $ over ((hurry 8).(|* g 0.5))
+    -- $ over (hurry "h")
+    -- $ chew "<2!5 3!5>" 5
+    -- $ juxBy (slow 4 $ (square*2-1)) ((|* sp (5/4)).(# dis 0.2))
+    -- $ s "eleas:25"
+    -- |* sp 1.33
+    -- |* g 0.2
+  d1 silence
+  --   $ every 2 (linger "q")
+  --   $ over ((hurry 4).(|* g 0.5).(#pan rand))
+  --   $ over ((|* sp "2s").(|* g 0.9))
+  --   $ sp "{1.25 [2 [1.5]]!2 ~ 4*5}%2"
+  --   # s "eleas:24"
+  --   # del "h" "t" "t"
+  --   |* g 0.5
+  d2 silence
+    -- $ chew 3 5
+    -- $ rarely (stut 6 "0.8" "e")
+    -- $ jux ((|* sp "-4").(rev).("t" ~>).(fast 1.5))
+    -- $ ply 2
+    -- $ sp "[1 ~ 1.333,s*2]"
+    -- # s "eleas:16"
+    -- |* g 0.5
+  d1 silence
+    -- $ over ((hurry 8).(|* g 0.5).(#o 8).(#rvb 0.9 0.9))
+    -- $ chunk 3 (over ((|* sp 1.333).("t" ~>).(# crush 2).(# pan rand)))
+    -- $ ply 3
+    -- $ slice 16 "6 7 3 2 14"
+    -- $ s "eleas:20"
+    -- |* g 0.5
+  d2 $ silence
+    -- $ chew 3 4
+    -- $ superimpose (hurry "e")
+    -- $ stutWith 5 "s" ((# pan sine).(|* sp 1.08))
+    -- $ euclid 5 9
+    -- $ s "eleas:11"
+    -- # dis 0.5
+    -- |* g 0.5
+  d1
+    $ over (
+      (zoom (0.4,0.6))
+      .(rand ~>)
+      .(|+ note 48).(# shape 0.8).(# del "2t" "t" "t")
+    )
+    $ over ((#pan (slow 8 tri)).(hurry 4).(|* g 0.9).(#lpq (slow 8 $ sine/3)))
+    $ s "eleas:2"
+    |* sp "0.6"
+    # lpf (range 300 1000 $ slow 16 $ cosine)
+    |* g 0.4
+  d2
+    $ over ((hurry 3).(|* g 0.7).(+| n "[0 3 2 7 6 3]"))
+    $ off "h" ((chop 4))
+    $ s "eleas:3"
+hush
+once $ stutWith 2 "s" (#pan "[0|1]") $ s "eleav:10" # waveloss 0.3 |* g 0.8 # o 8
+
+
+all $ (# rvb 0.4 0.4)
+
+
+
+bpm(98)
+
+do
+  d1 silence
+  d2
+    $ bite 3 4
+    $ every 3 (|* sp (9/8))
+    $ over (
+      (chunk 3 (stutWith 6 "2s" ((|* g 0.95).(|* sp 1.25).(slow 2))))
+      .(hurry "[6]")
+      .(|* g 0.6)
+      .(+| note "[2 5 0 8]").(# pan (slow 4 sine))
+    )
+    $ loopAt "[h,1]"
+    $ s "eleas:5"
+    |* g 0.8
+hush
+all $ (# rvb 0.4 0.4)
+
+
+
+
+bpm 98
+
+do
+  d1 silence
+  d2
+    $ jux (|* sp (5/4))
+    $ over ((slow 2).(degradeBy 0.7).(|+ note "[24|28|22|25]").(# shape 0.3).(# pan rand))
+    $ over (hurry "h")
+    $ over (hurry "q")
+    $ s "eleas:2"
+    |* sp "0.6"
+    # lpf (range 800 2000 $ slow 16 $ cosine)
+    # waveloss 100
+    # hp 66 0.6
+
+all $ (# rvb 0.95 0.95)
+
+once $ off "s" (#pan rand) $ s "eleav:42" # dis 0.1 # o 8 |* g 0.75
+
+hush
