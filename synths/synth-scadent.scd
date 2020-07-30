@@ -184,9 +184,7 @@ SynthDef(\cuerda, { |out=0, freq=440, pan=0, attack=0.01, release=0.4|
 
 	OffsetOut.ar(out, DirtPan.ar(sig, ~dirt.numChannels, pan, env));
 }).add;
-)
 
-(
 SynthDef(\friab, {|out=0,freq=440,sustain=1,pan=0,begin=0,end=1,speed=1|
   var line = Line.ar(begin, end, sustain*(end-begin)/speed, doneAction: Done.freeSelf);
   var env = Env.asr;
@@ -203,4 +201,17 @@ SynthDef(\friab, {|out=0,freq=440,sustain=1,pan=0,begin=0,end=1,speed=1|
   Out.ar(out, DirtPan.ar(sig * volume, ~dirt.numChannels, pan));
 }).add;
 
+SynthDef(\sin, {|out=0,freq=440,sustain=1,pan=0,begin=0,end=1,speed=1,accelerate=0|
+  var envLength = sustain*(end-begin)/speed;
+  var line = Line.ar(begin, end, envLength, doneAction: Done.freeSelf);
+  var env = Env.asr;
+  var volume = IEnvGen.ar(env, line);
+  var sig;
+
+  freq = freq * speed;
+  freq = max(freq * (1 + (accelerate * line)), 0);
+  sig = SinOsc.ar(freq);
+
+  Out.ar(out, DirtPan.ar(sig * volume, ~dirt.numChannels, pan));
+}).add;
 )
