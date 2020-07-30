@@ -206,11 +206,10 @@ SynthDef(\sin, {|out=0,freq=440,sustain=1,pan=0,begin=0,end=1,speed=1,accelerate
   var line = Line.ar(begin, end, envLength, doneAction: Done.freeSelf);
   var env = Env.asr;
   var volume = IEnvGen.ar(env, line);
-  var sig;
 
-  freq = freq * speed;
-  freq = max(freq * (1 + (accelerate * line)), 0);
-  sig = SinOsc.ar(freq);
+  var sig = SinOsc.ar(
+    max(0, freq * speed * (1 + (accelerate * line)))
+  );
 
   Out.ar(out, DirtPan.ar(sig * volume, ~dirt.numChannels, pan));
 }).add;
