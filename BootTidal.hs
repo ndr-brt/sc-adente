@@ -8,14 +8,6 @@ hSetEncoding stdout utf8
 tidal <- startTidal (superdirtTarget {oLatency = 0.15, oAddress = "127.0.0.1", oPort = 57120}) (defaultConfig {cFrameTimespan = 1/20})
 -- tidal <- startTidal (superdirtTarget {oLatency = 0.15, oAddress = "127.0.0.1", oPort = 57121}) (defaultConfig {cFrameTimespan = 1/20})
 
--- :{
--- tidal <- startMulti [
---     superdirtTarget {oLatency = 0.15, oAddress = "127.0.0.1", oPort = 57120}
---     ,
---     superdirtTarget {oLatency = 0.15, oAddress = "127.0.0.1", oPort = 57121, oTimestamp = NoStamp}
---   ] (defaultConfig {cFrameTimespan = 1/20})
--- :}
-
 :{
 let p = streamReplace tidal
     hush = streamHush tidal
