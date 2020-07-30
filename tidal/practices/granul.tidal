@@ -103,3 +103,30 @@ d4
 d4 silence
 
 hush
+
+d1
+  -- $ almostNever (si ((fast 8).(# pan rand).(|* sp 1.5)))
+  -- $ iter 4
+  -- $ every 8 (rev)
+  -- $ slow 2
+  -- $ chop 128
+  $ s "breaks125"
+  -- # n (slow 5 $ ri 5)
+  -- # del "h" "t" "t"
+  -- # rvb 0.4 0.8
+  -- # shape 0.4
+  -- # dis 0.2
+  -- # hp 66 0.3
+  # stretch 0.85
+
+do
+  d1
+    $ every 4 (|- n 1)
+    $ loopAt 1
+    -- $ rarely (si (rev.(hurry 2).(degBy "t")))
+    $ striateBy 24 "q"
+    $ sound "breaks125:1"
+    # dis 0.2
+    # rvb 0.3 0.5
+
+hush

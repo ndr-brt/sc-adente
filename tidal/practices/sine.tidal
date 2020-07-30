@@ -1,0 +1,124 @@
+bpm 111
+
+d1
+  $ si (hurry "q")
+  $ every 4 (rev)
+  $ off "e" ((|* sp 2).(plyWith 4 (|+ n "0.2")).(# binshift (slow 12 $ tri)).(# pan (slow 8 $ tri)))
+  $ off "q" ((hurry 2).(# hp 66 0.3))
+  $ n "0 [2.3 [4.4|6]]"
+  # s "sin"
+  # rvb 0.2 0.2
+  -- # dis 0.2
+  # lp (range 100 1000 $ slow 18 $ cosine) 0.2
+
+hush
+
+bpm 130
+
+do
+  d1
+    $ every 3 (rev)
+    $ every 4 (iter 2)
+    $ si ((hurry "q").(# hp 66 0.3))
+    $ off "3s" ((|+ oc 3).(# pan rand).(degradeBy "h"))
+    $ off "e" ((|+ oc 2).(# lpf 1000).(degradeBy 0.5))
+    $ off "s" ((|+ oc 1).(# pan "[0 1 0 1]"))
+    $ shut
+    $ n "[2(3,8), 1(1,8,3), 8(7,16,2)]"
+    # s "sin"
+    # oc 5
+    |* g 0.6
+    # rvb 0.1 0.1
+    # del "s" "t" "t"
+  d2
+    $ every 5 (rev)
+    $ almostNever (|+ n 3)
+    $ si ((hurry 4).(|* g 0.6).(degradeBy 0.5).(# pan (slow 4 sine)).(ply "[1|2]"))
+    $ si ((hurry "q").(stutWith 3 "s" (|+ oc 1)))
+    $ off "3e" (|+ oc 1)
+    $ off "q" (|+ oc 2)
+    $ euclid 3 9
+    -- $ shut
+    $ fast 2
+    $ s "sin:0"
+    |* g 0.9
+    # oc 4
+    # rvb 0.1 0.1
+    # del "s" "t" "t"
+
+
+bpm 128
+
+do
+  -- resetCycles
+  d1
+    $ si (
+      (hurry 4)
+      .(slow 2)
+      .(|* g 0.78)
+      .(|+ oc "<2 1 2!2 0>")
+    )
+    $ si ((hurry "h").(|* g 0.8))
+    $ juxBy (slow 8 $ ((saw*2)-1)) (slow "h")
+    $ striateBy "<24*5 29*2>/6" "w"
+    $ n "0 5 36 24 3 18"
+    # s "sin"
+    # oc 3
+    # rvb 0.9 0.9
+    # hp 56 0.4
+    -- # dis (trigger 1 $ range 0 3 $ slow 128 $ envL)
+    -- |* g (trigger 1 $ range 0 1 $ slow 16 $ envL)
+
+hush
+
+bpm 128
+
+do
+  d1
+    $ si (hurry 2)
+    $ rslice 100
+    $ s "sin:0"
+    |+ n (segment 4 $ irand 8)
+    # oc 3
+    |- begin (1/100)
+    |+ end (1/100)
+    # rvb 0.4 0.5
+    # del "0.8" "x" "x"
+    # hp 66 0.4
+  d2
+    $ si (hurry "e")
+    $ si ((hurry 2).(|* g 0.8))
+    $ stutWith 6 "1s" ((|* g 0.97).(|+ note "[0|-3|3|-5|5]").(# pan perlin))
+    $ s "sin:0"
+    # oc 6
+    # del "h" "t" "t"
+    |* g 0.9
+    # rvb 0.4 0.6
+
+
+bpm 98
+
+d1
+  $ layer [
+    (#oc 3)
+    .(# ac "-1")
+    .(euclid 9 16)
+    .(#legato 4)
+    .(# tanh 3)
+    ,
+    (hurry 4)
+    .(stutWith 4 "q" ((|* g 0.95).(|+ n (choose [0,-3,3,5,-5])).(# pan rand)))
+    .(# lpf 600)
+    .(# triode 0.8)
+    ,
+    ("[q|s]" ~>)
+    .(hurry 8)
+    .(rarely (fast 2))
+    .(# o 8)
+    .(#rvb 0.1 0.1)
+    .(# dis 0.38)
+  ]
+  $ s "sin:0"
+
+
+hush

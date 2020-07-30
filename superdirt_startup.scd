@@ -34,4 +34,4 @@ FreqScope.new(500, 50 , 0, server: s);
 s.meter;
 s.makeGui;
 
-);
+)

@@ -345,3 +345,6 @@ flood text2 = sequence_(replicator text2) -- from Kindohm
 -- phaseShift shifts shiftRepeats = ((slow slowP (run shiftsP) / shiftsP) ~>)
 -- where shiftsP = return shifts
     -- slowP = return (shifts * shiftRepeats)
+
+rslice x p = slice x (segment (toTime <$> x) $ ((>>= irand) x)) $ p
+rsplice x p = splice x (segment (toTime <$> x) $ ((>>= irand) x)) $ p

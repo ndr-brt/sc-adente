@@ -30,3 +30,6 @@ scr = pF "scr" -- wipe factor of bin scramble effect by Nesso, from 0 to 1
 smooth = pF "smooth" -- sets power of 2 value of fft bins for bin scrambling
 scry = pF "scry" -- amount of random displacement of bin scramble, from 0 to 1
 diff x y z = diffract x # diffshift y # diffmix z
+
+-- chop
+tilt = pF "tilt"
