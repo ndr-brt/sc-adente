@@ -60,3 +60,21 @@ d4
   # gain 0.8
 
 hush
+
+
+bpm 130
+
+d1
+  -- $ fast 2
+  $ every 3 (rev)
+  -- $ chunk 2 (|+ oc 2)
+  -- $ off "e" ((hurry 2).(|* g 0.9).(sb 0.1 (stutWith 6 "0.05" (|+ sp 2))))
+  $ off "q" (hurry "h")
+  -- $ off "e" (hurry "2")
+  $ n "[0 11] 0 [3 8] 5"
+  # s "xenbass"
+  # oc 5
+  # legato 1
+  -- # tuning 20
+  -- # hp 54 0.6
+  # rvb 0.3 0.4

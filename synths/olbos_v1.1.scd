@@ -1,7 +1,5 @@
 //Olbos' boot file template for Tidalcycles
 
-(
-
 //EFFECTS
 //Diffract: an FFT effect that scales and shifts bins based on the PV_BinShift Ugen
 
@@ -184,21 +182,26 @@ SynthDef("tantanh" ++ ~dirt.numChannels, { |out, tantanh|
 
 
 // Xenbass: a stochastic bass synthesizer based on the Gendy1 oscillator invented by Iannis Xenakis and Marie-Helene Serra and implemented on SC by Nick Collins. Works best with long decays due to its stochastic behavior. The depth control sets the range of frequency variation, high numbers determine chaotic pitch results.
-
 (
-SynthDef(\xenbass, { arg out, pan, freq = 440, tuning = 19, attack = 0.001, release = 1, depth = 1;
-	var signal, env, freqenv;
-	var note = freq.cpsmidi;
-	var octave = ((note/tuning)-5).trunc(1);
-	freq = [440 * (pow(2, octave)) * (pow(2, ((mod(note, tuning))/tuning)))];  //sets microtonal properties according to Guiot's technique
-	freqenv = EnvGen.ar(Env([freq, freq * 6, freq], [attack, release], 'exp')); // filter envelope
-	env = EnvGen.ar(Env([0.0001, 1, 0.0001], [attack, release], [-5, -4]), doneAction: 2); //amplitude envelope
-	signal = Gendy1.ar(1, 5, 1, 1, freq, [freq + depth, freq + depth + 1 ], 0.5, 0.6, 6); // a Gendy1 oscillator
-	signal = LPF.ar(signal, freqenv) * env; // applies filter and amplitude envelope to the oscillator
-	signal = LeakDC.ar(signal); //remove DC Offset
-	signal = Mix.ar(signal); //necessary for panning
-	OffsetOut.ar(out, DirtPan.ar(signal, ~dirt.numChannels, pan, env)); //configures the synth for Tidalcycles
-	}).add;
+
+SynthDef(\xenbass, {|out=0,pan=0,freq=440,tuning=19,attack=0.001,release=1,depth=1,sustain=1,begin=0,end=1,speed=1|
+  var envLength = sustain*(end-begin)/speed;
+  var line = Line.ar(begin, end, envLength, doneAction: Done.freeSelf);
+  var env = Env.asr(attackTime: attack, releaseTime: release);
+  var volume = IEnvGen.ar(env, line);
+  var signal, freqenv;
+  var note = freq.cpsmidi;
+  var octave = ((note/tuning)-5).trunc(1);
+  freq = [440 * (pow(2, octave)) * (pow(2, ((mod(note, tuning))/tuning)))];  //sets microtonal properties according to Guiot's technique
+  freqenv = EnvGen.ar(Env([freq, freq * 6, freq], [attack, release], 'exp')); // filter envelope
+  signal = Gendy1.ar(1, 5, 1, 1, freq, [freq + depth, freq + depth + 1 ], 0.5, 0.6, 6); // a Gendy1 oscillator
+  signal = LPF.ar(signal, freqenv); // applies filter and amplitude envelope to the oscillator
+  signal = LeakDC.ar(signal); //remove DC Offset
+  signal = Mix.ar(signal);
+
+  Out.ar(out, DirtPan.ar(signal * volume, ~dirt.numChannels, pan));
+}).add;
+
 );
 
 //Xenharp: a stochastic synth useful for arpy, high freq sounds with moderately long decays. It is based on the Gendy1 oscillator invented by Iannis Xenakis and Marie-Helene Serra and implemented on SC by Nick Collins. The depth control sets the range of frequency variation, high numbers determine chaotic pitch results.
@@ -321,6 +324,6 @@ SynthDef (  \waveblender, {
 	sig = LeakDC.ar(sig);  // avoids DC offset
 	sig = Mix.ar(sig); //necessary for panning
 	OffsetOut.ar(out, DirtPan.ar(sig, ~dirt.numChannels, pan, env)); //configures the synth for Tidalcycles
- }).add);
+ }).add
 
-)
+ );

@@ -1,21 +1,21 @@
-bpm 111
-
-d1
-  $ si (hurry "q")
-  $ every 4 (rev)
-  $ off "e" ((|* sp 2).(plyWith 4 (|+ n "0.2")).(# binshift (slow 12 $ tri)).(# pan (slow 8 $ tri)))
-  $ off "q" ((hurry 2).(# hp 66 0.3))
-  $ n "0 [2.3 [4.4|6]]"
-  # s "sin"
-  # rvb 0.2 0.2
-  -- # dis 0.2
-  # lp (range 100 1000 $ slow 18 $ cosine) 0.2
+do
+  bpm 111
+  d1
+    $ si (hurry "q")
+    $ every 4 (rev)
+    $ off "e" ((|* sp 2).(plyWith 4 (|+ n "0.2")).(# binshift (slow 12 $ tri)).(# pan (slow 8 $ tri)))
+    $ off "q" ((hurry 2).(# hp 64 0.2))
+    $ n "0 [2.3 [4.4|6]]"
+    # s "sin"
+    # rvb 0.2 0.2
+    -- # dis 0.2
+    # lp (range 100 1000 $ slow 18 $ cosine) 0.15
+    |* g 0.9
 
 hush
 
-bpm 130
-
 do
+  bpm 125
   d1
     $ every 3 (rev)
     $ every 4 (iter 2)
@@ -23,7 +23,7 @@ do
     $ off "3s" ((|+ oc 3).(# pan rand).(degradeBy "h"))
     $ off "e" ((|+ oc 2).(# lpf 1000).(degradeBy 0.5))
     $ off "s" ((|+ oc 1).(# pan "[0 1 0 1]"))
-    $ shut
+    -- $ shut
     $ n "[2(3,8), 1(1,8,3), 8(7,16,2)]"
     # s "sin"
     # oc 5
@@ -38,7 +38,7 @@ do
     $ off "3e" (|+ oc 1)
     $ off "q" (|+ oc 2)
     $ euclid 3 9
-    -- $ shut
+    $ shut
     $ fast 2
     $ s "sin:0"
     |* g 0.9
@@ -47,9 +47,9 @@ do
     # del "s" "t" "t"
 
 
-bpm 128
 
 do
+  bpm 128
   -- resetCycles
   d1
     $ si (
@@ -71,11 +71,11 @@ do
 
 hush
 
-bpm 128
 
 do
+  bpm 128
   d1
-    $ si (hurry 2)
+    $ si ((hurry 2).(# binshift 0.4))
     $ rslice 100
     $ s "sin:0"
     |+ n (segment 4 $ irand 8)
@@ -95,30 +95,86 @@ do
     |* g 0.9
     # rvb 0.4 0.6
 
+hush
 
-bpm 98
+do
+  bpm 98
+  d1
+    $ layer [
+      (|- oc 2)
+      .(|- n 3)
+      .(# ac "-0.8")
+      .(every 5 (iter 4))
+      .(euclid 7 16)
+      .(#legato 4)
+      .(# shape 0.3)
+      .(# tanh 2)
+      ,
+      (hurry 4)
+      .(stutWith 4 "q" ((|* g 0.95).(|+ n (choose [0,-3,3,5,-5])).(# pan rand)))
+      .(# lpf 600)
+      .(# triode 0.8)
+      ,
+      ("[q|s]" ~>)
+      .(hurry 8)
+      .(rarely (fast 2))
+      .(# o 8)
+      .(#rvb 0.1 0.1)
+      .(# dis 0.38)
+      ,
+      (|* sp 4)
+      .(# ac "5")
+      .(euclid 5 12)
+      .(stut 16 "0.9" "0.1")
+      .(# lp 800 0.2)
+      .(# legato 1)
+    ]
+    $ s "sin:0"
+    # oc 5
 
-d1
-  $ layer [
-    (#oc 3)
-    .(# ac "-1")
-    .(euclid 9 16)
-    .(#legato 4)
-    .(# tanh 3)
-    ,
-    (hurry 4)
-    .(stutWith 4 "q" ((|* g 0.95).(|+ n (choose [0,-3,3,5,-5])).(# pan rand)))
-    .(# lpf 600)
-    .(# triode 0.8)
-    ,
-    ("[q|s]" ~>)
-    .(hurry 8)
-    .(rarely (fast 2))
-    .(# o 8)
-    .(#rvb 0.1 0.1)
-    .(# dis 0.38)
-  ]
-  $ s "sin:0"
 
+hush
+
+do
+  bpm 100
+  d1
+    $ chunk 5 ((off "h" ((slow 2).(|* sp 1.5))).(# pan 0.1))
+    $ chunk 3 ((off "h" (hurry 2)).(# pan 0.9))
+    $ layer [
+      id
+      .(sometimesBy "x" ((|+ dis 0.3).(|* g 0.7)))
+      .(sometimesBy "t" (+| n (segment 2 $ scale "minor" (irand 8))))
+      ,
+      (euclid 7 8)
+      .(|- oc 2)
+      .(# ac "-0.4")
+      .(# shape 0.33)
+      .(# rvb 0.3 0.4)
+      .(# o 7)
+      ,
+      (slow 4)
+      .(db "q")
+      .(sb "h" (off "h" ((|- oc 2).(|* tremolo 2 1.5))).(# pan rand))
+      .(|+ n (choose [0,3,5]))
+      .(|+ dis 0.9)
+      .(|+ oc 1)
+      .(|* g 0.43)
+      .(# ac ((range 0.5 1 $ rand)*(choose [-1,1])))
+      .(# tremolo (irand 4 + 1) 0.5)
+      .(|+ rvb 0.2 0.4)
+      .(# o 8)
+      ,
+      (+| n "~!3 [3|3*2]")
+      .(# lpf 800)
+      .(|* g 0.8)
+      ,
+      (euclid 15 16)
+      .(|* sp 12)
+      .(# legato 2)
+      .(|* g 0.6)
+      .(# scram (slow 18 $ tri))
+    ]
+    $ s "sin:0"
+    # oc 5
 
 hush

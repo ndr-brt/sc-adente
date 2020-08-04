@@ -6,9 +6,11 @@ import Control.Applicative
 
 ac = accelerate
 c = choose
+db = degradeBy
 deg = degrade
 degBy = degradeBy
 dis = distort
+ds = distort
 ev = every
 fE = foldEvery
 fa = fast
