@@ -1,0 +1,131 @@
+-- order: 3
+
+bpm 111
+
+hush
+
+do
+  let fin = 1
+  d1
+    $ si (
+      (hurry 8)
+      .(sb fin (#crush 1))
+      .(fast "<2 6 4 2>")
+      .(|* gain 0.7)
+      .(jux (rev.(|* sp "-1")))
+    )
+    $ db fin
+    $ si ((hurry "f").(# hp 56 0.3))
+    $ si (|* sp "q")
+    $ shut
+    $ s "eleas:3/2"
+  d2
+    $ euclid "<6!4 3>" 8
+    $ off "q" ((hurry "8").(#pan rand).(|* g 0.8).(-| ac (choose [0.1,-0.2])).(|+ coarse 4))
+    $ si ((hurry "q").(#hp 56 0.3))
+    $ off "s" ((hurry 2).(|* g 0.8).(# pan (slow 8 sine)))
+    $ shut
+    $ s "eleas:22"
+    |* sp 0.8
+    |* g 1
+    # lp (range 400 1000 $ slow 12 $ cosine) 0.2
+  d3
+    $ loopAt 1
+    $ slow 2
+    $ si (
+      (hurry 2)
+      .(|* g 0.7)
+      .(stutWith 10 "e" (
+        (|* g 0.95)
+        .(|+ ac (choose [0.15, -0.15]))
+        .(# pan perlin))
+      )
+    )
+    $ si ((hurry "[q|e]").(# hp 56 0.3).(# tremolo 10 0.8))
+    $ shut
+    $ s "eleas:21"
+  d4
+    $ chunk 3 ((striate 8).(# pan "[0,1]"))
+    $ si ((+| sp "2 2 4 8").(# shape 0.3).(jux (rev)).(# binshift (slow 8 tri)))
+    $ si (hurry "h")
+    $ euclid "1 5" 8
+    $ shut
+    $ n "17"
+    # s "eleas"
+    # del "h" "t" "t"
+    # lpf 2500
+    # hp 58 0.5
+  d5
+    $ chop 7
+    $ shut
+    $ si ((plyWith "<3 6!4>" ((# pan rand).(|+ coarse (segment 1 $ irand 8)))).(euclid 2 6).(|* sp 2).(|+ rvb 0.5 0.5).(|* g 0.6).(#o 5))
+    $ si ((|* sp "q").(# hp 58 0.5))
+    $ s "eleas:13"
+  d6
+    $ loopAt 2
+    $ layer [
+      (|* sp "s")
+      .(#end "e")
+      .(# rmod 0.8 8 0.7).(#shape 0.4).(juxBy 0.2 (("s" ~>).(|* sp (5/4))))
+      ,
+      (hurry "h")
+      .(jux (|* sp (5/4)))
+      ,
+      id.(#tremolo "<2 9 19>" 0.5).(juxBy "h" (|/ sp (4/3))).(|* g 0.9)
+      ,
+      ((|* sp 8).(fast 2).(|* g 0.6).(# pan rand).(# ds 0.5))
+    ]
+    $ shut
+    $ s "eleas:25"
+    # lp 600 0
+  d7
+    $ si ((hurry 8).(|* g 0.8).(# binshift (slow 12 $ cosine)).(#pan (slow 8 $ sine)))
+    $ si ((db "h").(+| note "<24 22 20 28>").(slow 4).(# o 0).(|+ rvb 0.2 0.4))
+    $ off "h" ((|* sp (5/4)).(# pan perlin))
+    $ si (hurry "h")
+    $ shut
+    $ s "eleas:2"
+    |* sp 0.6
+    # lpf 800
+  d8
+    $ rslice "7"
+    $ layer [
+      id
+      .(# waveloss 40)
+      ,
+      (hurry "h")
+      ,
+      ((hurry 4)
+      .(|* g 0.7)
+      .(# pan (slow 4 (saw)))
+      .(# del "h" "t" "t")
+      .(#o 1))
+    ]
+    $ shut
+    $ s "eleas:30"
+  d9
+    $ layer [
+      (si (hurry "q"))
+      ,
+      id
+      ,
+      (si ((|* sp 8).(stutWith 16 "s" ((|* g 0.97).(# pan rand).(|+ coarse 1)))).(#dis 0.2))
+    ]
+    $ shut
+    $ s "eleas:9"
+    |* sp "q"
+    # begin 0.4
+    # end 0.6
+    # lpf 400
+  d10
+    $ shut
+    $ si (|* sp "q")
+    $ s "eleas:3/2" |* sp "-1"
+
+hush
+
+
+
+once $ off "0.05" ((|+ sp 0.01).(# pan rand)) $ s "eleav:39" # ds 0.2 |* g 0.8
+
+all $ (# rvb 0.4 0.5)
