@@ -1,33 +1,76 @@
--- order: 3
+-- order:
+-- 3/2,
+-- 22 sp 0.8
+-- 21,
+-- 5 loopat 1 - si hurry q boo - si hurry 2 - jux sp-1 - off e hurry 4 ecc..,
+-- 14 shape boo - chew <3 2 4> 5 - si hurry 2 sp -1 g 0.8,
+-- 25 lp 600,
+-- 2 sp 0.8 lp 800 0,
+-- 30 - lp 1800 0.3 - si hurry q (boo) - si hurry 3 - chunk 3 (sp -2 jux sp 4/5),
+-- 9 sp "q" beg end 0.4 0.6,
+-- 3/2 sp -1
 
-bpm 111
+do
+  bpm 111
+  all $ (# rvb 0.4 0.5).(# tanh 2)
+
+once $ off "0.05" ((|+ sp 0.01).(# pan rand)) $ s "eleav:41" # ds 0.2 |* g 0.8
+
+hush
+
+d1
+  $ chew "<3 2 4>" 5
+  $ si (
+    (# pan perlin)
+    .(hurry 2)
+    .(|* sp "-1")
+    .(|* g 0.8)
+  )
+  $ s "eleas:14"
+  # boo
+  # shape 0.3
+  -- # distort (range 0 0.2 $ slow 8 $ sine)
+
+d1
+  $ every 8 (|* sp "-1")
+  $ off "e" ((|* g 0.7).(hurry 4).(# dis 0.2).(# pan rand).(# binshift (slow 6 $ sine)))
+  $ si ((hurry "q").(#boo))
+  $ si ((hurry 2).(jux (|* sp "-1")))
+  $ loopAt 1
+  $ s "eleas:5"
+
+d1
+  $ chunk 3 ((|* sp "-2").(jux (|/ sp (5/4))))
+  $ si ((hurry 3).(|*g 0.8).(# pan perlin))
+  $ si ((hurry "q").(#boo))
+  $ s "eleas:30"
+  # lp 1800 0.3
 
 hush
 
 do
-  let fin = 1
   d1
     $ si (
       (hurry 8)
-      .(sb fin (#crush 1))
+      .(sb 0.1 (#crush 1))
       .(fast "<2 6 4 2>")
       .(|* gain 0.7)
       .(jux (rev.(|* sp "-1")))
     )
-    $ db fin
     $ si ((hurry "f").(# hp 56 0.3))
-    $ si (|* sp "q")
+    $ si ((|* sp "q").(# end "q"))
     $ shut
     $ s "eleas:3/2"
   d2
     $ euclid "<6!4 3>" 8
-    $ off "q" ((hurry "8").(#pan rand).(|* g 0.8).(-| ac (choose [0.1,-0.2])).(|+ coarse 4))
-    $ si ((hurry "q").(#hp 56 0.3))
-    $ off "s" ((hurry 2).(|* g 0.8).(# pan (slow 8 sine)))
+    $ off "[e|3s]" (
+      (hurry "8").(#pan rand).(|+ coarse 8).(|+ ac (choose [0.4,-0.4]))
+    )
+    $ si ((hurry "q").(# boo))
+    $ off "s" ((hurry 2).(# pan (slow 8 sine)))
     $ shut
     $ s "eleas:22"
     |* sp 0.8
-    |* g 1
     # lp (range 400 1000 $ slow 12 $ cosine) 0.2
   d3
     $ loopAt 1
@@ -41,7 +84,7 @@ do
         .(# pan perlin))
       )
     )
-    $ si ((hurry "[q|e]").(# hp 56 0.3).(# tremolo 10 0.8))
+    $ si ((hurry "[q|e]").(# boo).(# tremolo 10 0.8))
     $ shut
     $ s "eleas:21"
   d4
@@ -50,14 +93,13 @@ do
     $ si (hurry "h")
     $ euclid "1 5" 8
     $ shut
-    $ n "17"
-    # s "eleas"
+    $ s "eleas:17"
     # del "h" "t" "t"
     # lpf 2500
     # hp 58 0.5
   d5
     $ chop 7
-    $ shut
+    -- $ shut
     $ si ((plyWith "<3 6!4>" ((# pan rand).(|+ coarse (segment 1 $ irand 8)))).(euclid 2 6).(|* sp 2).(|+ rvb 0.5 0.5).(|* g 0.6).(#o 5))
     $ si ((|* sp "q").(# hp 58 0.5))
     $ s "eleas:13"
@@ -123,9 +165,3 @@ do
     $ s "eleas:3/2" |* sp "-1"
 
 hush
-
-
-
-once $ off "0.05" ((|+ sp 0.01).(# pan rand)) $ s "eleav:39" # ds 0.2 |* g 0.8
-
-all $ (# rvb 0.4 0.5)

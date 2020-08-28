@@ -1,0 +1,35 @@
+
+bpm (135)
+
+d1
+  $ rarely (iter 4)
+  $ jux (rev)
+  $ every 8 (linger "[q|h]")
+  $ off "s" ((|* g 0.9).(|* sp 2).(swing 3))
+  $ n "[0*2 ~, ~ 1, ~ 2*2 3*2, 5/3, ~ 6]"
+  # s "dald"
+  # shape 0.4
+  # rvb 0.4 0.5
+  # boo
+  # lp 5000 0
+
+hush
+
+do
+  d1
+    $ fast 2
+    $ si (hurry "q")
+    $ stutWith 3 "e" ((# pan rand))
+    $ n "[0 1 2 3]"
+    # s "dald"
+    # rvb 0.5 0.5
+    # boo
+    # shape 0.4
+    # del "h" "t" "t"
+  d2
+    $ si (hurry 2)
+    $ si (hurry "q")
+    $ jux (rev)
+    $ n "~ 7 6*2 ~"
+    # s "dald"
+    # lp 5000 (range 0 0.3 $ slow 4 $ sine)

@@ -91,6 +91,9 @@ sdel' = sdel
 kru' = kru
 scon' = scon
 
+-- booost the bass
+boo = hp 56 0.4
+
 -- runs of numbers
 r = run
 ri a = rev (r a) -- run inverted

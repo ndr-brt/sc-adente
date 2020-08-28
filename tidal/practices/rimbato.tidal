@@ -51,3 +51,17 @@ d3
 xfadeIn 3 2 $ silence
 
 hush
+
+d1
+  $ off (1/32) ((|- oc 1).(|* pan (-1)))
+  $ n "0*32"
+  # s "sin"
+  # oc 5
+  # ac "-5"
+  # pan (slow 5 tri)
+  # rvb ((slow 7 saw/2) + 0.2) ((slow 6 cosine/3) + 0.2)
+  # dis (slow 3 sine/5)
+  # crush (range 0 16 $ slow 18 $ tri)
+  # triode (slow 8 isaw/2)
+  # legato 32
+  # boo
