@@ -1,4 +1,4 @@
-bpm (115)
+bpm 115
 
 do
   -- resetCycles
@@ -6,11 +6,11 @@ do
     $ "feelfx*2"
     # n (irand 8)
     # legato 4
-    # rvb' 0.09 0.38
-    # speed (range 0.07 0.09 $ rand)
-    # gain 0.67
-    # hp' 60 0.2
-    # orbit 0
+    # rvb 0.12 0.38
+    # sp (range 0.07 0.09 $ rand)
+    |* g 0.67
+    # boo
+    # tanh 8
     -- # waveloss (trigger 1 $ range 0 100 $ slow 10 $ envL)
 
 d1 silence
@@ -32,7 +32,6 @@ d2
   # rvb' 0.5 0.98
   # pan (slow 8 $ perlin)
   # distort 0.65
-  # orbit 1
 --  # waveloss (trigger 2 $ range 0 100 $ slow 10 $ envL)
 
 d2 silence
@@ -52,7 +51,6 @@ d4
   # crush (irand 6 + 4)
   # shape 0.1
   # rvb' 0.3 0.6
-  # orbit 3
   -- # waveloss (trigger 4 $ range 0 100 $ slow 10 $ envL)
 
 d4 silence
@@ -61,7 +59,7 @@ d3
 -- clutchIn 3 12
   $ every 8 ((ply 2).(degradeBy 0.5).(linger 0.5))
   $ whenmod 6 5 ((# accelerate "-0.4").(stut 4 0.5 0.2))
-  $ whenmod 12 9 ((slow 3).(#del' 0.59 0.14 0.11))
+  $ whenmod 12 9 ((slow 3).(# del 0.59 0.14 0.11))
   $ rarely (striate 2)
   $ n (segment 8 $ irand 8)
   # s "haw"

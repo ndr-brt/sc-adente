@@ -35,7 +35,7 @@ wl = waveloss
 cyc = (toRational . floor) <$> sig id
 
 -- plays a sample in reverse at speed a every b cycles, timing the playback so it ends exactly when the next cycle begins.
--- rinse a b p = ((1/a) <~) $ struct (slow b "t") $ loopAt (-1/a) $ p
+rinse a b p = ((1/a) <~) $ struct (slow b "t") $ loopAt (-1/a) $ p
 -- rinse' a b c = every b (const $ ((1/a) <~) $ slow a $ loopAt (-1/a) $ sound (c))
 -- rinse a b c d = every b (const $ ((1/a) <~) $ slow a $ loopAt (-1/a) $ sound c # n (irand d))
 
@@ -353,3 +353,6 @@ flood text2 = sequence_(replicator text2) -- from Kindohm
 
 rslice x p = slice x (segment (toTime <$> x) $ ((>>= irand) x)) $ p
 rsplice x p = splice x (segment (toTime <$> x) $ ((>>= irand) x)) $ p
+
+quieten = mapM_ (\i -> xfade i silence) [1 .. 16]
+quietenIn t = mapM_ (\i -> xfadeIn i t silence) [1 .. 16]

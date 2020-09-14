@@ -1,5 +1,5 @@
 -- starts with d2 then d3 then d1
-bpm (100)
+bpm 100
 
 -- d1
 clutchIn 1 4

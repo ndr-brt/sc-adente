@@ -1,0 +1,11 @@
+bpm 135
+
+d1
+  $ every 2 (stutWith 32 (1/128) (# begin (range 0 0.5 saw)))
+  $ s "amencutup:2*4"
+  # cut 1
+  -- # end 0.6
+  -- # legato 0.2
+  -- |* g 0.7
+
+hush

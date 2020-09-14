@@ -1,22 +1,153 @@
 -- order:
--- 3/2,
--- 22 sp 0.8
--- 21,
--- 5 loopat 1 - si hurry q boo - si hurry 2 - jux sp-1 - off e hurry 4 ecc..,
--- 14 shape boo - chew <3 2 4> 5 - si hurry 2 sp -1 g 0.8,
--- 25 lp 600,
--- 2 sp 0.8 lp 800 0,
--- 30 - lp 1800 0.3 - si hurry q (boo) - si hurry 3 - chunk 3 (sp -2 jux sp 4/5),
+-- 3/2, si sp "q" boo, si hurry 2, si sp 10 euclid 12 14 h <~ binshift "t"
+-- 22 sp 0.8, off h sp q, off h hurry h, si hurry 3 rarely fast 4, jux sp -1
+-- 21 si hurry 2 pan rand, si hurry h, every qualcosa slow e crush/dis magari con ply,
+-- 5 loopat 1 - si hurry q boo - si hurry 2 - rarely sp-1 - off e hurry 4 ecc..,
+-- 14 chew <3 2 4> 5 - si hurry 2 sp -1 g 0.8 pan perlin (sul si, off q dis 0...),
+-- 25 lp 400 io 0.4 0.7, jux sp 5/4, si hurry q db 0.8 pan rand e stut, chunk 3 su tutto |+ note,
+-- 2 sp 0.8 lpf 800,
+-- 30 - lp 1800 0.3 - si hurry q (boo) - si hurry 3 - chunk 3 (sp -2 jux sp 4/5) - dis,
 -- 9 sp "q" beg end 0.4 0.6,
--- 3/2 sp -1
+-- 3/2 sp -1 - si hurry q
 
 do
   bpm 111
-  all $ (# rvb 0.4 0.5).(# tanh 2)
+  all $ (# rvb 0.4 0.5).(# tanh 1.8).(# boo)
 
-once $ off "0.05" ((|+ sp 0.01).(# pan rand)) $ s "eleav:41" # ds 0.2 |* g 0.8
+once $ off "0.05" ((|+ sp 1.01).(# pan rand))
+  $ s "eleav:2" # ds 0.2 |* g 0.7
 
 hush
+
+do
+  d1
+    $ si (
+      (hurry 2).(|* sp "-1").(|* g 0.84).(# pan perlin)
+      .(off "q" (# dis 2))
+    )
+    $ shut
+    $ chew "<3 2 4>" 5
+    $ s "eleas:14"
+  d2
+    $ chunk 3 (|* sp (9/8))
+    $ si ((hurry 4).(db 0.9).(# pan rand).(stutWith 3 "s" (|* note (4/5))))
+    $ si ((hurry "q").(# rmod 0.8 9 0.6))
+    $ jux (|* sp (5/4))
+    $ shut
+    $ s "eleas:25"
+    # lpf 400
+    # io 0.4 0.7
+  d3
+    $ jux (|* sp (4/5))
+    $ s "eleas:2" |* sp 0.8 # lpf 800
+
+
+
+do
+  d1
+    -- $ every 4 (chew 3 4)
+    $ si ((|* sp 10).(|* g 0.4).(euclid 12 14).("h" <~).(# binshift "t"))
+    $ si ((hurry 2).(|* g 0.7).(# pan (slow 16 sine)))
+    $ si (|* sp "q")
+    $ shut
+    $ s "eleas:3/2"
+  d2
+    $ si ((hurry 3).(|* g 0.65).(rarely (fast 4)).(juxBy (range "-1" "1" $ slow 8 sine) (|* sp "-1")).(#scram 0.2))
+    $ off "t" (hurry "h")
+    $ off "h" (|* sp "q")
+    $ shut
+    $ s "eleas:22" |* sp 0.8
+  d3
+    $ every 5 ((slow 4).(# dis 0.3).(ply 2).(#crush 4))
+    $ si (hurry "h")
+    $ si ((hurry 2).(# pan rand).(|* g 0.7).(sometimes ((fast 2))))
+    $ shut
+    $ s "eleas:21"
+  d4
+    $ si ((|* sp "t").(slow 2))
+    $ loopAt 1
+    $ s "eleas:5"
+
+hush
+
+do
+  d1
+    $ si ((|+ note "[24|26|20]").(db "h").(rarely (stut 3 1 "t")).(# pan rand))
+    $ si (hurry "h")
+    $ jux (|/ sp (5/4))
+    $ shut
+    $ s "eleas:2" |* sp 0.8 # lp 800 0
+  d2
+    $ chunk 3 ((|* sp "-2").(jux (|* sp (4/5))))
+    $ si ((hurry 3).(|* g 0.8).(# pan rand))
+    $ si (hurry "q")
+    $ shut
+    $ s "eleas:30" # lp 1800 0.3
+    |* dis 0.2
+    |* g 0.5
+  d3
+    $ si (
+      (bite 3 4).(|* sp "4").(|* g 0.7).(jux ((|* sp "-1").("e" ~>))).(chop 4).(stutWith 4 "q" (|+ coarse 8)).(rarely (fast 2))
+    )
+    $ si (hurry "h")
+    $ shut
+    $ s "eleas:9"
+    |* sp "q"
+    # io 0.4 0.6
+  d4
+    $ si (hurry "q")
+    $ s "eleas:3/2" |* sp "-1"
+
+hush
+
+do
+  d1
+    $ si ((|* sp 10).(euclid 12 14).(|* g 0.6).("h" <~).(# binshift "t").(# pan "[0|1]"))
+    $ si ((|* sp 2).(|* g 0.8).(# pan (slow 3 sine)))
+    $ si ((|* sp "q").(# boo))
+    $ shut
+    $ s "eleas:3/2"
+  d2
+    $ jux (|* sp "-1")
+    $ si ((hurry 3).(|* g 0.6).(rarely (fast 4)))
+    $ off "t" (hurry "t")
+    $ off "h" ((|* sp "q"))
+    $ shut
+    $ s "eleas:22" |* sp 0.8
+    # dis 0.2
+  d3
+    $ every 3 ((slow 4).(# crush 3).(# pan rand).(plyWith 4 (|+ dis 0.1)))
+    $ every 2 ((slow 4).(|+ dis 0.7).(ply 4))
+    $ si (hurry "h")
+    $ si ((hurry 2).(# pan rand).(|* g 0.7))
+    $ rslice 12
+    $ shut
+    $ s "eleas:21"
+  d4
+    $ off "e" ((hurry 4).(|* g 0.7).(#dis 0.3).(# pan (slow 8 tri)))
+    $ rarely (|* sp "-1")
+    $ si (hurry 2)
+    $ si (hurry "q")
+    $ loopAt 1
+    $ shut
+    $ s "eleas:5"
+  d5
+    $ si ((hurry 2).(|* sp "-1").(|* g 0.9).(# pan perlin))
+    $ chew "<3 2 4>" 5
+    $ shut
+    $ s "eleas:14"
+    # shape 0.3
+  d6
+    $ si ((hurry "q"))
+    $ si ((hurry "h").(#rmod 0.8 ((irand 10) + 2) 0.6))
+    $ si ((|* sp (choose [20, 22, 18])).(# pan rand).(|+ rvb 0.4 0.4))
+    -- $ jux (|* sp (5/4))
+    $ s "eleas:25"
+    # lp 400 0
+    # io 0.5 0.8
+
+  hush
+
 
 d1
   $ chew "<3 2 4>" 5

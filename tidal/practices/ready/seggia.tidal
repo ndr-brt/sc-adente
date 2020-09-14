@@ -1,65 +1,81 @@
-bpm (114)
+bpm 114
 
 do
-  -- resetCycles
-  -- clutchIn 1 8
   d1
+    $ chunk 3 ((slow 2).(plyWith 2 ((|* sp 2).(stutWith 2 "e" ((#pan 0.5).(|* sp 2))))))
     $ rarely (# n (ri 8))
     $ layer [
       (juxBy (slow 7 $ (cosine/2+0.5)) (iter 5))
-        .(whenmod 7 5 ((# freeze 1).(# n 0)))
-        .(sometimes (brak.rev))
-        .(rarely (# accelerate (irand 4 - 2)))
-        .(# smear (range 0.1 0.8 $ slow 10 $ (cosine+square)/2))
-        .(rarely (stut 4 0.5 0.2))
-        .(# o 2)
-        -- .(degradeBy 1)
+      -- .(chew 1 4)
+      .(whenmod 7 5 ((# freeze 1).(# n 0)))
+      .(sometimes (brak.rev))
+      .(rarely (# accelerate (irand 4 - 2)))
+      .(# smear (range 0.1 0.8 $ slow 10 $ (cosine+square)/2))
+      .(rarely (stut 4 0.5 0.2))
+      .(# o 3)
+      .(db 0)
       ,
-      (|* sp (slow 2 $ (saw/4 + 0.15)))
-        .(# accelerate "-0.6")
-        .(# comb (slow 4 $ sine))
-        .(# hp' 60 0.34)
-        .(# shape 0.2)
-        .(# o 3)
+      (|* sp (slow "[1|2|4]" $ (saw/4 + "t")))
+        .(# ac "-0.8")
+        .(# comb (slow (irand 5 + 1) $ sine))
+        .(# boo)
+        .(# lp 1200 0.3)
+        .(# shape 0.3)
+        .(# o 4)
+        .(|* g 1)
+        -- .(db 0.4)
       ,
       (slow 4)
         .(|* sp 4)
-        .(sometimesBy 0.34 (stut 24 0.9 0.005))
+        .(sb "h" (plyWith 8 (|- ac "0.1")))
         .(# pan rand)
         .(# hp' (range 2000 3000 $ slow 4 $ sine) 0.65)
         .(# binshift "[0.5 0.3 0.9 0.7]")
-        .(|* g 1.1)
-        .(# o 4)
-        .(rarely (#accelerate "-0.4"))
-        -- .(degradeBy 1)
+        .(|* g 1)
+        .(|+ rvb (range 0 "t" $ slow 7 $ isaw) 0.3)
+        .(# o 5)
+        .(rarely (# accelerate "-0.4"))
+        -- .(db 0)
     ]
     $ n (run 8)
     # s "chair"
     # del' 0.23 0.13 0.12
-    # rvb' 0.3 0.5
+    # rvb 0.3 0.5
     |* g 0.82
+  d2
+  -- clutchIn 2 4
+    -- $ shut
+    $ sb "h" (off "e" ((id).(# binshift (slow 3 $ sine))))
+    $ sb (1/10) (db "h")
+    $ while "<f!8 t>" (fast 2)
+    $ every 4 (slow 2)
+    $ every 6 ((linger 0.5).(swing 3))
+    $ sb "q" (jux rev)
+    $ sb 0.1 (stutWith 2 "e" ((# pan rand).(ply 2).(|- ac "1")))
+    $ s "[chair:15/2 chair:10?] chair:12*2"
+    # rvb' 0.3 0.3
+    # nudge 0.65
+    # tanh 5
+    # oct 0.3 0.3 0.6
+    # boo
+    |* g 0.56
+    # del rand (range (1/6) (1/3) $ slow 3 $ square) "t"
+  d3
+    -- $ shut
+    $ stutWith 50 (1/60) (id)
+    $ s "chair/7"
+    # n (irand 22)
+    # io 0.3 0.5
+    # pan "[0|1]"
+    |* sp (range "1.05" "1.35" $ rand)
+    # rvb 0.6 0.6
+    |* g 0.9
+  all
+    $ id
+    -- .(# waveloss (trigger 1 $ range 0 100 $ slow 12 $ envL))
+    -- .(# squiz (trigger 1 $ range 0 100 $ slow 12 $ envL))
+    -- .(|* g (trigger 1 $ range 1 0 $ slow 12 $ envL))
 
-d1 silence
-
-d2
--- clutchIn 2 8
-  $ every 4 (slow 2)
-  $ every 6 ((linger 0.5).(swing 3))
-  $ rarely (plyWith 2 (striate 2))
-  $ s "[chair:15/2 chair:10?] chair:12*2"
-  # rvb' 0.3 0.3
-  # nudge 0.65
-  # oct' 0.3 0.3 0.6
-  # hp' 60 0.35
-  |* g 0.7
-
-d2 silence
-
-mute 1
-unmute 1
-
-do
-  clutchIn 1 4 $ silence
-  clutchIn 2 6 $ silence
+d3 silence
 
 hush
