@@ -1,0 +1,26 @@
+
+
+
+
+
+
+bpm 98
+
+do
+  d2
+    $ jux ((|* sp "-1").(chop 2))
+    $ si (hurry "h")
+    $ si ((hurry 4).(|* g 0.65).(rarely ((plyWith 2 (# coarse 16)).(# pan rand))))
+    $ si ((|* sp 12).(bite 2 4).(|* g 0.8).(# lp 2000 0.2).(# del "2t" "t" "t"))
+    $ loopAt 1
+    $ s "eleas:14"
+    # shape 0.5
+    # wl 100
+    # dis 0.68
+    |* g 0.95
+
+once $ off "s" (# pan (rand)) $ s "eleav:27" # dis 0.2 # o 7
+
+all $ (# rvb 0.7 0.8)
+
+hush
