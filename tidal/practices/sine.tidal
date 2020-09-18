@@ -1,6 +1,7 @@
 do
   bpm 111
   d1
+    -- $ chunk 4 (# dis 0.2)
     $ si (hurry "q")
     $ every 4 (rev)
     $ off "e" ((|* sp 2).(plyWith 4 (|+ n "0.2")).(# binshift (slow 12 $ tri)).(# pan (slow 8 $ tri)))
@@ -15,7 +16,7 @@ do
 hush
 
 do
-  bpm 125
+  bpm 123
   d1
     $ every 3 (rev)
     $ every 4 (iter 2)
@@ -23,7 +24,7 @@ do
     $ off "3s" ((|+ oc 3).(# pan rand).(degradeBy "h"))
     $ off "e" ((|+ oc 2).(# lpf 1000).(degradeBy 0.5))
     $ off "s" ((|+ oc 1).(# pan "[0 1 0 1]"))
-    -- $ shut
+    $ shut
     $ n "[2(3,8), 1(1,8,3), 8(7,16,2)]"
     # s "sin"
     # oc 5
@@ -38,7 +39,7 @@ do
     $ off "3e" (|+ oc 1)
     $ off "q" (|+ oc 2)
     $ euclid 3 9
-    $ shut
+    -- $ shut
     $ fast 2
     $ s "sin:0"
     |* g 0.9
@@ -60,7 +61,7 @@ do
     )
     $ si ((hurry "h").(|* g 0.8))
     $ juxBy (slow 8 $ ((saw*2)-1)) (slow "h")
-    $ striateBy "<24*5 29*2>/6" "w"
+    -- $ striateBy "<24*5 29*2>/6" "w"
     $ n "0 5 36 24 3 18"
     # s "sin"
     # oc 3
@@ -178,3 +179,13 @@ do
     # oc 5
 
 hush
+
+do
+  bpm 94
+  d1
+    $ chunk "<2 3>" ((|+ note 5).(|* ac 2))
+    $ si (hurry "q")
+    $ si ((hurry 2).(db "h").(# pan "[0.2|0.8]"))
+    $ off "e" (rev)
+    $ ac "0 -0.2 0.4 -0.8"
+    # s "sin:-3"

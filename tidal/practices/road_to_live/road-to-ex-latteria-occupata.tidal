@@ -2,22 +2,26 @@
 -- 3/2, si sp "q" boo, si hurry 2, off -0.5 sp 10 euclid 12 14 binshift "t". chew 4 4 alla fine
 -- 22 sp 0.8 lpf 1800, off h sp q, off h hurry h, si hurry 3 rarely fast 4, jux sp -1
 -- 21 si hurry 2 pan rand, si hurry h, si sp 8 g 0.7 plywith 3|6 (|+ note 3|5) pan
--- 5 loopat 1 - si hurry h boo - si hurry 2 - every 5 sp-1 - off e hurry 4 ecc..,
+-- 5 loopat 1 - si hurry h boo - si hurry 2 - every 5 sp-1 - off e hurry 4 sp "-1" rarely fast 2 ecc..,
 -- 14 chew <3 2 4> 5 - si hurry 2 sp -1 g 0.8 pan perlin (sul si, off q dis 0...),
--- 25 lp 200 io 0.4 0.7, jux sp 5/4, si hurry t db 0.3 pan rand e stut, chunk 3 su tutto |+ note,
+-- 25 lp 200 io 0.4 0.7, jux sp 5/4, si hurry t db 0.3 pan rand, rmod, chunk 3 su tutto |+ note, si sp 8 ply 2...
 -- 2 sp 0.8 lpf 800 - si sp 4/5 - si db 0.8 |+ note 10|12|15|17 |* g 0.8, si hurry 24 binshift e pan slow sine
 -- 30 - lp 1800 0.3 - si hurry q (boo) - si hurry 3 - chunk 3 (sp -2 jux sp 4/5) - dis (a salire),
--- 9 lpf 1500 - splice 8 {2*9 1!2 4*3...}%8 - si hurry h - si hurry 0.1 - chunk a pala,
+-- 9 lpf 1500 - splice 8 {2*9 1!2 4*3...}%8 - si hurry h - si hurry 0.1 - chunk a pala (sp -0.5),
 -- 3/2 sp -1 - si sp q
 
 do
   bpm 111
-  all $ (# rvb 0.4 0.5).(# tanh 1.8).(# boo).(|* g 0.9)
+  all $ (# rvb 0.4 0.5).(# tanh 1.8).(# boo).(|* g 0.87)
 
 once $ off "0.05" ((|+ sp 1.001).(# pan rand))
-  $ s "eleav:18" # ds 0.2 |* g 0.7
+  $ s "eleav:1" # ds 0.2 |* g 0.7
 
-hush
+do
+  d2
+    $ si (|* sp "q")
+    $ s "eleas:3/2" |* sp "-1" # g 1
+    # waveloss (trigger 2 $ range 0 100 $ slow 12 $ envL)
 
 do
   d2
