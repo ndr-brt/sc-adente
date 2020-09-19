@@ -16,26 +16,26 @@ do
       .(db 0)
       ,
       (|* sp (slow "[1|2|4]" $ (saw/4 + "t")))
-        .(# ac "-0.8")
-        .(# comb (slow (irand 5 + 1) $ sine))
-        .(# boo)
-        .(# lp 1200 0.3)
-        .(# shape 0.3)
-        .(# o 4)
-        .(|* g 1)
-        -- .(db 0.4)
+      .(# ac "-0.8")
+      .(# comb (slow (irand 5 + 1) $ sine))
+      .(# boo)
+      .(# lp 1200 0.3)
+      .(# shape 0.3)
+      .(# o 4)
+      .(|* g 1)
+      .(db 0)
       ,
       (slow 4)
-        .(|* sp 4)
-        .(sb "h" (plyWith 8 (|- ac "0.1")))
-        .(# pan rand)
-        .(# hp' (range 2000 3000 $ slow 4 $ sine) 0.65)
-        .(# binshift "[0.5 0.3 0.9 0.7]")
-        .(|* g 1)
-        .(|+ rvb (range 0 "t" $ slow 7 $ isaw) 0.3)
-        .(# o 5)
-        .(rarely (# accelerate "-0.4"))
-        -- .(db 0)
+      .(|* sp 4)
+      .(sb "h" (plyWith 8 (|- ac "0.1")))
+      .(# pan rand)
+      .(# hp' (range 2000 3000 $ slow 4 $ sine) 0.65)
+      .(# binshift "[0.5 0.3 0.9 0.7]")
+      .(|* g 1)
+      .(|+ rvb (range 0 "t" $ slow 7 $ isaw) 0.3)
+      .(# o 5)
+      .(rarely (# accelerate "-0.4"))
+      .(db 0)
     ]
     $ n (run 8)
     # s "chair"
@@ -45,8 +45,8 @@ do
   d2
   -- clutchIn 2 4
     -- $ shut
-    $ sb "h" (off "e" ((id).(# binshift (slow 3 $ sine))))
-    $ sb (1/10) (db "h")
+    $ sb "0" (off "e" ((id).(# binshift (slow 3 $ sine)).(# freeze "[0|1]")))
+    $ sb "0" (db "h")
     $ while "<f!8 t>" (fast 2)
     $ every 4 (slow 2)
     $ every 6 ((linger 0.5).(swing 3))
@@ -72,9 +72,9 @@ do
     |* g 0.9
   all
     $ id
-    -- .(# waveloss (trigger 1 $ range 0 100 $ slow 12 $ envL))
-    -- .(# squiz (trigger 1 $ range 0 100 $ slow 12 $ envL))
-    -- .(|* g (trigger 1 $ range 1 0 $ slow 12 $ envL))
+    .(# waveloss (trigger 1 $ range 0 100 $ slow 16 $ envL))
+    .(# squiz (trigger 1 $ range 0 100 $ slow 16 $ envL))
+    .(|* g (trigger 1 $ range 1 0 $ slow 16 $ envL))
 
 d3 silence
 
