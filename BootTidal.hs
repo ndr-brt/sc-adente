@@ -3,24 +3,17 @@
 
 import Sound.Tidal.Context
 import System.IO (hSetEncoding, stdout, utf8)
-import qualified Control.Concurrent.MVar as MV
-import qualified Sound.Tidal.Tempo as Tempo
-import qualified Sound.OSC.FD as O
 hSetEncoding stdout utf8
 
 tidal <- startTidal (superdirtTarget {oLatency = 0.15, oAddress = "127.0.0.1", oPort = 57120}) (defaultConfig {cFrameTimespan = 1/20})
 -- tidal <- startTidal (superdirtTarget {oLatency = 0.15, oAddress = "127.0.0.1", oPort = 57121}) (defaultConfig {cFrameTimespan = 1/20})
 
 :{
-let only = (hush >>)
-    p = streamReplace tidal
+let p = streamReplace tidal
     hush = streamHush tidal
-    panic = do hush
-               once $ sound "superpanic"
     list = streamList tidal
     mute = streamMute tidal
     unmute = streamUnmute tidal
-    unmuteAll = streamUnmuteAll tidal
     solo = streamSolo tidal
     unsolo = streamUnsolo tidal
     once = streamOnce tidal
@@ -30,11 +23,6 @@ let only = (hush >>)
     all = streamAll tidal
     resetCycles = streamResetCycles tidal
     setcps = asap . cps
-    getcps = do tempo <- MV.readMVar $ sTempoMV tidal
-                return $ Tempo.cps tempo
-    getnow = do tempo <- MV.readMVar $ sTempoMV tidal
-                now <- O.time
-                return $ fromRational $ Tempo.timeToCycles tempo now
     xfade i = transition tidal True (Sound.Tidal.Transition.xfadeIn 4) i
     xfadeIn i t = transition tidal True (Sound.Tidal.Transition.xfadeIn t) i
     histpan i t = transition tidal True (Sound.Tidal.Transition.histpan t) i
