@@ -1,0 +1,32 @@
+
+
+
+
+
+
+
+
+bpm 102
+
+d1
+  $ sb 0.3 (|* sp (4/5))
+  $ chunk 3 (|* sp (9/8))
+  $ iter 4
+  $ every 4 (rev)
+  $ off "0.05" (# pan rand)
+  $ layer [
+    id
+    ,
+    hurry 16
+    ,
+    (|* sp 0.1).(euclid 3 4)
+    ,
+    (|* sp 0.05).(euclid 2 4).("q" ~>).(fast 2)
+    ,
+    (hurry 8).(db "h").(|* g 0.7).(# pan perlin).(stutWith 4 "e" ((|- ac "0.1").(|* g 0.8)))
+  ]
+  $ s "dr55:2"
+  # rvb 0.3 0.4
+  # dis 0.2
+
+hush
