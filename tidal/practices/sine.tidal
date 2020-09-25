@@ -1,7 +1,7 @@
 do
   bpm 111
   d1
-    -- $ chunk 4 (# dis 0.2)
+    -- $ chunk 4 (# dis 1)
     $ si (hurry "q")
     $ every 4 (rev)
     $ off "e" ((|* sp 2).(plyWith 4 (|+ n "0.2")).(# binshift (slow 12 $ tri)).(# pan (slow 8 $ tri)))
@@ -9,7 +9,6 @@ do
     $ n "0 [2.3 [4.4|6]]"
     # s "sin"
     # rvb 0.2 0.2
-    -- # dis 0.2
     # lp (range 100 1000 $ slow 18 $ cosine) 0.15
     |* g 0.9
 
@@ -24,14 +23,16 @@ do
     $ off "3s" ((|+ oc 3).(# pan rand).(degradeBy "h"))
     $ off "e" ((|+ oc 2).(# lpf 1000).(degradeBy 0.5))
     $ off "s" ((|+ oc 1).(# pan "[0 1 0 1]"))
-    $ shut
     $ n "[2(3,8), 1(1,8,3), 8(7,16,2)]"
     # s "sin"
     # oc 5
     |* g 0.6
     # rvb 0.1 0.1
     # del "s" "t" "t"
-  d2
+
+do
+  bpm 123
+  d1
     $ every 5 (rev)
     $ almostNever (|+ n 3)
     $ si ((hurry 4).(|* g 0.6).(degradeBy 0.5).(# pan (slow 4 sine)).(ply "[1|2]"))
@@ -39,14 +40,12 @@ do
     $ off "3e" (|+ oc 1)
     $ off "q" (|+ oc 2)
     $ euclid 3 9
-    -- $ shut
     $ fast 2
     $ s "sin:0"
     |* g 0.9
     # oc 4
     # rvb 0.1 0.1
     # del "s" "t" "t"
-
 
 
 do
@@ -65,7 +64,7 @@ do
     $ n "0 5 36 24 3 18"
     # s "sin"
     # oc 3
-    # rvb 0.9 0.9
+    # rvb 0.8 0.8
     # hp 56 0.4
     -- # dis (trigger 1 $ range 0 3 $ slow 128 $ envL)
     -- |* g (trigger 1 $ range 0 1 $ slow 16 $ envL)
@@ -183,9 +182,45 @@ hush
 do
   bpm 94
   d1
-    $ chunk "<2 3>" ((|+ note 5).(|* ac 2))
+    $ chunk 3 ((|+ note 5).(|* ac 2))
     $ si (hurry "q")
     $ si ((hurry 2).(db "h").(# pan "[0.2|0.8]"))
     $ off "e" (rev)
     $ ac "0 -0.2 0.4 -0.8"
     # s "sin:-3"
+
+
+do
+  bpm 109
+  d1
+    $ chew "<1!8 2 3 4>/2" 4 -- ply with this!
+    $ euclid 2 3
+    $ rarely (|- note "4")
+    $ chunk 3 (off "q" (|+ note "[3|5]"))
+    $ layer [
+      id
+      ,
+      ("e" ~>).(hurry 3).(+| note "[1 2 3]").(sb "t" (plyWith 3 (|- note 12)))
+      ,
+      ("h" ~>).(|- oc 2).(#ac "-4").(fast 2).(# boo).(# tanh 2.4)
+      ,
+      (every 3 (shut)).(# pan (choose [0,1])).(hurry 12).("h" ~>)
+      .(rarely (|- note "5")).(fast 2).(#o 8).(#del "h" "t" "t")
+      .(|* g 0.75)
+    ]
+    $ s "sin:0"
+    # oc 5
+    # legato 3
+    # rvb 0.2 0.3
+
+
+do
+  bpm 101
+  d1
+    $ off "h" (|* sp "0.2")
+    $ off "q" ((|* sp "q").(fast 4).(# legato 0.3))
+    $ off "e" ((|* sp "<0.66 0.75 0.5>").(fast 2).(ply "[1|2|4]").(#lp (range 500 2900 $ slow 8 sine) 0.2).(# pan perlin))
+    $ s "sin:0"
+    # oc 8
+
+hush

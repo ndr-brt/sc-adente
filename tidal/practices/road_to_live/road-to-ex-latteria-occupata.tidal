@@ -17,7 +17,9 @@ do
 once $ off "0.05" ((|+ sp 1.001).(# pan rand))
   $ s "eleav:1" # ds 0.2 |* g 0.7
 
+hush
 
+d1 $ s ""
 
 do
   d10
