@@ -69,3 +69,24 @@ d3 silence
 d2 silence
 
 hush
+
+do
+  bpm 135
+  d1
+    $ chew 2 4
+    $ off "e" (jux (rev))
+    $ s "{bd@t bd sn:2*3 clap:2}%8"
+    # del "<h t s>" "t" "<0 t>"
+    # crush 4
+    # tanh 2
+  d2
+    $ rarely (fast 2).(# legato 0.5)
+    $ si ((fast 2).(|+ oc 3).(|* g 0.86).(+| n "1 11 4").(sb "h" (|+ n "12")))
+    $ fast "1 3"
+    $ sb 0.1 (|+ n "2.3")
+    $ n "3 3 1 [5.2]"
+    # s "superchip"
+    # oc 3
+    # tanh 8
+    # lp (range 800 1200 $ rand) (slow 12 $ sine/5)
+    # rvb 0.4 0.5
