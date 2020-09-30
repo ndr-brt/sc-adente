@@ -1,0 +1,29 @@
+
+
+
+let masks fl fh sl sh = range (range fl fh $ saw) (range sl sh $ saw) $ rand
+let dens st en p = scramble (round <$> (range st en $ saw)) $ fast (range st en $ saw) $ s p
+
+d1
+  $ slow 10
+  -- $ layer [
+  --   id, id, id, (id.(slow (range 0.9 1.1 $ rand)))
+  -- ]
+  $ spread ($) [
+    (# freq (masks 220 440 880 440))
+    -- ,
+    -- (# freq (range 110 220 $ isaw))
+  ]
+  $ spread ($) [
+    (|* g (range 0.8 1 $ rand)),
+    (|* g (range 0.6 0.8 $ rand)),
+    (|* g (range 0.7 0.9 $ rand))
+  ]
+  $ dens 10 30 "sin:0"
+  -- $ s "sin:0 ~!3"
+  -- $ s "sin:0" + ("~")
+  # legato 10
+  -- # legato (irand 5 + 5)
+  -- |* g 0.8
+
+hush
