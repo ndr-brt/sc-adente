@@ -1,0 +1,11 @@
+
+
+d1
+  $ chunk 3 (|+ note 3)
+  $ si ((|* sp 4).(iter 3).(|* g 0.7).(#pan rand))
+  $ si (|* sp "q")
+  $ off "e" ((|* sp "2").rev)
+  $ n "<3 [5@q 0]> <1 [2 4*2] [5 7]>"
+  # s "pluck"
+  # rvb 0.3 0.4
+  # shape 0.4

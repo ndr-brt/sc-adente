@@ -33,6 +33,8 @@ u = up
 wl = waveloss
 
 cyc = (toRational . floor) <$> sig id
+sh t f p = superimpose ((hurry t).f) p
+so t f p = off t ((hurry t).f) p
 
 -- plays a sample in reverse at speed a every b cycles, timing the playback so it ends exactly when the next cycle begins.
 rinse a b p = ((1/a) <~) $ struct (slow b "t") $ loopAt (-1/a) $ p

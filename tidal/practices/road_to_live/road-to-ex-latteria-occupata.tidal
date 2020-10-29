@@ -17,6 +17,19 @@ do
 once $ off "0.05" ((|+ sp 1.001).(# pan rand))
   $ s "eleav:1" # ds 0.2 |* g 0.7
 
+xfadeIn 1 8
+  $ si ((hurry 3).(|* g 0.7))
+  $ off "h" (hurry "h")
+  $ off "h" ((|* sp "q"))
+  $ s "eleas:22"
+  |* sp "0.8"
+  # lpf 1800
+
+d1
+  $ soff "h" (fast 8)
+  $ s "eleas:22"
+  # lpf 1800
+
 hush
 
 d1 $ s ""

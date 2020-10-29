@@ -70,6 +70,8 @@ d2 silence
 
 hush
 
+d1 $ s "pluck:3"
+
 do
   bpm 135
   d1
