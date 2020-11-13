@@ -1,0 +1,20 @@
+do
+  bpm 111
+  let dial numb = once $ off "0.05" ((|+ sp 1.001).(# pan rand)) $ s "eleav" # n numb # ds 0.2 |* g 0.74
+  all $ (# rvb 0.5 0.6).(# tanh 1.6).(# boo).(|* g 0.8)
+
+========================
+Hi. Thanks for coming
+u-mano u-dito - elea 9003
+Check it out: https://thirdkindrecords.bandcamp.com/
+========================
+
+xfadeIn 1 8
+  $ stut 7 1 "e"
+  $ si (|* sp "q")
+  $ s "eleas:3/2"
+  |* sp "-1"
+  # tantanh 9.8
+  # wl 100
+
+hush

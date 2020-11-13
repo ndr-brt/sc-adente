@@ -1,10 +1,5 @@
 
 
-
-
-
-
-
 vid = document.createElement('video')
 vid.autoplay = true
 vid.loop = true
