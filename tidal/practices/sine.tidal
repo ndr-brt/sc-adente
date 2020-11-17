@@ -217,10 +217,45 @@ do
 do
   bpm 101
   d1
+    $ chunk 3 (|/ legato 5)
     $ off "h" (|* sp "0.2")
-    $ off "q" ((|* sp "q").(fast 4).(# legato 0.3))
-    $ off "e" ((|* sp "<0.66 0.75 0.5>").(fast 2).(ply "[1|2|4]").(#lp (range 500 2900 $ slow 8 sine) 0.2).(# pan perlin))
+    $ off "q" ((|* sp "q").(fast 4).(|* legato 0.3))
+    $ off "e" ((|* sp "<0.66 0.75 h>").(fast 2).(ply "[1|2|4]").(# lp (range 500 2900 $ slow 8 sine) 0.2).(# pan perlin))
     $ s "sin:0"
-    # oc 8
+    # oc 7
+    # tanh 2
+    |* g 0.9
+
+hush
+
+
+do
+  bpm 80
+  d1
+    $ stack [
+      rarely (si (rev))
+        $ off "q" ((|+ oc 2).(|* g 0.7).(# pan (slow 4 sine)))
+        $ stut 2 0.9 "s"
+        $ off "e" ((db "h").(|+ note 3.3))
+        $ off "e" ((db "t").(|+ note 1.7))
+        $ s "sin:0"
+        # oc 3
+        # tanh 2
+        -- # dis (rand*(slow 8 sine) / 5)
+        # legato 1
+        # rvb 0.3 0.4
+        |* g 0.9
+      ,
+      rarely (|* sp 0.98)
+        $ stutWith 5 "s" ((|* g 0.9).(# pan (choose [0, 0.5, 1])).(# binshift (rand)))
+        $ rarely (ply 4)
+        $ rarely (slow 2)
+        $ ((irand 4) <~)
+        $ s "sin:0(6,8)"
+        # oc 7
+        |* g 0.7
+        # o 8
+    ]
+
 
 hush
