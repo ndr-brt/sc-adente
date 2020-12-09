@@ -5,6 +5,7 @@ s.options.memSize = 32768 * 16; // increase this if you get "alloc failed" messa
 s.options.maxNodes = 2048 * 32; // increase this if you are getting drop outs and the message "too many nodes"
 s.options.numOutputBusChannels = 2; // set this to your hardware output channel size, if necessary
 s.options.numInputBusChannels = 2; // set this to your hardware output channel size, if necessary
+s.options.maxLogins = 8;
 
 s.waitForBoot {
   ~dirt = SuperDirt(2, s); // two output channels, increase if you want to pan across more channels
@@ -33,5 +34,7 @@ s.latency = 0.3; // increase this if you get "late" messages
 FreqScope.new(500, 50 , 0, server: s);
 s.meter;
 s.makeGui;
+
+// ~dirt.startSendRMS;
 
 )

@@ -5,6 +5,7 @@ import Sound.Tidal.Params
 import Control.Applicative
 
 ac = accelerate
+bs = binshift
 c = choose
 db = degradeBy
 deg = degrade
@@ -15,6 +16,7 @@ ev = every
 fE = foldEvery
 fa = fast
 g = gain
+h = hurry
 i = id
 m = mute
 o = orbit
