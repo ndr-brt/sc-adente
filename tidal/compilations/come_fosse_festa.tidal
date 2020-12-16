@@ -1,0 +1,62 @@
+do
+  bpm 100
+  all $ ((# tanh 1.3).(#rvb 0.3 0.6))
+  -- clutchIn 1 4
+  d1
+    -- $ shut
+    $ whenmod 6 4 (brak . rev . fast 1.5)
+    $ whenmod 12 9 (# nudge 0.95)
+    -- $ off "e" (# bs (slow 50 $ cosine))
+    $ juxBy (range "-0.3" "0.3" $ slow 6 $ tri) (
+      (fast (choose [1.4, 1.6, 1.2]))
+      .(|* sp 2)
+      .(# ac (irand 2 * "-1"))
+      .(stut 2 0.7 "s")
+      -- .(# rmod' 0.7 (range 0.1 200 $ slow 23 $ sine) 0.8)
+    )
+    $ every 4 (iter 8)
+    $ n (run 8 + "<0 0 0 8>")
+    # s "glass"
+    |* sp 0.8
+    |* g 0.8
+    # hp 1000 0.8
+    # pan (slow 8 $ perlin)
+  -- d2
+  --   $ shut
+  --   $ ply 2
+  --   -- $ stut 2 "w" "e"
+  --   -- $ whenmod 16 8 (plyWith 2 ((stut 2 "h" 0.05).(|* sp 2)).(0.1 <~).(slow 2))
+  --   $ every 12 (degradeBy 0.9)
+  --   $ every 4 (rev)
+  --   $ sb "h" (stut 2 "0.8" (1/20))
+  --   $ every 8 (linger "q")
+  --   $ n "[39(2,4), 35(3,8)]"
+  --   # s "glass"
+  --   |* sp 0.12
+  --   # oct' 0.8 0.7 0.9
+  --   # release 0.5
+  --   |* g 0.7
+  --   # shape 0.2
+  --   -- # del "t" "t" "t"
+  -- xfadeIn 3 12
+  d3
+    -- $ shut
+    $ chunk 7 (si ((|* sp (2)).(stutWith 5 "s" ((|* sp 2).(|+ bs (slow 8 tri))))))
+    $ si ((|* sp (8/9)).(# rmod (slow 8 sine) 180 1).(# shape 0.3))
+    $ juxBy (slow 8 ((tri*2)-1)) (|* sp (5/4))
+    -- $ sh 4 (# pan (slow 8 tri))
+    -- $ sh 2 id
+    $ sh "q" id
+    $ s "glass:34*6"
+    |* sp (1/12)
+    # ar "h" "h"
+    # legato 1.5
+    # hp 60 0.3
+    |+ rvb 0.3 0.3
+
+hush
+
+clutchIn 2 16 $ silence
+xfadeIn 3 16 $ silence
+
+hush

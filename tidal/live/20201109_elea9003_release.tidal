@@ -1,18 +1,35 @@
 do
   bpm 111
-  let dial numb = once $ off "0.05" ((|+ sp 1.001).(# pan rand)) $ s "eleav" # n numb # ds 0.2 |* g 0.74
-  all $ (# rvb 0.5 0.6).(# tanh 1.6).(# boo).(|* g 0.8)
+  all $ (# rvb 0.5 0.6).(# tanh 1.6).(# boo).(|* g 0.9)
 
 ======================================
 >>>>>> u-mano u-dito - elea 9003 <<<<<
 https://thirdkindrecords.bandcamp.com/
 ======================================
 
-d1
-  $ stut 2 "w" "s"
-  $ off "e" ((|+ n 4).rev.(#pan (slow 4 perlin)))
-  $ s "dald*8" |* slow 4 ((sine+square)/2)
-  -- # lpf 800
-  |* g 0.7
+
+
+
+xfadeIn 1 8
+  $ chunk 3 ((|* sp "-2").(jux (|* sp (4/5))))
+  $ sh 24 ((|* g 0.89).(db "h").(# coarse (r 24)).(# triode 0.8))
+  $ sh 3 ((|* g 0.7).(#crush 5))
+  $ sh "q" id
+  $ s "eleas:30"
+  # lp 1800 0.6
+  # dis 8.8
+  # wl 100
 
 hush
+
+
+draw "4*8?"
+
+
+  d3 $ s "in" # rvb 0 0
+  d3 silence
+
+
+do
+  d1 $ s "in"
+  all $ (# tanh 1.2)
