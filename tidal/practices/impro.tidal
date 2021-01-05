@@ -1,8 +1,8 @@
 
-
-bpm(98)
+hush
 
 do
+  bpm(98)
   d1
     $ every 5 (iter 3)
     $ layer [
@@ -50,3 +50,12 @@ do
 
 all $ (# crush 0)
 hush
+
+
+d1
+  $ off "e" ((|+ oc 3).(hurry 2).(|* g 0.7).(#bs 0.4))
+  $ n (fit 5 [0,1,2,3] "0 1 [~ 2] [3 4]")
+  # s "supercomparator"
+  # oc 4
+  # hp 66 0.4
+  # shape 0.4

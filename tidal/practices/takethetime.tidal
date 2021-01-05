@@ -1,0 +1,25 @@
+
+
+
+hush
+
+do
+  bpm 100
+  d1
+    $ iter 2
+    $ chunk 3 (|* note (5/4))
+    $ layer [
+      id
+      ,
+      (|- oc 2).(slow 2)
+      ,
+      (|+ oc 2).("e" <~).(slow 2).(|* g 0.8)
+    ]
+    $ n "0 ~ ~ 2.7"
+    # s "gabor"
+    # oc 4
+    # shape 0.7
+    # rvb 0.3 0.5
+    # del "h" "t" "t"
+    # lp (range 1000 5000 $ slow 10 cosine) (slow 3 sine/5)
+  d2 $ s "sine*8" # oc 3 # legato 0.5 # dis 0.4

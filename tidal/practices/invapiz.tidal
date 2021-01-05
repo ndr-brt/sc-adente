@@ -1,0 +1,26 @@
+do
+  bpm 98
+  d1
+    $ sh "q" id
+    $ sh 4 ((|* g 0.7).(every 2 (|+ note 3)).(#pan (slow 3 sine)))
+    $ chop 2
+    $ stutWith 4 "e" ((|* sp "-2").(|* g 0.95))
+    $ s "syntho:2"
+    # lp (range 1000 5000 $ slow 7 tri) (slow 5 sine/5)
+  d2
+    $ every 4 (slow 2)
+    $ jux (((1/50) <~).(|+ legato 0.4))
+    $ stack [
+      s "[kk ~] [kk!3 ~]" # ac "-1" # shape 0.5,
+      stutWith "[1|2|4]" "s" (# pan "[0|1]")
+        $ s "[~ ss*2] [~ ss]"
+        # legato 0.1
+    ]
+  d3
+    $ sb "0.8" ((# legato 0.2).(plyWith 4 (|+ coarse 4)))
+    $ si (|* sp (4/5))
+    $ loopAt 1
+    $ s "syntho:4"
+    |* g 0.9
+    # phaser 8 rand
+  all $ (# rvb 0.3 0.5).(# tanh 2)

@@ -1,8 +1,8 @@
 vid = document.createElement('video')
 vid.autoplay = true
 vid.loop = true
-// vid.src = 'https://localhost:8000/elea_9003.mp4'
-vid.src = '/home/andrea/Videos/elea_9003.mp4'
+vid.src = 'https://localhost:8000/elea_9003.mp4'
+// vid.src = '/home/andrea/Videos/elea_9003.mp4'
 
 s0.init({ src: vid })
 

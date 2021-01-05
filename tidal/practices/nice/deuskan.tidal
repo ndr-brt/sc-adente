@@ -1,6 +1,6 @@
-bpm(92)
 
 do
+  bpm(92)
   d1
     $ sometimesBy (slow 13 $ (sine-saw+square)/2) (|* legato 4)
     $ sometimesBy (rand) ("s" <~)
@@ -46,3 +46,5 @@ do
     |* g 0.8
 
 hush
+
+drawLine "<t f [t*2 ~] f>t"

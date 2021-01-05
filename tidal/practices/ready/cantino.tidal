@@ -1,11 +1,21 @@
-bpm 120
-
 do
+  bpm 120
   let gh = (slow 13 $ sine)
-  resetCycles
+  -- resetCycles
   d1
-    $ ply "<1 2 3 3 3 4 4 4 4 5 5 5 5 5 4 4 4 3 3 3 2 2 1>/2"
     $ layer [
+      (sh 2 (rev.(iter 4).(stutWith 1 "e" ((|* g 0.9).(|+ note 3))).(# pan (slow 10 perlin))))
+      -- .(sh 4 (|* g 0.7))
+      .(rarely (fast 2))
+      .(|* sp 4)
+      .(+| note "[0 2 7 3]")
+      .(|* g 0.9)
+      .(# lp 1800 (slow 8 (tri*0.2)))
+      .(# del "h" "3s" "h")
+      .(# o 8)
+      ,
+      (ply "<1 2 3 3 3 4 4 4 4 5 5 5 5 5 4 4 4 3 3 3 2 2 1>/2")
+      .(layer [
         (degradeBy gh)
         .(|* speed 12)
         .(degradeBy (0.3*gh))
@@ -34,13 +44,56 @@ do
         .(# rvb' 0.2 0.4)
         -- .(degradeBy (0.-gh))
         -- .(scramble 28)
+        ])
+        .(# begin (slow 5 $ sine/2))
+        .(# loop 2)
+        .(|* gain 0.6)
+        .(# rvb 0.2 0.3)
     ]
     $ s "syntho:12"
-    # begin (slow 5 $ sine/2)
-    # loop 2
     -- # crush (trigger 1 $ range 16 0 $ slow 16 $ envL)
-    |* gain 0.7
 
 clutchIn 1 4 $ silence
+
+
+do
+  bpm 120
+  d1
+    $ slow 2
+    $ jux rev
+    $ chunk 3 ((|+ note 3).(iter 3).(slow 4))
+    $ si ((|* sp 4).(|* g 0.9).(plyWith 4 ((|* sp 2).(|+ squiz (slow 30 $ r 30)))).(#pan (sine)))
+    $ sh (choose [1/4]) id
+    $ chew 4 "{0*2 1*4}%3"
+    $ s "[bd!3 hh*2]*2 sd*4"
+    |* sp (slow 3 $ cat [(5/4), 1, (8/9)])
+    # del "0.7" "t" "t"
+    # hp 64 0.6
+    # lp 2000 0.2
+    # shape 0.4
+    # tanh 2
+
+
+do
+  let rep a p = fast p . bite 16 a
+  d1
+    $ fast 2
+    $ jux rev
+    $ sh 2 ("h" <~)
+    $ every 3 (rep "[0 6 9 13]" 5)
+    $ stack [
+      n "[0*2? 1]"
+      ,
+      every 2 (rev) $ n "4(3,4)" |* g 0.7
+    ]
+    # s "dald"
+    # del "h" (1/12) "0.9"
+    # lp 2400 0.05
+
+do
+  bpm 140
+  d1
+    $ n "[4*2 [2 5 ~!2], 8(4,8)]"
+    # s "auto"
 
 hush
