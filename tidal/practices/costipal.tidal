@@ -1,0 +1,35 @@
+
+
+do
+  bpm 119
+  all $ slow 2
+  d1
+    $ rarely ((fast 2).(rev))
+    $ stutWith 4 "e" (
+      (#oc 7)
+      .(|+ n ("<1.3 -2>"*(rand+0.5)))
+      .(# pan rand)
+      .(# lpf 300)
+    )
+    -- $ off "e" ((|+ oc 3).(fast 2))
+    $ n "0 ~ 1.3"
+    # s "psin"
+    # oc 4
+    # rvb 0.7 0.6
+    # del rand "t" "t"
+  d2 $ euclid (irand 8) 8
+    $ s "kk"
+    # tanh 9
+    # lp 1800 0.1
+    # hp 56 0.3 # rvb 0.3 0.5
+  d3
+    $ db "0.8"
+    $ loopAt 1
+    $ s "syntho:6"
+    -- # cut "1"
+    # pan perlin
+    # rvb 0.9 0.9
+    # bs rand
+    -- |* g 0.7
+
+hush
