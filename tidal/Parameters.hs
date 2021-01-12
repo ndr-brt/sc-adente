@@ -33,3 +33,20 @@ let oscA = pF "oscA"
 
 -- chop
     tilt = pF "tilt"
+
+-- mutable
+    timbre = pF "timbre"
+    color = pF "color"
+    model = pI "model"
+    cpit = pF "cpit"
+    cpos = pF "cpos"
+    csize = pF "csize"
+    cdens = pF "cdens"
+    ctex = pF "ctex"
+    cdrywet = pF "cdrywet"
+    cspread = pF "cspread"
+    crvb = pF "crvb"
+    cfb = pF "cfb"
+    cfreeze = pF "cfreeze"
+    cmode = pF "cmode"
+    clofi = pF "clofi"
