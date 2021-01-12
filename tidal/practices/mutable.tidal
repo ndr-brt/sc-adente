@@ -1,0 +1,19 @@
+d1
+  $ iter (run 4)
+  $ off (1/32) ((|* g 0.8).(|+ oc 1).(# pan (slow 4 saw)))
+  $ n "0*2"
+  # s "braids"
+  # oc 5
+  # legato 2
+  # nudge 0.3
+  # timbre (slow 3 sine)
+  # color (slow 5 sine)
+  # model 11
+  # cpos 0.3
+  # cpit 0.2
+  # csize 0.3
+  # cfb 1
+  # cdrywet 0.5
+  -- # accelerate "-0.01"
+
+hush
