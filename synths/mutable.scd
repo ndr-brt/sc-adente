@@ -34,11 +34,13 @@
 			clofi: ~clofi
 		]
 	)
-}, {~clouds.notNil});
+}, {~cmode.notNil});
 
 SynthDef("clouds" ++ ~dirt.numChannels, { |out, cpit=0, cpos=0.5, csize=0.25, cdens=0.4, ctex=0.5, cdrywet=0.5, cspread=0.5, crvb=0, cfb=0, cfreeze=0, cmode=0, clofi=0|
 	var signal = In.ar(out, ~dirt.numChannels);
-	signal = MiClouds.ar(signal, cpit, cpos, csize, cdens, ctex, cdrywet, 10, cspread, crvb, cfb, cfreeze, cmode, clofi);
+	signal = MiClouds.ar(signal, cpit, cpos, csize, cdens, ctex, cdrywet, 1, cspread, crvb, cfb, cfreeze, cmode, clofi);
 	ReplaceOut.ar(out, signal)
-	}).add
+	}).add;
 );
+
+~dirt.orderModules(['clouds']);

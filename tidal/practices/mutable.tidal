@@ -1,19 +1,26 @@
 d1
+  $ slow 2
+  $ ply "[1|4|2|8]"
   $ iter (run 4)
-  $ off (1/32) ((|* g 0.8).(|+ oc 1).(# pan (slow 4 saw)))
-  $ n "0*2"
+  $ sh "q" ((|* g 0.8).(#legato 0.8).(# cut 4))
+  $ sh "h" ((|* g 0.8).(#legato 1).(#cut 3))
+  $ off "t" ((|* g 0.8).(|- oc 2).(# pan (slow 4 saw)).(#cut 2))
+  $ rarely (|* sp 1.1)
+  $ n "{0*2 2@h 8@q}%6"
   # s "braids"
   # oc 5
   # legato 2
   # nudge 0.3
+  |* g 0.8
   # timbre (slow 3 sine)
   # color (slow 5 sine)
-  # model 11
-  # cpos 0.3
-  # cpit 0.2
-  # csize 0.3
+  # cut 1
+  # model 3
+  # cpit 60
+  # cdrywet 2.9
   # cfb 1
-  # cdrywet 0.5
-  -- # accelerate "-0.01"
+  # crvb 10
+  # cmode 2
+  # cspread 0.9
 
 hush
