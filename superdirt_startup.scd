@@ -9,10 +9,10 @@ s.options.maxLogins = 8;
 
 s.waitForBoot {
   ~dirt = SuperDirt(2, s); // two output channels, increase if you want to pan across more channels
+  loadRelative("synths/*.scd");
   ~dirt.loadSoundFiles;
   ~dirt.loadSoundFiles("~/.sam-ples/*");
-  // s.sync; // optionally: wait for samples to be read
-  loadRelative("synths/*.scd");
+
   ~dirt.start(57120, 0!10);
 
   (
@@ -22,11 +22,22 @@ s.waitForBoot {
     ~d4 = ~dirt.orbits[3];
     ~d5 = ~dirt.orbits[4];
     ~d6 = ~dirt.orbits[5];
-    ~d6 = ~dirt.orbits[6];
-    ~d6 = ~dirt.orbits[7];
-    ~d6 = ~dirt.orbits[8];
-    ~d6 = ~dirt.orbits[9];
+    ~d7 = ~dirt.orbits[6];
+    ~d8 = ~dirt.orbits[7];
+    ~d9 = ~dirt.orbits[8];
+    ~d10 = ~dirt.orbits[9];
   );
+
+  ~dirt.orbits.do { |x|
+    var verb = GlobalDirtEffect(\global_mi_verb, [\verbwet, \verbtime, \verbdamp, \verbhp, \verbfreeze, \verbdiff, \verbgain]);
+    var clouds = GlobalDirtEffect(\global_mi_clouds, [\cloudspitch, \cloudspos, \cloudssize, \cloudsdens, \cloudstex, \cloudswet, \cloudsgain, \cloudsspread, \cloudsrvb, \cloudsfb, \cloudsfreeze, \cloudsmode, \cloudslofi]);
+    x.globalEffects = ~dirt.orbits[0].globalEffects
+      .addFirst(clouds)
+      .addFirst(verb);
+
+  };
+  ~dirt.orbits[0].initNodeTree;
+
 };
 
 s.latency = 0.3; // increase this if you get "late" messages
