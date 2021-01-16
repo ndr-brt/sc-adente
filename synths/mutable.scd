@@ -116,6 +116,21 @@
 );
 
 (
+~dirt.addModule('mu', { |dirtEvent|
+	dirtEvent.sendSynth('mu' ++ ~dirt.numChannels,
+		[ mu: ~mu, out: ~out ]
+	)
+}, {~mu.notNil});
+);
+
+(
+  SynthDef("mu" ++ ~dirt.numChannels, {|out,mu=0|
+    var signal = In.ar(out, ~dirt.numChannels);
+    ReplaceOut.ar(out, MiMu.ar(signal, mu));
+  }).add;
+);
+
+(
 ~dirt.addModule('rings', { |dirtEvent|
 	dirtEvent.sendSynth('rings' ++ ~dirt.numChannels,
 		[
