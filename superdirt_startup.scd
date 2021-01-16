@@ -29,9 +29,9 @@ s.waitForBoot {
   );
 
   ~dirt.orbits.do { |x|
-    var verb = GlobalDirtEffect(\global_mi_verb, [\verbwet, \verbtime, \verbdamp, \verbhp, \verbfreeze, \verbdiff, \verbgain]);
     var clouds = GlobalDirtEffect(\global_mi_clouds, [\cloudspitch, \cloudspos, \cloudssize, \cloudsdens, \cloudstex, \cloudswet, \cloudsgain, \cloudsspread, \cloudsrvb, \cloudsfb, \cloudsfreeze, \cloudsmode, \cloudslofi]);
-    x.globalEffects = ~dirt.orbits[0].globalEffects
+    var verb = GlobalDirtEffect(\global_mi_verb, [\verbwet, \verbtime, \verbdamp, \verbhp, \verbfreeze, \verbdiff, \verbgain]);
+    x.globalEffects = x.globalEffects
       .addFirst(clouds)
       .addFirst(verb);
 

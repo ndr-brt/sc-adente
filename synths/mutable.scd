@@ -16,27 +16,6 @@
 );
 
 (
-  SynthDef(\elements, {|out=0,freq=440,sustain=1,pan=0,begin=0,end=1,speed=1,accelerate=0,pit=48, strength=0.5, contour=0.2, bow_level=0,
-                blow_level=0, strike_level=0, flow=0.5, mallet=0.5, bow_timb=0.5, blow_timb=0.5,
-                strike_timb=0.5, geom=0.25, bright=0.5, damp=0.7, pos=0.2, space=0.3, model=0,
-                easteregg=0|
-    var envLength = sustain*(end-begin)/speed;
-    var line = Line.ar(begin, end, envLength, doneAction: Done.freeSelf);
-    var env = Env.asr;
-    var volume = IEnvGen.ar(env, line);
-    var sig;
-
-    freq = max(0, freq * speed * (1 + (accelerate * line)));
-    sig = MiElements.ar(pit: freq.cpsmidi, strength: strength, contour: contour, bow_level: bow_level,
-                blow_level: blow_level, strike_level: strike_level, flow: flow, mallet: mallet, bow_timb: bow_timb, blow_timb: blow_timb,
-                strike_timb: strike_timb, geom: geom, bright: bright, damp: damp, pos: pos, space: space, model: model,
-                easteregg: easteregg);
-
-    Out.ar(out, DirtPan.ar(sig * volume, ~dirt.numChannels, pan));
-  }).add;
-);
-
-(
   SynthDef(\omi, {|out=0,freq=440,sustain=1,pan=0,begin=0,end=1,speed=1,accelerate=0|
     var envLength = sustain*(end-begin)/speed;
     var line = Line.ar(begin, end, envLength, doneAction: Done.freeSelf);
@@ -72,6 +51,67 @@
     );
 
     Out.ar(out, DirtPan.ar(sig * volume, ~dirt.numChannels, pan));
+  }).add;
+);
+
+(
+~dirt.addModule('elements', { |dirtEvent|
+	dirtEvent.sendSynth('elements' ++ ~dirt.numChannels,
+		[
+      elementspitch: ~elementspitch,
+      elementsstrength: ~elementsstrength,
+      elementscontour: ~elementscontour,
+      elementsbowlevel: ~elementsbowlevel,
+      elementsblowlevel: ~elementsblowlevel,
+      elementsstrikelevel: ~elementsstrikelevel,
+      elementsflow: ~elementsflow,
+      elementsmallet: ~elementsmallet,
+      elementsbowtimb: ~elementsbowtimb,
+      elementsblowtimb: ~elementsblowtimb,
+      elementsstriketimb: ~elementsstriketimb,
+      elementsgeom: ~elementsgeom,
+      elementsbright: ~elementsbright,
+      elementsdamp: ~elementsdamp,
+      elementspos: ~elementspos,
+      elementsspace: ~elementsspace,
+      elementsmodel: ~elementsmodel,
+      elementseasteregg: ~elementseasteregg,
+			out: ~out
+		]
+	)
+}, {~elementsstrength.notNil});
+);
+
+(
+  SynthDef("elements" ++ ~dirt.numChannels, {|out,freq=440,sustain=1,pan=0,begin=0,end=1,speed=1,accelerate=0,
+      elementspitch=48, elementsstrength=0.5, elementscontour=0.2, elementsbowlevel=0,elementsblowlevel=0, elementsstrikelevel=0,
+      elementsflow=0.5, elementsmallet=0.5, elementsbowtimb=0.5, elementsblowtimb=0.5,
+      elementsstriketimb=0.5, elementsgeom=0.25, elementsbright=0.5, elementsdamp=0.7, elementspos=0.2, elementsspace=0.3, elementsmodel=0,
+      elementseasteregg=0|
+    var signal = In.ar(out, ~dirt.numChannels);
+    ReplaceOut.ar(out, MiElements.ar(
+      blow_in: signal,
+      strike_in: signal,
+      gate: 1,
+      pit: elementspitch,
+      strength: elementsstrength,
+      contour: elementscontour,
+      bow_level: elementsbowlevel,
+      blow_level: elementsblowlevel,
+      strike_level: elementsstrikelevel,
+      flow: elementsflow,
+      mallet: elementsmallet,
+      bow_timb: elementsbowtimb,
+      blow_timb: elementsblowtimb,
+      strike_timb: elementsstriketimb,
+      geom: elementsgeom,
+      bright: elementsbright,
+      damp: elementsdamp,
+      pos: elementspos,
+      space: elementsspace,
+      model: elementsmodel,
+      easteregg: elementseasteregg
+    ));
   }).add;
 );
 
