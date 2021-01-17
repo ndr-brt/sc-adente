@@ -159,27 +159,38 @@
 ~dirt.addModule('rings', { |dirtEvent|
 	dirtEvent.sendSynth('rings' ++ ~dirt.numChannels,
 		[
-			rtrig: ~rtrig,
-			rfreq: ~rfreq,
-			rstruct: ~rstruct,
-			rbright: ~rbright,
-			rdamp: ~rdamp,
-			rpos: ~rpos,
-			rmodel: ~rmodel,
-			rpoly: ~rpoly,
-			rintern_exciter: ~rintern_exciter,
-			reasteregg: ~reasteregg,
-			rbypass: ~rbypass,
+			ringstrig: ~ringstrig,
+			ringsfreq: ~ringsfreq,
+			ringsstruct: ~ringsstruct,
+			ringsbright: ~ringsbright,
+			ringsdamp: ~ringsdamp,
+			ringspos: ~ringspos,
+			ringsmodel: ~ringsmodel,
+			ringspoly: ~ringspoly,
+			ringsinternal: ~ringsinternal,
+			ringseasteregg: ~ringseasteregg,
 			out: ~out
 		]
 	)
-}, {~rbright.notNil});
+}, {~ringsbright.notNil});
 );
 
 (
-SynthDef("rings" ++ ~dirt.numChannels, { |out, rtrig=0, rfreq=60.0, rstruct=0.75, rbright=0.75, rdamp=0.4, rpos=0.9, rmodel=0, rpoly=1,rintern_exciter=0, reasteregg=0, rbypass=0|
+SynthDef("rings" ++ ~dirt.numChannels, { |out, ringsfreq=440,ringsstruct=0,ringsbright=0,ringsdamp=0.5,ringspos=0,ringsmodel=0,ringspoly=0,ringsinternal=0,ringseasteregg=0,ringsbypass=0|
 	var signal = In.ar(out, ~dirt.numChannels);
-	signal = MiRings.ar(signal, rtrig, rfreq, rstruct, rbright, rdamp, rpos, rmodel, rpoly,rintern_exciter, reasteregg, rbypass);
+	signal = MiRings.ar(
+    signal,
+    trig: ringsinternal,
+    pit: ringsfreq.cpsmidi,
+    struct: ringsstruct,
+    bright: ringsbright,
+    damp: ringsdamp,
+    pos: ringspos,
+    model: ringsmodel,
+    poly: ringspoly,
+    intern_exciter: ringsinternal,
+    easteregg: ringseasteregg
+  );
   ReplaceOut.ar(out, signal)
 }).add;
 
@@ -196,7 +207,7 @@ SynthDef("rings" ++ ~dirt.numChannels, { |out, rtrig=0, rfreq=60.0, rstruct=0.75
 		]
 	)
 }, {~ripplescf.notNil});
-)
+);
 
 (
 SynthDef("ripples" ++ ~dirt.numChannels, { |out, ripplescf=0, ripplesreson=0, ripplesdrive=1|
