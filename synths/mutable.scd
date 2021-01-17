@@ -31,6 +31,31 @@
 );
 
 (
+  SynthDef(\plaits, {|out=0,freq=440,sustain=1,pan=0,begin=0,end=1,speed=1,accelerate=0,
+      timbre=0.5,engine=0,harm=0.5,morph=0.5,level=1,lpgdecay=0,lpgcolour=0|
+    var envLength = sustain*(end-begin)/speed;
+    var line = Line.ar(begin, end, envLength, doneAction: Done.freeSelf);
+    var env = Env.asr;
+    var volume = IEnvGen.ar(env, line);
+    var sig;
+
+    freq = max(0, freq * speed * (1 + (accelerate * line)));
+    sig = MiPlaits.ar(
+      pitch: freq.cpsmidi,
+      timbre: timbre,
+      harm: harm,
+      engine: engine,
+      morph: morph,
+      level: level,
+      decay: lpgdecay,
+      lpg_colour: lpgcolour,
+    );
+
+    Out.ar(out, DirtPan.ar(sig * volume, ~dirt.numChannels, pan));
+  }).add;
+);
+
+(
   SynthDef(\tides, {|out=0,freq=440,sustain=1,pan=0,begin=0,end=1,speed=1,accelerate=0,tidesshape=0.5,slope=0.5,tidessmooth=0.5,shift=0.5,mode=2|
     var envLength = sustain*(end-begin)/speed;
     var line = Line.ar(begin, end, envLength, doneAction: Done.freeSelf);

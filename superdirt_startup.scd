@@ -35,8 +35,8 @@ s.waitForBoot {
       .addFirst(clouds)
       .addFirst(verb);
 
+    x.initNodeTree;
   };
-  ~dirt.orbits[0].initNodeTree;
 
 };
 
