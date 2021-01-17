@@ -185,6 +185,33 @@ SynthDef("rings" ++ ~dirt.numChannels, { |out, rtrig=0, rfreq=60.0, rstruct=0.75
 
 );
 
+(
+~dirt.addModule('ripples', { |dirtEvent|
+	dirtEvent.sendSynth('ripples' ++ ~dirt.numChannels,
+		[
+			ripplescf: ~ripplescf,
+			ripplesreson: ~ripplesreson,
+			ripplesdrive: ~ripplesdrive,
+			out: ~out
+		]
+	)
+}, {~ripplescf.notNil});
+)
+
+(
+SynthDef("ripples" ++ ~dirt.numChannels, { |out, ripplescf=0, ripplesreson=0, ripplesdrive=1|
+	var signal = In.ar(out, ~dirt.numChannels);
+	signal = MiRipples.ar(
+    signal,
+    cf: ripplescf,
+    reson: ripplesreson,
+    drive: ripplesdrive,
+  );
+  ReplaceOut.ar(out, signal)
+}).add;
+
+);
+
 
 (
 
