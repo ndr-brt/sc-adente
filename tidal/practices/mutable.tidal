@@ -24,3 +24,168 @@ d1
   # cspread 0.9
 
 hush
+
+verbgain = pF "verbgain"
+
+d1
+  $ jux rev
+  $ s "[bd(4,6), ~ ~ sn:2, ~ hh ~]"
+  # nudge 0.4
+  # shape 0.3
+  -- # ringsbright perlin
+  -- # ringsfreq 30
+  -- # slow 2 (ringspos saw)
+  -- # ringsmodel (irand 4)
+  -- # ringsstruct 0.75
+  -- # ringsdamp 0.4
+  -- # ringseasteregg 0
+  -- # ringstrig 0
+  -- # ringsintern_exciter 0
+  -- # ringsbypass 0
+  -- # cloudstex (slow 9 tri)
+  -- # cloudswet 0.9
+  -- # cloudsrvb rand
+  -- # cloudsfb (perlin)
+  -- # cloudsmode 1
+  -- # cloudspos (slow 3 sine)
+  -- # cloudssize (slow 5 cosine)
+  -- # cloudsfreeze 0
+  -- # cloudsgain 4
+  # verbwet 0.9
+  -- # verbdamp 0.4
+  # verbtime 0.9
+  # verbhp 0.2
+  -- # verbdiff 3.925
+  -- # verbfreeze 0
+  -- # verbgain 1
+
+  d1
+    -- $ slow 2
+    $ fast 2
+    $ off "e" (|* sp 8)
+    -- $ rarely (fast 4)
+    -- $ juxBy 0.5 (rev.("q" ~>).(|- n 1.8))
+    -- $ rarely (|+ note 2.4)
+    $ n "0 3 7 4"
+    # s "braids"
+    # nudge 0.4
+    # shape 0.8
+    # model 8
+    # oc 4
+    # legato 0.3
+    -- # elementsstrength 1
+    -- # elementsbowlevel 0.8
+    -- # elementsbowtimb 0.5
+    -- # elementsbright 0.8
+    -- # elementsblowtimb 0.8
+    -- # elementsblowlevel 1
+    -- # elementsdamp 0.4
+    -- # elementsgeom 4
+    -- # elementsspace 0.9
+    -- # elementspitch (irand 16)
+    -- # color (slow 9 sine)
+    -- # timbre (slow 13 tri)
+    -- # tidesshape (slow 9 sine)
+    -- # slope (slow 6 $ tri)
+    -- # shift (slow 5 $ tri)
+    -- # legato 2
+    -- # oc 5
+    -- # ringsbright 0.9
+    -- # ringsstruct 0.5
+    -- # ringsintern_exciter 0
+    -- # cloudsgain 1
+    -- # cloudsmode 0
+    -- # cloudspitch "0"
+    -- # cloudssize (slow 4 sine)
+    -- # cloudsdens (slow 3 $ sine)
+    -- # cloudspos (slow 8 isaw)
+    -- # cloudstex (slow 5 cosine)
+    -- # cloudsfreeze 0
+    -- # cloudsblend 0.6 (slow 8 sine) (slow 6 sine/3) 0.99
+    # verbgain 0.8
+    # verbwet 0.4
+    # verbtime 0.3
+
+d1
+  $ iter 3
+  $ chop 4
+  $ db "t"
+  $ bite 4 "0 0 3 2"
+  $ rarely rev
+  $ sb "t" (# ac "-0.5")
+  $ fast 2
+  $ off "q" (|/ sp 4)
+  $ off "e" (|/ sp 2)
+  $ sp "0 1 8 5"
+  # s "bass:0"
+  # mu "1"
+  # pan rand
+  -- |* g 1.5
+  # nudge 0.4
+  # legato 2
+  # cloudsgain 1
+  # cloudsblend 0.8 0.5 "t" 0.7
+  -- # cloudssize 0.7
+  -- # cloudspos 0.7
+  -- # cloudsdens 0
+  -- # cloudstex 0.8
+  -- # cloudspitch "0"
+  -- # verbgain 0.8
+  -- # verbwet 0.4
+  -- # verbtime 0.3
+
+hush
+
+mu
+
+do
+  all $ id
+  d1
+    $ sometimes rev
+    $ layer [
+      id
+      .(sb (slow 9 sine) (fast 2))
+      .(# boo)
+      ,
+      (slow 4)
+      .(|+ oc 2)
+      .(stut 3 "0.78" "s")
+      .(|* g 0.9)
+    ]
+    $ n "0 7 1 4"
+    # s "omi"
+    # oc 4
+    # shape 0.4
+    # rvb 0.3 0.4
+    -- |* g 0.7
+    -- # model 3
+    -- # vwet 0.8
+    -- # vtime 0.5
+  d2
+    $ every 5 ((linger "q"))
+    $ off "<e!4 3s>" (id)
+    $ n "0*2? [1 [2 3]?]"
+    # s "dald"
+    # rvb 0.3 0.4
+
+hush
+
+d1
+  $ slow 8
+  $ every 4 (slow 2)
+  $ off "e" ((|+ n 3).(fast 4))
+  $ n "3 [0 5] 7 1*1"
+  # s "plaits"
+  # oc 5
+  # engine 3
+  # legato 1.2
+  # mu 1
+  -- # timbre (slow 6 $ isaw)
+  -- # harm (slow 4 tri)
+  -- # morph (slow 7 cosine)
+  -- # rings 78 0.45 0.6 0.5 0.9
+  -- # ringsmodel 1
+  -- # clouds (slow 4 $ isaw) (slow 8 tri) (slow 8 cosine) (slow 9 tri)
+  -- # cloudsblend 0.9 0.7 "t" 0.9
+  -- # cloudslofi 1
+  # verb 0.4 0.8 0.2 0.2
