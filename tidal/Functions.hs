@@ -229,8 +229,8 @@ flood text2 = sequence_(replicator text2) -- from Kindohm
 -- where shiftsP = return shifts
     -- slowP = return (shifts * shiftRepeats)
 
-rslice x p = slice x (segment (toTime <$> x) $ ((>>= irand) x)) $ p
-rsplice x p = splice x (segment (toTime <$> x) $ ((>>= irand) x)) $ p
+rslice x p = slice x (segment (toTime <$> x) $ (irand x)) $ p
+rsplice x p = splice x (segment (toTime <$> x) $ (irand x)) $ p
 
 quieten = mapM_ (\i -> xfade i silence) [1 .. 16]
 quietenIn t = mapM_ (\i -> xfadeIn i t silence) [1 .. 16]
