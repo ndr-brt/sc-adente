@@ -4,23 +4,24 @@ export default function(p) {
 
   let centerX = p.windowWidth/2
   let centerY = p.windowHeight/2
-  let noteSpectre = 8 * 12; // octaves * notes per octave
+  let noteSpectre = 7 * 12; // octaves * notes per octave
   let characters = []
 
   p.setup = (() => {
     p.smooth();
     p.frameRate(30);
-    for (var i = 0; i< 10; i++) {
-      characters.push({
-        symbol: '~',
-        alpha: 255,
-        x: p.random(p.windowWidth),
-        y: p.random(p.windowHeight)
-      })
-    }
+    // for (var i = 0; i< 10; i++) {
+    //   characters.push({
+    //     symbol: '~',
+    //     alpha: 255,
+    //     x: p.random(p.windowWidth),
+    //     y: p.random(p.windowHeight)
+    //   })
+    // }
   })
 
   p.draw = (() => {
+    p.textFont('Courier New');
     p.background(0);
     p.textSize(50);
     for (var i = 0; i < characters.length; i++) {
@@ -45,14 +46,21 @@ export default function(p) {
     console.log(message)
 
     // oc=1 n=0: center (centerX, centerY)
+    let octave = message['octave']
+    let note = message['n']
+    let delta = message['delta']
 
-
+    let distanceFromCenter = centerY / noteSpectre * (octave*12 + note);
+    let angle = p.random(360)
+    console.log(`angle: ${angle}. sin: ${p.sin(angle)}. cos: ${p.cos(angle)}`)
+    let cathetusX = distanceFromCenter * p.cos(angle) * delta
+    let cathetusY = distanceFromCenter * p.sin(angle) * delta
 
     characters.push({
-      symbol: '#',
+      symbol: String.fromCharCode(delta*100*p.random(2) + 30),
       alpha: 255,
-      x: p.random(p.windowWidth),
-      y: p.random(p.windowHeight)
+      x: centerX + cathetusX,
+      y: centerY + cathetusY
     })
   })
 }

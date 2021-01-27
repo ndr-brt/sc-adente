@@ -1,4 +1,4 @@
-all $ (# verb 0.8 0.7 "t" 0.7).(# tanh 1.5)
+all $ (# verb 0.74 0.7 "t" 0.7).(# tanh 1.5)
 
 all $ id
 
