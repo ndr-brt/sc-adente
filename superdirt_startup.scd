@@ -50,7 +50,10 @@ s.makeGui;
 
 );
 
+// Upgrade SuperDirt
+// Quarks.checkForUpdates({Quarks.install("SuperDirt", "v1.7.2"); thisProcess.recompile()})
 
+/* MIDI IN
 (
 var on, off, cc;
 var osc;
@@ -88,3 +91,4 @@ if (~stopMidiToOsc != nil, {
 
 // Evaluate the line below to stop it.
 ~stopMidiToOsc.value;
+*/
