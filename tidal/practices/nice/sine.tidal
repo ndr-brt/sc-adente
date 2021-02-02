@@ -1,5 +1,4 @@
-all $ (# verb 0.74 0.7 "t" 0.7).(# tanh 1.5)
-
+all $ (# verb 0.74 0.7 "t" 0.7).(# tanh 1.5).(# shape 0.1)
 all $ id
 
 do
@@ -10,17 +9,20 @@ do
     $ chunk 4 ((# pan rand).(|+ note 1.23))
     $ si (hurry "q")
     $ every 4 (rev)
-    $ off "e" (
-      (|* sp 2).(plyWith 4 (|+ n "0.2"))
-      .(# bs (slow 12 $ tri))
-      .(# pan (slow 8 $ tri))
-      .(# lp (range 100 1000 $ slow 18 $ cosine) 0.15)
+    -- $ while "<t f!2>" (
+    $ while (slow 8 $ binary 143) (
+      off "e" (
+        (|* sp 2).(plyWith 4 (|+ n "0.2"))
+        .(# bs (slow 12 $ tri))
+        .(# pan (slow 4 $ tri))
+        .(# lp (range 100 1000 $ slow 18 $ cosine) 0.15)
+      )
     )
     $ off "q" ((hurry 2).(# hp 64 0.2))
     $ n "0 [2.3 [4.4|6]]"
     # s "sin"
+    # oc 5
     |* g 0.9
-    # boo
 
 hush
 
@@ -44,9 +46,6 @@ hush
 
 do
   bpm 123
-  all
-    $ id
-    -- $ (bite 3 "2 2 1")
   d1
     $ every 5 (rev)
     $ almostNever (|+ n 3)
@@ -58,20 +57,19 @@ do
     $ euclid 3 9
     $ fast 2
     -- $ shut
-    $ rarely (slow 2)
+    -- $ rarely (slow 2)
     $ s "sin:0"
     |* g 0.8
     # oc 4
-    # del "s" "t" "t"
+    -- # del "s" "t" "t"
   d2
-    $ stutWith 3 "s" ((|* g 0.95).(|* sp "[q|h]"))
-    $ sb (slow 8 sine) ((|* legato 2).(slow 2))
-    $ s "sin:0*12"
-    # oc 7
+    $ si ((# pan (slow 2 cosine)).(|+ oc 2).(fast 2))
+    $ stutWith 2 (1/12) ((|* g 0.90).(|* sp "[q|h]"))
+    $ s "sin:0*6"
+    # oc 6
     # legato 0.1
     # pan (slow 2 sine)
     |* g 0.8
-    -- # rvb 0.5 0.7
     # lp 1200 0.15
 
 hush
@@ -80,26 +78,25 @@ do
   bpm 128
   d1
     $ sb (slow 16 tri) (db (slow 4 cosine/2)) -- ci piace?
-    $ si (
+    $ while "<f t!2>" (si (
       (hurry 4)
       .(slow 2)
       .(|* g 0.78)
       .(|+ oc "<2 1 2!2 0>")
-    )
+    ))
     $ si ((hurry "h").(|* g 0.8))
     $ juxBy (slow 8 $ ((saw*2)-1)) (slow "h")
     $ n "0 5 36 24 3 18"
     # s "sin"
     # oc 3
-    # boo
 
 hush
 
 do
   bpm 100
   d1
-    $ chunk 5 ((off "h" ((slow 2).(|* sp 1.5))).(# pan 0.1))
-    $ chunk 3 ((off "h" (hurry 2)).(# pan 0.9))
+    $ chunk 5 ((off "h" ((slow 2).(|* sp 1.5))).(# pan 0.2))
+    $ chunk 3 ((off "h" (hurry 2)).(# pan 0.8))
     $ layer [
       id
       .(sometimesBy "x" ((|+ dis 0.3).(|* g 0.7)))
@@ -110,7 +107,6 @@ do
       .(# hp 54 0.2)
       .(# ac "-0.4")
       .(# shape 0.2)
-      -- .(# rvb 0.3 0.4)
       .(# o 7)
       ,
       (slow 4)
@@ -122,7 +118,6 @@ do
       .(|* g 0.43)
       .(# ac ((range 0.5 1 $ rand)*(choose [-1,1])))
       .(# tremolo (irand 4 + 1) 0.5)
-      -- .(|+ rvb 0.2 0.4)
       .(# o 8)
       ,
       (+| n "~!3 [3|3*2]")
@@ -137,14 +132,15 @@ do
     ]
     $ s "sin:0"
     # oc 5
+    |* g 0.8
 
 hush
 
 do
-  bpm 109
+  bpm 101
   d1
-    -- $ bite 4 "1 3 4"
-    $ chew "<1!8 5 3 4>/2" 6 -- play with this!
+    -- $ bite 4 "1 3 4 2"
+    $ chew "<1!2 2 5!2 3 4 2>/2" "<2 4 6>" -- play with this!
     $ euclid 2 3
     $ rarely (|- note "4")
     $ chunk 3 (off "q" (|+ note "[3|5]"))
@@ -153,7 +149,7 @@ do
       ,
       ("e" ~>).(hurry 3).(+| note "[1 2 3]").(sb "t" (plyWith 3 (|- note 12)))
       ,
-      ("h" ~>).(|- oc 2).(#ac "-4").(fast 2).(# boo).(|+ tanh "h")
+      ("h" ~>).(|- oc 2).(# ac "-4").(fast 2).(|+ tanh "h")
       ,
       (every 3 (shut)).(# pan (choose [0,1])).(hurry 12).("h" ~>)
       .(rarely (|- note "5")).(fast 2).(#o 8).(#del "h" "t" "t")
@@ -162,48 +158,20 @@ do
     $ s "sin:0"
     # oc 5
     # legato 3
-    -- # rvb 0.2 0.3
+    |* g 0.8
 
 hush
 
-do
-  bpm 101
-  d1
-    $ while "<f!8 t!4>" (bite 2 "8*2")
-    $ chunk 3 (|/ legato 5)
-    $ off "h" (|* sp "f")
-    $ off "q" ((|* sp "q").(fast 4).(|* legato 0.3))
-    $ off "e" (
-      (|* sp "<0.66 0.75 h>")
-      .(fast 2)
-      .(ply "[1|2|4]")
-      .(# lp (range 500 2900 $ slow 8 sine) 0.2)
-      .(# pan perlin))
-    $ s "sin:0"
-    # oc 6
-    |* g 0.9
-    # boo
-
-hush
-
-
+-- questa suona da sola
 do
   bpm 104
   d1
-    $ chew "<2!2 1!4 3!4 4!6>" 4
+    $ chew "<2!4 1!6 3!6 4!8>" 4
     $ chunk 7 ((chop 2).(|+ oc 1).(|* g 0.8))
     $ layer [
-      (slow 4)
-      .(# lpf 400)
-      .(# oc 2)
-      .(# hp 57 0.3)
-      .(# ac "-0.2")
+      (slow 4).(# lpf 400).(# oc 2).(# hp 57 0.3).(# ac "-0.2")
       ,
-      (# oc 4)
-      .(iter 4)
-      .(every 2 rev)
-      .(sb "s" (stut 2 "w" "s"))
-      .(|* g 0.8)
+      (# oc 4).(iter 4).(every 2 rev).(sb "s" (stut 2 "w" "s")).(|* g 0.8)
       ,
       (# oc 6)
       .(slow 8)
@@ -213,13 +181,9 @@ do
       .(# legato 0.3)
       .(# cut 1)
       .(# pan cosine)
-      -- .(scramble 3)
+      .(scramble 3)
       ,
-      (# oc 7)
-      .(|* g 0.5)
-      .(fast 4)
-      .(# pan perlin)
-      .(# freeze 1)
+      (# oc 7).(|* g 0.6).(fast 4).(# pan perlin).(# freeze 1)
     ]
     $ n "13 10 6.5 14@h 10.5@h"
     # s "sin"
@@ -232,8 +196,8 @@ do
   d1
     $ fast 2
     -- $ bite 2 (r 4) -- ottimo come intro
-    -- $ bite 2 (segment 1 $ r 4) $ chunk "<2 3>" (scramble "3") -- not bad
-    $ bite 4 "<3!8 4!2 6 7 8>"-- this
+    $ bite 2 (segment 1 $ r 4) $ chunk "<2 3>" (scramble "3") -- not bad
+    -- $ bite "<4!2 8 16>" "<3!8 4!2 6 7 8>" -- this
     $ layer [
       id.(# ar 0.2 0.01).(ply "<3!3 4!4>").(# pan rand)
       ,
@@ -247,7 +211,7 @@ do
       ,
       (h "q")
       ,
-      (h "e").(# boo).(|* g 0.8)
+      (h "e").(|* g 0.8)
     ]
     $ n "6 4"
     # s "sin"
@@ -257,75 +221,52 @@ hush
 
 
 do
-  bpm 87
+  bpm 86
   d1
-    -- $ bite 4 1
+    -- $ bite 4 "1*2 2"
     $ chunk 3 (|* sp (5/4))
     $ chunk 4 (|/ sp (9/8))
     $ chunk 5 (|/ sp (7/6))
     $ juxBy (slow 8 $ sine/2) rev
     $ chunk 2 (# pan rand)
     $ layer [
-      (|- oc 4).(fast 3)
-      ,
-      (|- oc 3)
-      ,
-      (|- oc 2).(chop 4).(# ac "-0.5")
-      ,
-      (|- oc 1).(chop 8).("3s" ~>).(stut 2 "w" "s").(|+ n "1 0 4 8").(iter 4)
-      ,
-      (|+ oc 1).(chop 16).("7s" ~>)
-      ,
+      (|- oc 1).(chop 8).("3s" ~>).(stut 2 "w" "s").(|+ n "1 0 4 8").(iter 4),
+      (|- oc 4).(fast 3),
+      (|- oc 1).(slow 1.5).(# ac "-0.5").(# legato 0.4),
+      (|- oc 3),
+      (|+ oc 1).(chop 16).("7s" ~>),
       (|+ oc 2).(chop 28).("11s" ~>)
       .(chunk 3 (fast 2)
-      .(# lp 2000 0.1))
-      ,
+      .(# lp 2000 0.1)),
       (|+ oc 3).(|* g 0.6).(# bs 0.4).(slice 2 (every 3 (rev) $ "{0 1!2 0*3}%8")).(#pan perlin)
     ]
     $ n "0"
     # s "sin"
-    # oc 6
-    |* g 0.9
+    # oc "[5|6]"
+    |* g 0.8
 
 hush
 
 do
   bpm 125
   d1
-    -- $ chunk 12 (# ac "-0.5")
+    $ chunk 4 (slow 2)
+    $ chunk 3 (|+ note 1.4)
+    $ chunk 5 (si press.(|* g 0.8))
+    $ chew "4" "<[3 2 1 0]!2 [0 .. 3]!2 1*2>"
     $ layer [
       (every 2 (si ((bite 12 "1*32").(|+ oc 1).(|* pan rand)).(|* g 0.8)))
       ,
-      (|+ oc 4).(slow 1.5).(ply 2).(# pan (slow 2 sine)).(|* g 0.7).(rarely rev).(# lp 2200 0.7)
+      (|+ oc 4).(slow 1.5)
+      .(ply 2)
+      .(si ((hurry "e").press.(# lp 1200 0.1)))
+      .(# pan (slow 2 sine)).(|* g 0.7).(rarely rev).(# lp 2200 0.1)
       ,
-      (slow 2).(|- oc 3).(# boo).(# ac "-0.5")
+      (slow 2).(|- oc 2).(# ac "-0.5").(stut 3 "w" (1/6)).(#legato 1.2).(|- note 5)
     ]
     $ iter 3
     $ n "[3(5,12), 7(4,6), 1(2,3)]"
     # s "sin"
-    # oc 5
+    # oc "[4|5|6]"
 
 hush
-
-do
-  bpm 121
-  d1
-    $ chunk 5 (|+ note 7)
-    $ chunk 4 (|- note 3)
-    $ layer [
-      (euclid 5 13)
-      .(|- oc 1)
-      ,
-      (sb "h" (off (1/13) ((|+ oc 2).(stut 3 0.8 (3/26)))))
-      .(euclid 7 13)
-      ,
-      (euclid 3 13)
-      .(|- oc 2)
-      ,
-      (euclid 2 13)
-      .(|- oc 3)
-      .(# shape 0.5)
-      .(# boo)
-    ]
-    $ s "sin:5"
-    # oc 5
