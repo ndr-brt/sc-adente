@@ -267,5 +267,3 @@ do -- J
     # oc "[4|5|6]"
 
 hush
-
-d1 $ s "sin:0*16" # pan sine
