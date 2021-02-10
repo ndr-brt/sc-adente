@@ -89,8 +89,13 @@ do -- E
     $ layer [
       id
       .(every 3 (|+ oc 1))
-      .(sometimesBy "x" ((|+ dis 0.3).(|* g 0.7)))
-      .(sometimesBy "t" (+| n (segment 2 $ scale "minor" (irand 8))))
+      .(sb (slow 6 tri) (stutWith (irand 6 + 1) "s" (
+        (|* g 0.95).(|+ oc (choose [-1,0,1]))
+        .(# lpf 1200).(|* legato 0.9).(# pan rand)))
+      )
+      .(sb "x" ((|+ dis 0.3).(|* g 0.7)))
+      .(sb "t" (+| n (segment 2 $ scale "minor" (irand 8))))
+      .(|* g 0.9)
       ,
       (euclid 7 8)
       .(|- oc 2)
@@ -112,11 +117,11 @@ do -- E
       .(# lpf 800)
       .(|* g 0.8)
       ,
-      (euclid 15 16)
+      (euclid 13 16)
       .(|* sp 12)
       .(# legato 2)
       .(|* g 0.6)
-      .(# scram (slow 18 $ tri))
+      .(# scram (slow 18 $ tri/3))
     ]
     $ s "sin:0"
     # oc 5
@@ -262,3 +267,5 @@ do -- J
     # oc "[4|5|6]"
 
 hush
+
+d1 $ s "sin:0*16" # pan sine
