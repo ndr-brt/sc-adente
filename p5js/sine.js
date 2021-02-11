@@ -5,7 +5,7 @@ export default function(p) {
   let centerX = p.windowWidth/2
   let centerY = p.windowHeight/2
   let noteSpectre = 9 * 12; // octaves * notes per octave
-  let characters = []
+  let shapes = []
 
   p.setup = (() => {
     p.smooth();
@@ -15,12 +15,31 @@ export default function(p) {
   p.draw = (() => {
     p.textFont('Helvetica');
     p.background(0);
-    for (var i = 0; i < characters.length; i++) {
-      var character = characters[i]
-      p.textSize(character.size)
-      p.fill(0, 255, 128, character.alpha);
-      p.text(character.symbol, character.x, character.y);
-      character.alpha = character.alpha - character.speed;
+    for (var i = 0; i < shapes.length; i++) {
+      let shape = shapes[i]
+
+      let distanceX = p.abs(shape.x - centerX)
+      let distanceY = p.abs(shape.y - centerY)
+
+      p.fill(distanceX + distanceY, shape.cycle % 256, 0, shape.alpha);
+      p.circle(shape.x, shape.y, shape.size)
+
+      shape.alpha = shape.alpha - shape.speed;
+
+      let speedX = distanceX/255
+      let speedY = distanceY/255
+
+      if (shape.x > centerX) {
+        shape.x -= speedX
+      } else {
+        shape.x += speedX
+      }
+
+      if (shape.y > centerY) {
+         shape.y -= speedY
+      } else {
+        shape.y += speedY
+      }
     }
   })
 
@@ -34,16 +53,15 @@ export default function(p) {
     message['legato'] = 1;
     message['speed'] = 1;
     message['pan'] = 0.5;
+    message['note'] = 0;
     for (var i = 0; i < oscMessage.args.length; i+=2) {
       message[oscMessage.args[i]] = oscMessage.args[i+1]
     }
     // console.log(message)
 
-    // oc=1 n=0: center (centerX, centerY)
     let cycle = message['cycle']
     let octave = message['octave']
-    let note = message['n']
-    let delta = message['delta']
+    let note = message['n'] + message['note']
     let legato = message['legato']
     let speed = message['speed']
     let pan = message['pan'] - 0.5
@@ -60,10 +78,10 @@ export default function(p) {
     let cathetusX = distanceFromCenter * p.cos(angle) + (pan * centerX)
     let cathetusY = distanceFromCenter * p.sin(angle)
 
-    characters.push({
-      symbol: String.fromCharCode(delta*100*p.random(2) + 30),
-      size: 50 * (legato/4+0.75),
+    shapes.push({
+      size: 10 * (legato/4+0.75) * (20/octave) + (30/speed) + (10/(1+note)),
       speed: speed,
+      cycle: cycleNumber,
       alpha: 255,
       x: centerX + cathetusX,
       y: centerY + cathetusY

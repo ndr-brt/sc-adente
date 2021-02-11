@@ -267,3 +267,10 @@ do -- J
     # oc "[4|5|6]"
 
 hush
+
+d1
+  $ si ((# legato 2).(db "t").(hurry 5))
+  $ si ((|* sp 4).(# pan (slow 4 cosine)))
+  $ s "sin:0*16"
+  # pan (slow 4 saw)
+  # oc 5
