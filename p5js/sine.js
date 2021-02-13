@@ -13,7 +13,6 @@ export default function(p) {
   })
 
   p.draw = (() => {
-    p.textFont('Helvetica');
     p.background(0);
     for (var i = 0; i < shapes.length; i++) {
       let shape = shapes[i]
