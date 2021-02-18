@@ -38,6 +38,16 @@ s.waitForBoot {
     x.initNodeTree;
   };
 
+  // Print osc messages
+  // ~dirt.addModule('post',
+  //   { |dirtEvent|
+  //     "\n------------\n".post;
+  //     dirtEvent.event.pairsDo { |key, val, i|
+  //       "%: % ".format(key, val).post;
+  //       if(i % 4 == 0) { "\n".post };
+  //     }
+  // });
+
 };
 
 s.latency = 0.3; // increase this if you get "late" messages
@@ -52,6 +62,10 @@ s.makeGui;
 
 // Upgrade SuperDirt
 // Quarks.checkForUpdates({Quarks.install("SuperDirt", "v1.7.2"); thisProcess.recompile()})
+
+
+
+
 
 /* MIDI IN
 (
