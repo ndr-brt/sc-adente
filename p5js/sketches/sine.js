@@ -39,6 +39,10 @@ export default function(p) {
       } else {
         shape.y += speedY
       }
+
+      if (shape.alpha < 0) {
+        shapes.splice(shapes.indexOf(shape), 1)
+      }
     }
   })
 

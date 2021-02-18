@@ -6,7 +6,7 @@ let shapes = [];
 function setup() {
   smooth();
   frameRate(30);
-  center = windowWidth/2;
+  centerX = windowWidth/2;
   centerY = windowHeight/2;
 }
 
@@ -33,9 +33,13 @@ function draw() {
     }
 
     if (shape.y > centerY) {
-       shape.y -= speedY
+      shape.y -= speedY
     } else {
       shape.y += speedY
+    }
+
+    if (shape.alpha < 0) {
+      shapes.splice(shapes.indexOf(shape), 1)
     }
   }
 }
@@ -43,44 +47,55 @@ function draw() {
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
 }
-//
-// this.onOscMessage(oscMessage => {
-//   let message = {};
-//   message['octave'] = 5;
-//   message['legato'] = 1;
-//   message['speed'] = 1;
-//   message['pan'] = 0.5;
-//   message['note'] = 0;
-//   for (var i = 0; i < oscMessage.args.length; i+=2) {
-//     message[oscMessage.args[i]] = oscMessage.args[i+1]
-//   }
-//   // console.log(message)
-//
-//   let cycle = message['cycle']
-//   let octave = message['octave']
-//   let note = message['n'] + message['note']
-//   let legato = message['legato']
-//   let speed = message['speed']
-//   let pan = message['pan'] - 0.5
-//
-//   let cycleNumber = floor(cycle)
-//   let cycleOffset = cycle - cycleNumber
-//
-//   let distanceFromCenter = centerY / noteSpectre * (octave*12 + note);
-//   let quadrant = cycleNumber + octave
-//
-//   let offset = cycleNumber % 2 == 0 ? (1 - cycleOffset) : cycleOffset
-//   let angle = PI/1.5 * (offset + quadrant)
-//
-//   let cathetusX = distanceFromCenter * cos(angle) + (pan * centerX)
-//   let cathetusY = distanceFromCenter * sin(angle)
-//
-//   shapes.push({
-//     size: 10 * (legato/4+0.75) * (20/octave) + (30/speed) + (10/(1+note)),
-//     speed: speed,
-//     cycle: cycleNumber,
-//     alpha: 255,
-//     x: centerX + cathetusX,
-//     y: centerY + cathetusY
-//   })
-// })
+
+oscPort = new osc.WebSocketPort({
+  url: "ws://localhost:8081"
+});
+
+oscPort.open();
+
+oscPort.socket.onmessage = function (e) {
+    console.log("message", e);
+};
+
+oscPort.on("message", function (oscMessage) {
+  let message = {};
+  message['octave'] = 5;
+  message['legato'] = 1;
+  message['speed'] = 1;
+  message['pan'] = 0.5;
+  message['note'] = 0;
+  message['n'] = 0;
+  for (var i = 0; i < oscMessage.args.length; i+=2) {
+    message[oscMessage.args[i]] = oscMessage.args[i+1]
+  }
+  // console.log(message)
+
+  let cycle = message['cycle']
+  let octave = message['octave']
+  let note = message['n'] + message['note']
+  let legato = message['legato']
+  let speed = message['speed']
+  let pan = message['pan'] - 0.5
+
+  let cycleNumber = floor(cycle)
+  let cycleOffset = cycle - cycleNumber
+
+  let distanceFromCenter = centerY / noteSpectre * (octave*12 + note);
+  let quadrant = cycleNumber + octave
+
+  let offset = cycleNumber % 2 == 0 ? (1 - cycleOffset) : cycleOffset
+  let angle = PI/1.5 * (offset + quadrant)
+
+  let cathetusX = distanceFromCenter * cos(angle) + (pan * centerX)
+  let cathetusY = distanceFromCenter * sin(angle)
+
+  shapes.push({
+    size: 10 * (legato/4+0.75) * (20/octave) + (30/speed) + (10/(1+note)),
+    speed: speed,
+    cycle: cycleNumber,
+    alpha: 255,
+    x: centerX + cathetusX,
+    y: centerY + cathetusY
+  })
+})
