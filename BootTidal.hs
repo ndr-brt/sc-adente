@@ -5,8 +5,6 @@ import Sound.Tidal.Context
 import System.IO (hSetEncoding, stdout, utf8)
 hSetEncoding stdout utf8
 
--- tidal <- startTidal (superdirtTarget {oLatency = 0.15, oAddress = "192.168.1.53", oPort = 57120}) (defaultConfig {cFrameTimespan = 1/20})
-
 :{
 let oscmap = [
               ((superdirtTarget {oLatency = 0.15, oPort = 57120}), [superdirtShape]),
