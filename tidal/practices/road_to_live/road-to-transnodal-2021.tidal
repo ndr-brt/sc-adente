@@ -1,0 +1,27 @@
+
+
+Happy birthday to TOPLAP!
+
+this can goin on forever!
+but it's almost the end
+
+thanks for watching
+i have some music out on
+umanoudito.bandcamp.com
+there's also some code on
+github.com/ndr-brt/sc-adente
+
+love music, hate police!
+
+do
+  let ahiahi = 23.7
+  d1
+    $ off (1/12) ((|+ oc 1).(# pan tri))
+    $ chunk 4 ((fast 1.5).(# pan saw))
+    $ chunk 3 ((|+ oc 1).(stutWith 3 "x" (# ac (-ahiahi))).(# pan isaw))
+    $ sh "h" id
+    $ sh "q" id
+    $ n "0*12"
+    # s "sin"
+    # oc "[3|4|5|6]"
+    # dis ahiahi

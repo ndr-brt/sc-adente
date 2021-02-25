@@ -17,28 +17,16 @@ export default function(p) {
     for (var i = 0; i < shapes.length; i++) {
       let shape = shapes[i]
 
-      let distanceX = p.abs(shape.x - centerX)
-      let distanceY = p.abs(shape.y - centerY)
+      let distanceX = shape.x - centerX
+      let distanceY = shape.y - centerY
 
-      p.fill(distanceX + distanceY, shape.cycle % 256, 0, shape.alpha);
+      p.fill(p.abs(distanceX) + p.abs(distanceY), shape.cycle % 256, 0, shape.alpha);
       p.circle(shape.x, shape.y, shape.size)
 
-      shape.alpha = shape.alpha - shape.speed;
+      shape.alpha = shape.alpha - (5);
 
-      let speedX = distanceX/255
-      let speedY = distanceY/255
-
-      if (shape.x > centerX) {
-        shape.x -= speedX
-      } else {
-        shape.x += speedX
-      }
-
-      if (shape.y > centerY) {
-         shape.y -= speedY
-      } else {
-        shape.y += speedY
-      }
+      shape.x -= distanceX/255
+      shape.y -= distanceY/255
 
       if (shape.alpha < 0) {
         shapes.splice(shapes.indexOf(shape), 1)
@@ -82,7 +70,7 @@ export default function(p) {
     let cathetusY = distanceFromCenter * p.sin(angle)
 
     shapes.push({
-      size: 10 * (legato/4+0.75) * (20/octave) + (30/speed) + (10/(1+note)),
+      size: 10 * (legato/4+0.75) * (20/octave) + (30/(speed*10)) + (10/(1+note)),
       speed: speed,
       cycle: cycleNumber,
       alpha: 255,
