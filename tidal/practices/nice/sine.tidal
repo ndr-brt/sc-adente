@@ -1,4 +1,9 @@
-all $ (# verb 0.74 0.7 "t" 0.7).(# tanh 1.5).(# shape 0.1)
+-- transnodal live
+do
+  bpm 113
+  all $ (# verb 0.74 0.7 "t" (1/8)).(# tanh 1.5).(# shape 0.1)
+
+all $ (# verb 0.74 0.7 "t" (1/8)).(# tanh 1.5).(# shape 0.1)
 all $ id
 
 do -- A
@@ -7,7 +12,7 @@ do -- A
     $ while "<f!10 t!3>" ((chew 6 8))
     $ while "<f!3 t>" (iter 4)
     $ chunk 4 ((# pan rand).(|+ note 1.23))
-    $ si (hurry "q")
+    $ sh "q" id
     $ every 4 (rev)
     -- $ while "<t f!2>" (
     $ while (slow 8 $ binary 143) (
@@ -19,7 +24,7 @@ do -- A
         .(|* g 0.9)
       )
     )
-    $ off "q" ((hurry 2).(# hp 64 0.2))
+    $ off "q" (h 2)
     $ n "0 [2.3 [4.4|6]]"
     # s "sin"
     # oc "[4|5|6]"
@@ -33,7 +38,7 @@ do -- B
     $ while "<f!8 t!2>" ((db "t").(stutWith 3 "s" ((|* sp 1.1).(|* pan rand))))
     $ every 3 (rev)
     $ every 4 (iter 2)
-    $ si ((hurry "q").(# hp 66 0.3))
+    $ sh "q" (# hp 66 0.3)
     $ off "3s" ((|+ oc 3).(# pan rand).(degradeBy "h"))
     $ off "e" ((|+ oc 2).(# lpf 1000).(degradeBy 0.5))
     $ off "s" ((|+ oc 1).(# pan "[0 1 0 1]"))
