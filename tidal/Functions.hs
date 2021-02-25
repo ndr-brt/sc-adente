@@ -7,22 +7,6 @@ import Control.Applicative
 bps b = setcps (b/2)
 bpm b = setcps (b/2/120)
 
--- range shorthands
-range' from to p = (p*to - p*from) + from
-rg = range
-rg' = range'
-rgx = rangex
-
--- continuous at freq
-sinf  f = fast f $ sin -- sine at freq
-cosf  f = fast f $ cos -- cosine at freq
-trif  f = fast f $ tri -- triangle at freq
-sawf  f = fast f $ saw -- saw at freq
-isawf f = fast f $ isaw -- inverted saw at freq
-sqf   f = fast f $ sq -- square at freq
-pwf w f = fast f $ pw w -- pulse at freq
-randf f = fast f $ rand -- rand at freq
-
 -- ranged continuous
 rsin i o = rg' i o sin -- ranged' sine
 rcos i o = rg' i o cos -- ranged' cosine
