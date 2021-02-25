@@ -1,9 +1,5 @@
--- transnodal live
-do
-  bpm 113
-  all $ (# verb 0.74 0.7 "t" (1/8)).(# tanh 1.5).(# shape 0.1)
-
 all $ (# verb 0.74 0.7 "t" (1/8)).(# tanh 1.5).(# shape 0.1)
+
 all $ id
 
 do -- A
@@ -249,33 +245,17 @@ do -- I
 hush
 
 do -- J
-  bpm 125
+  bpm 100
   d1
-    $ chunk 4 (slow 2)
-    $ chunk 3 (|+ note 1.4)
-    $ chunk 5 (si press.(|* g 0.8))
-    -- $ bite 4 "4!4"
-    $ chew "4" "<[3 2 1 0]!2 [0 .. 3]!2 1*2>"
-    $ layer [
-      (every 2 (si ((bite 12 "1*32").(|+ oc 1).(|* pan rand)).(|* g 0.8)))
-      ,
-      (|+ oc 4).(slow 1.5)
-      .(ply 2)
-      .(si ((hurry "e").press.(# lp 1200 0.1)))
-      .(# pan (slow 2 sine)).(|* g 0.7).(rarely rev).(# lp 2200 0.1)
-      ,
-      (slow 2).(|- oc 2).(# ac "-0.5").(stut 3 "w" (1/6)).(#legato 1.2).(|- note 5)
-    ]
-    $ iter 3
-    $ n "[3(5,12), 7(4,6), 1(2,3)]"
+    $ while "<f!8 t!2>" ((bite "4" "1*2 3*2").(# pan rand)) -- 4
+    $ chunk 3 ((|+ note 1.4).(# pan rand)) -- 1
+    $ chunk 7 ((|+ oc 1)) -- 2
+    $ chunk 5 ((stutWith 4 (1/24) ((|+ oc 1))).(#pan (sine)).(|/ legato 3)) -- 3
+    $ sb (slow 7 tri) ((db "q").(ply (choose [2,4]))) -- 5
+    $ iter (segment 1 (run 6 + 1)) -- no?
+    $ sh "q" id
+    $ n "[5.3(5,12,3), 10.3(2,6,1), 0.6(2,3)]"
     # s "sin"
-    # oc "[4|5|6]"
+    # oc "[4|5|7]"
 
 hush
-
-d1
-  $ si ((# legato 2).(db "t").(hurry 5))
-  $ si ((|* sp 4).(# pan (slow 4 cosine)))
-  $ s "sin:0*16"
-  # pan (slow 4 saw)
-  # oc 5
