@@ -247,15 +247,16 @@ hush
 do -- J
   bpm 100
   d1
+    -- $ linger "e" -- ultimo
     $ while "<f!8 t!2>" ((bite "4" "1*2 3*2").(# pan rand)) -- 4
     $ chunk 3 ((|+ note 1.4).(# pan rand)) -- 1
     $ chunk 7 ((|+ oc 1)) -- 2
     $ chunk 5 ((stutWith 4 (1/24) ((|+ oc 1))).(#pan (sine)).(|/ legato 3)) -- 3
     $ sb (slow 7 tri) ((db "q").(ply (choose [2,4]))) -- 5
-    $ iter (segment 1 (run 6 + 1)) -- no?
     $ sh "q" id
     $ n "[5.3(5,12,3), 10.3(2,6,1), 0.6(2,3)]"
     # s "sin"
-    # oc "[4|5|7]"
+    # oc (iter 3 $ "4 6 7")
+    |* g 0.9
 
 hush
