@@ -17,11 +17,15 @@ tidal <- startStream (defaultConfig {cFrameTimespan = 1/20}) oscmap
 
 
 :{
-let p = streamReplace tidal
+let only = (hush >>)
+    p = streamReplace tidal
     hush = streamHush tidal
+    panic = do hush
+               once $ sound "superpanic"
     list = streamList tidal
     mute = streamMute tidal
     unmute = streamUnmute tidal
+    unmuteAll = streamUnmuteAll tidal
     solo = streamSolo tidal
     unsolo = streamUnsolo tidal
     once = streamOnce tidal
@@ -31,6 +35,8 @@ let p = streamReplace tidal
     all = streamAll tidal
     resetCycles = streamResetCycles tidal
     setcps = asap . cps
+    getcps = streamGetcps tidal
+    getnow = streamGetnow tidal
     xfade i = transition tidal True (Sound.Tidal.Transition.xfadeIn 4) i
     xfadeIn i t = transition tidal True (Sound.Tidal.Transition.xfadeIn t) i
     histpan i t = transition tidal True (Sound.Tidal.Transition.histpan t) i
