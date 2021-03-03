@@ -1,54 +1,56 @@
-all $ (# verb 0.74 0.7 "t" (1/8)).(# tanh 1.5).(# shape 0.1)
+all $ (# verb 0.74 0.7 "t" 0.6).(# tanh 1.5).(# shape 0.1)
 
 all $ id
 
 do -- A
   bpm 111
   d1
-    $ while "<f!10 t!3>" ((chew 6 8))
+    $ while "<f!10 t!3>" ((chew 6 2))
     $ while "<f!3 t>" (iter 4)
     $ chunk 4 ((# pan rand).(|+ note 1.23))
     $ sh "q" id
+    -- $ rarely (stut 2 1 "s")
     $ every 4 (rev)
-    -- $ while "<t f!2>" (
     $ while (slow 8 $ binary 143) (
       off "e" (
         (|* sp 2).(plyWith 4 (|+ n "0.2"))
-        .(# bs (slow 12 $ tri))
+        .(# bs (slow 12 $ tri/2))
         .(# pan (slow 4 $ tri))
         .(# lp (range 100 1000 $ slow 18 $ cosine) 0.15)
-        .(|* g 0.9)
+        .(|* g 0.88)
       )
     )
     $ off "q" (h 2)
     $ n "0 [2.3 [4.4|6]]"
     # s "sin"
     # oc "[4|5|6]"
-    |* g 0.9
+    |* g 0.8
 
 hush
 
 do -- B
   bpm 123
   d1
+    -- $ chunk 3 (sply 4)
     $ while "<f!8 t!2>" ((db "t").(stutWith 3 "s" ((|* sp 1.1).(|* pan rand))))
     $ every 3 (rev)
     $ every 4 (iter 2)
     $ sh "q" (# hp 66 0.3)
     $ off "3s" ((|+ oc 3).(# pan rand).(degradeBy "h"))
-    $ off "e" ((|+ oc 2).(# lpf 1000).(degradeBy 0.5))
+    $ off "e" ((|+ oc 2).(# lpf 2000).(degradeBy 0.5))
     $ off "s" ((|+ oc 1).(# pan "[0 1 0 1]"))
     $ n "[2(3,8), 1(1,8,3), 8(7,16,2)]"
     # s "sin"
     # oc "[4|5|6]"
-    |* g 0.6
-    # del (1/8) "t" "t"
+    |* g 0.57
+    # del "e" "t" "t"
 
 hush
 
 do -- C
   bpm 123
   d1
+    $ linger "x"
     $ while "<f!6 t!4>" (
       (bite 4 (segment "<2!2 1!2>" $ irand 4))
       .(sb "t" (stutWith 12 (1/128) ((|* g 0.95).(# pan rand))))
@@ -60,25 +62,27 @@ do -- C
     # oc 6
     # legato 0.1
     # pan (slow 2 sine)
-    |* g 0.8
+    |* g 0.7
 
 hush
 
 do -- D
   bpm 128
   d1
+    $ chunk 3 (sply 8)
     $ sb (slow 16 tri) (db (slow 4 cosine/2))
-    $ while (slow 8 $ binary 21) (si (
-      (hurry 4)
-      .(slow 2)
-      .(|* g 0.78)
+    $ while (slow 8 $ binary 21) (sh 4 (
+      (slow 2)
+      .(|* g 0.75)
       .(|+ oc "<2 1 2!2 0>")
+      .(# lpf 7000)
     ))
-    $ si ((hurry "h").(|* g 0.8))
-    $ juxBy (slow 8 $ ((saw*2)-1)) (slow "h")
+    $ juxBy (slow 8 $ ((saw*2)-1)) (fast 2)
+    $ sh "h" ((|* g 0.82).(|+ shape 0.2))
     $ n "0 5 36 24 3 18"
     # s "sin"
     # oc 3
+    |* g 0.9
 
 hush
 

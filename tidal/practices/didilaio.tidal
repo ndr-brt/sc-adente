@@ -56,3 +56,15 @@ d3
   -- # nudge (slow 2 sine)
 
 hush
+
+
+
+d1
+  $ off "e" (rev.(|* g 0.6))
+  $ si brak
+  -- $ si (press.(db "h"))
+  $ s "[kk*2 [ss ~ ss], hhat(3,4)]"
+  # shape 0.4
+  # dis 0.1
+
+hush

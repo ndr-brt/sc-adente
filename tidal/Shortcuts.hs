@@ -112,3 +112,5 @@ let ac = accelerate
     rg = range
     rg' = range'
     rgx = rangex
+
+    sply n = (ply n).(slow n)
