@@ -189,3 +189,45 @@ d1
   -- # cloudsblend 0.9 0.7 "t" 0.9
   -- # cloudslofi 1
   # verb 0.4 0.8 0.2 0.2
+
+
+
+
+
+
+
+
+do
+  bpm 98
+  d1
+    $ slow 2
+    $ chunk 4 ((sply 4))
+    $ chunk 6 ((fast 2).("x" <~))
+    $ rarely (stutWith 3 (1/12) ((|+ oc 1).(|* g 0.8).(# pan rand)))
+    $ db 0.1
+    $ si (
+      (db "h").(fast 2).(|+ oc 1)
+      .(stutWith 6 (1/18) (|+ n 1.3)).(#legato 0.7).(|* g 0.9)
+    )
+    $ si (
+      (slow 2).(|- oc 2)
+      .(# ripples 0.28 0.9 0.9).(# boo)
+      .(# model 6).(# dis 0.8).(# shape 0.5)
+    )
+    $ n "0 2.8 5.8 1.5*2 7.3 2.3"
+    # s "braids"
+    # oc 5
+    # rings (slow 9 isaw) (rand) 0.6 (range 0 0.9 $ slow 11 $ tri) 0.9
+    # clouds (slow 12 sine) 0.2 0.7 (slow 14 $ tri)
+    # cloudsblend 0.5 0.6 0.3 0.6
+    # model 12
+    # legato 1
+
+
+
+
+
+
+
+
+-- TODO: plaits si sente solo a sx!
