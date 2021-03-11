@@ -1,8 +1,5 @@
 # sc-adente
-Shitty live coding stuff.
-
-## Boot
-`BootTidalCustom.hs` taken from https://github.com/lil-data/vroomvroom/blob/master/BootTidalCustom.hs
+not-pretentious livecoding stuff.
 
 ## Sam-ples
 Retrieve samples:
@@ -16,3 +13,6 @@ Update samples:
 
 other synthdefs and effects:
 https://github.com/Olbos/Tidal-Olbos
+
+mi-ugens:
+https://github.com/v7b1/mi-UGens
