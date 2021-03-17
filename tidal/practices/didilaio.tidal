@@ -60,11 +60,28 @@ hush
 
 
 d1
+  $ chunk 16 (fast 1.5)
+  -- $ sb (slow 8 tri) ((stutWith 2 "s" (|* sp 2)).(db "e"))
   $ off "e" (rev.(|* g 0.6))
-  $ si brak
-  -- $ si (press.(db "h"))
-  $ s "[kk*2 [ss ~ ss], hhat(3,4)]"
+  $ chunk 4 (slow 2)
+  -- $ si (brak.(db "h").(|* sp 2))
+  $ brak
+  $ s "[kk*2 [ss ~ ss], hhat(<7 8 6>,8,<1 5 2>)]"
   # shape 0.4
   # dis 0.1
+  # boo
+  # verb 0.2 0.9 0.7 0.4
+  -- # rings 0.3 (slow 12 tri) 0.6 0.2 0.8
+  -- # clouds 0.8 (slow 4 $ sine/2) 0.2 rand
+  -- # cloudsblend 0.6 0.7 (range 0.1 0.6 $ slow 9 sine) 0.8
 
 hush
+
+d1
+  $ sh 4 ((|* g 0.7))
+  $ sh "h" id
+  $ n "<0 3.1>"
+  # s "sin"
+  # legato 3 # lpfbus 1 (segment 128 $ range 80 400 $ sine) # lpqbus 2 (segment 128 $ slow 4 saw)
+  # dis 0.54
+  # boo
