@@ -134,28 +134,20 @@ do -- E
 
 hush
 
-do -- F
+do -- F...a schifo!
   -- resetCycles
   bpm 101
   d1
     -- $ bite 3 "1*3" $ off "x" (sply 4)
-    $ while "<f>" (chew "<1!4 2 5!2 4>/2" "<1*2 2 4!4 2 2*2>") -- play with this!
-    $ while "<f>" (euclid 2 3)
+    -- $ while "<t>" (chew "<1!4 2 5!2 4>/2" "<1*2 2 4!4 2 2*2>") -- play with this!
+    -- $ while "<f>" (euclid 2 3)
+    $ chew 6 (iter 3 $ "<[2 .. 4]*2 [1 .. 3]*2>")
     $ sb (slow 12 tri) (|- note "2.6")
     $ chunk 7 (off "t" (|+ note "[2.6|5.2]"))
-    $ layer [
-      id.(plyWith 2 (|+ oc 1))
-      ,
-      ("e" ~>).(fast 3).(|+ oc 3)
-      .(+| note "[0.4 2.4 5.2]")
-      .(sb "t" (plyWith 3 (|+ oc 1)).(|* g 0.8))
-      ,
-      ("x" ~>).(|+ oc 1).(fast 2).(|* legato (1/8))
-      ,
-      (# pan (choose [0,1])).(fast 12).(|+ oc 4).("x" ~>)
-      .(rarely (|+ note "3.2"))
-      .(|* g 0.75)
-    ]
+    $ off "x" ((fast 1.5).(|+ oc 1).(+| note "[0.4 2.4 5.2]").(sb "t" (plyWith 1.5 (|+ oc 1)).(|* g 0.8)))
+    $ off "t" ((# pan (choose [0,1])).(fast 6).(|+ oc 4).(rarely (|+ note "3.2")).(|* g 0.75))
+    -- $ off "x" ((|+ oc 2).(fast 1.5).(|* legato (1/8)))
+    $ sb "t" (plyWith 2 (|+ n 3.7))
     $ s "sin:0"
     # oc 3
     # legato 2
@@ -288,3 +280,20 @@ do -- K
     # "sin"
     # oc 3
     |* g 0.80
+
+
+
+do -- L
+  bpm 100
+  d1
+    $ while "<f!5 t!10>" (iter 5)
+    $ chunk 5 (|- oc 1)
+    $ sh 2 ((|* g 0.8).(sb 0.5 (|+ oc 1)).press)
+    $ sb (slow 7 sine) (rev.(|+ n 3.5).(# pan rand))
+    $ sb 0.1 (stutWith 4 (1/10) (|+ oc 1))
+    $ sh "h" id
+    $ brak
+    $ n "{0 4.5 2.1 5.6 -1.3}%5"
+    # s "sin"
+    # oc 4
+    |* g 0.9
