@@ -217,7 +217,7 @@ do -- H
     # s "sin"
     # oc 5
     |* g 0.9
-    -- # coarse 256 (un finale con gioia?)
+    # coarse 4096 -- (un finale con gioia? da 1 a 1024) potrebbe diventare l'ultimo pezzo del disco
 
 hush
 
@@ -269,17 +269,17 @@ do -- K
   bpm 110
   d1
     $ sply 4 $ bite 4 (fast 4 $ (segment 1 $ r 8)) -- inizio e fine
-    $ sh "t" (# boo)
+    $ sh "t" id
     $ chunk 4 (|- note 1.3)
     $ chunk 2 (|+ oc 1)
-    -- $ while "<f t>" (off "e" ((h 2).(|* g 0.8)))
-    -- $ sb 0.1 (si ((db "h").(stutWith 4 "s" ((|* g 0.95).(|+ note (rand*2)).(# pan rand)))))
-    -- $ sb (slow 12 tri) (off "3s" ((db "q").(bite 4 "2*4")))
+    $ while "<f t>" (off "e" ((h 2).(|* g 0.8)))
+    $ sb 0.1 (si ((db "h").(stutWith 3 "e" ((|* g 0.95).(|+ note (rand*2)).(# pan rand)))))
+    -- $ sb (slow 12 (tri/2)) (off "3s" ((db "q").(bite 4 "2*4")))
     $ sh "2" ((|* g 0.7).(|+ oc 3).(# pan (slow 7 saw)).(db "h"))
     $ n "0*4"
     # "sin"
     # oc 3
-    |* g 0.80
+    |* g 0.75
 
 
 
