@@ -52,7 +52,7 @@ s.waitForBoot {
 
 s.latency = 0.3; // increase this if you get "late" messages
 
-// FreqScope.new(500, 50 , 0, server: s);
+FreqScope.new(500, 50 , 0, server: s);
 // s.meter;
 s.makeGui;
 
@@ -67,7 +67,8 @@ s.makeGui;
 
 
 
-/* MIDI IN
+// MIDI IN
+/*
 (
 var on, off, cc;
 var osc;
@@ -78,17 +79,17 @@ MIDIClient.init;
 MIDIIn.connectAll;
 
 on = MIDIFunc.noteOn({ |val, num, chan, src|
-  postf("noteon (val %, num %, chan %, src %)", val, num, chan, src);
+  postf("noteon (val %, num %, chan %, src %)\n", val, num, chan, src);
 	osc.sendMsg("/ctrl", num.asString, val/127);
 });
 
 off = MIDIFunc.noteOff({ |val, num, chan, src|
-  postf("noteoff (val %, num %, chan %, src %)", val, num, chan, src);
+  postf("noteoff (val %, num %, chan %, src %)\n", val, num, chan, src);
 	osc.sendMsg("/ctrl", num.asString, 0);
 });
 
 cc = MIDIFunc.cc({ |val, num, chan, src|
-  postf("cc (val %, num %, chan %, src %)", val, num, chan, src);
+  postf("cc (val %, num %, chan %, src %)\n", val, num, chan, src);
 	osc.sendMsg("/ctrl", num.asString, val/127);
 });
 
@@ -105,4 +106,5 @@ if (~stopMidiToOsc != nil, {
 
 // Evaluate the line below to stop it.
 ~stopMidiToOsc.value;
+
 */
