@@ -59,3 +59,19 @@ d1
   # oc 4
   # hp 66 0.4
   # shape 0.4
+
+
+
+
+
+
+
+d1
+  $ bite 8 (segment 4 $ run 8)
+  $ chunk 4 (fast 2)
+  $ rarely (stut 3 1 "s")
+  $ brak
+  $ jux (rev.(ply 2))
+  $ superimpose (hurry 2)
+  $ s "{bd*2, ~ cp*4 sn, hh(<5 3 8>,8)}%1"
+  # coarse "2 12"

@@ -240,12 +240,12 @@ do -- L
   d1
     $ while "<f!5 t!10>" (iter 5)
     $ chunk 5 (|- oc 1)
-    $ sh 2 ((|* g 0.8).(sb 0.5 (|+ oc 1)).press)
+    -- $ sh 2 ((|* g 0.8).(sb 0.5 (|+ oc 1)).press)
     $ sb (slow 7 sine) (rev.(|+ n 3.5).(# pan rand))
-    $ sb 0.1 (stutWith 4 (1/10) (|+ oc 1))
+    -- $ sb 0.15 (stutWith 4 (1/10) (|+ oc 1))
     $ sh "h" id
     $ brak
     $ n "{0 4.5 2.1 5.6 -1.3}%5"
     # s "sin"
     # oc 4
-    |* g 0.9
+    |* g 0.85
