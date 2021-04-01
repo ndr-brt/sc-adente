@@ -108,5 +108,11 @@ let oscA = pF "oscA"
     verbfreeze = pI "verbfreeze"
     verbdiff = pF "verbdiff"
     verb w t d h = verbgain 1 # verbwet w # verbtime t # verbdamp d # verbhp h
+    warpsalgo = pI "warpsalgo"
+    warpstimb = pF "warpstimb"
+    warpsosc = pI "warpsosc"
+    warpsfreq = pF "warpsfreq"
+    warpsvgain = pF "warpsvgain"
+    warpseasteregg = pI "warpseasteregg"
 
 d1 $ s "bd:0"

@@ -1,0 +1,68 @@
+d1
+  $ slow 4
+  $ rarely (jux rev.press)
+  $ sometimesBy 0.2 (stut 3 0.8 "e")
+  $ s "[bd*2? sd, hh*4]" |* g 0
+  # clouds (slow 3 sine) (slow 5 tri) 0.05 (slow 8 tri)
+  # cloudsblend 0 0 0 0
+  -- # cloudsfreeze 1
+  # verb 0.9 0.9 0.2 0.2
+  # room 0.7 # size 0.4
+  # tanh 3
+  # waveloss 90
+
+hush
+
+d1
+  $ slow 4
+  $ chunk 6 (|+ note 15)
+  -- $ db 0.2
+  $ sh 1.5 id
+  $ sh 2 id
+  $ sh "x" id
+  $ n "0 3 5"
+  # s "braids"
+  # oc 4
+  # model 30
+  # warpsalgo 7
+  # warpstimb (slow 4 sine)
+  # warpsosc 3
+  # warpsfreq 8
+  # warpseasteregg 1
+  # pan (slow 3 sine)
+  -- * g 0.8
+  # rings 0.7 0.8 0.5 0.8 0.3
+  # cloudsblend 0.5 0.3 0.32 0.8
+  # clouds 0.2 0.4 0.05 0.5
+
+hush
+
+d1
+  $ slow 2
+  $ db "t"
+  $ chunk 3 (|+ oc 1)
+  $ rarely (fast 2)
+  $ while (slow 8 $ binary 120) (stut 2 0.7 (1/12))
+  $ off "x" ((|+ oc 3).(db 0.3).(# rings 0.6 sine 0.8 0.4 0.4))
+  $ superimpose (
+    (hurry "x")
+    .(# ripples 0.32 0.9 0.8)
+  )
+  $ n "0.8 4.2 1.6"
+  # oc 5
+  # model 12
+  # s "braids"
+  # cloudsblend 0.7 0.4 0.37 0.8
+  # clouds 0.3 (slow 3 sine/3) 0.05 0.7
+  |* g 0.9
+
+
+
+d1
+  $ s "bd*2? sn:2"
+  -- * g 0.7
+  # warpsalgo "6"
+  # warpsosc "1"
+  # warpsfreq "200"
+  # warpstimb 0.8
+  # warpseasteregg 0

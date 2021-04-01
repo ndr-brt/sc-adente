@@ -225,6 +225,41 @@ SynthDef("ripples" ++ ~dirt.numChannels, { |out, ripplescf=0, ripplesreson=0, ri
 
 
 (
+~dirt.addModule('warps', { |dirtEvent|
+	dirtEvent.sendSynth('warps' ++ ~dirt.numChannels,
+		[
+			warpsalgo: ~warpsalgo,
+			warpstimb: ~warpstimb,
+			warpsosc: ~warpsosc,
+			warpsfreq: ~warpsfreq,
+			warpsvgain: ~warpsvgain,
+			warpseasteregg: ~warpseasteregg,
+			out: ~out
+		]
+	)
+}, {~warpsalgo.notNil});
+);
+
+(
+SynthDef("warps" ++ ~dirt.numChannels, { |out, warpsalgo=0, warpstimb=0, warpsosc=1, warpsfreq=440, warpsvgain=1, warpseasteregg=0|
+	var signal = In.ar(out, ~dirt.numChannels);
+	signal = MiWarps.ar(
+    modulator: signal,
+    algo: warpsalgo,
+    lev1: 1,
+    lev2: 1,
+    timb: warpstimb,
+    osc: warpsosc,
+    freq: warpsfreq,
+    vgain: warpsvgain,
+    easteregg: warpseasteregg
+  );
+  ReplaceOut.ar(out, signal)
+}).add;
+
+);
+
+(
 
 (1..SuperDirt.maxSampleNumChannels).do { |numChannels|
 
