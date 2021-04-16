@@ -66,3 +66,51 @@ d1
   # warpsfreq "200"
   # warpstimb 0.8
   # warpseasteregg 0
+
+
+do
+  bpm 88
+  d1
+    $ while (slow 8 $ binary 143) (|+ n 1.8)
+    $ slow 2
+    $ layer [
+      (fast 4).(euclid 3 8).(|+ oc 2).(|* g 0.5).(/ legato 2).(#pan (slow 7 saw))
+      ,
+      (fast 6).(/ legato 2).(|* g 0.6).(# pan (slow 12 tri))
+      ,
+      (slow 8).(|- oc 3).(# pan rand)
+      ,
+      (slow 4).(|- oc 2).(# pan rand)
+      ,
+      (slow 2).(|- oc 1)
+      ,
+      id
+    ]
+    $ n "0 2.7"
+    # s "superpwm"
+    # oc 5
+    # legato 2
+    # acceleratebus 3 (slow 8 (sine-0.5)/10)
+    # lfobus 2 (slow 12 sine/2)
+    # resonancebus 1 (slow 6 sine/2)
+    # wl 20
+    # tanh 3
+    # voicebus 4 (slow 12 $ tri)
+    # verb 0.7 0.8 "t" 0.6
+    * g 0.9
+
+
+
+
+
+
+
+
+d1
+  $ loopAt 2
+  $ s "moog:2" * g 0
+  # cloudsfreeze 0
+  # cloudsblend 0.55 0.3 0.1 0.5
+  # clouds (slow 23 $ cosine) (slow 11 $ sine) (range 0.1 0.9 $ slow 5 square) (slow 9 tri)
+  <| cloudspitch (segment 64 $ slow 7 $ (sine+tri+saw)/3)
+  # verb 0.7 0.8 0.1 0.2

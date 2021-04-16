@@ -1,0 +1,42 @@
+all $ (# verb 0.74 0.7 "t" 0.6)
+  .(# tanh 1.5).(# shape 0.1)
+  -- .(# cloudsblend 0.02 0.8 0.3 0.1)
+  -- .(# clouds 0.5 0.1 0.12 0.1)
+  -- .(# cloudsfreeze 1)
+  -- .(# cloudspitch rand)
+
+
+
+
+
+do
+  bpm 103
+  d1
+    $ rarely (slow 2)
+    $ sh 3 (|* g 0.7)
+    $ sh "h" id
+    $ juxBy "t" (press.(|+ oc 1))
+    $ stutWith 6 "s" ((slow 2).(* legato "h"))
+    $ n "0"
+    # s "sin"
+    # oc 5
+    * legato "h"
+
+
+
+
+do
+  bpm 103
+  d1
+    $ slow 2
+    $ chew 4 "{3 4 1}%2"
+    $ while (slow 4 $ binary 34) (si ((slow 2).(press).(|+ oc 1)))
+    $ chunk 10 (|+ n 1.3)
+    $ sh 4 (("s" <~).(|* g 0.8).(# pan (slow 4 sine)))
+    $ sh 2 ("e" <~)
+    $ stutWith 3 "3s" ((|* g 0.95))
+    $ n "0"
+    # s "sin"
+    # oc "3"
+    * legato 0.7
+    # coarse 1024

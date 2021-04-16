@@ -31,7 +31,9 @@ s.waitForBoot {
   ~dirt.orbits.do { |x|
     var clouds = GlobalDirtEffect(\global_mi_clouds, [\cloudspitch, \cloudspos, \cloudssize, \cloudsdens, \cloudstex, \cloudswet, \cloudsgain, \cloudsspread, \cloudsrvb, \cloudsfb, \cloudsfreeze, \cloudsmode, \cloudslofi]);
     var verb = GlobalDirtEffect(\global_mi_verb, [\verbwet, \verbtime, \verbdamp, \verbhp, \verbfreeze, \verbdiff, \verbgain]);
+    // var saw = GlobalDirtEffect(\global_saw, [\sawgain, \sawfreq1, \sawfreq2, \sawcutoff, \sawresonance, \sawpan]);
     x.globalEffects = x.globalEffects
+      // .addFirst(saw)
       .addFirst(clouds)
       .addFirst(verb);
 
@@ -52,9 +54,9 @@ s.waitForBoot {
 
 s.latency = 0.3; // increase this if you get "late" messages
 
-FreqScope.new(500, 50 , 0, server: s);
+// FreqScope.new(500, 50 , 0, server: s);
+// s.makeGui;
 // s.meter;
-s.makeGui;
 
 // ~dirt.startSendRMS;
 

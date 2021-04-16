@@ -1,0 +1,19 @@
+do
+  bpm 98
+  d1
+    $ chunk 3 ((|+ note 1.4).(# pan rand))
+    $ chunk 7 ((|+ oc 1).(# pan "[0|1]"))
+    $ chunk 5 (stutWith 4 (1/24) ((|+ note 6.4).(|* g 0.8)).(/ legato 3).(# pan "[0|1]"))
+    $ while "<f!2 t>/3" (sply 2)
+    $ sh "q" id
+    $ n "[5.3(5,12,3), 10.3(2,6,1), 0.6(2,3)]"
+    # s "sin"
+    # oc (iter 3 $ "3 6 4")
+    # co 4096
+    # tanh 10
+    # dis 3.8
+    # cloudsblend 0.9 0.8 0.39 0.8
+    # clouds 0.3 0.05 0.05 0.8
+    # cloudspitch 0.8
+
+thank you! see you (maybe...)

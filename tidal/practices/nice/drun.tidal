@@ -11,7 +11,7 @@ do
       .(|* gain 0.4)
       .(# end 0.2)
       .(|* sp 0.17)
-      .(# hp' 65 0.5)
+      .(# hp 65 0.5)
       .(# o 8)
       .(# rvb 0.5 0.5)
       .(# del "h" "t" "t")
@@ -23,7 +23,7 @@ do
     # crush (range 16 4 $ slow 8 $ (square + saw)/2)
     # shape (perlin / 2)
     # pan (rand)
-    # lesl' 2 3 2.5
+    # lesl 2 3 2.5
     |* g 0.9
   d2
     $ superimpose (

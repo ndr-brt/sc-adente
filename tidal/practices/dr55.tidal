@@ -6,6 +6,42 @@
 
 
 
+
+-- <= THE CODE ON THE LEFT IS THE
+--    "GLOBAL EFFECT SYNTH"
+
+let sawgain = pF "sawgain"
+    sawfreq1 = pF "sawfreq1"
+    sawfreq2 = pF "sawfreq2"
+    sawcutoff = pF "sawcutoff"
+    sawresonance = pF "sawresonance"
+    sawpan = pF "sawpan"
+
+d1
+  $ s "bd" * g 0
+  # sawgain 0
+  <| sawcutoff (segment 12 $ range 100 400 $ fast 12 $ (tri+isaw)/2)
+  # sawresonance (slow 3 $ sine/2)
+  <| sawfreq1 (segment 10 $ range 220 440 $ fast 6 sine)
+  <| sawfreq2 (segment 8 $ range 440 220 $ fast 3 tri)
+  <| sawpan (segment 300 $ slow 8 $ sine)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 bpm 102
 
 d1

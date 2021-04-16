@@ -1,11 +1,13 @@
 
 do
   bpm(92)
+  -- all $ (chunk 6 (jux press))
   d1
     $ sometimesBy (slow 13 $ (sine-saw+square)/2) (|* legato 4)
     $ sometimesBy (rand) ("s" <~)
     $ n "0!3 1.7 0!5 2.3 0!6"
     # s "dk"
+    # oc 5
     # lp (range 400 900 $ rand) (range 0 0.3 $ slow 7 $ cosine)
     # legato 0.2
     |* g 0.9
