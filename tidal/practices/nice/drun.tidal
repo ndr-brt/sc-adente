@@ -1,5 +1,8 @@
 do
   bpm(122)
+  all $ id
+    .(# cloudsblend 0.3 0.4 0.3 0.4)
+    .(# clouds 0.1 0.1 0.02 rand)
   d1
     $ every 4 (rev)
     $ layer [
@@ -20,11 +23,11 @@ do
     # s "msg"
     # hpf (range (irand 200 + 100) (irand 100 + 1000) $ slow 32 $ sine)
     # hpq (rand/3)
-    # crush (range 16 4 $ slow 8 $ (square + saw)/2)
     # shape (perlin / 2)
+    # tantanh 6
     # pan (rand)
     # lesl 2 3 2.5
-    |* g 0.9
+    |* g 0.8
   d2
     $ superimpose (
       (|* sp 22)

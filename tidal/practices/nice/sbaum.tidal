@@ -1,9 +1,11 @@
 
 do
   bpm(110)
-  all $ ((# tanh 2).(# verb 0.6 0.7 0.2 0.3)
+  all $ id
+      .(# tanh 2)
+      .(# cloudsblend 0.3 0.4 0.3 0.4)
+      .(# verb 0.6 0.7 0.2 0.3)
       .(while (slow 4 $ binary 118) (slow 2))
-    )
   d1
     $ s "sbaum:0*12"
     # ar 3 3
@@ -21,7 +23,7 @@ do
     # sustain 12
     |* g 0.65
     # legato 2
-    -- # lp 800 0.2 -- lavorare un po sul filtro
+    # lp 800 0.2 -- lavorare un po sul filtro
     # rvb 0.4 0.5
     # scram 0.2
   d3

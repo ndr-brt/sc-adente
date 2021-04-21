@@ -114,5 +114,3 @@ let oscA = pF "oscA"
     warpsfreq = pF "warpsfreq"
     warpsvgain = pF "warpsvgain"
     warpseasteregg = pI "warpseasteregg"
-
-d1 $ s "bd:0"

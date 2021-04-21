@@ -1,25 +1,34 @@
 
 do
   bpm(92)
-  -- all $ (chunk 6 (jux press))
+  all $ id
+    .(# cloudsblend 0.3 0.4 0.3 0.4)
+    -- .(# clouds 0.1 0.2 0.1 0.8)
+    -- .(chunk 6 (jux press))
   d1
+    -- $ shut
     $ sometimesBy (slow 13 $ (sine-saw+square)/2) (|* legato 4)
     $ sometimesBy (rand) ("s" <~)
     $ n "0!3 1.7 0!5 2.3 0!6"
     # s "dk"
     # oc 5
-    # lp (range 400 900 $ rand) (range 0 0.3 $ slow 7 $ cosine)
+    # pan perlin
+    # lp (range 600 1000 $ rand) (range 0 0.3 $ slow 7 $ cosine)
     # legato 0.2
     |* g 0.9
     # del (range 0 0.87 $ slow 9 $ (perlin+cos)/2) "h" "0.2"
   d2
+    -- $ shut
     $ ("[e|q]" ~>)
     $ stutWith 3 "[h|q]" (
       (|* g 0.95)
       .(|- n 3)
-      .(# lp (range 300 800 $ slow 7 $ (saw+square)/2) 0.5)
+      .(# lpf (range 300 800 $ slow 7 $ (saw+square)/2))
+      .(# lpq "h")
+      -- .(# lpfbus 1 (segment 128 $ range 300 800 $ slow 7 $ (saw+square)/2))
+      -- .(# lpqbus 2 (segment 128 $ rcos 0.3 0.6))
     )
-    $ degradeBy 0.2
+    $ db 0.2
     $ s "dk:0?"
     # oc 3
     # ar 0.01 4
@@ -27,7 +36,8 @@ do
     # rvb 0.9 0.8
     |* g 0.8
   d3
-    $ jux (|- n 5)
+    -- $ shut
+    $ jux (|- n "<3 5 7>/4")
     $ s "dk:3*8"
     # ar 0.8 1
     # oc 7
@@ -36,17 +46,17 @@ do
     # hp (range 2000 4000 $ slow 17 $ (perlin + saw)/2) 0.4
     # legato 3
   d4
+    -- $ shut
     $ while "<t t f t t t f>" (shut)
+    $ juxBy (slow 4 $ sine*2-1) (press.(|+ oc 1))
     $ euclid 3 4
-    $ stutWith 8 "q" ((|* g 1).(|* coarse 8).(|* binshift (range 0.9 1.1 $ rand)))
+    $ stutWith 8 "q" ((|* coarse 8).(|* binshift (range 0.9 1.1 $ rand)))
     $ n "-5"
     # oc 5
     # s "dk"
-    # legato 0.4
-    # lp 1400 0
+    # legato 0.5
+    # lp 1200 0
     # binshift (slow 27 $ (sine+square+isaw)/3)
     |* g 0.8
 
 hush
-
-drawLine "<t f [t*2 ~] f>t"

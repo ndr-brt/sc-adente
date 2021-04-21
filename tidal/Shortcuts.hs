@@ -114,3 +114,20 @@ let ac = accelerate
     rgx = rangex
 
     sply n = (ply n).(slow n)
+
+    -- ranged continuous
+    rsin i o = rg' i o sin -- ranged' sine
+    rcos i o = rg' i o cos -- ranged' cosine
+    rtri i o = rg' i o tri -- ranged' triangle
+    rsaw i o = rg' i o saw -- ranged' saw
+    risaw i o = rg' i o isaw -- ranged' inverted saw
+    rsq i o = rg' i o sq -- ranged' square
+    rrand i o = rg' i o rand -- ranged' rand
+    rxsin i o = rgx i o sin -- ranged' exponential sine
+    rxcos i o = rgx i o cos -- ranged' exponential cosine
+    rxtri i o = rgx i o tri -- ranged' exponential triangle
+    rxsaw i o = rgx i o saw -- ranged' exponential saw
+    rxisaw i o = rgx i o isaw -- ranged' exponential inverted saw
+    rxsq  i o = rgx i o sq -- ranged' exponential sqaure
+    rxpw i o w = rgx i o pw w -- ranged' exponential pulse
+    rxrand i o = rgx i o rand -- ranged' exponential rand

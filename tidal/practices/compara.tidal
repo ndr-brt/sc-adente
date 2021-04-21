@@ -4,21 +4,18 @@ do
     $ sb "t" (rev)
     $ chunk 3 (stutWith 4 "s" ((|* sp (5/4)).(# pan rand).(|/ legato 1.5).(|+ oc 1).(|* g 0.9)))
     $ layer [
-      (hurry "h")
-      .(|- oc 1)
-      .(# boo)
+      (slow 2).(|- oc 1).(# boo).(# shape 0.5)
       ,
-      (h 2).(|+ oc 1).(fast 2).(iter 4)
+      (|+ oc 2).(fast 4).(iter 4)
       ,
       id
     ]
     $ n "0 [3 5*2]"
     # s "supercomparator"
-    # legato 0.8
     # oc 4
-    # rvb "s" "s"
+    # verb 0.7 0.8 0.2 0.2
     |* g 0.8
-    # del (slow 4 sine) "s" "s"
+    # del rand "q" "q"
     # phaser (slow 13 $ sine*10) 0.8
 
 hush
