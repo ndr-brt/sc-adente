@@ -1,6 +1,6 @@
-bpm(102)
 
 do
+  bpm 102
   d1
     $ layer [
       id

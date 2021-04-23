@@ -3,7 +3,7 @@ do
   bpm(110)
   all $ id
       .(# tanh 2)
-      .(# cloudsblend 0.3 0.4 0.3 0.4)
+      -- .(# cloudsblend 0.3 0.4 0.3 0.4)
       .(# verb 0.6 0.7 0.2 0.3)
       .(while (slow 4 $ binary 118) (slow 2))
   d1
@@ -23,17 +23,18 @@ do
     # sustain 12
     |* g 0.65
     # legato 2
-    # lp 800 0.2 -- lavorare un po sul filtro
+    -- # lp 800 0.2 -- lavorare un po sul filtro
+    # panbus 3 (segment 12 $ slow 4 $ rsin 0.3 0.7)
+    # lpfbus 2 (segment 32 $ rsin 600 1000)
+    # lpq 0.3
     # rvb 0.4 0.5
     # scram 0.2
   d3
     $ layer [
       id
-      .(# binshift 0.3)
-      .(every 6 (|+ binshift 0.2))
+      .(# binshiftbus 1 (rsaw 0.2 0.6))
       .(# pan (slow 3 $ (saw+sine)/2))
-      .(# triode (range 0 0.6 $ slow 13 $ cosine))
-      .(|* g 0.84)
+      .(|* g 0.7)
       ,
       (|+ oc 1)
       .(|* g 0.55)
@@ -42,13 +43,12 @@ do
       .(sometimesBy (slow 13 $ (isaw+cosine+square)/3) (ply 2))
       .(juxBy (slow 8 sine) ((rev).((4/3) <~)))
       .(# krush (slow 7 sine))
-      .(# o 8)
-      .(# del "h" "x" "x")
     ]
     $ slow 2
     $ every 3 (chunk 2 (|+ n 1.3))
     $ n "[0 3.3*3, 2.7 1.3 ~]"
     # s "sbaum"
     # oc 7
+    # del "h" "x" "t"
 
 hush

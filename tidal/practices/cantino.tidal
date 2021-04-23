@@ -1,5 +1,6 @@
 do
   bpm 120
+  all $ id
   let gh = (slow 13 $ sine)
   -- resetCycles
   d1
@@ -20,7 +21,7 @@ do
         .(|* speed 12)
         .(degradeBy (0.3*gh))
         .((1-gh) ~>)
-        .(# del' "[0.7 0]" 0.23 0.32)
+        .(# del "[0.7 0]" 0.23 0.32)
         .(# orbit 5)
         .(# distort (1-gh))
         ,
@@ -41,7 +42,7 @@ do
         .(striate "<72 88 45 92 63>")
         .(# boo)
         .(# orbit 4)
-        .(# rvb' 0.2 0.4)
+        .(# rvb 0.2 0.4)
         -- .(degradeBy (0.-gh))
         -- .(scramble 28)
         ])

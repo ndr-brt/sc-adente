@@ -1,41 +1,41 @@
 
-d1
-  $ loopAt 1.5
-  $ superimpose(
+do
+  bpm 100
+  d1
+    $ loopAt 1.5
+    $ superimpose(
       (every 4 (scramble 6))
       .(|* speed ((9/8) * (irand 3 + 6)))
       .(degradeBy 0.2)
       .((segment 1 $ choose [0.1, 0.2, 0.3]) ~>)
       .(sometimes (# accelerate "-0.2"))
       .(stutWith 4 0.3 ((# scram 0.1).(|* speed (1 - rand/8))))
-  )
-  $ s "droni:2"
-  # lpf (range 800 1200 $ slow 12 $ sine)
-  # hp' 70 0.5
-
-d2
-  $ rarely (ply 2)
-  $ every 6 (scramble 3)
-  $ slow 2
-  $ s "kk*3 ~!3"
-  # shape 0.35
-  # rvb' 0.4 0.8
-  # hp' 60 0.4
-
-d3
-  $ rarely (ply 2)
-  $ every 8 (fast 2)
-  $ s "[~!2 ss*2]"
-  # rvb' 0.2 0.4
-  # distort 0.4
-
-d4
-  $ s "babbl/2"
-  # ar' 0.4 0.9
-  # pan (rand)
-  # distort 0.9
-
-d4 silence
+    )
+    $ s "droni:2"
+    # lpf (range 800 1200 $ slow 12 $ sine)
+    # hp 70 0.5
+  d2
+    $ rarely (ply 2)
+    $ every 6 (scramble 3)
+    $ slow 2
+    $ s "kk*3 ~!3"
+    # shape 0.35
+    # rvb 0.4 0.8
+    # hp 60 0.4
+  d3
+    $ rarely (ply 2)
+    $ every 8 (fast 2)
+    $ s "[~!2 ss*2]"
+    # rvb 0.7 0.4
+    # distort 0.4
+    # tanh 10
+    # bpf 1200
+    |* g 0.8
+  d4
+    $ s "babbl/2"
+    # ar 0.4 0.9
+    # pan (rand)
+    # distort 0.9
 
 all $ id
 

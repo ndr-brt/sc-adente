@@ -1,6 +1,7 @@
-bpm(133)
 
 do
+  bpm(133)
+  all $ (# verb 0.4 0.5 0.2 0.3)
   d1
     $ superimpose (
       (slow 2)
@@ -13,13 +14,14 @@ do
     $ stut 5 "t" "e"
     $ s "eleas:22*8"
     |+ note "[2 5 8 9]"
-    # binshift (snowball 4 (*) (fast 4) $ (sine*(run 3+1)))
+    # bs (snowball 4 (*) (fast 4) $ (sine*(run 3+1)))
   d2
-    $ shut
+    -- $ shut
     $ ("s" <~)
+    $ rarely (stut 3 0.9 "e")
     $ s "tubes/2"
     # detune ((irand 120)*(-1))
-    # oc 2
+    # oc 7
   d3
     $ layer [
       (# oc 7)
@@ -39,7 +41,7 @@ do
       .(# o 7)
       ,
       (# oc 2)
-      .(#shape 0.3)
+      .(# shape 0.3)
       .(|* g 0.75)
       .(# lpf (range 900 2000 $ slow 22 $ tri))
       .(# hp 56 0.6)

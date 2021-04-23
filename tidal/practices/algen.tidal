@@ -6,13 +6,13 @@ let dens st en p = scramble (round <$> (range st en $ saw)) $ fast (range st en 
 
 d1
   $ slow 10
-  -- $ layer [
-  --   id, id, id, (id.(slow (range 0.9 1.1 $ rand)))
-  -- ]
+  $ layer [
+    id, (slow (range 0.9 1.1 $ rand))
+  ]
   $ spread ($) [
     (# freq (masks 220 440 880 440))
-    -- ,
-    -- (# freq (range 110 220 $ isaw))
+    ,
+    (# freq (range 110 220 $ isaw))
   ]
   $ spread ($) [
     (|* g (range 0.8 1 $ rand)),

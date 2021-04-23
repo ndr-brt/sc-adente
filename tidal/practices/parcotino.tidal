@@ -1,80 +1,75 @@
-bpm (120)
 
-d1
-  $ layer [
-    id
-    .(fast 40)
-    .(# legato 3)
-    .(# ar' 0.1 0.9)
-    .(# n (segment 1 $ range 0 4 $ perlin))
-    .(# lp' (range 1000 2000 $ slow 12 $ (saw+tri*2+square)/4) 0.2)
-    ,
-    id
-    .(#n "<0 0 3 -1>")
-    .(# octave 2)
-    .(# sustain 3)
-    .(# shape 0.4)
-    .(# oct' 1 1 1)
-    .(almostNever (stut 7 0.8 0.2))
-    ,
-    id
-    .(every 4 (euclid 3 4))
-    .(euclid 8 14)
-    .(# octave 1)
-    .(# hp' 40 0.6)
-  ]
-  $ s "plucking"
-  # rvb' 0.3 0.5
-  # gain 0.8
 
-d2
-  $ every 3 ((iter 3).(ply 3))
-  $ every 4 (stut' 10 0.05 (# n "-4"))
-  $ s "kk"
-  # shape 0.8
-  # n "-3"
-  # rvb' 0.2 0.5
-  # hp' 40 0.4
-  # gain 0.84
-
-d2 silence
-
-d3
-  $ (0.02 <~)
-  $ s "~ pitchednoise/2"
-  # gain 1.45
-  # shape 0.3
-  # ar' 0.001 1.5
-  # rvb' 0.4 0.5
-
-d3 silence
-
-d4
-  $ slice 12 "[0 1 3 2 4] <6 ~!2>*2 8|3 11"
-  $ every 7 (rev)
-  $ slow 4
-  $ s "synchronicity"
-  # shape 0.35
-  # n (range 10 13 $ rand)
-  # pan "[0 1 0.4 0.7]"
-  # gain 0.8
+do
+  bpm (120)
+  d1
+    $ layer [
+      id
+      .(fast 40)
+      .(# legato 3)
+      .(# ar 0.1 0.9)
+      .(# n (irand 3))
+      .(# lp (range 1000 2000 $ slow 12 $ (saw+tri*2+square)/4) 0.2)
+      ,
+      id
+      .(# n "<0 0 3 -1>")
+      .(# octave 2)
+      .(# sustain 3)
+      .(# shape 0.4)
+      .(# oct 1 1 1)
+      .(almostNever (stut 7 0.8 0.2))
+      ,
+      id
+      .(every 4 (euclid 3 4))
+      .(euclid 8 14)
+      .(# octave 1)
+      .(# hp 40 0.6)
+    ]
+    $ s "plucking"
+    # rvb 0.3 0.5
+    # gain 0.8
+  d2
+    $ every 3 ((iter 3).(ply 3))
+    $ every 4 (stutWith 10 0.05 (# n "-4"))
+    $ s "kk"
+    # shape 0.8
+    # n "-3"
+    # rvb 0.2 0.5
+    # hp 40 0.4
+    # gain 0.84
+  d3
+    $ (0.02 <~)
+    $ s "~ pitchednoise/2"
+    # gain 1.45
+    # shape 0.3
+    # ar 0.001 1.5
+    # rvb 0.4 0.5
+  d4
+    $ slice 12 "[0 1 3 2 4] <6 ~!2>*2 [8|3] 11"
+    $ every 7 (rev)
+    $ slow 4
+    $ s "synchronicity"
+    # shape 0.35
+    # n (range 10 13 $ rand)
+    # pan "[0 1 0.4 0.7]"
+    # gain 0.8
 
 hush
 
 
-bpm 130
-
-d1
-  -- $ fast 2
-  $ every 3 (rev)
-  -- $ chunk 2 (|+ oc 2)
-  -- $ off "e" ((hurry 2).(|* g 0.9).(sb 0.1 (stutWith 6 "0.05" (|+ sp 2))))
-  $ off "q" (hurry "h")
-  -- $ off "e" (hurry "2")
-  $ n "[0 11] 0 [3 8] 5"
-  # s "xenbass"
-  # oc 5
-  # legato 1
-  -- # tuning 20
-  -- # hp 54 0.6
-  # rvb 0.3 0.4
+do
+  bpm 130
+  d1
+    -- $ fast 2
+    $ every 3 (rev)
+    $ chunk 4 ((|+ oc 2).(sply 8))
+    -- $ off "e" ((hurry 2).(|* g 0.9).(sb 0.1 (stutWith 6 "0.05" (|+ sp 2))))
+    $ off "q" (hurry "h")
+    $ off "e" ((hurry "2").(db "t"))
+    $ n "[0 11] 0 [3 8] 5"
+    # s "xenbass"
+    # oc 5
+    # legato 1
+    -- # tuning 20
+    -- # hp 54 0.6
+    # rvb 0.3 0.4

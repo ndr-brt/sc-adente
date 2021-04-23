@@ -1,6 +1,7 @@
-bpm(111)
 
 do
+  bpm(111)
+  all $ id
   d1
     $ jux (slow 2)
     $ plyWith 16 (
@@ -51,18 +52,20 @@ all $ id
 
 hush
 
-bpm(140)
 
 -- spacca tutto (la cpu intendo)
-d1
-  -- $ splice 4 "3*3 1 0"
-  $ striate "<0 2 3 1>"
-  $ plyWith 8 (
-    (|* g 0.95)
-    .(|+ pan rand)
-    .(sometimesBy rand (hurry 2))
-    .(|- note "<3 5 -2>")
-    .(|* sp (1.58 * rand))
-  )
-  $ s "percuo:2"
-  # rvb 0.3 0.5
+do
+  bpm(140)
+  d1
+    $ striate "<0 2 3 1>"
+    $ plyWith 8 (
+      (|* g 0.95)
+      .(|+ pan rand)
+      .(sometimesBy rand (hurry 2))
+      .(|- note "<3 5 -2>")
+      .(|* sp (rrand 0.5 10))
+    )
+    $ s "percuo:2"
+    # rvb 0.3 0.5
+    # cloudsblend 0.2 0.9 0.3 0.8
+    # clouds sine rand 0.1 0.8

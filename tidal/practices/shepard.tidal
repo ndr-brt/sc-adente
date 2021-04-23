@@ -8,8 +8,8 @@ d1
   # oc 2
   # accelerate (range "-8" "8" $ slow 3 $ tri)
   # rvb 0.4 0.5
-  # tanh 8
-  # legato 0.7
+  # tanh 2
+  # legato 1
 
 
 hush

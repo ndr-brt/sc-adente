@@ -1,6 +1,6 @@
-bpm(118)
 
 do
+  bpm(118)
   d1
     $ layer [
       splice 6 "[0|3] 2!2 <5 1>"
@@ -22,9 +22,9 @@ do
 
 hush
 
-bpm (118)
 
 do
+  bpm 118
   d1
     $ stack [
       every 6 (rev) $
@@ -49,16 +49,16 @@ do
     # rvb 0.8 0.9
   d3
     $ every 2 rev
+    $ chunk 4 ((# ac "-4").(fast 2))
     -- $ off "q" ((|+ oc 3).(|* g 0.8).(|+ dis 0.2))
     $ juxBy "<0.5 -0.5>" (|+ oc 2)
     $ n (scale "minor" "[0 8.5] 0*2 [1 1.8] 2")
     # s "abbass"
     # oc 4
-    -- # ac "-4"
     # legato 1.8
     # lp (range 400 600 $ slow 8 sine) 0.1
     # tantanh 4
-    |*g 0.8
+    |* g 0.8
     # hp 68 0.3
     # rvb 0.2 0.2
 
@@ -69,21 +69,21 @@ hush
 
 
 
-bpm 120
+do
+  bpm 120
+  d1
+    $ stack [
+      every 6 (rev) $
+      off "0.07" (rev.(|* g 0.9).(# pan rand)) $ stack [
+        sb 0.1 (fast 2) $ n "[0 0?] ~" # s "dald",
+        sb 0.08 (stut 8 "0.8" "s")
+          $ sb "t" (off "q" ((|* g 0.8).(euclid 3 4)))
+          $ s "~ dald:1",
+          rarely (fast 2) $ s "~!4 dald:3/4"
+      ] # shape 0.8 # rvb 0.3 0.4 # o 8,
+      sb "t" (off "e" (|* g 0.9)) $ swing 3 $ s "dald:4(6,8)" |* g (range 0.6 0.8 $ rand),
+      s "dald:7/8" |* g 0.7
+    ]
+    # tantanh 10
 
-d1
-  $ stack [
-    every 6 (rev) $
-    off "0.07" (rev.(|* g 0.9).(# pan rand)) $ stack [
-      sb 0.1 (fast 2) $ n "[0 0?] ~" # s "dald",
-      sb 0.08 (stut 8 "0.8" "s")
-        $ sb "t" (off "q" ((|* g 0.8).(euclid 3 4)))
-        $ s "~ dald:1",
-        rarely (fast 2) $ s "~!4 dald:3/4"
-    ] # shape 0.8 # rvb 0.3 0.4 # o 8,
-    sb "t" (off "e" (|* g 0.9)) $ swing 3 $ s "dald:4(6,8)" |* g (range 0.6 0.8 $ rand),
-    s "dald:7/8" |* g 0.7
-  ]
-  # tantanh 10
-
-  hush
+hush

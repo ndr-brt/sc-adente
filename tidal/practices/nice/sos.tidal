@@ -1,6 +1,6 @@
 
 do
-  bpm 103
+  bpm 95
   all $ id
     .(# cloudsblend sine 0.6 0.2 0.8)
     .(# clouds (cos) perlin 0.1 (slow (segment 1 $ irand 4 + 1) $ tri))
@@ -20,6 +20,7 @@ do
     # wl 10
     -- # lpf 2000
     -- # lpq 0.2
+    # hpf 20
   d2
     -- $ shut
     $ brak
@@ -37,21 +38,3 @@ do
     # bpq 0.8
     # tantanh 6
     |* g 0.9
-  d3
-    -- $ shut
-    -- $ stutWith 8 (1/32) ((|+ n 12).(# pan "[0|1]"))
-    $ s "sin:0"
-    # oc 5
-    |* sp "e"
-    # shape 0.4
-  -- d3
-  --   $shut
-  --   $ chunk 8 (|+ n 2.1)
-  --   $ juxBy 0.4 (|+ n 5)
-  --   $ s "soshats*64"
-  --   # n (slow 4 "{12 7 8}%6")
-  --   # legato 2
-  --   # hpf 3000
-  --   # lpf 4000
-  --   # verb 0.3 0.5 0.2 0.3
-  --   |* g 0.7

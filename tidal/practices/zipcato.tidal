@@ -1,6 +1,6 @@
-bpm (120)
 
 do
+  bpm (120)
   xfadeIn 1 8
   -- d1
     $ rarely (iter 4)
@@ -11,25 +11,25 @@ do
     $ almostNever (ply 3)
     $ layer [
       id
-      .(sometimes (plyWith 2 (# hp' (range 1000 3000 $ slow 10 (square + isaw)/2) 0.2)))
+      .(sometimes (plyWith 2 (# hp (range 1000 3000 $ slow 10 (square + isaw)/2) 0.2)))
       ,
       id
       .(|* speed ((irand 20) + 20))
       .((range 0.3 0.6 $ slow 7 $ cosine) ~>)
       .(degradeBy 0.4)
-      .(# rmod' 0.7 80 0.6)
+      .(# rmod 0.7 80 0.6)
       .(stut ((irand 3)+7) 0.6 0.1)
       .(# orbit 6)
     ]
     $ s "incoming? incoming*4 hoover*3"
     # pan "[0.2,0.5,0.8]"
     # n (irand 6)
-    # rvb' 0.6 0.75
+    # rvb 0.6 0.75
     # speed ((perlin + 1) / (range 1.2 2.4 $ slow 14 $ (tri+cosine)/2))
-    # del' (slow 8 sine) 0.23 0.12
+    # del (slow 8 sine) 0.23 0.12
     # scram (range 0 0.2 $ slow 4 $ cosine)
-    # oct' 0.5 0.7 0.95
-    # hp' 80 0.3
+    # oct 0.5 0.7 0.95
+    # hp 80 0.3
     |* gain 0.58
 
 clutchIn 1 6 $ silence

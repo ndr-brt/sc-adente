@@ -1,48 +1,47 @@
-bpm(80)
 
-d1
-  $ every 8 (iter 4)
-  $ stack [
-    juxBy (range "-0.4" "0.4" $ slow 2 $ square) (|- octave 1)
-    $ whenmod 12 10 (degradeBy 1)
-    $ sometimes ((|- n 3).(fast 2))
-    $ n "0 0 0 -4 0 0 0 0"
-    # s "zonta"
+do
+  bpm(80)
+  d1
+    $ every 8 (iter 4)
+    $ stack [
+      juxBy (range "-0.4" "0.4" $ slow 2 $ square) (|- octave 1)
+      $ whenmod 12 10 (degradeBy 1)
+      $ sometimes ((|- n 3).(fast 2))
+      $ n "0 0 0 -4 0 0 0 0"
+      # s "zonta"
+      # octave 4
+      # tremolo 0.9 150
+      # shape 0.3
+      ,
+      every 4 (zoom (0.25,0.75))
+      $ whenmod 12 10 ((fast 2).(#rvb 0.2 0.6))
+      $ sometimes (iter 4)
+      $ rarely (ply 2)
+      $ s "[kk ss kk*2 ss]"
+      # shape 0.4
+      ,
+      euclid "<8 14 8>" 16
+      $ sometimes (stutWith 4 0.1 (# lpf 800))
+      $ s "hhat"
+      # hp 2500 (range 0.2 0.6 $ rand)
+    ]
+  d2
+    $ whenmod 12 8 (degradeBy 1)
+    $ n "<0 0 0 -4>"
+    # s "uou"
+    # distort 0.6
     # octave 4
-    # tremolo' 0.9 150
-    # shape 0.3
-    ,
-    every 4 (zoom (0.25,0.75))
-    $ whenmod 12 10 ((fast 2).(#rvb' 0.2 0.6))
-    $ sometimes (iter 4)
-    $ rarely (ply 2)
-    $ s "[kk ss kk*2 ss]"
-    # shape 0.4
-    ,
-    euclid "<8 14 8>" 16
-    $ sometimes (stut' 4 0.1 (# lpf 800))
-    $ s "hhat"
-    # hp' 2500 (range 0.2 0.6 $ rand)
-]
-
-d2
-  $ whenmod 12 8 (degradeBy 1)
-  $ n "<0 0 0 -4>"
-  # s "uou"
-  # distort 0.6
-  # octave 4
-  # accelerate "-2"
-  # ar' 0.01 0.01
-  # hold 2
-  # sustain 2
-  # rvb' 0.2 0.4
-  # gain 0.9
-  # lp' 800 0.1
-
-d3
-  $ whenmod 12 8 (# gain 1)
-  $ slow 2
-  $ s "entropy"
-  # gain 0
+    # accelerate "-2"
+    # ar 0.01 0.01
+    # hold 2
+    # sustain 2
+    # rvb 0.2 0.4
+    # gain 0.9
+    # lp 800 0.1
+  d3
+    $ whenmod 12 8 (# gain 1)
+    $ slow 2
+    $ s "entropy"
+    # gain 0
 
 hush

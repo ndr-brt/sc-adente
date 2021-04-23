@@ -1,14 +1,13 @@
-bpm(120)
 
 do
+  bpm(120)
   d1
-    $ fast 16
-    $ s "zonta:0"
+    $ s "zonta:0*16"
     # oc 3
     # legato 3
     # hp 64 0.3
   d2
-    $ superimpose ((|- oc 4).(|* g 1).(# n "<0*4 3*2>").(# dis 0.3))
+    $ si ((|- oc 4).(|* g 1).(# n "<0*4 3*2>").(# dis 0.3))
     $ rarely (# rmod 0.8 18 0.3)
     $ s "zonta:0"
     # oc 8
@@ -16,7 +15,7 @@ do
     |* g 0.6
     # rvb 0.4 0.5
   d3
-    $ superimpose ((|+ squiz 64).("s" ~>).(# shape 0.3).(# hp 66 0.3).(# pan rand))
+    $ si ((|+ squiz 64).("s" ~>).(# shape 0.3).(# hp 66 0.3).(# pan rand))
     $ sometimes (jux ("h" <~))
     $ every 3 (iter 5)
     $ squiz "<2 4 8 12 24 48 96>"
@@ -30,10 +29,8 @@ hush
 
 
 
-
-bpm(111)
-
 do
+  bpm(111)
   d1
     $ every 3 (|+ n 5)
     $ stutWith 6 "[t|x|f]" (
@@ -65,39 +62,37 @@ do
 
 hush
 
-
-
-bpm(135)
-
-d1
-  $ superimpose (
-    (hurry "h")
-    .(sometimesBy 0.5 ((|* sp 6).("[e|q]" <~).(stutWith 6 "[q|e]" ((|+ note (segment 1 $ choose [2,4])).(|* g 0.88)))))
-    .(# o 8)
-    .(# pan (slow 3 $ sine))
-  )
-  $ superimpose (
-    (hurry "q")
-    .(sometimes (|+ note 3))
-    .(# hp 64 0.3)
-  )
-  $ superimpose (
-    (hurry 2)
-    .(degradeBy 0.5)
-    .(|* g 0.8)
-    .(# bpf 4500 )
-    .(# o 7)
-    .(# rvb 0.4 0.6)
-    .(# pan (choose [0,1]))
-  )
-  $ rarely (|+ note 3)
-  $ rarely (fast 2)
-  $ chunk 4 (|- note 8)
-  $ chunk 3 (|- note 3)
-  $ note "{0*4 2*4 3*4}%2"
-  # s "uxay"
-  |* sp "[4 10 5]"
-  # shape 0.4
-  # dis 0.5
+do
+  bpm(135)
+  d1
+    $ si (
+      (hurry "h")
+      .(sometimesBy 0.5 ((|* sp 6).("[e|q]" <~).(stutWith 6 "[q|e]" ((|+ note (segment 1 $ choose [2,4])).(|* g 0.88)))))
+      .(# o 8)
+      .(# pan (slow 3 $ sine))
+    )
+    $ si (
+      (hurry "q")
+      .(sometimes (|+ note 3))
+      .(# hp 64 0.3)
+    )
+    $ si (
+      (hurry 2)
+      .(degradeBy 0.5)
+      .(|* g 0.8)
+      .(# bpf 4500 )
+      .(# o 7)
+      .(# rvb 0.4 0.6)
+      .(# pan (choose [0,1]))
+    )
+    $ rarely (|+ note 3)
+    $ rarely (fast 2)
+    $ chunk 4 (|- note 8)
+    $ chunk 3 (|- note 3)
+    $ note "{0*4 2*4 3*4}%2"
+    # s "uxay"
+    |* sp "[4 10 5]"
+    # shape 0.4
+    # dis 0.5
 
 hush
