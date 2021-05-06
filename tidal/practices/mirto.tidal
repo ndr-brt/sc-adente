@@ -89,55 +89,29 @@ d1
 
 hush
 
-hush
-
-d1
-  $ off "q" (|+ n 3)
-  $ chunk 3 (|+ n 5)
-  $ every 4 (bite 5 8)
-  $ si ((hurry 8).(# o 7).(#rvb 0.5 0.8).(|*g 0.7).(#ar 0.01 0.8))
-  $ si ((hurry 4).(sometimesBy 0.7 (ply 2)))
-  $ si ((hurry 2).(stutWith 3 "q" ((|* g 0.95).(# lp 800 0.2))))
-  $ si ((hurry "q").(fast 2))
-  $ s "friab"
-
-d1
-  $ slow 4
-  $ rarely (rev)
-  $ off "5s" ((|* sp "<0.4 0.6 0.5>").(fast 4).(rarely (|*sp "e")).(#pan (slow 10 sine)))
-  $ off "1s" ((hurry 4).(every 2 (*| sp "2!4")).(degBy 0.5))
-  $ off "e" (hurry 2)
-  $ si (|* sp "q")
-  $ sp "[1 1.2 0.8, ~ 1.45, 3.4(3,8)]"
-  # s "sin"
-  # oc 5
-  # rvb 0.3 0.4
-  # del "h" "t" "t"
+do
+  bpm 123
+  d1
+    $ chunk 3 ((|+ n 3.4).(fast 2))
+    $ sb (slow 4 $ sine/2) ((euclid 3 4).(# pan rand))
+    $ every 2 (bite 5 (segment 2 $ r 5))
+    $ off "q" (|+ n 1.2)
+    $ sh 8 ((|* g 0.7).(# ar 0.01 0.8))
+    $ sh 2 ((stutWith 3 "q" ((|* g 0.95).(# lp 1800 0.2))))
+    $ sh "q" (fast 2)
+    $ s "friab:0"
+    # oc 5
+    # lp 2000 0.1
+    # shape 0.3
 
 hush
 
 d1 $ fast 16 $ randslice 16 $ s "eleas:15"
 d1 $ slice 16 (segment 16 $ irand 16) $ s "eleas:15"
 
-slice 3 (segment 3 $ irand' 3) $ s "bd"
-
-irand' :: Num a => Pattern Int -> Pattern a
-irand' = (>>= irand)
-
-rslice :: Pattern Int -> ControlPattern -> ControlPattern
-rslice x p = fast x Sound.Tidal.Context.<* slice x (irand' x) p
-
-rslice :: Pattern Time -> ControlPattern -> ControlPattern
-rslice x = fast x $ randslice (x :: Int)
-
-let rslice x p = slice x (segment (toTime <$> x) $ ((>>= irand) x)) $ p
-let rsplice x p = splice x (segment (toTime <$> x) $ ((>>= irand) x)) $ p
-
-let rsplice = -- implement me
-
-bpm 98
 
 do
+  bpm 98
   d1
     $ layer [
       id.(chop 4).rev
@@ -155,39 +129,40 @@ do
 
 hush
 
-
-d1
-  $ off "s" (|- n 3)
-  $ off "e" ((|+ n 5).(stutWith 6 "s" (# legato 0.1)).(degradeBy "t"))
-  $ off "q" (|+ n 3)
-  $ rarely (fast 2)
-  $ every 8 (# legato 0.2)
-  $ s "[soskick, ~ sostoms*2? ~ sossnare, soshats(3,4)]"
-  # pan "[0.5, 0.5, [0 1 0.3]]"
-  # shape 0.4
-  # tantanh 0.9
-  # rvb 0.1 0.1
-  # lpf (range 400 1400 $ slow 8 sine)
+do
+  bpm 125
+  d1
+    $ off "s" (|- n 3)
+    $ off "e" ((|+ n 5).(stutWith 6 "s" (# legato 0.1)).(degradeBy "t"))
+    $ off "q" (|+ n 3)
+    $ rarely (fast 2)
+    $ every 8 (# legato 0.2)
+    $ s "[soskick, ~ sostoms*2? ~ sossnare, soshats(3,4)]"
+    # pan "[0.5, 0.5, [0 1 0.3]]"
+    # shape 0.4
+    # tantanh 0.9
+    # rvb 0.1 0.1
+    # lpf (range 400 1400 $ slow 8 sine)
 
 hush
 
 
-bpm 135
-
-d1
-  $ slow 1.5
-  $ off "3s" (rarely (iter 4))
-  $ every 3 (zoom (0.5, 1))
-  $ every 4 (rev)
-  $ stack [
-    s "friab:0*2 ~" # ac "-4" # shape 0.3,
-    stut 3 "0.7" "s" $ s "~ ss" # tanh 3,
-    rarely ((degradeBy "t").(stut 3 "0.9" "x"))
-      $ euclid (irand 8 + 8) 16 $ s "hhat"
-      # pan rand
-      # lp (range 1000 3000 $ rand) 0.1
-  ]
-  # rvb 0.2 0.3
-  # del "h" "t" "[t|x]"
+do
+  bpm 135
+  d1
+    $ slow 1.5
+    $ off "3s" (rarely (iter 4))
+    $ every 3 (zoom (0.5, 1))
+    $ every 4 (rev)
+    $ stack [
+      s "friab:0*2 ~" # ac "-4" # shape 0.3,
+      stut 3 "0.7" "s" $ s "~ ss" # tanh 3,
+      rarely ((degradeBy "t").(stut 3 "0.9" "x"))
+        $ euclid (irand 8 + 8) 16 $ s "hhat"
+        # pan rand
+        # lp (range 1000 3000 $ rand) 0.1
+    ]
+    # rvb 0.2 0.3
+    -- # del "h" "t" "[t|x]"
 
 hush

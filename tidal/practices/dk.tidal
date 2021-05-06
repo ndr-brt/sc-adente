@@ -1,4 +1,6 @@
 do
+  bpm 120
+  all $ id
   let octRange = 8
   d1
     $ slow 2
@@ -7,23 +9,23 @@ do
     -- $ sometimesBy 0.22 (# squiz (irand 100))
     $ n "[-36 .. 36]"
     # s "cuerda"
-    # lp' (range 400 2000 $ saw) 0.8
+    # lp (range 400 2000 $ saw) 0.8
     # octave (run octRange + 1)
-    # rvb' 0.3 0.5
+    # rvb 0.3 0.5
     |* gain 0.50
     # pan (saw/2)
     -- # nudge sine
     # legato 4
-    -- # lp' 5000 0
+    -- # lp 5000 0
   d2
     $ every 4 (|+ n 2)
     $ almostNever (slow 2)
     $ n "0 3*2"
     # s "mbm"
-    # del' 0.99 0.20 0.77
+    # del 0.99 0.20 0.77
     |* gain 0.74
-    # lp' 3600 0.1
-    # rvb' 0.4 0.5
+    # lp 3600 0.1
+    # rvb 0.4 0.5
   d3
     $ jux ((rev).(# octave 6))
     $ rarely (scramble 3)
@@ -31,71 +33,68 @@ do
     $ n "[0 0 0? 0*2 4 3]"
     # s "dk"
     # octave 4
-    # rvb' 0.2 0.4
+    # rvb 0.2 0.4
     # shape 0.2
-    # lp' (range 400 1200 $ slow 4 $ saw) 0.1
+    # lp (range 400 1200 $ slow 4 $ saw) 0.1
   d4 $ stack [
-      every 3 ((fast 3).(scramble 4)) $ s "kk" # hp' 50 0.3,
-      s "~ ss" # bp' 1200 0.8 # distort 0.4 # del' 0.9 0.2 0.73 # orbit 6,
+      every 3 ((fast 3).(scramble 4)) $ s "kk" # hp 50 0.3,
+      s "~ ss" # bp 1200 0.8 # distort 0.4 # del 0.9 0.2 0.73 # orbit 6,
       every 4 (swing 5) $ every 4 (slow (8/6)) $ s "hh*8",
-      s "crash/4" # ar' 0.01 0.5 # distort 0.99 |* gain 0.8
+      s "crash/4" # ar 0.01 0.5 # distort 0.99 |* gain 0.8
     ]
     # shape 0.2
-    # rvb' 0.6 0.8
+    # rvb 0.6 0.8
+
+hush
+
+do
+  bpm 140
+  d1
+    $ slow 4
+    $ every 4 (superimpose (|+ n 8))
+    $ rarely (superimpose (|+ n 5))
+    $ layer [
+      id
+      .(rarely (# rmod 0.99 (run 10 + 1) 0.9))
+      .(juxBy (range "-1" "1" $ slow 16 $ sine) (|+ n 3))
+      ,
+      id
+      .(|- oc 2)
+      .(# hp 48 0.4)
+      ,
+      id
+      .(|+ oc 3)
+    ]
+    $ s "cuerda"
+    # oc 5
+    # lp (range 1100 1500 $ slow 8 $ sine) 0.2
+    # shape 0.3
+    # legato 2
 
 hush
 
 
-d1
-  $ slow 4
-  $ every 4 (superimpose (|+ n 8))
-  $ rarely (superimpose (|+ n 5))
-  $ layer [
-    id
-    .(# octave 5)
-    .(rarely (#rmod' 0.99 (run 10 + 1) 0.9))
-    .(juxBy (range "-1" "1" $ slow 16 $ sine) (|+ n 3))
-    ,
-    id
-    .(# octave 2)
-    .(#hp' 48 0.4)
-    ,
-    id
-    .(# octave 8)
-  ]
-  $ s "cuerda"
-  # lp' (range 1100 1500 $ slow 8 $ sine) 0.2
-  # shape 0.3
-  # legato 2
-  # rvb' 0.99 0.99
-
-hush
 
 
-
-
-bpm(121)
-
-d1
-  $ superimpose (
+do
+  bpm 121
+  d1
+    $ superimpose (
       (fast 1.5)
       .(# octave 2)
-  )
-  $ euclid 3 5
-  $ s "pingz"
-  # octave 5
-  # rvb' 0.6 0.8
-
-d2
-  $ juxBy 0.5 (striateBy 3 0.92)
-  $ s "santoor:2"
-  # gain 0.5
-
-d3
-  $ superimpose ((|* sp 8).(stut 5 0.6 0.15))
-  $ loopAt 1 $ s "osc:3" |* sp "<0.8 0.8 1 1.25>"
-
-d4 $ striate ("<12 24 36 48>") $ s "emsoft:3" |* g 0.7
+    )
+    $ euclid 3 5
+    $ s "pingz"
+    # octave 5
+    # rvb 0.6 0.8
+  d2
+    $ juxBy 0.5 (striateBy 3 0.92)
+    $ s "santoor:2"
+    # gain 0.5
+  d3
+    $ superimpose ((|* sp 8).(stut 5 0.6 0.15))
+    $ loopAt 1 $ s "osc:3" |* sp "<0.8 0.8 1 1.25>"
+  d4 $ striate ("<12 24 36 48>") $ s "emsoft:3" |* g 0.7
 
 d1 $ every 4 (ply (irand 4)) $ stut 5 0.4 0.1 $ s "bd"
 d2 $ sometimes (hurry 2) $ s "sn*3@h" # gain 0.7
@@ -105,7 +104,7 @@ d4 $ every 5 (fast 2) $ every 2 (hurry 1.5) $ sometimes (gap 2) $ s "808*8" # ga
 
 d1 $ every 3 (euclid 3 4) $ s "bd*2" # shape 0.7
 d2 $ every 4 (zoom (0, 0.5)) $  s "~ sn*3"
-d3 $ every 3 (fast 2) $ striate 12 $ s "industrial" # n "<0 1 2>" # del' 0.8 0.12 0.23
+d3 $ every 3 (fast 2) $ striate 12 $ s "industrial" # n "<0 1 2>" # del 0.8 0.12 0.23
 d4 $ superimpose (|* sp "0.5") $ gap 2 $ s "bd*12"
 d5 $ superimpose ((fast 3).(#orbit 5)) $ every (choose [2,3]) (hurry 3) $ s "cp"
 

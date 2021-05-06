@@ -1,17 +1,18 @@
-bpm(160)
 
-d1
-  $ degradeBy 0.2
-  $ every 3 (fast 1.5)
-  $ ply (run 3)
-  $ juxBy (slow 16 $ sine) ((2 ~>).(|* speed 2).(rev).(#scram 0.3).(#lp' 1600 0.1))
-  $ euclid 5 8
-  $ sound "percuo"
-  # n (irand 3)
-  # speed (rand/1.5 + 0.2)
-  # rvb' 0.5 0.8
-  # tremolo' rand rand
-  # gain 0.7
+do
+  bpm(160)
+  d1
+    $ degradeBy 0.2
+    $ every 3 (fast 1.5)
+    $ ply (run 3)
+    $ juxBy (slow 16 $ sine) ((2 ~>).(|* speed 2).(rev).(#scram 0.3).(#lp 1600 0.1))
+    $ euclid 5 8
+    $ sound "percuo"
+    # n (irand 3)
+    # speed (rand/1.5 + 0.2)
+    -- # rvb 0.5 0.8
+    # tremolo rand rand
+    # gain 0.7
 
 d1 silence
 

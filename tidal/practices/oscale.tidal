@@ -1,23 +1,23 @@
-bpm (90)
-
-d1
-  $ every 5 (rev)
-  $ superimpose (
-    (|+ oc 3)
-    .(|- n 3)
-    .(slow 2)
-    .(shut)
-    .(stutWith 1 "h" ((# lp 100 0.8).(jux (|- n 3)).("0.05" ~>).(#pan rand).(# o 8)).(stutWith 2 "q" (|- n 5)))
-    .(# legato 2)
-    .(|* g 0.7)
-  )
-  $ fast 2
-  $ every 4 (bite 3 5)
-  $ every 3 (chew 2 7)
-  $ n "0 ~ 2 3 2 0 ~ 0 ~ 3 2"
-  # s "goeysynth:0"
-  # sustain 0.4
-  # oc 3
+do
+  bpm 90
+  d1
+    $ every 5 (rev)
+    $ superimpose (
+      (|+ oc 3)
+      .(|- n 3)
+      .(slow 2)
+      .(shut)
+      .(stutWith 1 "h" ((# lp 100 0.8).(jux (|- n 3)).("0.05" ~>).(#pan rand).(# o 8)).(stutWith 2 "q" (|- n 5)))
+      .(# legato 2)
+      .(|* g 0.7)
+    )
+    $ fast 2
+    $ every 4 (bite 3 5)
+    $ every 3 (chew 2 7)
+    $ n "0 ~ 2 3 2 0 ~ 0 ~ 3 2"
+    # s "goeysynth:0"
+    # sustain 0.4
+    # oc 3
 
 hush
 

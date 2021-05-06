@@ -1,0 +1,36 @@
+do
+  bpm 109
+  d1
+    $ loopAt 2
+    $ layer [
+      id
+      .(splice 8 "[0..3 [5|4] 3 2]")
+      ,
+      id
+      -- .(shut)
+      .("q" ~>)
+      .(stutWith (irand 4 + 1) "s" (|+ coarse 8))
+      .(* sp 8)
+      .(|* gain 0.7)
+      .(# hp 50 0.4)
+      ,
+      id
+      -- .(shut)
+      .(while "[f t]/3" (slow 2))
+      .(|* speed 15)
+      .(euclid 3 4)
+      .(jux (|* speed "-1"))
+      .(stut 5 0.8 "x")
+      .(sometimes (|* speed (8/9)))
+      .(rarely (|* speed (5/4)))
+      .(sometimesBy "h" (|* speed (4/3)))
+      .(|* gain 0.6)
+    ]
+    $ s "moog"
+    # lpf 5000
+  d2
+    $ slow 2
+    $ sb "0.8" (stut 16 1 (1/128))
+    $ s "~ kk"
+
+  hush

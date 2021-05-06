@@ -1,0 +1,13 @@
+do
+  bpm 111
+  d1
+    $ while "<f!2 [f t]>" (stutWith 3 "e" ((* sp 4).(# pan "[0|1]").(# hp (rrand 1200 5000) (slow 4 tri/3))))
+    $ sh "e" id
+    $ sh "3" ((# squiz 2).(|* g 0.7).(# pan perlin))
+    $ sh "1.5" (# ac (rand*8))
+    $ striateBy "12" 0.9
+    $ juxBy (slow 3 sine) press
+    $ s "dald:0"
+    # shape 0.6
+    # lpfbus 1 (segment 12 $ range 2000 8000 $ slow 2 $ sin)
+    # lpq (saw)

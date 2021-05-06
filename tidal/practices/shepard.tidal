@@ -1,15 +1,16 @@
-d1
-  $ si ((|+ oc 3).(fast "1 4 1 2").(|* g 0.7).(# pan (slow 3 $ sine)))
-  $ juxBy (slow 4 sine - 0.5) (rev.(slow 2))
-  $ sb (slow 7 saw) ((|+ n 5).(|+ oc 2))
-  $ n (reveni 64)
-  # s "cyclo"
-  # legato 2
-  # oc 2
-  # accelerate (range "-8" "8" $ slow 3 $ tri)
-  # rvb 0.4 0.5
-  # tanh 2
-  # legato 1
+do
+  bpm 110
+  d1
+    $ si ((|+ oc 3).(fast "1 4 1 2").(|* g 0.7).(# pan (slow 3 $ sine)))
+    $ juxBy (slow 4 sine - 0.5) (rev.(slow 2))
+    $ sb (slow 7 saw) ((|+ n 3.3).(|+ oc (irand 8 - 4)))
+    $ n (reveni 64)
+    # s "cyclo"
+    # legato (rand*2)
+    # oc 2
+    # acceleratebus 1 (segment 64 $ range "-8" "8" $ tri)
+    # rvb 0.4 0.5
+    # tanh 2
 
 
 hush

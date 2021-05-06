@@ -1,0 +1,15 @@
+do -- ci sono dei sample che vanno lunghi!
+  bpm 112
+  all $ id
+  d1
+    $ while "<t!4 f!8>" (iter (choose [2,4,8]))
+    $ chunk 4 (fast 2)
+    $ sb 0.2 (* sp 1.1)
+    $ juxBy (slow 4 $ rsq "-0.5" "0.5") (* sp (-1))
+    $ off "q" ((# coarse 8))
+    $ sh "2" id
+    $ sh "e" ((* g 0.8))
+    $ s "dald:5"
+    # io 0.05 0.4
+    # shape 0.4
+    -- # lp 6000 0.1

@@ -1,6 +1,7 @@
-bpm(112)
 
 do
+  bpm 112
+  all $ id
   d1
     $ ("h" ~>)
     $ euclid 3 4

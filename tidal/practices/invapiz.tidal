@@ -23,4 +23,4 @@ do
     $ s "syntho:4"
     |* g 0.9
     # phaser 8 rand
-  all $ (# rvb 0.3 0.5).(# tanh 2)
+  -- all $ (# rvb 0.3 0.5).(# tanh 2)

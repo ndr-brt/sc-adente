@@ -2,7 +2,7 @@
 
 do
   bpm 106
-  all $ (#rvb 0.3 0.5)
+  -- all $ (#rvb 0.3 0.5)
   d1
     $ slow 2
     $ chunk 4 (si ((chop 6).(|* sp "<2 4>")))

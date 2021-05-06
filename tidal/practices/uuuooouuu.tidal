@@ -1,6 +1,6 @@
-bpm(130)
 
 do
+  bpm 130
   d1
     $ every 6 (linger "h")
     $ fast 2

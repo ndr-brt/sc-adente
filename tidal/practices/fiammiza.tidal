@@ -1,42 +1,43 @@
-bpm(132)
 
-d1
-  $ stack [
-    every 4 (degradeBy 0.5)
-      $ rarely (# del' 0.56 0.23 0.23)
-      $ almostNever (ply 2)
-      $ euclid 5 8
-      $ n "14"
-      # orbit 8
-    ,
-    every 3 (ply 2)
-      $ euclid 3 4
-      $ n "3"
-      # speed 4
-    ,
-    every 5 (slice "4" "3 2 1 0")
-    $ n "8"
-      # speed "0.3"
-      # begin 0.18
-    ,
-    every 7 (fast 6)
-      $ stutWith 3 0.08 (# accelerate "3.5")
-      $ n "~ [~ 6/2]"
-      # accelerate "3"
-    ,
-    striateBy 22 0.98
-      $ sometimes (|* speed (4/3))
-      $ rarely (|* speed (9/8))
-      $ almostNever (|* speed (5/4))
-      $ n "3*2"
-      # gain 0.55
-      # speed 0.32
-      # scram 0.4
-      # orbit 7
-      # lp' 1600 0.2
-      # pan (sine)
-      # rvb' 0.9 0.9
-  ]
-  # s "match"
+do
+  bpm(111)
+  d1
+    $ stack [
+      every 4 (degradeBy 0.5)
+        -- $ rarely (# del 0.56 0.23 0.23)
+        $ almostNever (ply 2)
+        $ euclid 5 8
+        $ n "14"
+        # orbit 8
+      ,
+      every 3 (ply 2)
+        $ euclid 3 4
+        $ n "3"
+        # speed 4
+      ,
+      every 5 (slice "4" "3 2 1 0")
+      $ n "8"
+        # speed "0.3"
+        # begin 0.18
+      ,
+      every 7 (fast 6)
+        $ stutWith 3 0.08 (# accelerate "3.5")
+        $ n "~ [~ 6/2]"
+        # accelerate "3"
+      ,
+      striateBy 22 0.98
+        $ sometimes (|* speed (4/3))
+        $ rarely (|* speed (9/8))
+        $ almostNever (|* speed (5/4))
+        $ n "3*2"
+        # gain 0.55
+        # speed 0.32
+        # scram 0.4
+        # orbit 7
+        # lp 1600 0.2
+        # pan (sine)
+        -- # rvb 0.9 0.9
+    ]
+    # s "match"
 
 hush

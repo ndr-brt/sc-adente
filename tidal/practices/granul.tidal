@@ -120,13 +120,33 @@ d1
   # stretch 0.85
 
 do
+  bpm 102
   d1
-    $ every 4 (|- n 1)
+    -- $ every 4 (|- n 1)
     $ loopAt 1
     -- $ rarely (si (rev.(hurry 2).(degBy "t")))
-    $ striateBy 24 "q"
+    $ striateBy 24 "f"
     $ sound "breaks125:1"
     # dis 0.2
-    # rvb 0.3 0.5
+    -- # rvb 0.3 0.5
 
 hush
+
+
+do
+  bpm 94
+  d1
+    $ chunk 8 (sply 5)
+    $ while (slow 5 $ binary 154) (si (("h" <~).press.(* sp 10).(* g 0.6)))
+    -- $ rinse 1 1
+    -- $ chunk 10 (sh 5 ((* g 0.7).(stutWith 15 (1/15) ((* g 0.9).(* sp 0.8)))))
+    $ while (binary 124) (chew 5 (segment 5 $ ri 5))
+    $ chunk 5 rev
+    $ off "[f|0|0.1]" ((rslice 10).(* sp "-1.27").(# pan perlin))
+    $ loopAt "1"
+    $ chop 5
+    $ s "syntho:8"
+    # tanh 8
+    * sp "2"
+    # rmod rand 5 rand
+    # lp 10000 0.5

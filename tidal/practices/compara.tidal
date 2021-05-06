@@ -1,7 +1,7 @@
 do
   bpm 110
   d1
-    $ sb "t" (rev)
+    -- $ sb "t" (rev)
     $ chunk 3 (stutWith 4 "s" ((|* sp (5/4)).(# pan rand).(|/ legato 1.5).(|+ oc 1).(|* g 0.9)))
     $ layer [
       (slow 2).(|- oc 1).(# boo).(# shape 0.5)

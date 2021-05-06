@@ -1,33 +1,27 @@
 do
   bpm(122)
   all $ id
-    .(# cloudsblend 0.3 0.4 0.3 0.4)
-    .(# clouds 0.7 0.05 0.1 rand)
+    -- .(# cloudsblend 0.3 0.4 0.3 0.4)
+    -- .(# clouds 0.7 0.05 0.1 rand)
   d1
     $ every 4 (rev)
-    $ layer [
-      id
-      .(sometimes (iter 3))
-      ,
-      (striate' 8 (0.9))
-      .(degradeBy 0.1)
-      .(|* gain 0.4)
-      .(# end 0.2)
-      .(|* sp 0.17)
-      .(# hp 65 0.5)
-      .(# rvb 0.5 0.5)
-    ]
-    $ n (run (12))
+    $ chunk 6 (slow 2)
+    $ sb 0.2 (stutWith 8 (1/48) (|* sp (choose [5/4,1,1.5])))
+    $ sb 0.3 (plyWith 3 (stutWith 2 "x" (|* sp 3)))
+    $ sh "x" id
+    $ n (run (6))
     # s "msg"
-    # hpf (range (irand 200 + 100) (irand 100 + 1000) $ slow 32 $ sine)
+    -- # hpf (range (irand 200 + 100) (irand 100 + 1000) $ slow 32 $ sine)
     # hpq (rand/3)
     # shape (perlin / 2)
     # tantanh 6
-    # pan (rand)
-    # lesl (slow 18 $ rsin 3 5) 3 2.5
-    # del "h" "x" "t"
-    |* g 0.7
+    * sp 2
+    # pan (perlin)
+    -- # del "h" "x" "t"
+    -- # rvb 0.5 0.5
+    |* g 0.8
   d2
+    $ shut
     $ superimpose (
       (|* sp 22)
       .(stutWith 8 "[2s|1s]" ((|* g 0.9).(|+ coarse 8)))
@@ -37,7 +31,7 @@ do
     $ rarely (# cut 0)
     $ s "outdoor:2*3?"
     -- # coarse (irand (8))
-    |* sp (0.3)
+    |* sp "t"
     -- # hp 66 0.7
     # scram (range 0.1 0.4 $ slow 8 $ sine)
     # rvb 0.6 0.7

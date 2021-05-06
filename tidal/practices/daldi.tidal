@@ -1,21 +1,21 @@
-
-bpm (135)
-
-d1
-  $ rarely (iter 4)
-  $ jux (rev)
-  $ every 8 (linger "[q|h]")
-  $ off "s" ((|* g 0.9).(|* sp 2).(swing 3))
-  $ n "[0*2 ~, ~ 1, ~ 2*2 3*2, 5/3, ~ 6]"
-  # s "dald"
-  # shape 0.4
-  # rvb 0.4 0.5
-  # boo
-  # lp 5000 0
+do
+  bpm (135)
+  d1
+    $ rarely (iter 4)
+    $ jux (rev)
+    $ every 8 (linger "[q|h]")
+    $ off "s" ((|* g 0.9).(|* sp 2).(swing 3))
+    $ n "[0*2 ~, ~ 1, ~ 2*2 3*2, 5/3, ~ 6]"
+    # s "dald"
+    # shape 0.4
+    # rvb 0.4 0.5
+    # boo
+    # lp 5000 0
 
 hush
 
 do
+  bpm 120
   d1
     $ fast 2
     $ si (hurry "q")
@@ -65,6 +65,7 @@ do
     -- $ id
     -- $ ((slow 2).(|+ rvb 0.2 0.3))
     -- $ (|+ tanh 8)
-    $ (|+ rvb 0.2 0.3).(sb "t" (iter 4)).(rarely (linger "[e|s]")).("<s e!3 q 0!2>" <~).(|* g 0.8)
+    $ id
+    -- $ (|+ rvb 0.2 0.3).(sb "t" (iter 4)).(rarely (linger "[e|s]")).("<s e!3 q 0!2>" <~).(|* g 0.8)
 
 hush

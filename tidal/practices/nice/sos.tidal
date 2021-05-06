@@ -1,10 +1,9 @@
-
 do
   bpm 95
   all $ id
-    .(# cloudsblend sine 0.6 0.2 0.8)
-    .(# clouds (cos) perlin 0.1 (slow (segment 1 $ irand 4 + 1) $ tri))
-    .(# cloudspitch (rand))
+    -- .(# cloudsblend sine 0.6 0.2 0.8)
+    -- .(# clouds (cos) perlin 0.1 (slow (segment 1 $ irand 4 + 1) $ tri))
+    -- .(# cloudspitch (rand))
     .(|* g 0.8)
     .(iter 2)
   d1
@@ -17,7 +16,7 @@ do
     $ s "soskick"
     # oc 5
     # distortbus 1 (segment 32 $ cos/5)
-    # wl 10
+    # tanh 1.5
     -- # lpf 2000
     -- # lpq 0.2
     # hpf 20
@@ -25,7 +24,9 @@ do
     -- $ shut
     $ brak
     $ si ((# bpf 3200).(|* g 0.8).(# shape 0.8))
+    $ sb 0.2 (# pan rand)
     $ rarely (plyWith 4 (|+ oc 1))
+    $ while (slow 4 $ binary 141) (jux press)
     $ si (
       ("h" <~)
       .(stutWith 4 (1/16) ((|+ coarse 2).(|+ bpq 0.2)))
@@ -34,7 +35,7 @@ do
     )
     $ s "~ sossnare*2"
     # oc 6
-    # bpf 800
+    # bpf 1500
     # bpq 0.8
-    # tantanh 6
+    # tantanh 8
     |* g 0.9

@@ -4,7 +4,7 @@ do
   all $ id
       .(# tanh 2)
       -- .(# cloudsblend 0.3 0.4 0.3 0.4)
-      .(# verb 0.6 0.7 0.2 0.3)
+      -- .(# verb 0.6 0.7 0.2 0.3)
       .(while (slow 4 $ binary 118) (slow 2))
   d1
     $ s "sbaum:0*12"
@@ -13,7 +13,7 @@ do
     # lpf (range 400 1200 $ slow 7 $ (saw+sine)/2)
     # legato 2
     |* g 0.7
-    # rvb 0.9 0.9
+    -- # rvb 0.9 0.9
   d2
     $ every 6 (# rmod 1 6 1)
     $ almostNever (|+ n "2.7")
@@ -27,7 +27,7 @@ do
     # panbus 3 (segment 12 $ slow 4 $ rsin 0.3 0.7)
     # lpfbus 2 (segment 32 $ rsin 600 1000)
     # lpq 0.3
-    # rvb 0.4 0.5
+    -- # rvb 0.4 0.5
     # scram 0.2
   d3
     $ layer [

@@ -19,7 +19,6 @@ do
     # rvb 0.3 0.5
     # del "h" "t" "t"
     # lp (range 1000 5000 $ slow 10 cosine) (slow 3 sine/5)
-
   d2 $ s "sine*8" # oc 3 # legato 0.5 # dis 0.4
 
 hush

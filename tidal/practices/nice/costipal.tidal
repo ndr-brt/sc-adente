@@ -1,8 +1,5 @@
 do
-  bpm 119
-  all $ id
-    .(slow 2)
-    .(# verb 0.4 0.5 0.3 0.3)
+  bpm 60
   d1
     $ chunk 3 (plyWith 18 (# pan sine))
     $ rarely ((fast 2).(rev))
@@ -16,19 +13,20 @@ do
     $ n "0 ~ 1.3"
     # s "psin"
     # oc 4
+    * g 0.8
   d2
-    $ sb 0.3 (stut 9 1 (1/60))
+    $ sb "t" (stutWith 20 (1/128) ((|+ n 16).(# pan (fast 4 $ perlin)).(|* g 0.98)))
     $ s "kk ~ kk"
     # tanh 18
-    # lp 1800 0.3
-    # hp 56 0.3
-    # rvb 0.3 0.5
+    # lp 1900 0.3
+    # boo
+    * g 0.8
   d3
     $ loopAt 1
     $ sh "3" ((db "h"))
     $ s "syntho:6"
     # pan perlin
-    # rvb 0.3 0.4
     # bs rand
+    * g 0.8
 
 hush

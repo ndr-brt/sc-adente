@@ -1,13 +1,21 @@
 
 
 do
-  bpm 111
+  bpm 107
   d1
-    $ chunk 3 (|+ note 3)
-    $ si ((|* sp 4).(iter 3).(|* g 0.7).(#pan rand))
-    $ sh "q" id
+    $ slow 2
+    $ juxBy 0.5 rev
+    $ chunk 5 (si (rinse "2" "t"))
+    $ chunk 3 (|+ note 2.8)
+    $ chunk 4 (sply 2)
+    $ while (slow 4 $ binary 125) (chop 3)
+    $ si ((|* sp 4).(iter 5).(|* g 0.7).(# pan rand).(db "t").(# lp 1000 0.3))
     $ off "e" ((|* sp "2").rev)
-    $ n "<3 [5@q 0]> <1 [2 4*2] [5 7]>"
+    -- $ n "<2.1 [4.3@q 0]> <1.4 [2.5 3.7*2] [5.2 6.9]>"
+    $ n "0 6.1 2.3 4.6 1.3"
     # s "pluck"
-    # rvb 0.3 0.4
+    -- # rvb 0.3 0.4
+    * sp "0.6"
+    # mu 1
     # shape 0.4
+    * g 0.8

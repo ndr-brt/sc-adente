@@ -1,8 +1,9 @@
 
 do
   bpm(133)
-  all $ (# verb 0.4 0.5 0.2 0.3)
+  -- all $ (# verb 0.4 0.5 0.2 0.3)
   d1
+    -- $ shut
     $ superimpose (
       (slow 2)
       .(|/ sp 16)
@@ -18,14 +19,16 @@ do
   d2
     -- $ shut
     $ ("s" <~)
-    $ rarely (stut 3 0.9 "e")
+    $ sb "h" (stut 5 0.7 "e")
     $ s "tubes/2"
     # detune ((irand 120)*(-1))
     # oc 7
+    # tanh 3
   d3
+    -- $ shut
     $ layer [
       (# oc 7)
-      .(#ar 0.01 0.7)
+      .(# ar 0.01 0.7)
       .(while ("<t f f>") (|+ n "[3 5 0]"))
       .(euclid 7 8)
       .(# pan rand)
@@ -35,7 +38,7 @@ do
       (# oc 5)
       .(fast 2)
       .(# scr (slow 8 $ sine))
-      .(#rmod (slow 13 $ cosine) 20 0.8)
+      .(# rmod (slow 13 $ cosine/2) 1 0.8)
       .(# pan (slow 8 $ perlin))
       .(|* g 0.6)
       .(# o 7)
@@ -47,9 +50,11 @@ do
       .(# hp 56 0.6)
       .(# o 6)
     ]
-    $ n "<0 3 8>/2"
+    $ n "<0 3.4 7.6>/2" -- prima era 0 4 8, supermelodico ma ci poteva stare
     # s "cuerda"
-    # rvb 0.8 0.9
+    # tanh 5
+    * g 0.9
+    -- # rvb 0.8 0.9
 
 
 hush

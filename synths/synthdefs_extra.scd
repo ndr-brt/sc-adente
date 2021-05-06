@@ -75,13 +75,20 @@ SynthDef(\voicform, { | out=0, gate=1, freq=440, amp=0.25, voiceGain=0.25, noise
 
 }).add;
 
-SynthDef(\synchronicity,{|out= 0, freq = 440, amp = 0.1, gate=1, cutoff=8000, rq=0.2, pan|
-	var slavefreq = EnvGen.ar(Env([1,5,1],[0.04,0.9]))*freq;
-	var pulse = SyncSaw.ar(freq,slavefreq);
-	var filter = BLowPass.ar(pulse,cutoff,rq,amp);
-	var env = EnvGen.ar(Env.adsr(0.01,0.0,1.0,0.1),gate,doneAction:2);
+SynthDef(\synchronicity,{|out=0, freq=440, cutoff=8000, rq=0.2, pan=0, sustain=1, begin=0,end=1,speed=1,accelerate=0 |
+  var envLength = sustain*(end-begin)/speed;
+  var line = Line.ar(begin, end, envLength, doneAction: Done.freeSelf);
+  var env = Env.adsr;
+  var volume = IEnvGen.ar(env, line);
+  var sig;
 
-	OffsetOut.ar(out, DirtPan.ar(filter * amp, ~dirt.numChannels, pan, env));
+  freq = max(0, freq * speed * (1 + (accelerate * line)));
+  sig = BLowPass.ar(
+    SyncSaw.ar(freq, EnvGen.ar(Env([1,5,1],[0.04,0.9])) * freq),
+    cutoff,
+    rq);
+
+  Out.ar(out, DirtPan.ar(sig * volume, ~dirt.numChannels, pan));
 }).add;
 
 SynthDef(\spook,{ |out=0, freq = 440, amp = 0.1, gate=1, cutoff=8000, rq=0.2, lfowidth=0.01, lforate=3.8, pan|

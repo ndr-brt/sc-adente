@@ -66,6 +66,8 @@ do
       .(|* sp (rrand 0.5 10))
     )
     $ s "percuo:2"
-    # rvb 0.3 0.5
-    # cloudsblend 0.2 0.9 0.3 0.8
-    # clouds sine rand 0.1 0.8
+    -- # rvb 0.3 0.5
+    -- # cloudsblend 0.2 0.9 0.3 0.8
+    -- # clouds sine rand 0.1 0.8
+
+hush

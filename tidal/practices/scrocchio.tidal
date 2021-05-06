@@ -8,9 +8,7 @@ do
       superimpose (
         (|* speed 27)
         .(plyWith (run 8 * 4) ((# coarse 4).(# pan perlin)))
-        .(# rvb 0.1 0.2)
-        .(# comb 0.3)
-        .(# orbit 6)
+        .(# comb "t")
       )
     )
     $ striateBy 32 (range 0.93 0.99 $ rand)

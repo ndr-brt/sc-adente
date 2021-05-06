@@ -1,13 +1,13 @@
 do
   bpm(92)
   all $ id
-    .(# cloudsblend 0.3 0.4 0.3 0.4)
+    -- .(# cloudsblend 0.3 0.4 0.3 0.4)
     -- .(# clouds 0.1 0.2 0.1 0.8)
     -- .(chunk 6 (jux press))
   d1
     -- $ shut
-    $ sometimesBy (slow 13 $ (sine-saw+square)/2) (|* legato 4)
-    $ sometimesBy (rand) ("s" <~)
+    $ sb (slow 13 $ (sine-saw+square)/2) (|* legato 4)
+    $ sb (rand) ("s" <~)
     $ n "0!3 1.7 0!5 2.3 0!6"
     # s "dk"
     # oc 5

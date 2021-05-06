@@ -1,6 +1,6 @@
 
 do
-  bpm(130)
+  bpm 109
   let ar = "<3 3 3 4 1 2 2 4 1>"
   d1
     $ rarely (stut ar 0.6 0.1)

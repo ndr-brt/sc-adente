@@ -1,11 +1,18 @@
-bpm 135
 
-d1
-  $ every 2 (stutWith 32 (1/128) (# begin (range 0 0.5 saw)))
-  $ s "amencutup:2*4"
-  # cut 1
-  -- # end 0.6
-  -- # legato 0.2
-  -- |* g 0.7
+do
+  bpm 101
+  d1
+    $ iter 4
+    $ sh 5 ((* g 0.6).(db "t"))
+    $ sh 1.5 (* g 0.8)
+    $ every (ri 4) (stutWith 32 (1/128) (# begin (range 0 0.5 $ saw)).(# pan perlin))
+    $ n "[1 2 [3 1] 2, 5(4,6)]"
+    # s "amencutup"
+    # tanh 10
+    -- # cut 1
+    -- # end 0.6
+    -- # legato (rand + 0.1)
+    * sp 0.5
+    |* g 0.7
 
 hush

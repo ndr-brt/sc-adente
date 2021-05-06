@@ -1,43 +1,45 @@
-bpm(122)
-
-d1
-  $ layer [
-    id
-    (jux (rev.(|- n 3)))
-    ,
-    (|+ oc 7)
-    .(slow "<3!3 2 1!2 0>")
-    .(|* g 0.8)
-    .(stutWith 3 "<0.3!3 0.2 0.1!2 0>" (
-      (|* g 0.9).(# lp (range 600 1200 $ slow 7 sine) (slow 5 $ cosine - 0.1)))
-    )
-    .("0.05" ~>)
-    .(# pan (perlin))
-  ]
-  $ fast 2
-  $ n (scale "enigmatic" "8 2 ~ 5*2 9 ~ 1")
-  # s "pingr"
-  # oc 4
-  # rvb' 0.5 0.7
-  # distort 0.7
-  # gain 0.6
-
-hush
-
-d2
-  $ fast 2
-  $ struct (binary 154)
-  $ "pingm"
-  # n (range "-10" "10" $ slow 8 $ (tri+cosine)/2)
-  # octave 3
-  # distort 0.3
-  # hp' 45 0.8
-
-hush
-
-bpm(77)
 
 do
+  bpm(122)
+  d1
+    $ layer [
+      id
+      (jux (rev.(|- n 3)))
+      ,
+      (|+ oc 7)
+      .(slow "<3!3 2 1!2 0>")
+      .(|* g 0.8)
+      .(stutWith 3 "<0.3!3 0.2 0.1!2 0>" (
+        (|* g 0.9).(# lp (range 600 1200 $ slow 7 sine) (slow 5 $ cosine - 0.1)))
+      )
+      .("0.05" ~>)
+      .(# pan (perlin))
+    ]
+    $ fast 2
+    $ n (scale "enigmatic" "8 2 ~ 5*2 9 ~ 1")
+    # s "pingr"
+    # oc 4
+    -- # rvb 0.5 0.7
+    # distort 0.7
+    # gain 0.6
+
+hush
+
+do
+  d2
+    $ fast 2
+    $ struct (binary 154)
+    $ "pingm"
+    # n (range "-10" "10" $ slow 8 $ (tri+cosine)/2)
+    # octave 3
+    # distort 0.3
+    # hp 45 0.8
+
+hush
+
+
+do
+  bpm(141)
   -- resetCycles
   d1
     $ juxBy (range "-0.5" "0.5" $ slow 2 $ square) ((0.05 ~>).(|* gain 0.8))
@@ -55,6 +57,6 @@ do
     $ slow 4
     $ n "0 ~!2 3 ~!3"
     # s "pingm"
-    # rvb' 0.99 0.99
-    # del' 0.22 0.22 0.22
+    -- # rvb 0.99 0.99
+    -- # del 0.22 0.22 0.22
     # distort (range 0 0.3 $ slow 125 $ sine)
