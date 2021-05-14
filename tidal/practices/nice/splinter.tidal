@@ -30,7 +30,8 @@ do
     # lpf 5000
   d2
     $ slow 2
-    $ sb "0.8" (stut 16 1 (1/128))
+    $ sb "0.8" (stut 4 0.7 (choose [1/12, 1/24]))
     $ s "~ kk"
+    # shape 0.8
 
   hush

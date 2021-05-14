@@ -4,16 +4,21 @@ s.options.numBuffers = 1024 * 256; // increase this if you need to load more sam
 s.options.memSize = 32768 * 16; // increase this if you get "alloc failed" messages
 s.options.maxNodes = 2048 * 32; // increase this if you are getting drop outs and the message "too many nodes"
 s.options.numOutputBusChannels = 2; // set this to your hardware output channel size, if necessary
+// s.options.numOutputBusChannels = 8; // set this to your hardware output channel size, if necessary
 s.options.numInputBusChannels = 2; // set this to your hardware output channel size, if necessary
 s.options.maxLogins = 8;
 
 s.waitForBoot {
   ~dirt = SuperDirt(2, s); // two output channels, increase if you want to pan across more channels
   loadRelative("synths/*.scd");
+  ~dirt.doNotReadYet = true;
   ~dirt.loadSoundFiles;
   ~dirt.loadSoundFiles("~/.sam-ples/*");
 
   ~dirt.start(57120, 0!10);
+  // ~dirt.start(57120, 0!10, NetAddr("192.168.1.61"));
+  // ~dirt.start(57120, 0!10, NetAddr("0.0.0.0"));
+  // ~dirt.start(57120, [0, 2, 4, 6, 8]);
 
   (
     ~d1 = ~dirt.orbits[0];
@@ -40,7 +45,7 @@ s.waitForBoot {
     x.initNodeTree;
   };
 
-  // Print osc messages
+  // // Print osc messages
   // ~dirt.addModule('post',
   //   { |dirtEvent|
   //     "\n------------\n".post;
@@ -56,7 +61,7 @@ s.latency = 0.3; // increase this if you get "late" messages
 
 // FreqScope.new(500, 50 , 0, server: s);
 s.makeGui;
-s.meter;
+// s.meter;
 
 // ~dirt.startSendRMS;
 

@@ -1,7 +1,6 @@
 
 do
   bpm(133)
-  -- all $ (# verb 0.4 0.5 0.2 0.3)
   d1
     -- $ shut
     $ superimpose (
@@ -32,7 +31,8 @@ do
       .(while ("<t f f>") (|+ n "[3 5 0]"))
       .(euclid 7 8)
       .(# pan rand)
-      .(|* g 0.74)
+      .(|* g 0.84)
+      .(# lp 2000 (isaw/4))
       .(# o 8)
       ,
       (# oc 5)
@@ -50,7 +50,7 @@ do
       .(# hp 56 0.6)
       .(# o 6)
     ]
-    $ n "<0 3.4 7.6>/2" -- prima era 0 4 8, supermelodico ma ci poteva stare
+    $ n "<0 4 8>/2" -- prima era 0 4 8, supermelodico ma ci poteva stare
     # s "cuerda"
     # tanh 5
     * g 0.9

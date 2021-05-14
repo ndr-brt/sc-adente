@@ -1,14 +1,13 @@
 do
   bpm 95
+  let sharo p = iter 2 $ brak p
   all $ id
     -- .(# cloudsblend sine 0.6 0.2 0.8)
     -- .(# clouds (cos) perlin 0.1 (slow (segment 1 $ irand 4 + 1) $ tri))
     -- .(# cloudspitch (rand))
-    .(|* g 0.8)
-    .(iter 2)
   d1
     -- $ shut
-    $ brak
+    $ sharo
     -- $ while (slow 4 $ binary 133) (plyWith 2 ("q" <~))
     $ sb 0.6 (stut 3 1 (1/16))
     $ sb 0.7 (stutWith 6 (-1/32) ((|+ oc 4).(# crush 8)).(# pan perlin))
@@ -20,9 +19,10 @@ do
     -- # lpf 2000
     -- # lpq 0.2
     # hpf 20
+    |* g 0.8
   d2
     -- $ shut
-    $ brak
+    $ sharo
     $ si ((# bpf 3200).(|* g 0.8).(# shape 0.8))
     $ sb 0.2 (# pan rand)
     $ rarely (plyWith 4 (|+ oc 1))
@@ -35,7 +35,7 @@ do
     )
     $ s "~ sossnare*2"
     # oc 6
-    # bpf 1500
+    # bpf 1300
     # bpq 0.8
     # tantanh 8
-    |* g 0.9
+    |* g 0.8

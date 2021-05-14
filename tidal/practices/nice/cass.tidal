@@ -1,13 +1,14 @@
 do
-  bpm 111
+  bpm 102
   d1
+    $ chunk 3 (sply (choose [2, 3, 6]))
+    $ chunk 7 (stut 2 0.9 "s")
     $ while "<f!2 [f t]>" (stutWith 3 "e" ((* sp 4).(# pan "[0|1]").(# hp (rrand 1200 5000) (slow 4 tri/3))))
-    $ sh "e" id
-    $ sh "3" ((# squiz 2).(|* g 0.7).(# pan perlin))
-    $ sh "1.5" (# ac (rand*8))
-    $ striateBy "12" 0.9
-    $ juxBy (slow 3 sine) press
+    $ sh "3" ((# coarse 2).(|* g 0.7).(# pan perlin))
+    $ sh "3h" (# ac (rand*8))
+    $ sh "q" (# boo)
+    $ striateBy "5" 0.9
     $ s "dald:0"
     # shape 0.6
-    # lpfbus 1 (segment 12 $ range 2000 8000 $ slow 2 $ sin)
-    # lpq (saw)
+    # lpf (range 100 8000 $ slow 3 $ sin)
+    # lpq (slow 4 $ saw)

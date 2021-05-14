@@ -6,7 +6,7 @@ do
     $ off (1/6) ((|+ oc 3).(db "t").(|* g 0.9))
     $ stutWith 4 "e" (
       (# oc 7)
-      .(|+ n ("<1.3 -2>"*(rand+0.5)))
+      .(|+ n ("<1.8 -2>"*(rand+0.5)))
       .(# pan rand)
       .(# lpf 300)
     )
@@ -15,7 +15,7 @@ do
     # oc 4
     * g 0.8
   d2
-    $ sb "t" (stutWith 20 (1/128) ((|+ n 16).(# pan (fast 4 $ perlin)).(|* g 0.98)))
+    $ sb "t" (stutWith 24 (1/128) ((|+ n 16).(# pan (fast 4 $ perlin)).(|* g 0.98).(# cut 1)))
     $ s "kk ~ kk"
     # tanh 18
     # lp 1900 0.3

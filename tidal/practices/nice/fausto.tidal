@@ -9,7 +9,7 @@ do
     $ rarely (|+ n (choose [3,5,8]))
     $ fast fasto
     $ sb (1-lfoo) (superimpose ((|+ oc 5).(|* g 0.7).(jux id).(# o 5)))
-    $ sb lfoo (superimpose ((|+ oc 2).(fast 2).(# o 6).(#del "h" "t" "s").(|* g 0.75)))
+    $ sb lfoo (superimpose ((|+ oc 2).(fast 2).(# o 6).(|* g 0.75)))
     $ layer [
       (slow 2)
       .(|- oc 1)
@@ -23,7 +23,7 @@ do
       .(fast (fausto))
       .("t" ~>)
       .(|+ n "5")
-      , -- mortale!
+      ,
       (midd)
       .(degradeBy (fast (fausto+fasto) $ (lfoo/2 + 0.5)))
       .("t" ~>)
@@ -39,13 +39,13 @@ do
     $ s "friab:0"
     # oc 5
     # legato 2
-    # rvb 0.9 0.9
-    # del "h" "t" "t"
+    -- # rvb 0.9 0.9
+    -- # del "h" "t" "t"
     # lpfbus 1 (range 1000 5000 $ slow 4 $ sine)
     # lpq (range 0 0.3 $ slow (6*fausto) tri)
     -- # verb 0.8 0.8 0.8 0.2
     -- # cloudsblend 0.6 0.8 0.35 0.7
     -- # clouds 0.8 0.1 0.05 0.1
-    |* g 0.8
+    -- |* g 0.8
 
 hush
