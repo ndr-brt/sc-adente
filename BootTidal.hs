@@ -7,9 +7,9 @@ hSetEncoding stdout utf8
 
 :{
 let oscmap = [
-              ((superdirtTarget {oLatency = 0.15, oPort = 57120}), [superdirtShape])
+              ((superdirtTarget {oLatency = 0.20, oPort = 57120}), [superdirtShape])
               -- ,
-              -- ((superdirtTarget {oLatency = 0.15, oPort = 57121}), [superdirtShape])
+              -- ((superdirtTarget {oLatency = 0.20, oPort = 57121}), [superdirtShape])
              ]
 :}
 
