@@ -59,20 +59,22 @@ clutchIn 1 4 $ silence
 
 do
   all $ id
-  bpm 120
+  bpm 102
   d1
     $ slow 2
     $ jux rev
+    $ chunk 4 (# crush 4)
     $ chunk 3 ((|+ note 3).(iter 3).(slow 4))
     $ si ((|* sp 4).(|* g 0.9).(plyWith 4 ((|* sp 2).(|+ squiz (slow 30 $ r 30)))).(#pan (sine)))
     $ sh (choose [1/4]) id
-    $ chew 4 "{0*2 1*4}%3"
+    $ chew 4 "{0*2 1*4 2*2 0!2}%3"
     $ s "[bd!3 hh*2]*2 sd*4"
     |* sp (slow 3 $ cat [(5/4), 1, (8/9)])
-    # del "0.7" "t" "t"
+    -- # del rand "t" "t"
     # hp 64 0.6
     # lp 2000 0.2
     # shape 0.4
+    # ac (rand*(-1))
     # tanh 2
 
 

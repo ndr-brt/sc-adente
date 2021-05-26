@@ -40,4 +40,18 @@ do
     ]
     # s "match"
 
+
 hush
+
+do
+  bpm 132
+  d1
+    -- $ chunk 6 (|+ n 2.3)
+    $ jux (|* sp (4/5))
+    $ sh 3 ((|* g 0.7).(# pan perlin))
+    $ sh 6 ((|* g 0.8).(db "t"))
+    $ s "supersaw:0"
+    # oc 3
+    # legato 1.1
+    # cloudsblend 0.5 0.8 0.4 0.5
+    # clouds cos sine 0.1 0.7

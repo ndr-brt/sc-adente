@@ -1,0 +1,31 @@
+import Data.List(sortOn)
+
+densityFilter:: Eq a => Double -> [Event a] -> [Event a]
+densityFilter density events = foldl (fi density) events [0..length events -1]
+                      where fi density es n | length es > n = filter (\e -> e == es!!n || abs ((eventPartStart e) - (eventPartStart (es!!n))) >= toRational density ) es
+                                            | otherwise = es
+
+lessDense :: Eq a => Double -> Pattern a -> Pattern a
+lessDense density p = p {query = (densityFilter density). sortOn whole . query p}
+
+do
+  let dense = 1/90
+  bpm 160
+  d1
+    $ while (binary 132) (stutWith 4 (14/32) ((|* sp 1.5).(# pan rand)))
+    $ swing 6
+    $ stack [
+      lessDense dense $ s "hh(15,16,3)"
+      ,
+      lessDense dense $ s "bd*4" # freeze (slow 2 $ square)
+      ,
+      lessDense dense $ s "sd(5,8,1)" # freeze (square)
+    ]
+    # ac "-0.5"
+    -- # verb 0.6 0.6 0.2 0.2
+    -- # cloudsblend 0.4 0.4 0.3 0.6
+    -- # clouds (slow 3 tri) (slow 2 sine) 0.05 0.6
+    # shape 0.8
+  -- d1 $ lessDense dense $ s "hh*16"
+  -- d2 $ lessDense dense $ s "bd*4"
+  -- d3 $ lessDense dense $ s "sd(5,8,1)"

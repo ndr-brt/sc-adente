@@ -71,3 +71,16 @@ do
     -- # clouds sine rand 0.1 0.8
 
 hush
+
+
+d1
+  $ fast 4
+  $ chunk 3 (|+ note 3)
+  $ sh 3 ((|* g "[0 1]").(stutWith "<3 5 4 6>/4" "t" (|* sp (5/4)).(|* g 0.8)).(|* g 0.7))
+  -- $ slow 2
+  $ n "0 3.3 7.8"
+  # s "superzow"
+  # ar 0.01 3
+  # oc 4
+  # legato 0.8
+  # slide 70

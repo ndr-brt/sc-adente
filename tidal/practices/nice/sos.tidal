@@ -1,5 +1,5 @@
 do
-  bpm 95
+  bpm 92
   let sharo p = iter 2 $ brak p
   all $ id
     -- .(# cloudsblend sine 0.6 0.2 0.8)
@@ -23,15 +23,17 @@ do
   d2
     -- $ shut
     $ sharo
-    $ si ((# bpf 3200).(|* g 0.8).(# shape 0.8))
-    $ sb 0.2 (# pan rand)
+    $ si ((# bpf 3200).(|* g 0.8).(# shape 0.8).(# o 3))
+    -- $ sb 0.2 (# pan rand)
     $ rarely (plyWith 4 (|+ oc 1))
     $ while (slow 4 $ binary 141) (jux press)
     $ si (
       ("h" <~)
+      -- .(shut)
       .(stutWith 4 (1/16) ((|+ coarse 2).(|+ bpq 0.2)))
       .(|+ n (rrand 4.5 10))
       .(# pan perlin)
+      .(#o 2)
     )
     $ s "~ sossnare*2"
     # oc 6

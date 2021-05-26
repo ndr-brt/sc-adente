@@ -1,0 +1,19 @@
+do
+  bpm 90
+  d1
+    $ si (chew 4 (slow 4 $ ri 4))
+    $ chunk 3 (slow 2)
+    $ chunk 6 (sply 4)
+    $ juxBy (slow 2 $ rsin (-1) 1) (pressBy "[t|h|2t]")
+    $ plyWith 2 ((|* sp "<1.7 1.3333>/8").(|+ coarse 2))
+    $ sh "[x|q]" id
+    $ sh "[t|h]" id
+    $ sh "[1.5|3]" id
+    $ n "0"
+    # s "superhammond"
+    # ar 0.01 1
+    # legato "1.2"
+    # oc "[5|6]"
+    -- # boo
+    -- |* sp "h"
+    -- |* g 1

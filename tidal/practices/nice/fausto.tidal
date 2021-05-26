@@ -31,7 +31,7 @@ do
       .(stutWith 3 (1/6) (
         (|* g 0.7)
         .(# crush 3)
-        .(# squiz (4 * (choose [0,1,2,3,4])))
+        .(# wl (2 * (choose [0,1,2,3,4])))
         .(# lpf 2000)
         .(# pan rand)
         ))
@@ -41,7 +41,7 @@ do
     # legato 2
     -- # rvb 0.9 0.9
     -- # del "h" "t" "t"
-    # lpfbus 1 (range 1000 5000 $ slow 4 $ sine)
+    # lpf (range 1000 5000 $ slow 4 $ sine)
     # lpq (range 0 0.3 $ slow (6*fausto) tri)
     -- # verb 0.8 0.8 0.8 0.2
     -- # cloudsblend 0.6 0.8 0.35 0.7

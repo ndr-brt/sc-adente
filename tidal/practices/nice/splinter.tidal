@@ -5,6 +5,7 @@ do
     $ layer [
       id
       .(splice 8 "[0..3 [5|4] 3 2]")
+      .(# o 0)
       ,
       id
       -- .(shut)
@@ -13,6 +14,7 @@ do
       .(* sp 8)
       .(|* gain 0.7)
       .(# hp 50 0.4)
+      .(# o 1)
       ,
       id
       -- .(shut)
@@ -25,13 +27,17 @@ do
       .(rarely (|* speed (5/4)))
       .(sometimesBy "h" (|* speed (4/3)))
       .(|* gain 0.6)
+      .(# o 2)
     ]
     $ s "moog"
     # lpf 5000
   d2
     $ slow 2
-    $ sb "0.8" (stut 4 0.7 (choose [1/12, 1/24]))
+    $ sb "0.8" (stut 5 0.7 (choose [1/24, 1/48]))
     $ s "~ kk"
     # shape 0.8
+    # o 3
 
   hush
+
+d1 $ s "bd*4" # oc 5

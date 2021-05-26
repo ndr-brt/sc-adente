@@ -19,3 +19,20 @@ do
     # phaser (slow 13 $ sine*10) 0.8
 
 hush
+
+do
+  bpm 111
+  d1
+    $ slow 2
+    $ jux rev
+    $ while (slow 4 $ binary 121) (sply 2)
+    $ chunk 5 (|+ n 1.4)
+    $ chunk 3 (|+ n 2.3)
+    $ sh 6 (# pan sine)
+    $ sh 3 id
+    $ sh "e" id
+    $ n "0 [3.5 2.1]"
+    # s "abbass"
+    # oc 5
+    # lpf 4000
+    # lpq 0.2

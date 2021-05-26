@@ -1,14 +1,16 @@
 do
-  bpm 102
+  bpm 112
   d1
     $ chunk 3 (sply (choose [2, 3, 6]))
-    $ chunk 7 (stut 2 0.9 "s")
-    $ while "<f!2 [f t]>" (stutWith 3 "e" ((* sp 4).(# pan "[0|1]").(# hp (rrand 1200 5000) (slow 4 tri/3))))
-    $ sh "3" ((# coarse 2).(|* g 0.7).(# pan perlin))
-    $ sh "3h" (# ac (rand*8))
-    $ sh "q" (# boo)
+    $ chunk 7 (stut 4 0.8 (1/32))
+    $ while (slow 3 $ binary 123)
+      (stutWith 3 "s" ((* sp 4).(# pan rand)
+        .(# hp (rrand 1200 5000) (slow 4 tri/3))))
+    $ sh "3" ((# coarse 2).(|* g 0.7).(# pan perlin).(# o 3))
+    $ sh "3h" ((# ac (rand*8)).(# o 2))
+    $ sh "q" ((# boo).(# ac "-2").(# o 1))
     $ striateBy "5" 0.9
     $ s "dald:0"
     # shape 0.6
-    # lpf (range 100 8000 $ slow 3 $ sin)
-    # lpq (slow 4 $ saw)
+    # lpf (range 100 8000 $ sin)
+    # lpq (slow 4 $ saw/"2 4 1 5")

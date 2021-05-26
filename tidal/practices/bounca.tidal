@@ -1,33 +1,33 @@
+do
+  bpm 106
+  all $ id
+  d1
+    $ chunk 4 (|- ac 1)
+    $ while (binary 123) (si ((# legato "e").(|+ oc 3).(fast 1.5)).(# pan sine))
+    $ jux (((1/40) ~>).(|- n 12))
+    $ si ((euclid 5 12).(|+ oc 4).(# legato "t").(stutWith 3 (1/8) (|+ oc 1)))
+    $ every 4 (si (|+ n (4/5)))
+    $ s "supergrind:0"
+    # oc 3
+    -- # boo
+    -- # voice (irand 4 - 2)
+    -- # accelerate (rand * (-0.5))
+    -- # rate (slow 4 $ rsin 200 800)
+    -- # lpf 2000
+    # rate 40
 
 do
-  bpm 102
+  bpm 106
   d1
-    $ layer [
-      id
-      .(# o 0)
-      ,
-      (|- oc 4)
-      .(slow (4/3))
-      .(# hp 60 0.4)
-      .(# pan "h")
-      .(# o 4)
-      ,
-      (fast (5/4))
-      .(|- oc 3)
-      .(# o 5)
-    ]
-    $ almostNever (# binshift (slow 9 $ (saw+cosine)/2))
-    $ sometimesBy 0.09 (# squiz (irand 100))
-    $ every 5 (rev)
-    $ fast 2
-    $ stutWith 8 "[x|s|t]" (
-      (# pan (sine))
-      .(|* g 0.95)
-      .(|+ n "1 -3 [3 7*2] 5")
+    $ si ((db "t").(|+ oc 4).(# legato "q").(|+ ac 1)
+      .(plyWith 12 (|+ oc 1)).(|+ lpf 4000).(# pan sine)
     )
-    $ s "mbm:0"
-    # oc 5
-    # rvb (rand) 0.8
-    |* g 0.9
+    $ s "supergrind:0"
+    # oc 4
+    # rate 800
+    # legato 2
+    # lpf 2000
+    # lpq (slow 7 $ rsin 0 0.15)
+    # boo
 
 hush

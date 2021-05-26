@@ -1,59 +1,57 @@
-bpm(80)
-
-d1
-  -- $ slow 4
-  $ while "[f f f t]/4" (# distort 0.7)
-  $ every 6 (linger 0.25)
-  $ stack [
-    s "[ss ss@3.5]*4"
-    ,
-    euclid 20 8
-      $ s "hhat"
-    ,
-    (every 3 (fast 2))
-      $ s "~ kk/4"
-      # distort 0.9
-      # shape 0.99
-      # orbit 8
-      # del' 0.9 0.4 0.4
-  ]
-  # shape 0.3
-  # rvb' 0.2 0.7
-
-d2
-  $ every 5 (|+ n "5")
-  $ superimpose (
-      (|+ octave 3)
-      .(0.25 ~>)
-      .(# lp' 3000 0.1)
-      .(# orbit 6)
-  )
-  $ n "0 3/2"
-  # s "supergrind"
-  # octave 3
-  # ar' 0.3 0.9
-  # del' 0.99 0.66 0.40
-  # hp' 50 0.4
-  -- # oct' 0.7 0.8 0.6
-
-d3
-  $ slow 8
-  $ superimpose (
-    (|- octave 2)
-    -- .(0.5 ~>)
-    .(rarely (iter 5))
-    .(# pan (slow 4 $ tri))
-  )
-  $ ply 4
-  $ n "[0 0 3 0]*16"
-  # s "superchip"
-  # legato 2
-  # octave 8
-  # lp' 3000 0.1
-  # ar' 0.1 0.4
-  |* gain 0.65
-  # rvb' 0.7 0.8
-  -- # nudge (slow 2 sine)
+do
+  bpm 80
+  d1
+    -- $ slow 4
+    $ while "[f f f t]/4" (# distort 0.7)
+    $ every 6 (linger 0.25)
+    $ stack [
+      s "[ss ss@3.5]*4"
+      ,
+      euclid 20 8
+        $ s "hhat"
+      ,
+      (every 3 (fast 2))
+        $ s "~ kk/4"
+        # distort 0.9
+        # shape 0.99
+        # orbit 8
+        # del 0.9 0.4 0.4
+    ]
+    # shape 0.3
+    # rvb 0.2 0.7
+  d2
+    $ every 5 (|+ n "5")
+    $ superimpose (
+        (|+ octave 3)
+        .(0.25 ~>)
+        .(# lp 3000 0.1)
+        .(# orbit 6)
+    )
+    $ n "0 3/2"
+    # s "supergrind"
+    # octave 3
+    # ar 0.3 0.9
+    # del 0.99 0.66 0.40
+    # hp 50 0.4
+    -- # oct 0.7 0.8 0.6
+  d3
+    $ slow 8
+    $ superimpose (
+      (|- octave 2)
+      -- .(0.5 ~>)
+      .(rarely (iter 5))
+      .(# pan (slow 4 $ tri))
+    )
+    $ ply 4
+    $ n "[0 0 3 0]*16"
+    # s "superchip"
+    # legato 2
+    # octave 8
+    # lp 3000 0.1
+    # ar 0.1 0.4
+    |* gain 0.65
+    # rvb 0.7 0.8
+    -- # nudge (slow 2 sine)
 
 hush
 
@@ -82,6 +80,7 @@ d1
   $ sh "h" id
   $ n "<0 3.1>"
   # s "sin"
-  # legato 3 # lpfbus 1 (segment 128 $ range 80 400 $ sine) # lpqbus 2 (segment 128 $ slow 4 saw)
+  # legato 3
+  # lpfbus 1 (segment 128 $ range 80 400 $ sine) # lpqbus 2 (segment 128 $ slow 4 saw)
   # dis 0.54
   # boo
