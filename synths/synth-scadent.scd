@@ -186,46 +186,39 @@ SynthDef(\cuerda, { |out=0, freq=440, pan=0, attack=0.01, release=0.4|
 }).add;
 
 SynthDef(\friab, {|out=0,freq=440,sustain=1,pan=0,begin=0,end=1,speed=1,accelerate=0|
-  var line = Line.ar(begin, end, sustain*(end-begin)/speed, doneAction: Done.freeSelf);
+  var envLength = sustain*(end-begin)/speed;
+  var line = Line.ar(begin, end, envLength, doneAction: Done.freeSelf);
+  var rate = max(0, speed * (1 + (accelerate * line)));
+
   var env = Env.asr;
+  var sig = (Impulse.ar(freq) + VarSaw.ar(freq/2) + Impulse.ar(freq, LFTri.kr(line*4)))/2;
+
   var volume = IEnvGen.ar(env, line);
-  var sig;
-
-  freq = max(0, freq * speed * (1 + (accelerate * line)));
-  sig = (
-    Impulse.ar(freq)
-    + VarSaw.ar(freq/2)
-    + (Impulse.ar(freq, LFTri.kr(line*4)))
-    )/2;
-
   Out.ar(out, DirtPan.ar(sig * volume, ~dirt.numChannels, pan));
 }).add;
 
 SynthDef(\sin, {|out=0,freq=440,sustain=1,pan=0,begin=0,end=1,speed=1,accelerate=0|
   var envLength = sustain*(end-begin)/speed;
   var line = Line.ar(begin, end, envLength, doneAction: Done.freeSelf);
+  var rate = max(0, speed * (1 + (accelerate * line)));
+
   var env = Env.asr;
+  var sig = SinOsc.ar(freq * rate);
+
   var volume = IEnvGen.ar(env, line);
-  var sig;
-
-  freq = max(0, freq * speed * (1 + (accelerate * line)));
-  sig = SinOsc.ar(freq);
-
-  Out.ar(out, DirtPan.ar(sig * volume, ~dirt.numChannels, pan));
+  Out.ar(out, DirtPan.ar(sig, ~dirt.numChannels, pan, volume));
 }).add;
 
 SynthDef(\abbass, {|out=0,freq=440,sustain=1,pan=0,begin=0,end=1,speed=1,accelerate=0|
   var envLength = sustain*(end-begin)/speed;
   var line = Line.ar(begin, end, envLength, doneAction: Done.freeSelf);
+  var rate = max(0, speed * (1 + (accelerate * line)));
+
   var env = Env.asr;
+  var sig = (Saw.ar(freq*2) + Pulse.ar(freq/2) + SinOsc.ar(freq/4)) * 0.5;
+
   var volume = IEnvGen.ar(env, line);
-  var sig;
-
-  freq = max(0, freq * speed * (1 + (accelerate * line)));
-  sig = Saw.ar(freq*2) * 0.5 +
-    Pulse.ar(freq/2) * 0.5 +
-    SinOsc.ar(freq/4) * 0.5;
-
   Out.ar(out, DirtPan.ar(sig * volume, ~dirt.numChannels, pan));
 }).add;
+
 )
