@@ -61,8 +61,8 @@ let ac = accelerate
     kru k c = krush k # kcutoff c
     scon r i = real r # imag i
 
-    -- booost the bass
     boo = hp 56 0.4
+    down v = sustain v # ac "-1"
 
     -- runs of numbers
     r = run
