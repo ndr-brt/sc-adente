@@ -45,6 +45,7 @@ export default function(p) {
     message['speed'] = 1;
     message['pan'] = 0.5;
     message['note'] = 0;
+    message['n'] = 0;
     for (var i = 0; i < oscMessage.args.length; i+=2) {
       message[oscMessage.args[i]] = oscMessage.args[i+1]
     }
