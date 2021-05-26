@@ -13,6 +13,13 @@ do
 let dial number = do once $ s "eleav" # n number
 
 
+once $ s "ba"
+
+once $ s "kk"
+
+setcps 0.5
+d1 $ s "~ sn"
+
 xfadeIn 1 8
   $ chew 3 3
   $ sh 48 ((|* g 0.7))
