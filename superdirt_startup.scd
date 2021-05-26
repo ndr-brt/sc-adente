@@ -15,9 +15,7 @@ s.waitForBoot {
   ~dirt.loadSoundFiles;
   ~dirt.loadSoundFiles("~/.sam-ples/*");
 
-  ~dirt.start(57120, 0!10);
-  // ~dirt.start(57120, 0!10, NetAddr("192.168.1.61"));
-  // ~dirt.start(57120, 0!10, NetAddr("0.0.0.0"));
+  ~dirt.start(57120, 0!10, NetAddr("0.0.0.0"));
   // ~dirt.start(57120, [0, 2, 4, 6, 8]);
 
   (
@@ -43,6 +41,7 @@ s.waitForBoot {
       .addFirst(verb);
 
     x.initNodeTree;
+    x.set(\fadeTime, 0.01);
   };
 
   // // Print osc messages
