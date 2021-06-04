@@ -18,4 +18,13 @@ hush
 let phase = pF "phase"
 
 d1
-  $ s "blow:0"
+  $ chunk 6 (# ac "-0.5")
+  $ chunk 3 (|* sp 2)
+  $ sh 6 id
+  $ sh 3 id
+  $ sh "h" id
+  $ s "spook"
+  # oc 3
+  # pan rand
+
+d1 $ s "voicform"

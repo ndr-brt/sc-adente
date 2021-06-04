@@ -1,65 +1,78 @@
 //* taken from https://github.com/everythingwillbetakenaway/Synthdefs *//
 (
-
-SynthDef(\plastickystrings,{ |out=0, freq=440, lforate = 5900, lfowidth=0.01, pan, attack=0.4|
+SynthDef(\plastickystrings,{ |out=0, freq=440, lforate = 5900, lfowidth=0.01, pan, attack=0.4, speed=1, accelerate=0, sustain=1|
 	var lfo = LFTri.ar(lforate, Rand(0,2.0));
-	var signal = SinOsc.ar(freq*(1.0+(lfowidth*lfo)),0.5);
+  var basefreq = freq * DirtFreqScale.kr(speed, accelerate, sustain);
+	var signal = SinOsc.ar(basefreq*(1.0+(lfowidth*lfo)), 0.5);
 	var env = EnvGen.ar(Env.adsr(attack,0.0,1.0,1.0),1,doneAction:2);
 
-	OffsetOut.ar(out, DirtPan.ar(signal, ~dirt.numChannels, pan, env));
+	Out.ar(out, DirtPan.ar(signal, ~dirt.numChannels, pan, env));
 }).add;
+);
 
-SynthDef(\plucking, { | out=0, amp, freq=440, decay = 5, coef = 0.1, pan |
-	var snd = Pluck.ar(
+(
+SynthDef(\plucking, { | out=0, amp, freq=440, decay = 5, coef = 0.1, pan, speed=1, accelerate=0, sustain=1 |
+  var basefreq = freq * DirtFreqScale.kr(speed, accelerate, sustain);
+  var snd = Pluck.ar(
         in: WhiteNoise.ar(amp),
         trig: Impulse.kr(0),
-
         maxdelaytime: 0.1,
-        delaytime: freq.reciprocal,
+        delaytime: basefreq.reciprocal,
         decaytime: decay,
         coef: coef);
 
 	var env = EnvGen.kr(Env.linen(0, decay, 0), doneAction: 2);
 
-	OffsetOut.ar(out, DirtPan.ar(snd, ~dirt.numChannels, pan, env));
+	Out.ar(out, DirtPan.ar(snd, ~dirt.numChannels, pan, env));
 }).add;
+);
 
-SynthDef(\pitchednoise, { | out=0, freq=440, amp=0.1,attack=0.01, sustain=0.1, decay=0.01,pan=0.0, bandwidth=100 |
+(
+SynthDef(\pitchednoise, { | out=0, freq=440, amp=0.1,attack=0.01, sustain=0.1, decay=0.01,pan=0.0, bandwidth=100, speed=1, accelerate=0|
 	var env= EnvGen.ar(Env([0,1,1,0],[attack, sustain, decay]), doneAction:2);
 	var source= WhiteNoise.ar(amp);
-	var filter= BPF.ar(source*env, freq, bandwidth/freq);
+  var basefreq = freq * DirtFreqScale.kr(speed, accelerate, sustain);
+	var filter = BPF.ar(source*env, basefreq, bandwidth/basefreq);
 
-	OffsetOut.ar(out, DirtPan.ar(filter, ~dirt.numChannels, pan, env));
+	Out.ar(out, DirtPan.ar(filter, ~dirt.numChannels, pan, env));
 }).add;
+);
 
-SynthDef(\werkit, { | out=0, freq = 440, amp = 0.1, gate = 1, cutoff = 100, rq = 0.1, attack = 0.2, sustain=0.5, release=0.2, pan |
+(
+SynthDef(\werkit, { |out=0, freq=440, amp=0.1, gate=1, cutoff=100, rq=0.1, attack=0.2, sustain=0.5, release=0.2, pan, speed=1, accelerate=0|
 	var source = LFSaw.ar(Array.fill(16, { Rand(100, 200) }));
-	var filter = BLowPass4.ar(source, freq, rq) * 0.1;
+	var filter = BLowPass4.ar(source, freq * DirtFreqScale.kr(speed, accelerate, sustain), rq) * 0.1;
 	var env = EnvGen.ar(Env.asr(attack, sustain, release), gate, doneAction: 2);
 	var snd = (filter + (0.3 * filter.distort));
 	snd = HPF.ar(snd, 100);
 	snd = Splay.ar(snd);
 
-	OffsetOut.ar(out, DirtPan.ar(snd, ~dirt.numChannels, pan, env));
+	Out.ar(out, DirtPan.ar(snd, ~dirt.numChannels, pan, env));
 }).add;
+);
 
-SynthDef(\trianglewavebells,{ | out = 0, pan, freq = 440, amp = 1.0, gate = 1, att = 0.01, dec = 0.1, sus = 1, rel = 0.5, lforate = 10, lfowidth = 0.0, cutoff = 100, rq = 0.5 |
+(
+SynthDef(\trianglewavebells,{ | out=0, pan, freq=440, amp=1.0, gate=1, att=0.01,
+    dec=0.1, sus=1, rel=0.5, lforate=10, lfowidth=0.0, cutoff=100, rq=0.5, sustain=1, speed=1, accelerate=0|
 
+  var basefreq = freq * DirtFreqScale.kr(speed, accelerate, sustain);
 	var vibrato = SinOsc.ar(lforate, Rand(0, 2.0));
-	var osc1 = Saw.ar(freq * (1.0 + (lfowidth * vibrato)), 0.75);
-	var osc2 = Mix(LFTri.ar((freq.cpsmidi + [11.9, 12.1]).midicps));
+	var osc1 = Saw.ar(basefreq * (1.0 + (lfowidth * vibrato)), 0.75);
+	var osc2 = Mix(LFTri.ar((basefreq.cpsmidi + [11.9, 12.1]).midicps));
 	var filter = RHPF.ar((osc1 + (osc2 * 0.5)) * 0.5, cutoff, rq);
 	var env = EnvGen.ar(
 		envelope: Env.adsr(att, dec, sus, rel, amp),
 		gate: gate,
 		doneAction: 2);
 
-	OffsetOut.ar(out, DirtPan.ar(filter, ~dirt.numChannels, pan, env));
+	Out.ar(out, DirtPan.ar(filter, ~dirt.numChannels, pan, env));
 }).add;
+);
 
-SynthDef(\voicform, { | out=0, gate=1, freq=440, amp=0.25, voiceGain=0.25, noiseGain=0.2, sweepRate=0.01, pan = 0.0 |
+(
+SynthDef(\voicform, { | out=0, gate=1, freq=440, amp=0.25, voiceGain=0.25, noiseGain=0.2, sweepRate=0.01, pan = 0.0, sustain=1, speed=1, accelerate=0 |
 
-	var voiced = Pulse.ar(freq, 0.1, voiceGain);
+	var voiced = Pulse.ar(freq * DirtFreqScale.kr(speed, accelerate, sustain), 0.1, voiceGain);
 	var onezero = OneZero.ar(voiced, -0.9);
 	var onepole = OnePole.ar(onezero, 0.97 - (amp*0.2));
 	var noise = WhiteNoise.ar(noiseGain*0.1);
@@ -71,10 +84,12 @@ SynthDef(\voicform, { | out=0, gate=1, freq=440, amp=0.25, voiceGain=0.25, noise
 
 	var filters = TwoPole.ar(excitation, Lag.kr(ffreqs, sweepRate), Lag.kr(fradii, sweepRate), Lag.kr(famps, sweepRate), amp);
 
-	OffsetOut.ar(out, DirtPan.ar(filters, ~dirt.numChannels, pan));
+	Out.ar(out, DirtPan.ar(filters, ~dirt.numChannels, pan));
 
 }).add;
+);
 
+(
 SynthDef(\synchronicity,{|out=0, freq=440, cutoff=8000, rq=0.2, pan=0, sustain=1, begin=0,end=1,speed=1,accelerate=0 |
   var envLength = sustain*(end-begin)/speed;
   var line = Line.ar(begin, end, envLength, doneAction: Done.freeSelf);
@@ -82,7 +97,7 @@ SynthDef(\synchronicity,{|out=0, freq=440, cutoff=8000, rq=0.2, pan=0, sustain=1
   var volume = IEnvGen.ar(env, line);
   var sig;
 
-  freq = max(0, freq * speed * (1 + (accelerate * line)));
+  freq = freq * DirtFreqScale.kr(speed, accelerate, sustain);
   sig = BLowPass.ar(
     SyncSaw.ar(freq, EnvGen.ar(Env([1,5,1],[0.04,0.9])) * freq),
     cutoff,
@@ -90,17 +105,22 @@ SynthDef(\synchronicity,{|out=0, freq=440, cutoff=8000, rq=0.2, pan=0, sustain=1
 
   Out.ar(out, DirtPan.ar(sig * volume, ~dirt.numChannels, pan));
 }).add;
+);
 
-SynthDef(\spook,{ |out=0, freq = 440, amp = 0.1, gate=1, cutoff=8000, rq=0.2, lfowidth=0.01, lforate=3.8, pan|
+(
+SynthDef(\spook,{ |out=0, freq = 440, amp = 0.1, gate=1, cutoff=8000, rq=0.2, lfowidth=0.01, lforate=3.8, pan, sustain=1,speed=1,accelerate=0 |
 	var lfo = LFTri.kr(lforate,Rand(0,2.0)!2);
-	var pulse = Mix(Saw.ar(freq*[1,1.001]*[1.0,1.0+(lfowidth*lfo)]))*0.5;
+  var basefreq = freq * DirtFreqScale.kr(speed, accelerate, sustain);
+	var pulse = Mix(Saw.ar(basefreq*[1,1.001]*[1.0,1.0+(lfowidth*lfo)]))*0.5;
 	var filter = BHiPass.ar(pulse,cutoff,rq, amp);
 	var env = EnvGen.ar(Env.adsr(0.1,0.0,1.0,3),gate,doneAction:2);
 
-	OffsetOut.ar(out, DirtPan.ar(filter, ~dirt.numChannels, pan, env));
+	Out.ar(out, DirtPan.ar(filter, ~dirt.numChannels, pan, env));
 
 }).add;
+);
 
+(
 SynthDef(\spook2,{ |out= 0, freq = 440, amp = 0.1, gate=1, cutoff=8000, rq=0.2, pan=0.0|
 
 	var filter, env;
