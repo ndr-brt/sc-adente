@@ -8,7 +8,7 @@
     var volume = IEnvGen.ar(env, line);
     var sig;
 
-    freq = max(0, freq * speed * (1 + (accelerate * line)));
+    freq = freq * DirtFreqScale.kr(speed, accelerate, sustain);
     sig = MiBraids.ar(pitch: freq.cpsmidi, timbre: timbre, color: color, model: model);
 
     Out.ar(out, DirtPan.ar(sig * volume, ~dirt.numChannels, pan));
@@ -23,7 +23,7 @@
     var volume = IEnvGen.ar(env, line);
     var sig;
 
-    freq = max(0, freq * speed * (1 + (accelerate * line)));
+    freq = freq * DirtFreqScale.kr(speed, accelerate, sustain);
     sig = MiOmi.ar(pit: freq.cpsmidi);
 
     Out.ar(out, DirtPan.ar(sig * volume, ~dirt.numChannels, pan));
@@ -39,7 +39,7 @@
     var volume = IEnvGen.ar(env, line);
     var sig;
 
-    freq = max(0, freq * speed * (1 + (accelerate * line)));
+    freq = freq * DirtFreqScale.kr(speed, accelerate, sustain);
     sig = MiPlaits.ar(
       pitch: freq.cpsmidi,
       timbre: timbre,
@@ -63,7 +63,7 @@
     var volume = IEnvGen.ar(env, line);
     var sig;
 
-    freq = max(0, freq * speed * (1 + (accelerate * line)));
+    freq = freq * DirtFreqScale.kr(speed, accelerate, sustain);
     sig = MiTides.ar(
       freq: freq,
       shape: tidesshape,

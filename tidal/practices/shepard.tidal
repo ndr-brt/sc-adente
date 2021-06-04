@@ -16,15 +16,15 @@ do
 hush
 
 let phase = pF "phase"
+bpm 110
 
 d1
   $ chunk 6 (# ac "-0.5")
   $ chunk 3 (|* sp 2)
   $ sh 6 id
   $ sh 3 id
+  $ sh "q" id
   $ sh "h" id
-  $ s "spook"
+  $ s "bbdd"
   # oc 3
   # pan rand
-
-d1 $ s "voicform"

@@ -183,14 +183,14 @@ SynthDef("tantanh" ++ ~dirt.numChannels, { |out, tantanh|
 
 // Xenbass: a stochastic bass synthesizer based on the Gendy1 oscillator invented by Iannis Xenakis and Marie-Helene Serra and implemented on SC by Nick Collins. Works best with long decays due to its stochastic behavior. The depth control sets the range of frequency variation, high numbers determine chaotic pitch results.
 (
-
-SynthDef(\xenbass, {|out=0,pan=0,freq=440,tuning=19,attack=0.001,release=1,depth=1,sustain=1,begin=0,end=1,speed=1|
+SynthDef(\xenbass, {|out=0,pan=0,freq=440,tuning=19,attack=0.001,release=1,depth=1,sustain=1,begin=0,end=1,speed=1,accelerate=0|
   var envLength = sustain*(end-begin)/speed;
   var line = Line.ar(begin, end, envLength, doneAction: Done.freeSelf);
   var env = Env.asr(attackTime: attack, releaseTime: release);
   var volume = IEnvGen.ar(env, line);
   var signal, freqenv;
-  var note = freq.cpsmidi;
+  var basefreq = freq * DirtFreqScale.kr(speed, accelerate, sustain);
+  var note = basefreq.cpsmidi;
   var octave = ((note/tuning)-5).trunc(1);
   freq = [440 * (pow(2, octave)) * (pow(2, ((mod(note, tuning))/tuning)))];  //sets microtonal properties according to Guiot's technique
   freqenv = EnvGen.ar(Env([freq, freq * 6, freq], [attack, release], 'exp')); // filter envelope
@@ -201,15 +201,14 @@ SynthDef(\xenbass, {|out=0,pan=0,freq=440,tuning=19,attack=0.001,release=1,depth
 
   Out.ar(out, DirtPan.ar(signal * volume, ~dirt.numChannels, pan));
 }).add;
-
 );
 
 //Xenharp: a stochastic synth useful for arpy, high freq sounds with moderately long decays. It is based on the Gendy1 oscillator invented by Iannis Xenakis and Marie-Helene Serra and implemented on SC by Nick Collins. The depth control sets the range of frequency variation, high numbers determine chaotic pitch results.
 
 (
-SynthDef(\xenharp, { arg out, pan, freq = 440, tuning = 19, attack = 0.001, release = 1, depth = 1;
+SynthDef(\xenharp, { arg out, pan, freq = 440, tuning = 19, attack = 0.001, release = 1, depth = 1, sustain=1, speed=1, accelerate=0;
 	var signal, env, filterenv;
-	var note = freq.cpsmidi;
+	var note = (freq * DirtFreqScale.kr(speed, accelerate, sustain)).cpsmidi;
 	var octave = ((note/tuning)-5).trunc(1);
 	freq = [440 * (pow(2, octave)) * (pow(2, ((mod(note, tuning))/tuning)))];  //sets microtonal properties according to Guiot's technique
 	filterenv = EnvGen.ar(Env([freq, 10000, freq ], [attack, release], [-4, -1])); //filter envelope
@@ -218,17 +217,18 @@ SynthDef(\xenharp, { arg out, pan, freq = 440, tuning = 19, attack = 0.001, rele
 	signal = RLPF.ar(signal, filterenv, 0.95); // resonant filter with filter envelope
 	signal = LeakDC.ar(signal * env); // applies amplitude envelope and a DC block
 	signal = Mix.ar(signal); //necessary for panning
-	OffsetOut.ar(out, DirtPan.ar(signal, ~dirt.numChannels, pan, env)); //configures the synth for Tidalcycles
+	Out.ar(out, DirtPan.ar(signal, ~dirt.numChannels, pan, env)); //configures the synth for Tidalcycles
 }).add;
 );
 
 //Tubes: a physical-modelling of two tubes based on the TwoTube Ugen plugin. SynthDef developed with Nesso for the Ambix duo project.
 
 (
-SynthDef(\tubes, { |out=0, pan=0, depth=0.3, freq=440, detune=0, begin=0, end=1, sustain=1|
+SynthDef(\tubes, { |out=0, pan=0, depth=0.3, freq=440, detune=0, begin=0, end=1, sustain=1, speed=1, accelerate=0|
   var line = Line.ar(begin, end, sustain*(end-begin), doneAction: Done.freeSelf);
-  var f1 = freq.clip(3, 5000);
-  var f2 = (freq.cpsmidi - detune).midicps.clip(3, 5000);
+  var basefreq = freq * DirtFreqScale.kr(speed, accelerate, sustain);
+  var f1 = basefreq.clip(3, 5000);
+  var f2 = (basefreq.cpsmidi - detune).midicps.clip(3, 5000);
   var source = WhiteNoise.ar(0.5) * EnvGen.ar(Env([1,1,0],[(f1+f2)/SampleRate.ir,0.0]));
   var volume = IEnvGen.ar(Env.asr, line);
   var sig = TwoTube.ar(
@@ -238,7 +238,7 @@ SynthDef(\tubes, { |out=0, pan=0, depth=0.3, freq=440, detune=0, begin=0, end=1,
     f1,
     f2
   );
-  OffsetOut.ar(out, DirtPan.ar(sig, ~dirt.numChannels, pan, volume));
+  Out.ar(out, DirtPan.ar(sig, ~dirt.numChannels, pan, volume));
 }).add;
 );
 
