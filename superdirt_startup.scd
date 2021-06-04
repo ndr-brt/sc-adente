@@ -4,7 +4,7 @@ s.options.numBuffers = 1024 * 256; // increase this if you need to load more sam
 s.options.memSize = 32768 * 16; // increase this if you get "alloc failed" messages
 s.options.maxNodes = 2048 * 32; // increase this if you are getting drop outs and the message "too many nodes"
 s.options.numOutputBusChannels = 2; // set this to your hardware output channel size, if necessary
-// s.options.numOutputBusChannels = 8; // set this to your hardware output channel size, if necessary
+// s.options.numOutputBusChannels = 12; // set this to your hardware output channel size, if necessary
 s.options.numInputBusChannels = 2; // set this to your hardware output channel size, if necessary
 s.options.maxLogins = 8;
 
@@ -16,7 +16,7 @@ s.waitForBoot {
   ~dirt.loadSoundFiles("~/.sam-ples/*");
 
   ~dirt.start(57120, 0!10, NetAddr("0.0.0.0"));
-  // ~dirt.start(57120, [0, 2, 4, 6, 8]);
+  // ~dirt.start(57120, [0, 2, 4, 6, 8, 10]);
 
   (
     ~d1 = ~dirt.orbits[0];
@@ -43,6 +43,8 @@ s.waitForBoot {
     x.initNodeTree;
     x.set(\fadeTime, 0.01);
   };
+
+  ~dirt.set(\speedFreq, 1);
 
   // // Print osc messages
   // ~dirt.addModule('post',
