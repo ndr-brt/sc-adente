@@ -201,3 +201,5 @@ rsplice x p = splice x (segment (toTime <$> x) $ (irand x)) $ p
 
 quieten = mapM_ (\i -> xfade i silence) [1 .. 16]
 quietenIn t = mapM_ (\i -> xfadeIn i t silence) [1 .. 16]
+
+loopStriate n k p = slow n ((linger (fromRational <$> (1/n)) . (~>) (fromRational <$> (k/n)) . striate (round <$> n)) p) |* speed (fromRational <$> (1/n)) # unit (pure "c")
