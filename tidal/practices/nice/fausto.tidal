@@ -1,6 +1,5 @@
 do
   bpm 112
-  all $ id
   let fasto = 1
   let fausto = segment 1 $ choose [1,2]
   let lfoo = (slow (8*fausto) $ tri)

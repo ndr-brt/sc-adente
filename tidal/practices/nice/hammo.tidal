@@ -1,4 +1,5 @@
 do
+  -- questo va solo con lo scaling della frequenza sul synth
   bpm 90
   d1
     $ si (chew 4 (slow 4 $ ri 4))

@@ -38,7 +38,7 @@ do
   d2
     $ layer [
       id
-      .(# rmod' 0.99 (range 2 100 $ slow 4 $ sine) 0.5)
+      .(# rmod 0.99 (range 2 100 $ slow 4 $ sine) 0.5)
       -- .(degradeBy 1)
       ,
       id
@@ -46,9 +46,9 @@ do
       .(plyWith 4 (# crush (range 8 2 $ slow 2 $ sine)))
       .(# octave 2)
       .(# sustain 0.3)
-      .(# oct' 0.9 0.7 0.96)
+      .(# oct 0.9 0.7 0.96)
       .(# gain 0.8)
-      .(# hp' 50 0.8)
+      .(# hp 50 0.8)
       ,
       id
       .(whenmod 2 1 (degradeBy 1))

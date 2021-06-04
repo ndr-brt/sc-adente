@@ -18,9 +18,9 @@ do
     $ sb "t" (stutWith 24 (1/128) ((|+ n 16).(# pan (fast 4 $ perlin))
       .(|* g 0.98).(# cut 1).(|+ dis 0.05)))
     $ s "kk ~ kk"
-    # tanh 18
+    # tanh 8
     # lp 1900 0.3
-    # boo
+    # hp 55 0.5
     * g 0.8
   d3
     $ loopAt 1

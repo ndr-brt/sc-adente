@@ -6,6 +6,7 @@ do
       id
       .(splice 8 "[0..3 [5|4] 3 2]")
       .(# o 0)
+      .(juxBy 0.5 ((|/ sp (4/5)).("e" ~>)))
       ,
       id
       -- .(shut)
@@ -32,12 +33,12 @@ do
     $ s "moog"
     # lpf 5000
   d2
+    -- $ shut
     $ slow 2
-    $ sb "0.8" (stut 5 0.7 (choose [1/24, 1/48]))
+    $ while (binary 113) (jux press)
+    $ chunk 4 (fast 2)
+    $ sb "0.6" (stutWith 4 (1/12) ((|* g 0.95).(|+ wl 10)))
     $ s "~ kk"
-    # shape 0.8
+    # shape 0.5
+    |* sp "0.4"
     # o 3
-
-  hush
-
-d1 $ s "bd*4" # oc 5

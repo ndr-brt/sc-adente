@@ -34,6 +34,7 @@ do
       .(|* g 0.80)
       .(# lp 1000 "f")
       .(# o 8)
+      .(# mu 1)
       ,
       (# oc 5)
       .(fast 2)
@@ -50,7 +51,7 @@ do
       .(# hp 56 0.6)
       .(# o 6)
     ]
-    $ n "<0 4 8>/2" -- prima era 0 4 8, supermelodico ma ci poteva stare
+    $ n "<0 4 8>/2"
     # s "cuerda"
     # tanh 5
     * g 0.9

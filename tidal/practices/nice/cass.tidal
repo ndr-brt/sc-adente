@@ -12,5 +12,6 @@ do
     $ striateBy "5" 0.9
     $ s "dald:0"
     # shape 0.6
+    |* sp (rand+1)
     # lpf (range 100 8000 $ sin)
     # lpq (slow 4 $ saw/"2 4 1 5")

@@ -1,10 +1,6 @@
 do
   bpm 92
   let sharo p = iter 2 $ brak p
-  all $ id
-    -- .(# cloudsblend sine 0.6 0.2 0.8)
-    -- .(# clouds (cos) perlin 0.1 (slow (segment 1 $ irand 4 + 1) $ tri))
-    -- .(# cloudspitch (rand))
   d1
     -- $ shut
     $ sharo
@@ -16,8 +12,8 @@ do
     # oc 5
     # distortbus 1 (segment 32 $ cos/5)
     # tanh 1.5
-    -- # lpf 2000
-    -- # lpq 0.2
+    # lpf 4000
+    # lpq (cos)
     # hpf 20
     |* g 0.8
   d2
@@ -26,7 +22,7 @@ do
     $ si ((# bpf 3200).(|* g 0.8).(# shape 0.8).(# o 3))
     -- $ sb 0.2 (# pan rand)
     $ rarely (plyWith 4 (|+ oc 1))
-    $ while (slow 4 $ binary 141) (jux press)
+    $ while (slow 4 $ binary 141) (jux (press.(# o 4)))
     $ si (
       ("h" <~)
       -- .(shut)

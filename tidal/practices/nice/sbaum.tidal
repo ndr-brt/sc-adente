@@ -1,20 +1,19 @@
 
 do
   bpm(110)
-  all $ id
-      .(# tanh 2)
-      -- .(# cloudsblend 0.3 0.4 0.3 0.4)
-      -- .(# verb 0.6 0.7 0.2 0.3)
-      .(while (slow 4 $ binary 118) (slow 2))
+  let ognillento = while (slow 4 $ binary (118)) (slow 2)
   d1
+    $ ognillento
     $ s "sbaum:0*12"
     # ar 3 3
     # oc 3
     # lpf (range 400 1200 $ slow 7 $ (saw+sine)/2)
     # legato 2
     |* g 0.7
+    # tanh 2
     -- # rvb 0.9 0.9
   d2
+    $ ognillento
     $ every 6 (# rmod 1 6 1)
     $ almostNever (|+ n "2.7")
     $ rarely (fast 2)
@@ -29,7 +28,9 @@ do
     # lpq 0.3
     -- # rvb 0.4 0.5
     # scram 0.2
+    # tanh 2
   d3
+    $ ognillento
     $ layer [
       id
       .(# binshiftbus 1 (rsaw 0.2 0.6))
@@ -50,5 +51,6 @@ do
     # s "sbaum"
     # oc 7
     # del "h" "x" "t"
+    # tanh 2
 
 hush
