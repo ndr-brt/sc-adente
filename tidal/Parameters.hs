@@ -1,5 +1,13 @@
+-- synth parameters
+let bright = pF "bright"
+    damp = pF "damp"
+    feedback = pF "feedback"
+    noise = pF "noise"
+    reso = pF "reso"
+    structure = pF "structure"
+
 -- benjolis params
-let oscA = pF "oscA"
+    oscA = pF "oscA"
     oscB = pF "oscB"
     runA = pF "runA"
     runB = pF "runB"

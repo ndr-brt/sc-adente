@@ -18,13 +18,36 @@ hush
 let phase = pF "phase"
 bpm 110
 
+
+
 d1
-  $ chunk 6 (# ac "-0.5")
-  $ chunk 3 (|* sp 2)
-  $ sh 6 id
-  $ sh 3 id
-  $ sh "q" id
+  $ chunk 2 (iter 2)
+  $ chunk 4 (ply 2)
+  $ brak
+  $ juxBy 0.3 ((# oc 6).(rev.press))
+  $ sh 2.5 id
+  $ sh "t" id
   $ sh "h" id
-  $ s "bbdd"
-  # oc 3
-  # pan rand
+  $ n "[0 7 12 2]"
+  # s "minieasel"
+  # oc 4
+  # reso 1.1
+  # feedback sine*2
+  # noise (rsin 0 0.05)
+  # rvb 0.3 0.5
+  -- # verb 0.8 0.9 0.2 0.2
+
+let damp = pF "damp"
+
+d1
+  $ palindrome
+  -- $ n (segment 1 $ irand 36)
+  $ off "e" (|+ oc 1)
+  $ n "0 4 8 2"
+  # s "rongs"
+  # pos (slow 4 $ sine)
+  # structure (slow 3 tri)
+  # bright (slow 5 $ rsaw 0.2 0.8)
+  # damp (slow 4 cos)
+  # oc "[4|5|6]"
+  -- # verb 0.4 0.5 0.2 0.2
