@@ -236,13 +236,13 @@ SynthDef(\friab, {|out=0,freq=440,sustain=1,pan=0,begin=0,end=1,speed=1,accelera
 );
 
 (
-SynthDef(\sin, {|out=0,freq=440,sustain=1,pan=0,begin=0,end=1,speed=1,accelerate=0|
+SynthDef(\sin, {|out=0,freq=440,sustain=1,pan=0,begin=0,end=1,speed=1,accelerate=0,feedback=0|
   var envLength = sustain*(end-begin)/speed;
   var line = Line.ar(begin, end, envLength, doneAction: Done.freeSelf);
   var basefreq = freq * DirtFreqScale.kr(speed, accelerate, sustain);
 
   var env = Env.asr;
-  var sig = SinOsc.ar(basefreq);
+  var sig = SinOscFB.ar(basefreq, feedback);
 
   var volume = IEnvGen.ar(env, line);
   Out.ar(out, DirtPan.ar(sig, ~dirt.numChannels, pan, volume));
@@ -250,13 +250,13 @@ SynthDef(\sin, {|out=0,freq=440,sustain=1,pan=0,begin=0,end=1,speed=1,accelerate
 );
 
 (
-SynthDef(\abbass, {|out=0,freq=440,sustain=1,pan=0,begin=0,end=1,speed=1,accelerate=0|
+SynthDef(\abbass, {|out=0,freq=440,sustain=1,pan=0,begin=0,end=1,speed=1,accelerate=0,feedback=0|
   var envLength = sustain*(end-begin)/speed;
   var line = Line.ar(begin, end, envLength, doneAction: Done.freeSelf);
   var basefreq = freq * DirtFreqScale.kr(speed, accelerate, sustain);
 
   var env = Env.asr;
-  var sig = (Saw.ar(basefreq*2) + Pulse.ar(basefreq/2) + SinOsc.ar(basefreq/4)) * 0.5;
+  var sig = (Saw.ar(basefreq*2) + Pulse.ar(basefreq/2) + SinOscFB.ar(basefreq/4, feedback)) * 0.5;
 
   var volume = IEnvGen.ar(env, line);
   Out.ar(out, DirtPan.ar(sig * volume, ~dirt.numChannels, pan));

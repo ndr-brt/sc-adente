@@ -26,7 +26,7 @@ SynthDef(\lpg, { |out,pan,freq=440,attack=0.00001,release=1,reso=1.35|
 (
 SynthDef(\minieasel, { |out,pan,freq=440,attack=0.00001,release=1,reso=1.1,speed=1,accelerate=0,sustain=1,feedback=1.1,noise=0.05|
 
-	var sig = SinOscFB.ar(freq*DirtFreqScale.kr(speed,accelerate,sustain), feedback) + WhiteNoise.ar(noise);
+	var sig = SinOscFB.ar(freq * DirtFreqScale.kr(speed,accelerate,sustain), feedback) + WhiteNoise.ar(noise);
 	var env = Env.perc(0.1,0.9).kr;
 
 	sig = LPG.ar(
@@ -46,21 +46,20 @@ SynthDef(\minieasel, { |out,pan,freq=440,attack=0.00001,release=1,reso=1.1,speed
 (
 SynthDef.new(\bongo, {
 	|out=0,
-	amp=0.5,
 	freq=141,
 	width=0.95,
 	attack=0.001,
 	release=0.999,
 	pan=0,
-	lpgsustain=0.01,
-	lpgoffset=0,
+	lpgsustain=0.02,
+	lpgoffset=0.2,
 	lpgfilterscale=0.3,
 	vcaness=0.75,
 	resonance=1.1, speed=1, accelerate=0, sustain=1, feedback=1.5|
 
 	// var sig = VarSaw.ar(freq - [ 0, freq/100.0 ], 0, width).sum;
 	var sig = SinOscFB.ar(freq * DirtFreqScale.kr(speed, accelerate, sustain), feedback);
-	var env = Env.perc(attack,release).kr(timeScale: lpgsustain.poll, doneAction: 0);
+	var env = Env.perc(attack,release).kr(timeScale: lpgsustain, doneAction: 0);
 
 	sig = LPG.ar(
 		input: sig,
@@ -78,17 +77,17 @@ SynthDef.new(\bongo, {
 );
 
 (
-SynthDef.new(\rongs, {|out=0, amp=0.25, pan=0, sustainTime=0.01, freq=440, structure=0.8,
-    bright=0.59, damp=0.25, accent=0.4, harmonicstretch=0.5, pos=0.15, loss=0.15,
-    attack=0.00001, release=0.1|
+SynthDef.new(\rongs, {|out=0, pan=0, freq=440, structure=0.8, model=2,
+    bright=0.7, damp=0.25, accent=0.4, harmonicstretch=0.9, pos=0.15, loss=0.15,
+    attack=0.001, release=0.01, speed=1, accelerate=0, sustain=1|
   var trig = Env.perc(attack, release);
-  // var env = EnvGen.ar(trig, doneAction:2);
 
-	var modeNum=3, cosFreq=0.025;
+  var basefreq = freq * DirtFreqScale.kr(speed, accelerate, sustain);
+	var modeNum=2, cosFreq=0.025;
 	var sig = Rongs.ar(
 		trigger:trig.kr,
 		sustain:trig.kr,
-		f0:freq,
+		f0:basefreq,
 		structure:structure,
 		brightness:bright,
 		damping:damp,

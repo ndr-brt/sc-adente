@@ -1,7 +1,10 @@
 -- synth parameters
-let bright = pF "bright"
+let accent = pF "accent"
+    bright = pF "bright"
     damp = pF "damp"
     feedback = pF "feedback"
+    harmonicstretch = pF "harmonicstretch"
+    loss = pF "loss"
     noise = pF "noise"
     reso = pF "reso"
     structure = pF "structure"
