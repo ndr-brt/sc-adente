@@ -48,14 +48,14 @@ SynthDef.new(\bongo, {
 	|out=0,
 	freq=141,
 	width=0.95,
-	attack=0.001,
+	attack=0.01,
 	release=0.999,
 	pan=0,
 	lpgsustain=0.02,
 	lpgoffset=0.2,
 	lpgfilterscale=0.3,
 	vcaness=0.75,
-	resonance=1.1, speed=1, accelerate=0, sustain=1, feedback=1.5|
+	reso=1.1, speed=1, accelerate=0, sustain=1, feedback=1.5|
 
 	// var sig = VarSaw.ar(freq - [ 0, freq/100.0 ], 0, width).sum;
 	var sig = SinOscFB.ar(freq * DirtFreqScale.kr(speed, accelerate, sustain), feedback);
@@ -67,7 +67,7 @@ SynthDef.new(\bongo, {
 		controloffset: lpgoffset,
 		controlscale: lpgfilterscale,
 		vca: vcaness,
-		resonance: resonance,
+		resonance: reso,
 		lowpassmode:1,
 		linearity:1
 	);
