@@ -8,6 +8,7 @@ let accent = pF "accent"
     noise = pF "noise"
     reso = pF "reso"
     structure = pF "structure"
+    width = pF "width"
 
 -- benjolis params
     oscA = pF "oscA"
