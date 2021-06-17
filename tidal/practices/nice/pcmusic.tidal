@@ -1,0 +1,23 @@
+do
+  bpm 85
+  d1
+    $ while (binary (segment 1 $ irand 64)) ((chew 4 "4 3").(# pan rand))
+    $ chunk 10 ((|+ oc 1).(# lpf 5000).(plyWith 8 ((# pan perlin).(|- lpf 500)).(# o 5)))
+    $ si (rev.(press).(# o 4))
+    $ juxBy (range "-0.5" "0.5" $ square) (brak.press.(# o 3))
+    $ iter 4
+    $ sh 4 ((|* g 0.7).(|* sp (rrand 0.7 1.1)).(# o 2))
+    $ sh "q" (# o 1)
+    $ n "0.2 3.4 7.7 5.3"
+    # s "rongs"
+    # structure rand
+    # bright (rrand 0.5 0.9)
+    -- # damp (fast 3 isaw)
+    # pos (slow 5 tri)
+    # loss (slow 3 sine)
+    # accent (slow 7 sine)
+    # harmonicstretch (slow 4 cos)
+    # oc 4
+    -- # shape 0.5
+    # legato 1.5
+    |* g 0.9

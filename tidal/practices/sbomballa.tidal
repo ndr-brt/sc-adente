@@ -1,0 +1,112 @@
+d1
+  $ sometimesBy 0.1 (stutWith "<3 4 5>" "1e" (|* gain 0.95))
+  $ sometimesBy 0.1 ((# s "{peri ifdrums feel}%12") . (# gain 0.9))
+  $ sometimesBy 0.1 (|* speed 0.5)
+  $ sometimesBy 0.1 (|* sp 1.5)
+  $ sometimesBy 0.1 (|+ n 3)
+  $ sometimesBy 0.1 (|+ n 3)
+  $ sometimesBy 0.1 (|+ n 3)
+  $ sometimesBy 0.1 (|+ n 1)
+  $ sometimesBy 0.1 (|+ n 2)
+  $ struct "1(<2 [1 2 2]/3 2 [1 2]/2 [2 1]/2 3>,{8 8 4 8 16}%2,<0 1 5>)"
+  $ s "{bd drum}%11"
+  # n "{10 5 2}%14" # cut 1
+  # speed "{1 1 1 1 0.5}%9"
+  # cps (120/120/2)
+  |* g 0.7
+
+
+  _sometimesBy :: Double -> (Pattern a -> Pattern a) -> Pattern a -> Pattern a
+  _sometimesBy prob f p = innerJoin $ (\e -> if (prob > rand) then f e else e) <*> p
+
+
+-- _mapWhen prand x p = stack [ fmap fst $ filterValues ((> x) . snd) $ (,) <$> p Sound.Tidal.Context.<* prand, fmap fst $ filterValues ((<= x) . snd) $ (,) <$> p Sound.Tidal.Context.<* prand]
+_mapWhen x f p = stack [ fmap fst $ filterValues ((> x) . snd) $ (,) <$> p Sound.Tidal.Context.<* rand,fmap fst $ filterValues ((<= x) . snd) $ (,) <$> f p Sound.Tidal.Context.<* rand]
+
+_sghir prob f p = cat [filterValues (\v -> prob > timeToRand (v)) $ f p, filterValues (\v -> prob <= timeToRand (v)) $ p]
+
+
+d1 $ timeLoop "<1 2>" $ sound "bd*8" # speed rand
+
+d1
+  $ timeLoop "2"
+  $ off (range (1/60) (1/140) $ rand) (|* pan (choose [0,1]))
+  $ stutWith 4 "s" ((|* sp 2).(sb 0.2 (plyWith 2 (|* sp 2))))
+  $ sound "[bd sd, hhat(3,4)]*4"
+  |* speed rand
+  # shape 0.8
+  # crush 4
+  # hp 60 0.3
+
+do
+  d1
+    $ slow 2
+    -- $ shut
+    -- $ sh 3 id
+    $ sh "q" id
+    $ sh "h" id
+    $ timeLoop "t"
+    $ n (segment 8 $ irand 12)
+    # s "sin"
+    # del "h" "x" "h"
+    # rvb 0.3 0.6
+    # tanh 5
+    # oc 6
+    |* g 0.7
+  d2
+    $ sh 2 rev
+    $ juxBy (sine) (press.(db "t"))
+    -- $ chunk 4 (stutWith 3 "s" (|+ n 3))
+    $ s "[soskick sossnare*3, soshats(2,3)]"
+    # tanh 8
+    |* g 0.8
+
+d1
+  $ _sghir 0.1 (|* sp 4)
+  $ s "sn*8"
+
+let sometimesBy r f pat = innerJoin $ (\x -> if x < r then f pat else pat) <$> rand
+
+  d1
+    $ sometimesBy 0.1 (|+ n 1)
+    $ sometimesBy 0.1 (|+ n 1)
+    $ sometimesBy 0.1 (|+ n 1)
+    $ sometimesBy 0.1 (|+ n 1)
+    $ sometimesBy 0.1 (|+ n 1)
+    $ sometimesBy 0.1 (|+ n 1)
+    $ sometimesBy 0.1 (|+ n 1)
+    $ sometimesBy 0.1 (|+ n 1)
+    $ sometimesBy 0.1 (|+ n 1)
+    $ sometimesBy 0.1 (|+ n 1)
+    $ sometimesBy 0.1 (|+ n 1)
+    $ sometimesBy 0.1 (|+ n 1)
+    $ sometimesBy 0.1 (|+ n 1)
+    $ sometimesBy 0.1 (|+ n 1)
+    $ sometimesBy 0.1 (|+ n 1)
+    $ sometimesBy 0.1 (|+ n 1)
+    $ sometimesBy 0.1 (|+ n 1)
+    $ sometimesBy 0.1 (|+ n 1)
+    $ sometimesBy 0.1 (|+ n 1)
+    $ sometimesBy 0.1 (|+ n 1)
+    $ sometimesBy 0.1 (|+ n 1)
+    $ sometimesBy 0.8 (stut 6 1 "s")
+    $ sometimesBy 0.1 (|+ n 1)
+    $ sometimesBy 0.1 (|+ n 1)
+    $ s "bd"
+    -- $ s "{bd drum}%11"
+    -- |* g 0.7
+
+
+innerJoin $ ("3" :: Double -> Pattern Double) <$> rand
+
+do
+  -- let sometimesBy r f pat = innerJoin $ ((\x -> if x < r then f (pat <$> (rand)) else (pat <$> pat)))
+  d1
+    -- $ off "s" (h 2)
+    $ sometimesBy 0.5 (stutWith 3 "s" (|* sp 2))
+    $ s "bd*4"
+
+d1 $ chop (irand 100 + 1) $ s "sitar"
+
+drawLine (timeLoop 4 $ "a b?")
+drawLine (timeLoop "<1 4>" $ "a b?")

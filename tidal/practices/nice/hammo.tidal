@@ -1,5 +1,4 @@
 do
-  -- questo va solo con lo scaling della frequenza sul synth
   bpm 90
   d1
     $ si (chew 4 (slow 4 $ ri 4))
@@ -13,8 +12,8 @@ do
     $ n "0"
     # s "superhammond"
     # ar 0.01 1
-    # legato "1.2"
-    # oc "[5|6]"
+    # legato "1.5"
+    # oc "[4|5|6]"
     -- # boo
     -- |* sp "h"
     -- |* g 1

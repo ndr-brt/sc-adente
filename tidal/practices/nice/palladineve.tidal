@@ -7,7 +7,7 @@ do
       (slow 2)
       .(|/ sp 16)
       .(|* g 0.5)
-      .(# o 5)
+      .(# o 1)
       .(# hp 56 0.4)
       .(# rvb 0.2 0.4)
     )
@@ -23,39 +23,47 @@ do
     # detune ((irand 120)*(-1))
     # oc 7
     # tanh 3
+    # o 2
+    |* g 0.9
   d3
-    -- $ shut
     $ layer [
       (# oc 7)
+      -- .(shut)
       .(# ar 0.01 0.7)
       .(while ("<t f f>") (|+ n "[3 5 0]"))
       .(euclid 7 8)
       .(# pan rand)
       .(|* g 0.80)
       .(# lp 1000 "f")
-      .(# o 8)
+      .(# o 5)
       .(# mu 1)
       ,
       (# oc 5)
+      .(shut)
       .(fast 2)
       .(# scr (slow 8 $ sine))
       .(# rmod (slow 13 $ cosine/2) 1 0.8)
       .(# pan (slow 8 $ perlin))
       .(|* g 0.6)
-      .(# o 7)
+      .(# o 4)
       ,
       (# oc 2)
+      .(shut)
       .(# shape 0.3)
       .(|* g 0.75)
       .(# lpf (range 900 2000 $ slow 22 $ tri))
       .(# hp 56 0.6)
-      .(# o 6)
+      .(# o 3)
     ]
     $ n "<0 4 8>/2"
     # s "cuerda"
     # tanh 5
     * g 0.9
     -- # rvb 0.8 0.9
+
+xfadeIn 1 16 $ silence
+xfadeIn 2 8 $ silence
+xfadeIn 3 8 $ silence
 
 
 hush

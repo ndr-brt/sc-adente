@@ -1,0 +1,41 @@
+let freq1 = pF "freq1"
+let freq2 = pF "freq2"
+
+let fm1 = pF "fm1"
+let fm2 = pF "fm2"
+
+let pm1 = pF "pm1"
+let pm2 = pF "pm2"
+
+let ring1 = pF "ring1"
+let ring2 = pF "ring2"
+
+let add1 = pF "add1"
+let add2 = pF "add2"
+
+let mul1 = pF "mul1"
+let mul2 = pF "mul2"
+
+let fold = pF "fold"
+let wrap = pF "wrap"
+
+
+
+
+do
+  bpm 135
+  d1
+    -- $ sh "q" id
+    $ s "complex:0*16"
+    |* g 0.7
+    # freq1 (range 110 880 $ slow 3 tri)
+    # freq2 (range 10 80 $ slow 2 sine)
+    # legato 4
+    # fm1 (slow 3 sine)
+    # fm2 (slow 8 tri)
+    # pm1 0.2
+    # pm2 0.2
+    # ring1 0.8
+    # ring2 0.9
+    # wrap 0.8
+    # model 3

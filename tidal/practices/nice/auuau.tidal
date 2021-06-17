@@ -1,0 +1,23 @@
+
+do
+  bpm 70
+  d1
+    -- $ shut
+    $ off "h" ((chew 4 4).(#boo).(# o 3))
+    $ chunk 8 (|* sp 1.8)
+    $ chunk 6 (slow 2)
+    $ chunk 7 (fast 2)
+    $ chunk 5 (|* sp 1.2)
+    $ slow 2
+    $ stutWith 3 (1/140) ((# pan rand))
+    $ sb 0  (sh 2 (rev.(|* sp "<2 3.8 3 4.4>").(# o 2)))
+    $ sh "h" (# o 1)
+    $ euclid 6 8
+    $ s "bongo"
+    # feedback 1.9
+    # reso 10
+    -- # shape 0.3
+    |* sp "h"
+    |* g 0.75
+    # legato 2
+    -- # tanh 1
