@@ -1,0 +1,302 @@
+
+
+do
+  bpm 104
+  all $ id
+    .(# verb 0.4 0.4 0.2 0.2)
+    .(# clouds 0.3 0.4 0.2 0.3)
+    .(# cloudsblend 0.2 0.8 0.2 0.3)
+  d1
+    $ db (slow 3 sine)
+    $ every 2 (|* sp "-1")
+    -- $ shut
+    -- $ si ((# bp 7000 1.8).(# tanh 10))
+    $ stutWith "<1!3 3 2!2>" (1/64) ((# pan rand).(|* sp "<2 4>"))
+    -- $ off (1/80) ((# pan rand).(stutWith 2 ()(|* sp "2")))
+    -- $ sb 0.05 (plyWith 3 (|+ scram "t"))
+    $ while (binary (irand 255)) (|* sp 2)
+    $ chunk 8 (off "-s" ((|* sp 2).(slow 2).(# ac "-0.5")))
+    $ juxBy (slow 4 $ rsin "-1" 1) (rev.(db 0.3))
+    -- $ euclid 3 8
+    $ slice 256 "{18 16 13}%16"
+    $ s "naoto:0"
+    -- # ac "-0.9"
+    # tanh 10
+    # bp 7000 1.8
+  d2
+    -- $ shut
+    $ while (binary (irand 255)) (off (1/36) (|* sp 2))
+    $ si (# pan perlin)
+    $ splice 16 (segment 36 $ irand 16+1)
+    $ s "naoto:0"
+    # hp 3000 0.4
+  d3
+    $ jux (|* sp "-1")
+    $ slice 55 "48"
+    $ s "naoto:0"
+    -- # shape 0.4
+    |* sp "q"
+    # tanh 8
+    # triodebus 1 (slow 7 sine)
+    # lpfbus 2 (slow 12 $ range 1000 5000 $ (sin+saw)/2)
+    # lpqbus 3 (segment 24 $ slow 14 $ range 0 0.4 $ ((tri+isaw)/2))
+  d4
+    $ slow 2
+    $ stutWith 2 "x" (|* sp 2)
+    $ slice 128 "20"
+    $ s "naoto:0"
+    # ac "-1"
+    # dis 0.5
+    # tanh 3
+    # hp 56 0.4
+  d5
+    -- $ slow 2
+    $ rarely (plyWith 6 (|+ coarse 4))
+    $ slice 128 "~ 80"
+    $ s "naoto:0"
+    # shape 0.8
+    # dis 0.5
+
+
+do
+  bpm 102
+  all $ id
+    .(|* g 0.5)
+    .(# verb 0.4 0.4 0.2 0.2)
+    .(# clouds 0.3 0.4 0.2 0.3)
+    -- .(# cloudsblend 0.2 0.8 0.2 0.3)
+  d1
+    -- $ shut
+    $ iter 8
+    -- $ chunk 8 (# bs rand)
+    $ chunk (irand 8 + 1) (plyWith 1 ((|* sp 2).(|- ac "1")))
+    $ si ((|* sp 8).(chop 4).(# pan perlin).(fast "{4 2 4}%4"))
+    $ while (binary (irand 255 + 1)) (jux (rev.press))
+    $ sh "h" id
+    $ off "3q" ((|* sp 6).(# pan rand))
+    $ off "q" ((|* sp 2).(# bs 0.4))
+    $ s "naoto:1"
+  d2
+    $ si (chew 4 4)
+    $ layer [(# vowel "a"),(# vowel "e").(|* sp (-1))]
+    $ s "naoto:1"
+    -- # sdel 0.9 210
+    # lp 1800 0.1
+    -- # rvb 0.3 0.4
+    # tremolo 7 "<0!3 1>" -- tremolo con squarewave!
+    # boo
+
+
+do
+  bpm 60
+  all $ id
+    -- .(|* g 0.5)
+  d1
+    $ iter 4
+    -- $ juxBy 0 (# squiz 4)
+    $ off (1/128) (# bs (slow 2 sine))
+    $ while (binary 154) (si ((|* sp 2).(# scram 1)))
+    $ slice 16 "4*64"
+    $ s "naoto:1"
+
+do
+  bpm 76
+  all $ id
+    -- .(every 2 (mask "[t ~]*8"))
+    -- .(# verb 0.3 0.3 0.2 0.2)
+  d1
+    -- $ db 0.5
+    -- $ shut
+    $ every 4 (bite 4 "<2 3 0 1 3>*4")
+    $ iter 8
+    $ jux (press.rev)
+    $ chunk (irand 8 + 1) (stutWith 8 (1/64) ((|* g 0.99).(|* sp (rand + 1.5)).(|+ end (rand/10))))
+    $ sh "2" id
+    $ stutWith 3 "s" ((|* sp 2).(# pan sine))
+    $ ply 2
+    $ s "naoto:1"
+    # io 0 0.1
+    # cloudsblend (slow 2 tri) rand (rrand 0 0.5) rand
+  d2
+    -- $ shut
+    $ loopAt 2
+    $ every 2 (mask "[t ~]*8")
+    $ striateBy 240 (rsaw 0.01 0.05)
+    $ s "naoto:1"
+    -- # ps 2 0.8
+    -- # sdel 12 0.05
+    # lpfbus 1 (segment 64 $ slow 2 $ range 100 10000 $ (sin+square+isaw)/3)
+    # lpq 0.4
+    # tanh 4000
+    -- # dis 0.8
+    |* g 0.7
+    -- # triode 0.8
+    # boo
+
+do
+  bpm 60
+  all $ id
+    .(# verb 0.6 0.6 0.2 0.2)
+    .(# clouds 0.3 0.4 0.2 0.3)
+    -- .(|* g 1)
+    -- .(# cloudsblend 0.1 0.4 0.1 0.9)
+  d1
+    $ loopAt 1
+    -- $ chop 4
+    $ chop (segment 1 $ choose [1, 2, 4, 8, 16, 32])
+    -- $ off "[h|q|3q]" ((stutWith 3 "e" ((|* sp 4))))
+    $ every 4 (
+      si (
+        (stut 24 1 (1/128))
+        .(slice 16 8)
+        .(# pan (fast 3 sine))
+        .(|* g 0.7)
+      )
+    )
+    $ sh "h" id
+    $ off "s" (|* sp 2)
+    $ s "naoto:2"
+    # tanh 2
+
+
+do
+  bpm 60
+  all $ id
+    .(# verb 0.5 0.5 0.2 0.2)
+    .(# clouds 0.3 0.4 0.2 0.3)
+    -- .(# cloudsblend rand 0.4 (fast 3 saw) (fast 4 isaw))
+    .(|* g 1)
+  d1
+    $ loopAt 1
+    $ layer [
+      id
+      ,
+      ("s" <~).(|* sp "-1").(# bs rand)
+      ,
+      (chunk 8 (db 1))
+      -- .(shut)
+      .("[t|5t]" ~>)
+      .(|* sp "2")
+      .(striateBy 16 "q")
+      .(# pan (fast 4 $ perlin))
+      .(|* g 0.6)
+      .(stutWith 3 "e" (|* sp (sine + 0.5)))
+      .(plyWith "4 8 2" ((# coarse (irand 16))))
+      -- .(# bs tri)
+      ,
+      (chew 4 "<4>").(rarely (off "e" id))
+    ]
+    $ s "naoto:2"
+    # tanh 10
+    -- # dis 0.4
+
+do
+  bpm 100
+  all $ id
+  d1
+    -- $ bite 4 "<4!2 3 1>*<2 2 1>"
+    $ chunk 4 (slow 2)
+    $ sh "4t" ((db "0").(# pan sine).(si ((# hp 10000 0.3).(# tanh 3))))
+    $ sh "3f" (chunk 6 (stutWith 8 (1/128) (|* sp 2)))
+    $ sh "q" ((# pan rand).(# rings 0.8 "f h 0.8" 0.3 0.7 0.7))
+    $ sh "x" (id)
+    $ s "naoto:3*4"
+    # clouds 0.8 0.5 0.8 0.9
+    # cloudsblend 0.1 0.9 0.33 0.5
+
+
+do
+  bpm 100
+  d1
+    $ slow 2
+    $ chew 4 "<0 1 3!2>*4"
+    $ chunk 6 (si (|* sp (-1)))
+    -- $ bite 4 "<0 1 3!2>*4"
+    -- $ sh 4 ((|* g 0.7).(db 0.7).(# pan (slow 4 tri)))
+    $ sh "e" (# boo)
+    $ sh 2 ((# hp 7000 0.4).(stutWith (irand 4 + 1) "s" ((|* sp "-1").(# coarse 16))))
+    $ s "naoto:4(<5 4 3 2>,<8>)"
+    # verb 0.6 0.9 0.4 0.1
+    # shape 0.5
+    # tanh 1
+    |* g 0.6
+
+do
+  bpm 135
+  d1
+    -- $ jux press
+    $ chunk 4 ((sply 2).rev)
+    $ stutWith (segment 2 $ irand 3 + 1) (segment 2 $ choose [1/16, 1/32]) (# pan perlin)
+    $ sh (1/12) id
+    $ sh "h" (# boo)
+    $ plyWith 8 (|* sp (segment 1 $ (tri + 1)))
+    $ s "naoto:5"
+    -- # verb rand rand saw tri
+    -- |* g 0.5
+
+do
+  bpm 110
+  d1
+    -- $ rarely (ply 64)
+    $ stutWith 6 "s" (|* sp 1.3)
+    $ slice 64 "7 5 14 27"
+    $ s "naoto:7"
+
+
+
+
+
+
+d6
+  $ slow 2
+  $ stack [
+    n ((1/4) ~> "<0 7.4 5 <10.3 4>>" + 12),
+    n ("<7.8 2.3 3 <10 -3.8> 5.21>")
+    ] + 3
+  # s "superfm"
+  # legato (rangex 1.1 2.0 rand)
+  # pF "amp1" 1
+  # pF "amp2" 0
+  # pF "amp3" 0
+  # pF "amp4" 0
+  # pF "amp5" 0
+  # pF "amp6" 0
+  # pF "ratio2" 0.51
+  # pF "ratio3" 0.251
+  # pF "mod11" 0.7
+  # pF "mod12" 2
+  # pF "mod13" 1
+  # pF "eglevel11" 0
+  # pF "eglevel12" 1
+  # pF "eglevel13" 1
+  # pF "eglevel14" 0
+  # pF "eglevel21" 0.2
+  # pF "eglevel22" 0.7
+  # pF "eglevel23" 1
+  # pF "eglevel24" 0.1
+  # pF "egrate11" 1
+  # pF "egrate12" 0.5
+  # pF "egrate13" 0.5
+  # pF "egrate14" 0.25
+  # pF "egrate21" 0.5
+  # pF "egrate22" 0.5
+  # pF "egrate23" 0.5
+  # pF "egrate24" 0.5
+  # pF "feedback" (rangex 0.01 1.5 rand)
+  # pF "lfofreq" (rangex 2 5 rand)
+  # pF "lfodepth" (rangex 0.001 0.009 rand)
+  -- # gain 0.8
+  # room 0.4
+  # size 0.94
+  # tremdp (rangex 0.05 0.3 rand)
+  # tremr (rangex 2 5 rand)
+  # scram (rangex 0.15 0.4 rand)
+  # pan (range 0.3 0.7 rand)
+
+d1
+  $ fast 6
+  $ jux rev
+  $ supertask 2 3
+  $ s "sd" # nudge 0.4 |* g 1.5
+  |* sp "[1.3 2.7]"
+  # bs 0.5

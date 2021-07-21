@@ -31,7 +31,18 @@ s.waitForBoot {
     ~d10 = ~dirt.orbits[9];
   );
 
-  ~dirt.orbits.do { |x|
+  // ~dirt.orbits.do { |x|
+  //   var clouds = GlobalDirtEffect(\global_mi_clouds, [\cloudspitch, \cloudspos, \cloudssize, \cloudsdens, \cloudstex, \cloudswet, \cloudsgain, \cloudsspread, \cloudsrvb, \cloudsfb, \cloudsfreeze, \cloudsmode, \cloudslofi]);
+  //   var verb = GlobalDirtEffect(\global_mi_verb, [\verbwet, \verbtime, \verbdamp, \verbhp, \verbfreeze, \verbdiff, \verbgain]);
+  //   x.globalEffects = x.globalEffects
+  //     .addFirst(clouds)
+  //     .addFirst(verb);
+  //
+  //   x.initNodeTree;
+  //   x.set(\fadeTime, 0.01);
+  // };
+
+  ~dirt.orbits[0].do { |x|
     var clouds = GlobalDirtEffect(\global_mi_clouds, [\cloudspitch, \cloudspos, \cloudssize, \cloudsdens, \cloudstex, \cloudswet, \cloudsgain, \cloudsspread, \cloudsrvb, \cloudsfb, \cloudsfreeze, \cloudsmode, \cloudslofi]);
     var verb = GlobalDirtEffect(\global_mi_verb, [\verbwet, \verbtime, \verbdamp, \verbhp, \verbfreeze, \verbdiff, \verbgain]);
     x.globalEffects = x.globalEffects

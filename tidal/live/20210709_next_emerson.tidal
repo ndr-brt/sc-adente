@@ -1,0 +1,8 @@
+
+      d1
+        $ stutWith 6 "e" (# pan rand)
+        $ si (|* sp "q")
+        $ s "eleas:3/2"
+        |* sp "-1"
+        # tantanh 1.8
+        # wl (trigger 1 $ range 0 100 $ slow 10 $ envL)

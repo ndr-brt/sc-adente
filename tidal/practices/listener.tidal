@@ -1,0 +1,16 @@
+
+
+chunk 7 ((ply 8).(|* speed 8).(# pan rand))
+$ chew 4 "{2 3 1}%{1 2 2}%4"
+$ every 4 (chew "3 6" "3 <2 1>*2")
+$ sometimesBy "0.5" (# squiz "12 18")
+$ superimpose (hurry "1.5 3 6")
+$ superimpose ((hurry "9 [6 3]*2").(|* gain 0.7).(# pan perlin))
+$ superimpose (hurry "q")
+$ n "{0 2 1}%{2 1}%{1 2}%4"
+# s "if"
+# shape 0.5
+# delay "h"
+# delaytime "x"
+# delayfb "h"
+-- # gain 0.8

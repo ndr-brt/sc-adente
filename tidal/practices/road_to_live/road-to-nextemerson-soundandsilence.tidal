@@ -1,0 +1,20 @@
+do
+  bpm 111
+  all $ id
+    .(# verb 0.6 0.7 "t" 0.2)
+    .(# tanh 1.6)
+    -- .(# boo)
+    .(|* g 0.9)
+    .(# cloudsblend 0.3 0.7 0.37 0.5)
+    .(# clouds 0.1 0.8 0.05 0.95)
+    -- .(# cloudsgain 0)
+    -- .(# wl (qtrigger 1 $ range 0 100 $ slow 40 $ envL))
+
+let dial number p = do once $ s "eleav" # n number |* g 0.95 # pan p
+let dial number = do once $ s "eleav" # n number |* g 0.95
+
+dial 47 (segment 3 $ rand)
+
+d1
+  $ chew "<3 2 5>" 4
+  $ s "eleas:14"

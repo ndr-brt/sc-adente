@@ -7,14 +7,16 @@ vid.src = '/home/andrea/Videos/elea_9003.mp4'
 s0.init({ src: vid })
 
 a.show()
-a.setSmooth(0.7)
+a.setSmooth(0.2)
 a.setBins(4);
 
 src(s0)
-  .rotate(({time}) => (time/50)%360, 0.4)
-  .pixelate(({time}) => 1920*a.fft[1], ({time}) => 1080*a.fft[2])
-  .kaleid(3)
+  // .kaleid(({time}) => ((time%60)/10)+1)
+  .kaleid(({time}) => ((time%20)/60)+2)
+  .scale(({time}) => (time%20)/40 + 0.3)
+  .rotate(220, ({time}) => Math.sin(time%100)/50000)
   .thresh(0.5)
-  .contrast(0.7)
-  .brightness(({time}) => a.fft[1] - 0.8)
+  .contrast(1)
+  .brightness(({time}) => a.fft[3] - 0.9) //  - 0.8
+  // .brightness(({time}) => -0.2) //  - 0.8
   .out()

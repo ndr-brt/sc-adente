@@ -60,6 +60,7 @@ let ac = accelerate
     sdel x t = xsdelay x # tsdelay t
     kru k c = krush k # kcutoff c
     scon r i = real r # imag i
+    ps rate disp = (pF "psrate") rate # (pF "psdisp") disp
 
     boo = hp 56 0.4
     down v = sustain v # ac "-1"
