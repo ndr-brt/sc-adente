@@ -11,7 +11,7 @@ s.options.maxLogins = 8;
 s.waitForBoot {
   ~dirt = SuperDirt(2, s); // two output channels, increase if you want to pan across more channels
   loadRelative("synths/*.scd");
-  ~dirt.doNotReadYet = true;
+  // ~dirt.doNotReadYet = true;
   ~dirt.loadSoundFiles;
   ~dirt.loadSoundFiles("~/.sam-ples/*");
 
@@ -31,18 +31,8 @@ s.waitForBoot {
     ~d10 = ~dirt.orbits[9];
   );
 
-  // ~dirt.orbits.do { |x|
-  //   var clouds = GlobalDirtEffect(\global_mi_clouds, [\cloudspitch, \cloudspos, \cloudssize, \cloudsdens, \cloudstex, \cloudswet, \cloudsgain, \cloudsspread, \cloudsrvb, \cloudsfb, \cloudsfreeze, \cloudsmode, \cloudslofi]);
-  //   var verb = GlobalDirtEffect(\global_mi_verb, [\verbwet, \verbtime, \verbdamp, \verbhp, \verbfreeze, \verbdiff, \verbgain]);
-  //   x.globalEffects = x.globalEffects
-  //     .addFirst(clouds)
-  //     .addFirst(verb);
-  //
-  //   x.initNodeTree;
-  //   x.set(\fadeTime, 0.01);
-  // };
-
-  ~dirt.orbits[0].do { |x|
+  ~dirt.orbits.do { |x|
+  // ~dirt.orbits[0].do { |x|
     var clouds = GlobalDirtEffect(\global_mi_clouds, [\cloudspitch, \cloudspos, \cloudssize, \cloudsdens, \cloudstex, \cloudswet, \cloudsgain, \cloudsspread, \cloudsrvb, \cloudsfb, \cloudsfreeze, \cloudsmode, \cloudslofi]);
     var verb = GlobalDirtEffect(\global_mi_verb, [\verbwet, \verbtime, \verbdamp, \verbhp, \verbfreeze, \verbdiff, \verbgain]);
     x.globalEffects = x.globalEffects
@@ -54,6 +44,8 @@ s.waitForBoot {
   };
 
   ~dirt.set(\speedFreq, 1);
+
+  ~looper = TidalLooper(~dirt);
 
   // // Print osc messages
   // ~dirt.addModule('post',
