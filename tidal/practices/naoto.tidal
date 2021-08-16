@@ -1,4 +1,3 @@
-
 do
   bpm 104
   all $ id
@@ -82,7 +81,7 @@ do
     -- # sdel 0.9 210
     # lp 1800 0.1
     -- # rvb 0.3 0.4
-    # tremolo 7 "<0!3 1>" -- tremolo con squarewave!
+    # tremolo 7 "<0!3 1>"
     # boo
 
 
@@ -438,7 +437,7 @@ do
 do
   bpm 99
   all $ id
-    .(|* g 0.7)
+    -- .(|* g 0.7)
   d1
     $ sh 4 (|* g 0.8)
     $ every 7 (shut)
@@ -465,6 +464,8 @@ do
 
 do
   bpm 90
+  all $ id
+    -- .(rarely (slow (irand 3 + 1)))
   d1
     $ chunk 6 (# bs (slow 7 tri))
     $ n "5*128"
@@ -475,8 +476,45 @@ do
     # clouds 0.8 0.5 0.1 0.8
     # verb 0.8 0.8 0.2 0.2
     # boo
+    # tanh 8
     |* g 0.8
   d2
-    $ stutWith 8 "0.25s" (|* sp "2")
-    $ juxBy (sin*2-1) rev.press
-    $ euclid 5 8 $ s "kk" # tanh 8 # boo
+    -- $ shut
+    $ slow "5h"
+    $ while (binary 123) (ply 4)
+    $ stutWith 8 "{0.25s!3 0.75s 0.5s}%3" ((|* sp "3").(|+ tanh 4).(# pan sine))
+    $ si (sb 0.7 press)
+    $ euclid "{7 3!2 5!2}%2" 8
+    $ s "kk"
+    # tanh 16 # boo
+    -- # shape 0.9
+
+do
+  bpm 104
+  d1
+    $ stripe "{2 16 64 128}%5"
+    $ s "naoto:3(3,4)"
+    # end "{s 0.5s}%3"
+    # tanh 300
+    # pan "[0|1]"
+    |* g 0.5
+    # lp (rrand 400 15000) (rrand 0 0.4)
+    # verb 0.5 0.5 0.8 0.8
+  d2
+    $ sb "e" (striateBy 8 "q")
+    $ stutWith "{3 2 5 4}%7" "{s 0.5s}%3" ((# pan rand).(|* sp "<-1 1>"))
+    $ loopAt 1
+    $ s "naoto:2"
+    # tanh 30
+    |* sp "<1!4 -1>"
+    # hp 56 0.7
+    # wl 10
+    # verb 0.5 0.5 0.8 0.8
+
+
+do
+  bpm 60
+  d1
+    $ juxBy "h" (|* sp "-1")
+    $ striateBy 20 "h"
+    $ s "naoto:6"
