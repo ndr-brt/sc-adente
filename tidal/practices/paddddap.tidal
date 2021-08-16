@@ -1,0 +1,46 @@
+
+d6
+  $ slow 2
+  $ stack [
+    n ((1/4) ~> "<0 7.4 5 <10.3 4>>" + 12),
+    n ("<7.8 2.3 3 <10 -3.8> 5.21>")
+    ] + 3
+  # s "superfm"
+  # legato (rangex 1.1 2.0 rand)
+  # pF "amp1" 1
+  # pF "amp2" 0
+  # pF "amp3" 0
+  # pF "amp4" 0
+  # pF "amp5" 0
+  # pF "amp6" 0
+  # pF "ratio2" 0.51
+  # pF "ratio3" 0.251
+  # pF "mod11" 0.7
+  # pF "mod12" 2
+  # pF "mod13" 1
+  # pF "eglevel11" 0
+  # pF "eglevel12" 1
+  # pF "eglevel13" 1
+  # pF "eglevel14" 0
+  # pF "eglevel21" 0.2
+  # pF "eglevel22" 0.7
+  # pF "eglevel23" 1
+  # pF "eglevel24" 0.1
+  # pF "egrate11" 1
+  # pF "egrate12" 0.5
+  # pF "egrate13" 0.5
+  # pF "egrate14" 0.25
+  # pF "egrate21" 0.5
+  # pF "egrate22" 0.5
+  # pF "egrate23" 0.5
+  # pF "egrate24" 0.5
+  # pF "feedback" (rangex 0.01 1.5 rand)
+  # pF "lfofreq" (rangex 2 5 rand)
+  # pF "lfodepth" (rangex 0.001 0.009 rand)
+  -- # gain 0.8
+  # room 0.4
+  # size 0.94
+  # tremdp (rangex 0.05 0.3 rand)
+  # tremr (rangex 2 5 rand)
+  # scram (rangex 0.15 0.4 rand)
+  # pan (range 0.3 0.7 rand)

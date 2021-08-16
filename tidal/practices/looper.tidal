@@ -1,0 +1,32 @@
+let linput = pI "linput"
+    lname = pS "lname"
+
+once $ s "looper"
+once $ s "looper" # linput 1
+once $ s "looper" # linput 1 # lname "uuuu"
+once $ s "looper" # linput 1 # lname "iiii"
+once $ s "looper" # linput 1 # lname "boom"
+once $ s "looper" # linput 1 # lname "gnar"
+once $ s "looper" # linput 1 # lname "bccc"
+once $ s "looper" # linput 1 # lname "oooo"
+hush
+
+do
+  bpm 130
+  d1 $ s "uuuu"
+  -- d1 $ s "msg*4" # shape "0.4 0!3"
+  -- d2 $ s "uuuu(3,8)" # end "t"
+  -- d3 $ striateBy 256 "0.125s" $ s "uuuu"
+  -- d4 $ chop 4 $ h 4 $ s "iiii" # lpfbus 1 (segment 32 $ slow 12 $ rsin 2000 8000) # lpqbus 2 (segment 32 $ slow 10 $ rsin 0 0.3)
+  -- d5 $ stutWith 3 "{s e}%3" (|* sp 2) $ s "boom(5,8)" # boo
+  -- d6 $ chew "{3 4 6}%3" "{3 2 1}%3" $ sh "t" id $ sh "3" id $ s "~ gnar/2" |* sp 3 # ac "-1"
+  -- d7 $ slice 16 "{0 2 1 6 5*2 11}%{8 16 4}%8" $ s "bccc" # coarse 4 # pan (rand)
+  -- d8 $ rev $ s "tcia(3,8)"
+
+do
+  d1
+    $ sh "t" id
+    -- $ sh 1.5 id
+    $ striateBy 32 0.125
+    $ s "loop"
+    |* g 0.8
