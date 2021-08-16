@@ -17,6 +17,6 @@ src(s0)
   .rotate(220, ({time}) => Math.sin(time%100)/50000)
   .thresh(0.5)
   .contrast(1)
-  .brightness(({time}) => a.fft[3] - 0.9) //  - 0.8
+  .brightness(({time}) => a.fft[3] - 0.5) //  - 0.8
   // .brightness(({time}) => -0.2) //  - 0.8
   .out()

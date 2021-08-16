@@ -1,0 +1,14 @@
+
+
+  stutWith "{2 1 3 4 5}%3" "{x 0.5x 0.25x 0.125x}%3"
+    ((|* speed "1.5").(|+ coarse 3))
+  $ slow 2
+  $ chew "{3 6}%2" "<0 1*{2 4}%3 2*2>"
+  $ while "{t f!3}%{5 10}%2" (jux (press.(# lpf 2400).(# lpq 0.8)))
+  $ superimpose ((hurry "{2 1.5}%4").(|* gain 0.7))
+  $ superimpose ((hurry "h").(ply 4096))
+  $ speed "[{1 1.12 0.87 ~ 1.43}%{3 6}%7]"
+  # s "sf"
+  # n "{0 3 4 10 14 21}%3"
+  |* speed 0.2
+  # room 0.9 # shape 0.8 # delay "w" # crush 2 # distort 0.8
