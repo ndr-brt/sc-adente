@@ -1,0 +1,32 @@
+
+import qualified Data.Map.Strict as Map
+
+
+trigg :: Pattern b -> Pattern b
+trigg pat = pat {query = q}
+ where q st = query (rotR (offset st) pat) st
+       offset st = fromMaybe 0 $ do
+                                    -- ctrl <- do i <- Map.lookup "_id_" (controls st)
+                                    let values = controls st
+                                    -- liftIO $ putStrLn "cul"
+                                    -- case values of
+                                    --   Just a -> liftIO $ putStrLn $ "I'm so happy you chose "
+                                    --   Nothing -> liftIO $ putStrLn $ "So sorry;  is not a valid option."
+                                    -- let ctrl = "_t_" ++ show (id st)
+                                    let ctrl = "_t_1"
+                                    -- i <- Map.lookup "_id_" values
+                                               -- return "_t_1"
+                                    -- v <- Map.lookup ctrl values
+                                    -- return (fromMaybe 0 $ getR v)
+                                    return 120
+       -- id st = fromMaybe 0 $ Map.lookup "_id_" (controls st) >>= getI
+       id st = 1
+
+import Prelude hiding (lookup)
+import Control.Monad.IO.Class
+
+show (d1 $ s "bd" # g 0)
+
+d1 $ s "bd*8" # g (trigger 1 $ slow 4 $ range 1 0 $ envL)
+
+d1 $ s "bd*8" # g (trigg $ slow 4 $ range 1 0 $ envL)

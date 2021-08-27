@@ -1,0 +1,141 @@
+
+
+do
+  bpm 83
+  d1
+    $ chew 2 2
+    $ while (slow 3 $ binary (irand 255)) ((# coarse 8).(# bs rand))
+    $ juxBy (slow 2 sine*2-1) (press)
+    $ striateBy "{128 100 110 95 140}%3" "1%64"
+    $ n ("{0 8 2 27 18 22}%6")
+    # s "eleas"
+    # tanh 8
+    # verb 0.7 0.7 0.1 0.1
+
+do
+  bpm 99
+  d1
+    $ plyWith 32 ((# pan rand))
+    $ striateBy 12 "1%32"
+    $ n "{~ 2 ~ {0 ~}%5 ~ 19 ~!3}%6"
+    # s "eleas"
+    # tanh 3
+    # verb 0.1 0.1 0.1 0.1
+
+do
+  bpm 97
+  d1
+    -- $ chew "{4 2 8}%4" "<0!3 1>*2"
+    -- $ plyWith "<2 2 2>" ((# pan sine).(# cut 1))
+    $ striateBy 8 "7e"
+    $ stack [
+      n "0!16 1*4 [4*2 0]"
+      ,
+      fast "<8 4>" $ n "~ 6!<18 12 21>" # ac "-1"
+    ]
+    # s "dald"
+    -- # tanh 2
+    # verb 0.8 0.5 0.1 0.1
+    # cloudsblend 0.5 0.8 0.2 0.5
+
+
+let c = clouds
+    cb = cloudsblend
+    v = verb
+
+do
+  bpm 101
+  d1
+    $ chunk 4 (|- n 3)
+    $ chunk 7 (|+ n 2)
+    $ chunk 8 ((|+ n 1).(slow 2))
+    -- $ chew "12" "{2 3}%2"
+    -- $ jux (rev)
+    -- $ arpeggiate
+    $ while (slow 2 $ binary (irand 255)) (plyWith 2 ((|- ac "q").(|* sp 2).(# pan rand)))
+    $ stack [
+      -- striateBy "{2 4 8}%3" "<4e 5e>" $ n "0 1 4 2"
+      -- ,
+      sh 2 id $ n "~ 3(3,4)" # shape 0.3
+      -- ,
+      -- n "{~ 5 ~}%6" |* sp "4"
+    ]
+    # s "dald"
+    # tanh 40
+    -- # v 0.7 0.7 0.1 0.1
+    -- # cb 0.7 0.8 0.39 0.8
+    -- # c 0.7 0.9 0.06 0.9
+    |* g 0.8
+
+
+do
+  bpm 98
+  d1
+    $ ply "512"
+    $ chew 2 "<0 1>"
+    $ chunk 13 ((|* sp 2).(ply 2))
+    $ chunk 5 (|* sp "q")
+    $ chunk 8 (|* sp "h")
+    $ jux rev
+    $ stack [
+      striateBy 32 "0.5s" $ n "0 1 6 4"
+      ,
+      arpeggiate
+      $ rarely (|- n 1)
+      $ fast (iter 3 $ "2 1 4") $ n "~ 3*2" |+ tanh 6
+      ,
+      stutWith 5 "{s 0.5s}%3" (# pan rand) $ n "~!3 1" |* sp 2 |+ tanh 2
+    ]
+    # s "dald"
+    # tanh 2
+    # v 0.7 0.7 0.2 0.2
+    # cb 0.5 0.8 0.8 0.8
+    # c 0.7 0.8 0.01 0.1
+
+
+do
+  bpm 99
+  d1
+    $ chunk 7 (|/ sp "h")
+    $ chunk 9 (|/ sp "q")
+    $ while (slow 8 $ binary 111) (|* sp 2)
+    $ juxBy (sin*2-1) rev
+    -- $ ply 4
+    $ stack [
+      striateBy "64" "s" $ n "0 1 3 0",
+      rarely ((stutWith 12 "0.0677s" (|* sp "0.9"))) $ n "~ 3*2",
+      n "4*2" # end 0.1
+    ]
+    # s "dald"
+    # tanh 3
+    # v 0.4 0.4 0.1 0.1
+    # cb 0.3 0.7 0.3 0.5
+    # c 0.3 0.3 0.1 0.5
+
+
+
+
+do
+  bpm 99
+  d1
+    $ jux rev
+    $ striateBy 128 "7e"
+    $ n "[0 .. 5]"
+    # s "sf"
+    # tanh 2
+    # v 0.3 0.3 0.1 0.1
+    # cb 0.5 0.5 0.35 0.5
+    # c 0.2 0.5 0.1 0.5
+
+
+do
+  bpm 99
+  all $ (# v 0.5 0.5 0.1 0.1).(# tanh 10)
+  d1
+    $ stack [
+      jux (press.rev) $ fast (iter 3 $ scramble 3 $ "3 1 6 12") $ n "[0 2 3]",
+      chunk 4 (ply 3) $ n "4(13,18)" |* g 0.7 # legato 0.1 # pan sine
+    ]
+    # s "dald"
+    -- # cb 0.5 0.5 0.35 0.5
+    -- # c 0.2 0.5 0.1 0.5
