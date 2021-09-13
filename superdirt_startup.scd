@@ -45,7 +45,7 @@ s.waitForBoot {
 
   ~dirt.set(\speedFreq, 1);
 
-  ~looper = TidalLooper(~dirt);
+  // ~looper = TidalLooper(~dirt);
 
   // // Print osc messages
   // ~dirt.addModule('post',
