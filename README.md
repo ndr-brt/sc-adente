@@ -21,5 +21,5 @@ https://github.com/Olbos/Tidal-Olbos
 mi-ugens:
 https://github.com/v7b1/mi-UGens
 
-mkplugins:
-https://github.com/madskjeldgaard/mkplugins
+PortedPlugins:
+https://github.com/madskjeldgaard/portedplugins
