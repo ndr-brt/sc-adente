@@ -1,0 +1,13 @@
+
+xfadeIn 1 8
+  $ chunk 3 ((|* sp "-2").(jux (|* sp "4%5")))
+  $ sh 3 (|* g 0.8)
+  $ sh "q" id
+  $ s "eleas:30"
+  # lp 1800 0.2
+  # dis 200000000000000000
+  |+ tanh 300000000000000
+  # boo
+  # wl 90000
+  # cb 0.9 0.9 (rrand 0 0.4) 0.9
+  # c (slow 7 tri) (slow 4 sine) 0.01 0.9

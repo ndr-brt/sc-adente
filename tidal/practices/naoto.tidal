@@ -278,15 +278,6 @@ do
     $ s "naoto:9"
 
 do
-  bpm 110
-  d1
-    $ sh "2" (|* sp "2")
-    $ sh "h" id
-    $ slice 8 "{<0 1 3> 7*2}%{3.5 7}%2"
-    $ s "naoto:10"
-    # legato 1
-
-do
   bpm 83
   d1
     $ layer [
@@ -308,13 +299,6 @@ do
     # verb 0.7 0.7 0.3 0.3
     # cloudsblend 0.1 0.4 0.3 0.4
     # clouds 0.8 0.6 0.1 0.8
-
-do
-  -- NO! troppo lungo il numero 11
-  bpm 124
-  d1
-    $ slice 512 "[1 <43 154>]"
-    $ s "naoto:11"
 
 
 do
@@ -413,7 +397,7 @@ do
     $ sh "h" (rev.("e" ~>))
     $ plyWith 8 (|* sp "-1.5")
     $ s "naoto:3"
-    # tanh 1
+    # tanh 2
     |* sp "h"
     # boo
     # verb 0.5 0.5 0.2 0.2
@@ -453,8 +437,8 @@ do
     $ sb 0.1 (stutWith 4 "q" (|* sp "h"))
     $ s "~ kk/2 ~!2"
     |* sp "h"
-    # tanh 20
-    # verb 0.9 0.9 0.2 (segment 16 rand)
+    # tanh 10
+    # verb 0.8 0.8 0.2 (segment 16 rand)
     -- # rvb 0.99 0.99
     -- # cloudsblend 0.8 0.8 0.12 0.8
     # boo
@@ -490,6 +474,7 @@ do
     -- # shape 0.9
 
 do
+  -- NOT BAD
   bpm 104
   d1
     $ stripe "{2 16 64 128}%5"
@@ -507,13 +492,13 @@ do
     $ s "naoto:2"
     # tanh 30
     |* sp "<1!4 -1>"
-    # hp 56 0.7
+    # hp 56 0.5
     # wl 10
     # verb 0.5 0.5 0.8 0.8
 
 
 do
-  -- non male giocare con il clouds
+  -- non male giocare con il clouds (MAH)
   bpm 20
   d1
     $ si (# ripples 0.58 0.7 0.5)
@@ -522,8 +507,8 @@ do
     $ juxBy "h" (|* sp "-1")
     $ striateBy 30 "q"
     $ s "naoto:6"
-    # cloudsblend 0.6 0.8 0.2 0.1
-    # clouds 0.4 0.2 0.01 0.4
+    # cloudsblend 0.6 0.8 0.2 0.3
+    # clouds 0.1 0.2 0.01 0.4
     # cloudspitch rand
 
 do
@@ -599,6 +584,7 @@ do
     -- # clouds 0.1 0.2 0.1 0.3
 
 do
+  -- IDEE BUONE MA FA SCHIFO
   bpm 99
   d1
   -- $ shut
@@ -634,6 +620,7 @@ do
     # pan perlin
 
 do
+  -- ANCHE NO
   bpm 100
   d1
     $ jux press
@@ -742,20 +729,6 @@ do
     |* sp "q"
     # cut 2
 
-do
-  bpm 90
-  d1
-    $ rarely (ply 3)
-    $ chunk 24 (# ac "-1")
-    $ sh 2.5 ((# pan sine).(|+ cut 2))
-    $ sh "h" (|+ cut 4)
-    $ sh 2 (|+ cut 1)
-    $ stut 6 1 "s"
-    $ s "naoto:6"
-    # tanh 4
-    # boo
-    # cut 1
-
 
 do
   bpm 90
@@ -805,6 +778,7 @@ do
   all $ id
   d1
     -- $ bite 5 "0*5h"
+    -- $ fast (iter 3 $ "1 2 h 4")
     $ bite 5 (iter 5 $ "<[3 4 ~ 2 1]!4 0*5>")
     $ iter 5
     $ chunk 3 (slow 2)
@@ -873,17 +847,51 @@ do
     # verb 0.8 0.5 0.1 0.1
 
 do
+  -- SI!!!
   bpm 50
   d1
-    $ chunk 6 (chew 3 3)
-    $ sh "f" id
+    -- $ chew 2 0
+    -- $ whenmod 2 4 (chew 2 0)
+    $ slow (iter 2 $ "1 2")
+    $ stutWith 4 "e" ((|* sp "3q").(|* g 0.96))
+    -- $ chunk 18 (ply 3)
+    $ chunk 9 (si (("3q" <~).(chew 2 0)))
+    $ chunk 6 (si (("w" <~).(chew 3 0)))
+    -- $ sh "f" id
     $ layer [
-      id
+      -- id
+      (sh "f" id).(|* g 0.6).(# tanh 2)
+      ,
       -- ,
-      ply 16.(# cut 1).(# pan (slow 2 tri))
+      (ply 32).(# cut 1).(# pan (slow 2 tri))
     ]
-    $ striateBy "12 24 6 18" "1%16"
+    $ striateBy (iter 3 $ "12 24 6 18") "1%16"
     $ n "[9 3, ~ [4 3] 6]"
     # s "naoto"
-    # verb 0.9 0.8 0.2 0.2
-    # cloudsblend 0.5 0.6 0 0.8
+    # verb rand rand 0.2 0.2
+    # cloudsblend 0.5 0.6 0 perlin
+    # c 0.2 0.5 0.1 0.6
+    -- # tanh 2
+
+
+do
+  -- sto qua non sarebbe male per un pezzo!
+  bpm 108
+  d1
+    $ plyWith 3 ((|* sp 4).(|+ cut 1))
+    $ every 4 (chew "2 8 1 4" "<1 2 0>*2")
+    $ sh "h" (|+ cut 3)
+    $ juxBy (slow 2 $ sin*2-1) (rev.press.(|+ cut 1))
+    $ fast "<[1 4]!3 2>"
+    $ striate 40
+    $ stack [
+      n "10*4" # cut 14
+      -- ,
+      -- fast "3 1 2" $ n "<3 5 4 ~>" # cut 22
+    ]
+    # s "naoto"
+    # tanh 10
+    -- # wl 100
+    -- # v 0.7 0.7 0.1 0.1
+    # cb rand 0.6 0.2 0.8
+    # c 0.2 0.8 0.05 rand

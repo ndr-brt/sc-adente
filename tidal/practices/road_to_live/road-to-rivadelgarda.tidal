@@ -139,3 +139,298 @@ do
     # s "dald"
     -- # cb 0.5 0.5 0.35 0.5
     -- # c 0.2 0.5 0.1 0.5
+
+do
+  bpm 99
+  d1
+    $ swing 3
+    $ chew 4 "{0 3 1}%4"
+    $ ply (iter 4 $ "4 2 8 16")
+    $ fast (scramble 3 $ "1 2")
+    $ off "t" (press.(|* sp 2).(# pan sine))
+    $ off "x" (rev.(|* sp "h"))
+    $ n "[0 .. 8]"
+    # s "industrial"
+    # tanh 10
+    # v 0.7 0.7 0.1 0.1
+    # cb 0.5 0.7 0.3 0.8
+    # c 0.1 0.8 0.05 0.8
+
+
+do
+  bpm 99
+  d1
+    -- $ bite 8 "<0 5>*4"
+    $ chunk 6 (plyWith 4 ((|* sp 2).(# pan "[0|1]")))
+    $ while (iter 3 $ "<f!4 t!2>") (chew 2 0)
+    $ sh "t" id
+    $ sh 2 (# pan sine)
+    $ (mask (binary 123) $ fast "{2 1}%3" $ iter 7 $ n "[0 1 2 3 4]")
+    # s "dald"
+    # v 0.5 0.5 0.1 0.1
+    # tanh 20
+    # lpf 5000
+    -- # boo
+    # shape 0.8
+    -- # cb 0.5 0.6 0.1 0.7
+    -- # c 0.2 0.8 0.1 0.4
+
+do
+  bpm 99
+  d1
+    $ fast 4
+    $ jux press.rev
+    $ stack [
+      n "0(5,6)" # shape 0.6,
+      fast "[16 8]*{4 8}%3" $ n "1"
+    ]
+    # s "dald"
+    # tanh 10
+
+do
+  bpm 97
+  d1
+    $ jux (press.rev)
+    $ striateBy 16 "15s"
+    $ stutWith 3 "s" ((|* sp 2).(|+ cut 3))
+    $ chew 2 "0"
+    $ sh 2 ((|+ cut 1).(# pan sine))
+    $ sh "h" (|+ cut 2)
+    $ chunk 6 (|+ n 1)
+    $ stack [
+      mask (binary 111) $ n "6(12,16)",
+      mask (inv $ binary 44) $ n "0(16,16)",
+      fast "4 2" $ n "~ 1"
+    ]
+    # s "dald"
+    # cut 1
+    # verb 0.2 0.2 0.1 0.1
+    # tanh 4
+
+do
+  bpm 98
+  d1
+    -- $ ply 32
+    -- $ chew 2 "1 0"
+    -- $ slow (fast 6 $ "h 3%2")
+    -- $ stutWith 6 "0.5s" ((# pan sine).(|- ac "h"))
+    $ sh 4 ((|* g 0.9).(|* sp 8).(#pan rand).(# cut 1))
+    $ sh "h" id
+    $ stut 12 1 "{1%128 1%64 1%256}%7"
+    $ jux press.rev
+    $ n ("[{0 3 1 2}%8]")
+    # s "dald"
+    # sp (iter 6 $ "{1 -1}%3")
+    # tanh 10
+    # cut 2
+    # v 0.4 0.4 0.1 0.1
+
+do
+  bpm 98
+  let fact = 8
+  d1
+    -- $ chew 2 "<1 0>"
+    -- $ sh "h" (# shape 0.8)
+    -- $ sh "2" ((|* g 0.9).(|* sp 4).(# cut 1).(# pan sine))
+    $ stutWith fact (1/(8*fact)) (# pan rand)
+    $ n "{0 3 1 2}%8"
+    # s "dald"
+    # tanh 10
+    # v 0.7 0.7 0.2 0.2
+    # cb 0.5 0.8 0.42 0.9
+    # cb 0.2 0.8 0.02 rand
+
+
+
+do
+  bpm 111
+  all $ id
+    .(# verb 0.6 0.7 "t" 0.2)
+    .(# tanh 1.8)
+    .(|* g 0.9)
+    .(# cloudsblend 0.3 0.7 0.37 0.5)
+    .(# clouds 0.1 0.8 0.05 0.95)
+
+
+
+xfadeIn 1 8
+  $ chunk 3 ((|* sp "-2").(jux (|* sp (4/5))))
+  $ sh 3 (|* g 0.8)
+  $ sh "q" id
+  $ s "eleas:30"
+  # lp 1800 0.2
+  # dis 100
+
+
+do
+  bpm 102
+  d1
+    $ slow 8
+    $ ply 32
+    $ iter "7 2 5"
+    $ linger "<s!6 e!2>"
+    $ sh "q" id
+    $ while
+      (slow 3 $ binary (segment 1 $ irand 255))
+      ((# hp (slow 10 $ rsin 200 2000) (rrand 0 0.4)).(# pan tri).(ply 8).(db "h"))
+    $ striateBy "256" "1%32s"
+    $ n (every 4 rev $ scramble 3 $ "{9 3 {7 2}%6 {4 1}%3 10 5}%8")
+    # s "naoto"
+    # tanh 8
+    # v 0.4 0.4 0.1 0.1
+    # cb 0.5 0.9 0.3 0.7
+    # c 0.4 0.8 0.1 0.5
+
+do
+  bpm 111
+  d1
+    $ every 3 (chew 2 "1")
+    $ chunk 10 (|* sp (4/5))
+    $ chunk 12 (|* sp 2)
+    $ sb 0.2 (|* sp "-1")
+    $ stutWith 2 "s" (|* sp 2)
+    $ sh "q" (|+ cut 1)
+    $ fast "<[2 4 1 h]!4 1.5!2>"
+    $ jux (press.rev.(|+ cut 1))
+    $ striateBy 40 "1%32"
+    $ n "<[0*16] [3*<3!2 5>] [4*4]!3 [6*3]!2>"
+    # s "naoto"
+    # tanh 1000000000000
+    # cut 1
+    # v 0.8 0.8 0.1 0.5
+    # cb 0.1 0.8 rand 0.8
+    # c 0.1 0.45 0.05 0.7
+
+
+do
+  bpm 108
+  d1
+    $ chew 120 0
+    $ chunk 10 (|* sp (4/5))
+    $ chunk 12 (|* sp 2)
+    $ sh "h" (|+ cut 2)
+    $ fast "<[2 4 1 h]!3 [3h]>"
+    $ juxBy (sine*2-1) (press.rev.(|+ cut 1).(|* sp "-1"))
+    $ striate 40
+    $ n "<4 3 8 10 9>*{1 4 2}%5"
+    # s "naoto"
+    # cut 1
+    # tanh 1000000000000
+    # v 0.4 0.4 0.1 0.1
+    # cb 0.2 0.2 0.3 0.2
+    # c 0.1 0.5 0.1 0.5
+
+do
+  bpm 106
+  d1
+    -- $ while (binary (segment 1 $ r 255)) (ply 8)
+    -- $ chew "{3 6}%{3 4 5}%10" "<[0 2] [3 1] [5 3]!3>"
+    $ chew 32 0
+    $ bite (iter 6 $ "2 8 4") "<[2*2 3 1]!2 [0 .. 3]!2>"
+    $ chunk 10 (|* sp (4/5))
+    $ chunk 12 (|* sp "2 -2")
+    $ sh "e" (|+ cut 2)
+    $ fast "<[2 4 h 1] 3h>/2"
+    $ juxBy (sine*2-1) (press.rev.(|+ cut 1))
+    $ striate 40
+    $ n "{10 7 2 3}%{4 2 8}%7"
+    # s "naoto"
+    # cut 1
+    # tanh 100000
+    # v 0.5 0.5 0.1 0.3
+    # cb 0.5 0.6 0.3 0.7
+    # c 0.1 0.7 0.1 0.8
+
+do
+  bpm 103
+  d1
+    $ while (binary (segment 1 $ irand 255)) (sply 8)
+    $ chunk 8 (stutWith 4 "0.25s" (|* sp 2))
+    $ fast (slow "3 1 2" $ iter 3 $ "h 1 3q")
+    $ sb (rand) (|/ legato 3)
+    $ juxBy (sine*2-1) rev
+    $ sh "{x t}%3" (|* g 0.8)
+    $ sh "{2 1.5 4}%3" (id.rev)
+    $ stack [iter "4 8" $ s "kk ~!4 kk ss ~", brak $ s "hhat(<3 1 5>,16,1)" # ar 0.001 0.1]
+    # tanh 20
+    # boo
+    # legato (rand + 1)
+    # verb rand 0.3 0.1 0.1
+
+
+do
+  -- sto qua non sarebbe male per un pezzo!
+  bpm 108
+  d1
+    $ plyWith 3 ((|* sp 4).(|+ cut 1))
+    $ every 4 (chew "2 8 1 4" "<1 2 0>*2")
+    $ sh "h" (|+ cut 3)
+    $ juxBy (slow 2 $ sin*2-1) (rev.press.(|+ cut 1))
+    $ fast "<[1 4]!3 2>"
+    $ striate 40
+    $ stack [n "10*4" # cut 14]
+    # s "naoto"
+    # tanh 20
+    -- # wl 100
+    -- # v 0.7 0.7 0.1 0.1
+    -- # cb 0.5 0.6 0.2 0.8
+    -- # c 0.2 0.8 0.05 rand
+
+d1
+  $ sh "q" id
+  $ juxBy (sine*2-1) rev.press
+  $ stutWith "3 1 2" "x" (|* sp 2)
+  $ n "<1 [6 7 8] 3 4 6 6 [2 3 5]>*3"
+  # begin "-0.1 0.1 0.2"
+  # s "tabla"
+  # cb 0.5 0.8 (rrand 0 0.4) 0.4
+  # c 0.1 0.4 0.1 0.8
+
+hush
+
+
+
+
+
+
+
+do
+  bpm 105
+  d1
+    -- $ while (binary (segment 1 $ irand 256)) (ply "3 2 4")
+    $ ply "1 2 1.5"
+    $ chunk "7 5" (plyWith (iter 3 "2 3") (|* sp 3))
+    $ chunk "8 3 7" (|* sp 2)
+    $ sh "h q" (|+ cut 2)
+    $ fast "<[1 4]!3 2>"
+    $ jux (rev.press.(|+ cut 1))
+    $ striate 40
+    $ stack [
+      fast "<4 2 3>" $ n "10" |* g 1 # cut 7
+    ]
+    # s "naoto"
+    # tanh 100
+    -- # wl 200
+    # v 0.7 0.7 0.1 0.1
+    # cb 0.5 0.5 (rrand 0 0.4) 0.9
+    # c 0.3 0.4 0.05 0.5
+
+
+do
+  bpm 103
+  d1
+    $ ply 32
+    $ stutWith 3 "7e" (|+ cut 3)
+    $ chunk 7 ((|* sp 3).(# lp (slow 1.5 $ rsin 100 10000) 0.3))
+    $ fast (iter 3 "<[4 1]!4 2 [1 2]!2>")
+    $ juxBy (slow 2 $ sine*2-1) (press.rev.(|+ cut 1))
+    $ striate 40
+    $ stack [fast "8" $ n "10" # cut 1]
+    # s "naoto"
+    # tanh 20
+    # v 0.2 0.2 0.1 0.1
+
+
+do
+  bpm 111
+  d1
