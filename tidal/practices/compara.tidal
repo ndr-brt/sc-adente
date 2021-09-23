@@ -36,3 +36,17 @@ do
     # oc 5
     # lpf 4000
     # lpq 0.2
+
+do
+  bpm 102
+  let patte = "0 8 7 2 11 2 6 13"
+  d1
+    -- $ fast 2
+    $ sh "t" id
+    $ sh "e" id
+    $ sh "h" id
+    $ stack [
+      n (scale "minor" patte) # oc 6 # lpf (range 1000 5000 $ slow 4 $ sine) # lpq (rsin 0 0.2) # pan perlin
+    ]
+    # s "supercomparator"
+    # v 0.5 0.5 0.1 0.1
