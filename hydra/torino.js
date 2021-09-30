@@ -1,7 +1,8 @@
 vid = document.createElement('video')
 vid.autoplay = true
 vid.loop = true
-vid.src = '/home/andrea/Videos/duepiedi.mp4'
+vid.src = '/home/andrea/Videos/duuu.mp4'
+
 
 s0.init({ src: vid })
 
@@ -9,10 +10,9 @@ a.show()
 a.setSmooth(0.8)
 a.setBins(4);
 
-// noise(3,0.1)
 src(s0)
 .brightness(()=>(a.fft[3]-0.3)/2)
-.add(src(s0).kaleid(() => 4))
+.diff(src(s0).kaleid(4))
 // .mult(src(s0).modulateScale(o0).luma(()=>a.fft[1]).blend(o0))
 // .add(src(s0).modulateScale(o0).blend(o0))
 .contrast(5)
