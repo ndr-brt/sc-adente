@@ -10,6 +10,8 @@ let accent = pF "accent"
     structure = pF "structure"
     width = pF "width"
 
+let timescale = pF "timescale"
+
 -- benjolis params
     oscA = pF "oscA"
     oscB = pF "oscB"

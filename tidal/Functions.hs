@@ -205,3 +205,5 @@ quietenIn t = mapM_ (\i -> xfadeIn i t silence) [1 .. 16]
 loopStriate n k p = slow n ((linger (fromRational <$> (1/n)) . (~>) (fromRational <$> (k/n)) . striate (round <$> n)) p) |* speed (fromRational <$> (1/n)) # unit (pure "c")
 
 supertask x y pat = cat (take y $ iterate (ply x) pat)
+
+geom mult steps pat = fast (parseBP_E $ show steps) $ fast (cat $ take steps $ iterate (|* mult) 1) pat
