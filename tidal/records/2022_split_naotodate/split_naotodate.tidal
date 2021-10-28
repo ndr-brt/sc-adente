@@ -1,0 +1,142 @@
+
+do
+  -- A: UN DISCRETO INTERMEZZO
+  bpm 135
+  clutchIn 1 16
+    -- $ while (segment 8 $ binary (run 255)) (# scram 0.4)
+    $ db "f"
+    $ juxBy (sine*2-1) press
+    $ chunk 4 ((sply 2).rev)
+    $ stutWith (segment 2 $ irand 3 + 1) (segment 2 $ choose [1/16, 1/32]) (# pan perlin)
+    $ sh (1/12) id
+    $ sh "h" (# boo)
+    $ plyWith 8 (|* sp (segment 1 $ (tri + 1)))
+    $ s "naoto:5"
+    # verb rand rand saw tri
+    |* g 0.9
+
+
+
+do
+-- D: SEMBRA OK!
+  bpm 65
+  d1
+    $ iter "2 4"
+    $ every 2 brak
+    $ sh "{4 2}%3" (# pan rand)
+    $ sh "h" (rev.("e" ~>))
+    $ plyWith 8 (|* sp "-1.5")
+    $ s "naoto:3"
+    |* sp "h"
+    # boo
+    -- # cut (segment 1 $ irand 128)
+    # bp 180 0.01
+    |+ tanh 5
+    # lpf (range 4000 20000 $ slow 10 $ sine)
+    # lpq 0.1
+    # verb 0.5 0.5 0.2 0.2
+
+
+do
+  -- J: CI POTREBBE STARE?
+  bpm 50
+  d1
+  -- xfadeIn 1 3
+    -- $ shut
+    $ loopAt 1
+    $ stutWith 8
+      (every 3 rev $ iter 3 $ "{0.5s 0.125s s 2s 1.5s 0.25s}%{4 8}%3")
+      ((|* g 0.95).(|/ end (choose [2,1,0.5])).(# pan (fast 3 perlin)))
+    $ s "naoto:2"
+    # tanh 8
+    # verb 0.4 0.4 0.1 0.1
+    # wl (trigger 1 $ range 0 100 $ slow 10 $ envL)
+  d2 $ silence
+  -- xfadeIn 2 5
+    -- $ s "naoto:0*256"
+    -- # tanh 8
+    -- # begin (segment 17 $ slow 17 sine)
+    -- |* sp "q"
+    -- # lpfbus 1 (slow 5 $ rsin 400 5000)
+    -- # lpqbus 2 (slow 6 $ rsin 0 0.4)
+    -- # cut 2
+
+
+do
+  -- K: DICO OK
+  bpm 111
+  let frange s = slow s $ range 2000 7000 $ (sine-saw+square)/3
+  let qrange s = slow s $ range 0 (1/4) $ (sine+saw)/2
+  d1
+    -- $ shut
+    $ jux rev
+    $ bite 5 (iter 5 $ "<[3 4 ~ 2 1]!4 0*5>")
+    $ iter 5
+    $ chunk 3 (slow 2)
+    $ chunk 12 (fast 2)
+    $ chunk 15 ((linger "f").(ply 5))
+    $ sh "f" ((# boo).(# ac "-1"))
+    $ sh "q" (# lp 1000 0.3)
+    $ grain "h*15" "1%600"
+    # s "naoto:8"
+    # tanh 18
+    # shape 0.4
+    # crush 0
+  d2
+    $ jux (("1%100" ~>).(#lpf (frange 43)).(# lpq (qrange 34)))
+    $ sh "e" ((# boo).(# pan "h"))
+    $ fast 64
+    $ grain "5e" "1%64"
+    # s "naoto:8"
+    # tanh 5
+    # pan (rsin 0 1)
+    |* g 0.60
+    # v 0.9 0.9 0.1 0.1
+    # lpf (frange 57)
+    # lpq (qrange 40)
+  -- xfadeIn 2 5 $ silence
+
+
+do
+  -- L: OK!
+  bpm 70
+  d1
+    $ chew 2 "<0 0 1>"
+    $ chunk 15 (|* sp 3)
+    $ layer [
+      plyWith "30" ((# pan (slow "3h" $ sine)))
+      ,
+      ("f" ~>).(plyWith 6 (# bs (slow 7 tri))).(# tanh 5).(|* g 0.9)
+      ,
+      (# tanh 10).(db "e").(stutWith "{3 2 1}%3" "0.5s" ((|* g 0.95).(|* pan perlin)))
+    ]
+    $ striateBy 3 "0.0677x"
+    $ n "{10 3 5 1}%5"
+    # s "naoto"
+    # ac "-0.1"
+    # cloudsblend 0.3 0.8 (rrand 0 0.35) 0.5
+    # clouds 0.1 0.2 0.2 0.9
+
+    
+do
+  -- Q: rifarla chiudendo con il finale envL
+  bpm 88
+  -- xfadeIn 1 8
+  d1
+    $ sh "e" id
+    $ while (binary 111) (fast (choose [1.5,2,1.333]))
+    $ juxBy (tri*2-1) rev
+    $ every 5 (|* sp 1.01)
+    $ every 3 (|* sp 0.98)
+    $ ply 16
+    $ chunk 5 (stutWith 8 "x" (|* sp 2))
+    $ chunk 7 (plyWith 3 (|* sp 2))
+    $ fast "4"
+    $ s "naoto:6"
+    # grain "h" "e"
+    # tanh 2
+    # v rand (saw) 0.1 0.2
+    # cb 0.5 0.7 (tri) 0.5
+    # c 0.1 0.3 0.1 0.5
+    -- # wl (trigger 1 $ slow 20 $ range 0 100 $ envL )
+    |* g 0.9

@@ -132,3 +132,4 @@ let ac = accelerate
     rxsq  i o = rgx i o sq -- ranged' exponential sqaure
     rxpw i o w = rgx i o pw w -- ranged' exponential pulse
     rxrand i o = rgx i o rand -- ranged' exponential rand
+    renvL i o = rg' i o envL -- ranged envL
