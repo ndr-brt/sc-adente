@@ -207,3 +207,5 @@ loopStriate n k p = slow n ((linger (fromRational <$> (1/n)) . (~>) (fromRationa
 supertask x y pat = cat (take y $ iterate (ply x) pat)
 
 geom mult steps pat = fast (parseBP_E $ show steps) $ fast (cat $ take steps $ iterate (|* mult) 1) pat
+
+stages l1 l2 = parseBP_E $ unwords (concat ([(replicate x) (show num) | (num, x) <- zip l1 l2]))

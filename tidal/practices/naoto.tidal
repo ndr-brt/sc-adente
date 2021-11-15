@@ -1,3 +1,24 @@
+
+do
+  -- A: UN DISCRETO INTERMEZZO
+  bpm 125
+  -- clutchIn 1 16
+  d1
+    -- $ while (segment 8 $ binary (run 255)) (# scram 0.4)
+    -- $ slow 2
+    $ db "x"
+    $ juxBy (sine*2-1) press
+    -- $ chunk 7 ((|* sp 0.9).(fast 4))
+    $ chunk 4 ((sply 2).brak)
+    $ stutWith (segment 2 $ irand 3 + 1) (segment 2 $ choose [1/16, 1/32]) (# pan perlin)
+    $ sh (1/12) id
+    $ sh "h" (# boo)
+    $ plyWith 8 (|* sp (segment 1 $ (tri + 1)))
+    $ s "naoto:5"
+    # verb rand rand saw tri
+    |* g 0.8
+
+
  do
   -- HA QUALCHE POSSIBILITÀ
   bpm 76
@@ -133,33 +154,6 @@ do
     |* g 0.5
     # tanh 25
     # ac (-0.7)
-
-do
-  -- F: QUESTO È FIGO! LAVORARE SUI SUONI
-  bpm 60
-  d1
-    $ chunk 6 (# bs (slow 7 tri))
-    $ n "5*128"
-    # s "naoto"
-    |* sp (slow 32 $ rcos "-1.1" "-0.9")
-    |- note "<20 22 26 19 28>/6"
-    # cloudsblend 0.7 0.5 0.4 0.8
-    # clouds 0.8 0.5 0.1 0.8
-    # verb 0.8 0.8 0.2 0.2
-    # boo
-    # tanh 8
-    |* g 0.55
-  d2
-    $ sb 0.1 (jux press.rev)
-    $ slow "5h"
-    $ while (binary 123) (ply 4)
-    $ stutWith 8 "{0.25s!3 0.75s 0.5s}%3" ((|* sp "3").(|+ tanh 4).(# pan sine))
-    $ si (sb 0.7 (press))
-    $ euclid "{7 3!2 5!2}%2" 8
-    $ s "kk"
-    # tanh 16
-    # boo
-    |* g 0.7
 
 do
   -- G: NOT BAD
