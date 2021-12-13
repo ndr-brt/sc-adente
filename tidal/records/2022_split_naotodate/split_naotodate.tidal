@@ -10,10 +10,11 @@ do
     $ plyWith 8 (|* sp "-1.5")
     $ s "naoto:3"
     |* sp "h"
+    # release 0.1
     # boo
     # bp 180 0.01
-    |+ tanh 8
-    # verb 0.5 0.5 0.2 0.2
+    |+ tanh 10
+    # verb 0.6 0.6 0.2 0.2
 
   clutchIn 1 2 $ silence
 
@@ -21,36 +22,36 @@ do
 do
   -- F: QUESTO È FIGO! LAVORARE SUI SUONI
   bpm 60
-  d1
-  -- xfadeIn 1 4
+  -- d1
+  xfadeIn 1 4
     -- $ shut
     $ chunk 7 (# bs (slow 7 tri))
     $ n "5*128"
     # s "naoto"
-    -- |* sp (slow 32 $ rcos "-1.1" "-0.95")
-    |- note "<20 22 26 19 28>/6"
+    |- note "<20 22 26 19 28>/3"
     # cloudsblend 0.7 0.8 0.4 0.8
     # clouds 0.8 0.5 0.1 0.8
     # verb 0.8 0.8 0.3 0.3
     # pan sine
     # boo
     # tanh 4
-    |* g 0.58
+    |* g 0.50
     # lpf 3000
   d2
     -- $ shut
     $ sb 0.2 (jux press)
     $ slow "5h"
     $ while (binary 123) (ply 4)
-    $ stutWith 8 "{0.25s!3 0.75s 0.5s}%3" ((|* sp "3").(|+ tanh 4).(# pan sine))
+    $ stutWith 8 "{0.25s!3 0.75s 0.5s}%3" ((|* sp "3").(|+ tanh 4).(# pan sine).(|* g 0.99))
     $ si (sb 0.7 (press))
     $ euclid "{7 3!2 1 5!2}%{5 3}%4" 8
     $ s "kk"
     # tanh 16
     # boo
-    |* g 0.58
+    |* g 0.52
+    # v 0.3 0.3 0.1 0.1
 
-  clutchIn 2 4 $ silence
+  clutchIn 2 8 $ silence
 
 
 do
@@ -66,8 +67,8 @@ do
     $ s "naoto:2"
     # tanh 8
     # verb 0.4 0.4 0.1 0.1
+    |* g 0.7
     -- # wl (trigger 1 $ range 0 100 $ slow 10 $ envL)
-    |* g 0.8
   -- xfadeIn 2 5
   d2
     $ s "naoto:0*256"
@@ -78,7 +79,8 @@ do
     # lpfbus 1 (slow 5 $ rsin 400 5000)
     # lpqbus 2 (slow 6 $ rcos 0 0.4)
     # cut 2
-    |* g 0.8
+    |* g 0.75
+    -- |* g (trigger 1 $ range 1 0 $ slow 10 $ envL)
 
   clutchIn 2 4 $ silence
 
@@ -91,7 +93,7 @@ do
   d1
     -- $ shut
     $ jux rev
-    $ bite 5 (iter 5 $ "<[3 4 ~ 2 1]!4 0*5>")
+    $ every 3 (bite 5 (iter 5 $ "<[3 4 ~ 2 1]!4 0*5>"))
     $ iter 5
     $ chunk 3 (slow 2)
     $ chunk 12 (fast 2)
@@ -101,9 +103,11 @@ do
     $ grain "h*15" "1%600"
     # s "naoto:8"
     # tanh 18
-    # shape 0.4
-    # crush 0
+    # shape 0.5
+    |* g 0.7
+    -- # crush 0
   d2
+    -- $ shut
     $ jux (("1%100" ~>).(#lpf (frange 43)).(# lpq (qrange 34)))
     $ sh "e" ((# boo).(# pan "h"))
     $ fast 64
@@ -111,7 +115,7 @@ do
     # s "naoto:8"
     # tanh 5
     # pan (rsin 0 1)
-    |* g 0.60
+    |* g 0.5
     # v 0.9 0.9 0.1 0.1
     # lpf (frange 57)
     # lpq (qrange 40)
@@ -124,6 +128,8 @@ do
     $ chew 2 "<0 0 1>"
     $ chunk 15 (|* sp 3)
     $ layer [
+      id
+      ,
       plyWith "30" ((# pan (slow "3h" $ sine)))
       ,
       ("f" ~>).(plyWith 6 (# bs (slow 7 tri))).(# tanh 5).(|* g 0.9)
@@ -135,20 +141,22 @@ do
     # s "naoto"
     # ac "-0.1"
     # cloudsblend 0.3 0.8 (rrand 0 0.35) 0.5
-    # clouds 0.1 0.2 0.2 0.9
+    # clouds 0.1 0.2 0.16 0.6
+    |* g 0.87
+
+  xfadeIn 1 2 $ silence
 
 
 do
-  -- Q: rifarla chiudendo con il finale envL
+  -- Q: rifarla chiudendo con il finale envL -> non funzia, fare a manella
   bpm 88
   -- xfadeIn 1 8
   d1
     $ sh "e" id
-    $ while (binary 111) (fast (choose [1.5,2,1.333]))
     $ juxBy (tri*2-1) rev
-    $ every 5 (|* sp 1.01)
+    $ every 5 (|* sp 1.02)
     $ every 3 (|* sp 0.98)
-    $ ply 16
+    $ ply 16 -- da 1 a 16
     $ chunk 5 (stutWith 8 "x" (|* sp 2))
     $ chunk 7 (plyWith 3 (|* sp 2))
     $ fast "4"
@@ -156,52 +164,59 @@ do
     # grain "h" "e"
     # tanh 2
     # v rand (saw) 0.1 0.2
-    # cb 0.5 0.7 (tri) 0.5
+    # cb 0.3 0.7 (tri*(6/7)) 0.5
     # c 0.1 0.3 0.1 0.5
-    -- # wl (trigger 1 $ slow 20 $ range 0 100 $ envL )
-    |* g 0.9
+    # wl 100
+    |* g 0.7
 
 
 do
   -- R: ehhhh
   bpm 80
   d1
-    $ chunk 12 (|* sp "6e") $ chunk 7 (|* sp "3h") $ chunk 2 (|* sp "h")
+    $ chunk 12 (|* sp "6e")
+    $ chunk 7 (|* sp "3h")
+    $ chunk 2 (|* sp "h")
     $ fast (iter 5 $ "2 1 4")
     $ stutWith 32 "1%128" (# pan perlin)
     $ n "{3 4 5 6}%{1 2}" -- mai al 4!
-    -- $ n "{3 4 5 6}%{1 2 h}"
     # s "naoto"
     # v 0.9 0.7 0.1 0.1
     # boo
-    # lpf 6000
-    |* g 0.8
+    -- # lpf 5000
+    |* g 0.7
   d2
     -- $ shut
-    $ plyWith "[128]" (# pan rand) -- arriva fino al 64
+    -- $ plyWith "128" (# pan sine) -- arriva fino al 128
     $ s "naoto:5(11,16)"
     # v 0.3 0.3 0.1 0.1
-    |* g 0.5
+    |* g 0.46
     # tanh 40
     # boo
-    # lpf 8000
+    # lpf 1000
     |* sp 1
     # end 0.3
 
+
 do
-  bpm 107
+  -- S
+  bpm 99
+  let lvl = 0
   d1
     $ stack [
-      sb 0.5 (stutWith 3 "e" (|- oc 1))
+      sb 0.5 (stutWith 4 "e" ((|+ oc 1).(|* g 0.9)))
+      -- $ shut
       $ s "sin:0/2 [~ sin:3/3]"
       |* g 0.6
-      # ac "-1"
+      # ac "-2"
       # oc 4
-      # sustain 0.7
-      # mu 3
+      # sustain 0.6
+      # shape 0.4
+      # mu 45
       # tanh 8
       ,
       plyWith "[1|1|1|3|6|12|24]" ((|/ end "5q").(|* g 0.97))
+      -- $ shut
       $ sb "h" rev
       $ sh "h" id
       $ euclid 3 5
@@ -214,20 +229,91 @@ do
       -- # tanh 5
       # boo
       -- # lp (slow 4 $ rsin 1000 5000) (slow 2 $ rsin 0 0.3)
-      |* g 0.6
+      |* g 0.58
       -- |* g 0
       ,
       fast "1 2 1"
-      $ juxBy rand rev
+      -- $ shut
+      $ juxBy sine rev
       $ s "naoto:3(14,16)"
       # ar 0.01 0.01
-      |* g 0.8
+      # mu 5
+      |* g 0.68
     ]
+    # crush lvl
+    |* g 0.9
+  -- xfadeIn 2 6
   d2
-    $ sh 4 (|+ cut 5)
+    -- $ shut
+    $ sh 4 ((|+ cut 5).(|* g 0.8))
     -- $ sh 2 (|+ cut 2)
     $ s "naoto:10"
     # cut 1
     # begin "<0!4 h!2>"
-    |* g 0.8
-    # v 0.5 0.5 0.1 0.1
+    # end "<q!4 3q!2>"
+    |* g 0.9
+    # tanh 2
+    # tremolo 9 1
+    # v 0.6 0.6 0.1 0.1
+    |* g (lvl/16)
+
+  xfadeIn 2 1 $ silence
+  -- clutchIn 1 4 $ silence
+
+
+do
+  -- T
+  bpm 98
+  d1
+    -- $ shut
+    -- $ chunk 14 ((ply 2).(|* sp 2))
+    -- $ sb 0.2 (off (1/14) (|* sp 2))
+    $ slow 2
+    $ note (iter 7 "{4.3 2.1 6.4 ~ 11.3}%{14}")
+    # s "naoto:10"
+    # ar 0.01 0.3
+    # v 0.3 0.3 0.1 0.1
+    |* g 0.7
+    # legato 0.8
+    # ac "0.2"
+    # mu 40
+    # lp 4000 0.2
+    # tremolo 30 1
+    -- # cb 0.3 0.3 0.1 0.8
+    -- # c 0.1 0.1 0.1 0.1
+    # hp 100 0.1
+  d2
+    $ jux ((1/100) ~>)
+    $ fast (iter 3 "[2 1]*4")
+    $ s "naoto:3({11 13 10 12}%3,14)" # ar 0.01 0.01
+  d3
+    $ rarely (fast 2)
+    $ s "naoto:10({5 2 3 4}%5,7)" # ar 0.01 0.1 # ac "-1"
+    # tanh 30
+    -- # mu 4
+    # v 0.3 0.3 0.1 0.1
+
+  clutchIn 1 4 $ silence
+  clutchIn 3 4 $ silence
+
+
+do
+  -- U
+  bpm 130
+  xfadeIn 1 2
+    $ whenmod 7 4 (jux rev)
+    $ whenmod 5 3 brak
+    $ stutWith "[1|6|2|12|24]" "1%32" ((|/ legato 1.2).(# pan perlin))
+    $ sh "h" ((# ac "-0.4").(# end "h").(#boo))
+    $ while (slow 4 $ binary 123) (sh 2 id)
+    $ n (iter 4 "6 ~ 4 [6 5 6]")
+    # s "naoto"
+    # begin (slow 4 $ rsin 0 0.3)
+    # legato 0.2
+    # tanh 8
+    # v rand 0.3 0.1 0.3
+    # cb 0.3 0.9 0.3 0.2
+    # c 0.1 0.1 0.1 sine
+    |* g 0.75
+
+  clutchIn 1 8 $ silence
