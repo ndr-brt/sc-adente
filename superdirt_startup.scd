@@ -45,6 +45,12 @@ s.waitForBoot {
 
   ~dirt.set(\speedFreq, 1);
 
+  MIDIClient.init;
+
+  ~midiOut = MIDIOut.newByName("AudioBox USB 96", "AudioBox USB 96 MIDI 1");
+  ~dirt.soundLibrary.addMIDI(\midi, ~midiOut);
+  // ~midiOut.latency = 0.45;
+
   // ~looper = TidalLooper(~dirt);
 
   // // Print osc messages

@@ -1,0 +1,104 @@
+do
+  bpm 102
+  let smarm cyc = wl (trigger 1 $ range 0 100 $ slow cyc $ envL) # tantanh (trigger 1 $ range 0 10 $ slow cyc $ envL)
+  all $ id
+    .(# v 0.3 0.3 0.1 0.1)
+    .(# tanh 4)
+
+do
+  bpm 102
+  all $ id
+    .(# v 0.3 0.3 0.1 0.1)
+    .(# tanh 4)
+  d1
+    $ si ((hurry 2).(|* g 1))
+    $ layer [
+      id
+      .(si ((|* sp "-8").(|* g 0.9).(# pan rand)))
+      .(si ((|* sp "-16").("h" ~>).(|* g 0.9).(# pan rand)))
+      .(si ((|* sp "-32").("3q" ~>).(|* g 0.9).(# pan rand)))
+      ,
+      (fast "{2 4 8}%3")
+      .(iter "4 2")
+      .(chop "{32 16 64 128}%3")
+      .(|* sp "{8 4 12 16 5 7}%4")
+      .(# pan perlin)
+      .(sh 2 (|* g 0.9))
+      .("h" ~>)
+      .(|* g 0.9)
+      ,
+      (sb 0.3 (stutWith 3 "s" ((|* sp 2).(|* g 0.95))))
+      .(fast (iter 3 "2 4 1 8"))
+      .(# end 0.1)
+      .(|* sp 2)
+      .(# ac "-1")
+      .(# shape 0.2)
+    ]
+    $ s "mmbass:3"
+    # wl (trigger 1 $ range 0 100 $ slow 10 $ envL)
+
+hush
+
+
+
+
+do
+  bpm 102
+  all $ id
+    .(# v 0.3 0.3 0.1 0.1)
+    .(# tanh 4)
+  xfadeIn 1 2
+    $ layer [
+      id
+      ,
+      (|* sp "-8").("q" ~>).(|* g 0.8).(#pan rand).(slow 2)
+      ,
+      (|* sp "-16").("3q" ~>).(|* g 0.7).(# pan (rand))
+      ,
+      (|* sp "-32").("7e" ~>).(|* g 0.7).(# pan (rand))
+      ,
+      (fast "{2 4 1 8}%3")
+      .(chop "{256 32 128 16 64}%6")
+      .("h" ~>)
+      .(|* sp "{8 16 4}%5")
+      .(|* g 0.8)
+      .(sh 2 (|* g 0.9))
+      .(# pan perlin)
+      ,
+      (stutWith "8" "{0.5s s e 3s}%8" ((|* g 0.97).(|* sp 2).(# pan sine)))
+      .(# end 0.1)
+      .(while (binary (irand 255)) brak)
+      .(fast (iter 3 $ "32 8 16 2"))
+      .(|* sp 2)
+      .(|* g 0.7)
+      .(# ac "-h")
+    ]
+    $ s "mmbass:3"
+    # wl (trigger 1 $ range 0 100 $ slow 10 $ envL)
+
+d1
+  $ layer [
+    id,
+    ((|* sp "-4").("q" ~>).(|* g 0.9))
+    ,
+    ((ply 2).(|* sp "-8").("3q" ~>).(|* g 0.8))
+    ,
+    ((ply 4).(|* sp "-16").("7e" ~>).(|* g 0.7))
+    ,
+    (|* g 0.8)
+    .(|* sp (iter 4 "{4 32 8 16}%{5 10}%2"))
+    .("h" ~>)
+    .(chop "{128 256 16 32 64}%{3 6}%3")
+    .(sh 4 ((# pan perlin).(|* g 0.9)))
+    ,
+    (#end 0.1)
+    .(stutWith 6 "{0.5s s 2s 3s 5s}" ((|* sp 2).(|* g 0.9)))
+    .(jux rev)
+    .(while (binary (irand 256)) (brak))
+    .(sb "t" (press.(|* sp 4)))
+    .(fast (iter 3 "{2 8 4}%5"))
+    .(#ac "-h").(|* sp 2)
+    .(|* g 0.7)
+  ]
+  $ s "mmbass:3"
+  -- # smarm 40

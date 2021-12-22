@@ -1,0 +1,42 @@
+
+-- u-mano u-dito
+-- improvised "single sample run"
+-- a.k.a: will use only one sample
+
+-- this will melt to the ground
+-- thanks for following the longest night stream
+-- enjoy!
+
+d1
+  $ layer [
+    id.(jux (|*sp "-1"))
+    ,
+    (|* sp "-8").(|* g 0.75).("q" ~>)
+    ,
+    (plyWith 2 (|* sp 2)).(fast "3 6")
+    .(|* sp "-16").(|* g 0.5).("3q" ~>)
+    ,
+    (|* sp "-4").(|* g 0.7).("7e" ~>)
+    ,
+    (|* g 0.8)
+    .(sh 2 id)
+    .(|* sp "{16 32 64}%{5 7}%3")
+    .(chop (iter "{4 6}" "{32 16 64}%4"))
+    .(# pan perlin)
+    .("h" ~>)
+    ,
+    (# end 0.1)
+    .(jux rev)
+    .(chunk 4 press)
+    .(while (binary (irand 255)) brak)
+    .(stutWith "{4 8}%3" "{0.5s s e 3s}%3" (
+      (|* sp "{1.5 2}%4").(|* g 0.8).(#pan rand))
+    )
+    .(# ac "-h")
+    .(|* sp 2)
+    .(|* g 0.85)
+    .(fast (iter 5 "{2 8 4}%5"))
+  ]
+  $ s "mmbass:3"
+  # wl (trigger 1 $ range 0 100 $ slow 80 $ envL)
+  # tantanh (trigger 1 $ range 0 20 $ slow 80 $ envL)
