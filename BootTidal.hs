@@ -82,8 +82,8 @@ let setI = streamSetI tidal
 :}
 
 :script ./tidal/Shortcuts.hs
-:script ./tidal/Functions.hs
 :script ./tidal/Parameters.hs
+:script ./tidal/Functions.hs
 
 :set prompt "tidal> "
 :set prompt-cont ""

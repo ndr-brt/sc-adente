@@ -15,7 +15,20 @@ do
     # s "midi"
     # midichan 0 # octave 3
 
-d1
-  $ note "39*8"
-  # s "midi"
-  # octave 2
+do
+  bpm 110
+  d1
+    $ every 4 (|+ oc 2)
+    $ stack [
+      note "19(2,16,{2 3}%3)"
+      ,
+      iter 8 $ note "16(1,8)"
+      ,
+      chunk 6 (fast 2) $ note "18(7,8)" |* g 0.7
+      ,
+      chunk 4 ((|- note 1).(stut 3 1 "s")) $ note "12(2,8)"
+      ,
+      mask (binary 101) $ note "15*16"
+    ]
+    # s "midi"
+    # octave 2
