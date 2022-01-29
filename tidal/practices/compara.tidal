@@ -82,5 +82,3 @@ do
     # s "supercomparator"
     # v ((1 ~>) $ rand) rand 0.2 0.2
     -- # smarm 20
-
-    tidal_version

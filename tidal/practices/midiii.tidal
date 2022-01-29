@@ -1,5 +1,5 @@
 
-
+-- Boss DR550
 do
   bpm 180
   d1
@@ -32,3 +32,43 @@ do
     ]
     # s "midi"
     # octave 2
+
+-- Roland TR505
+
+-- drum
+-- bd: ab
+-- sd: sn
+-- rs: rm
+-- cp: cp
+-- lt: lf
+-- mt: ft
+-- ht: hm
+-- ch: ch
+-- oh: oh
+-- cr: cr
+-- ri: ri
+-- hcg: mh
+-- lcg: hc
+-- ti: he
+-- hcb: ag
+-- lcb: la
+
+do
+  bpm 160
+  d1
+    -- $ iter 4
+    -- $ every 3 rev
+    -- $ chunk 16 (ply 2)
+    $ stack [
+      -- sb 0.5 (stutWith 4 "0.25s" ((|* g 0.99).(|+ n 1)))
+      sb 0.9 (stut 2 1 "t")
+      $ drum "ab*2? sn"
+      ,
+      db 0.3 $ rarely (ply 2) $ drum "ch(11,12,{1 2 3}%3)"
+      ,
+      iter 3 $ sb 0.5 rev $ drum "~ [lf [ft hm]] ~"
+      -- ,
+      -- drum "he(3,6)"
+      -- $ drum "[la(6,16), {hm ft}%3(3,8), ab(7,8,{1 2}%3) ~, sn(1,16,{3 2}%3), ch*{16 32 8 16}, ~ oh/2]"
+    ]
+    # s "midi"

@@ -61,3 +61,8 @@ do
 d2 silence
 
 hush
+
+
+d1 $ fast "<8 2 4 3 6>" $ "bd bd cp ~"
+
+drawLine $ fast "<1 2 4 3>" $ "a b c ~"

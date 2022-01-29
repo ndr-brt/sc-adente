@@ -5,7 +5,7 @@ do
     $ iter 4
     $ sh 5 ((* g 0.6).(db "t"))
     $ sh 1.5 (* g 0.8)
-    $ every (ri 4) (stutWith 32 (1/128) (# begin (range 0 0.5 $ saw)).(# pan perlin))
+    $ every (segment 2 $ ri 4) (stutWith 32 (1/128) (# begin (range 0 0.5 $ saw)).(# pan perlin))
     $ n "[1 2 [3 1] 2, 5(4,6)]"
     # s "amencutup"
     # tanh 10

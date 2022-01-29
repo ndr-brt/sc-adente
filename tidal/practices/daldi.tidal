@@ -17,22 +17,24 @@ hush
 do
   bpm 120
   d1
-    $ fast 2
+    $ fast (iter 4 "2 1")
     $ si (hurry "q")
     $ stutWith 3 "e" ((# pan rand))
     $ n "[0 1 2 3]"
     # s "dald"
-    # rvb 0.5 0.5
+    # v 0.5 0.5 0.1 0.1
     # boo
     # shape 0.4
+    -- # mu 10
     # del "h" "t" "t"
-  d2
-    $ si (hurry 2)
-    $ si (hurry "q")
-    $ jux (rev)
-    $ n "~ 7 6*2 ~"
-    # s "dald"
-    # lp 5000 (range 0 0.3 $ slow 4 $ sine)
+    -- # smarm 100
+  -- d2
+  --   $ si (hurry 2)
+  --   $ si (hurry "q")
+  --   $ jux (rev)
+  --   $ n "~ 7 6*2 ~"
+  --   # s "dald"
+  --   # lp 5000 (range 0 0.3 $ slow 4 $ sine)
 
 do
   bpm 122
@@ -69,3 +71,45 @@ do
     -- $ (|+ rvb 0.2 0.3).(sb "t" (iter 4)).(rarely (linger "[e|s]")).("<s e!3 q 0!2>" <~).(|* g 0.8)
 
 hush
+
+
+do
+  bpm 111
+  d1
+    $ stut (r 8) 1 "1%64"
+    $ jux (pressBy "s")
+    $ foldEvery [7, 3] ((|+ n 1).(ply 2).(|* g 0.9))
+    $ n "1*5 [0*2@5q 1]"
+    # s "dald"
+    # shape 0.6
+    # mu 2
+    # boo
+    # v 0.6 0.6 0.1 0.1
+
+do
+  bpm 100
+  d1
+    $ sh 0.5 (# pan rand)
+    $ n (iter 4 "[0*<1 2 4> 4*<1 1 1 2>]*4")
+    # s "dald"
+    # boo
+    -- # tanh 2
+
+d1 $ struct (select 0.2 ["f!8", "t!8"]) $ s "bd"
+
+d1
+  $ jux ((sb 0.3 press).rev)
+  $ stut (iter 8 "{4 1 8}%4") 0.6 "1%32"
+  $ while (binary (irand 256)) (sply 8)
+  $ chunk 8 (shut)
+  $ stack [
+    fast 2 $ struct (squeeze "[0|1]" ["t ~ t*2 ~", "t*4"]) $ n "0" # boo
+    ,
+    ("e" ~>) $ fast "2 1" $ n "4*8" # lpf 4000 # legato 0.1
+    ,
+    n "~ 1/2" # mu 3
+    ,
+    striate 12 $ n "{5 6 7}%3" |* g 0.5
+  ]
+  # s "dald"
+  # v 0.5 0.5 0.1 0.1

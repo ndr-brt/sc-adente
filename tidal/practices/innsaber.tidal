@@ -20,7 +20,7 @@ d2
   $ slow 2
   $ every 4 (rev . linger 0.5)
   $ rarely (iter 3)
-  $ sometimesBy 0.05 (# rvb' 0.2 0.5)
+  $ sometimesBy 0.05 (# rvb 0.2 0.5)
   $ sometimes (ply 2)
   $ whenmod 16 14 (degradeBy 0.9)
   $ sometimesBy 0.12 (stut 4 0.5 0.05)
@@ -36,7 +36,7 @@ d2
   # shape 0.5
   # distort 0.6
   # nudge (range 0.3 0.6 $ slow 4 $ square)
-  # hp' 50 0.3
+  # hp 50 0.3
   # gain 0.75
 
 d2 silence
@@ -62,3 +62,7 @@ do
     # gain 0.73
 
 hush
+
+setI "value" (irand 8 + 8)
+
+d1 $ s "{bd cd hh sd}%^value"
