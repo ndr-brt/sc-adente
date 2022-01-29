@@ -9,7 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "osc": "^2.4.1",
+    "osc": "^2.4.2",
     "express": "4.17.1",
     "ws": "7.4.6"
   }
