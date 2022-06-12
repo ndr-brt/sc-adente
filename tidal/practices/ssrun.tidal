@@ -1,0 +1,103 @@
+bpm 100
+
+d1
+  $ slow 2
+  -- $ stutWith 7 "s" ((|* gain 0.9).(|* speed 0.7))
+  -- $ chunk 4 (ply 2)
+  -- $ jux rev.press
+  $ layer [
+    (stutWith 4 "1%16" ((|* speed 2).(|/ accelerate 2)))
+    .(euclid 3 8).(# end 0.02).(# shape 0.5).(# accelerate "-1").(|* speed 1.5)
+    -- .shut
+    ,
+    (# begin 0.1).(# end 0.2).(fast "2 1 3").(*| speed "7.5 8.6 9.4 7.3")
+    .(every 4 (|* speed 1.2))
+    .(|* gain 0.8).(superimpose (hurry 0.5)).(|* speed 0.7)
+    -- .shut
+    ,
+    (|* speed 3).(#begin 0.32).(#end 0.35).(# shape 0.7).(# tanh 10).(|* g 0.9).(ply 4)
+    -- .shut
+    ,
+    (degradeBy 0.6).(fast (iter 5 "1 2 1 1 2")).(|* speed 16).(# end 0.04).(euclid 12 16).(# pan rand).(|* gain 0.9)
+    -- .shut
+  ]
+  $ s "mmbass:3"
+  # v 0.3 0.3 0.5 0.4
+
+
+d1
+  $ bite 4 "{2 4 3 0}%{4 2}%3"
+  $ chunk 8 (slow 2)
+  $ juxBy 0.8 rev
+  $ layer [
+    (|* speed 0.5).(# end 0.2).(# ac "-1").(euclid "{3 4 6}" 8)
+    ,
+    (|* gain 0.5).(# tantanh 120).(# ar 0.01 0.2).(struct (binary 28))
+    ,
+    (fast 2).(|* sp 20).(struct (binary 234)).(|* gain 0.8).(# pan rand)
+    ,
+    (rarely (|+ note 2.74)).(off "e" ((degradeBy 0.3).(hurry 2))).(|* speed 0.25).(*| note "{0 ~ [5.3 7.2] 11.8*2}%2")
+  ]
+  $ s "sine"
+  # v 0.3 0.3 0.3 0.3
+
+  d1
+    $ hurry "h"
+    $ sb 0.3 (slow 2)
+    $ sb 0.5 (ply 2)
+    $ sh "[2|3]" ((|* g 0.7).(# pan sine))
+    $ sh "[h|t]" id
+    $ iter 4
+    $ palindrome $ n "{2 3.5 9.2 5.2 6.8}%{2 4 8}%2" # s "sin"
+    # v 0.6 0.6 0.1 0.1
+    |* g 0.9
+
+d1
+  $ chunk 8 (ply 2)
+  $ bite 4 "{2 1 0}%{4 1 2}"
+  $ sh 3 id
+  $ sh "h" id
+  $ slow 2
+  $ stack [
+    n "0 0*2 [3*[2|1] 0?] 1",
+    fast "1 2 1" $ n "4*8" # end 0.1 |* g 0.6 # pan sine,
+    jux rev $ stutWith 6 "s" (|* sp 1.2) $ n "6" |* g 0.6
+  ]
+  # s "dald"
+  # shape 0.5
+  # tanh 3
+
+d1
+  $ slow 2
+  $ layer [
+    (euclid "{4 3 7 2}%6" 8).(# ac "-1").(# begin 0.01).(# end 0.05).(|* sp "3q").(# shape 0.5),
+    (degradeBy 0.2).(fast "16").(# end 0.03).(|* sp 2).(# pan sine).(# shape 0.6),
+    (slow (iter 4 "2 1")).(|* sp "{2 1.8 ~ 2.2}%{4 16 8}%1").(striateBy 128 "0.8").(|* g 0.8).(# pan rand)
+  ]
+  $ s "sd"
+
+scramble "1" "a b"
+
+:t scramble
+
+
+
+
+all $ (|* tanh 20)
+
+            d1
+              $ slow "{1 2 2 4}%3"
+              $ superimpose rev
+              $ stutWith 3 "1%16" (|* speed 2)
+              $ layer [
+                (euclid 5 8).(# end 0.04)
+                .(# accelerate "-1").(|* speed 2)
+                ,
+                (euclid 13 16).(|* speed 8).(# end 0.02)
+                ,
+                (fast 2).(*| speed "1 4%3 1.5 1")
+                  .(# ar 0.01 0.8)
+                ,
+                (*| speed "{4 6.1 3.6 8.3}%16").(# ar 0.01 0.3)
+              ]
+              $ s "dald:0"

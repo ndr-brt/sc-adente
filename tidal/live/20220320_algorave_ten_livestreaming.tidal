@@ -1,0 +1,23 @@
+
+
+
+-- I'm u-mano u-dito from italy, will improvise on some
+-- drum samples. enojoy (maybe)
+
+
+--bye, enjoy the algorave#10!
+d1
+  $ slow 2
+  $ ply 32
+  $ chunk 4 rev
+  $ chunk 8 (ply 2)
+  $ chunk 6 brak
+  $ juxBy ((sin-1)*2) rev
+  $ stack [
+    fast "{0.5 0.25 1}%5" $ sh 2 press $ n "0 0*2 [~ 3] 1",
+    fast "0.5 1" $ stut 4 0.9 "-s" $ n "~ ~ 4*2 ~" |* g 0.6 # ar 0.01 0.1,
+    stutWith 10 "0.5s" ((|* sp (1+rand)).(|- ac "0.1"))
+      $ n "6" # ar 0.01 0.5 |* g 0.6
+  ]
+  # s "dald"
+  # rvb 0.4 0.4

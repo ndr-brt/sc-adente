@@ -47,7 +47,7 @@ s.waitForBoot {
 
   MIDIClient.init;
 
-  ~midiOut = MIDIOut.newByName("AudioBox USB 96", "AudioBox USB 96 MIDI 1");
+  ~midiOut = MIDIOut.newByName("SSL 2+", "SSL 2+ MIDI 1");
   ~dirt.soundLibrary.addMIDI(\midi, ~midiOut);
   // ~midiOut.latency = 0.45;
 
@@ -77,3 +77,4 @@ s.makeGui;
 
 // Upgrade SuperDirt
 // Quarks.checkForUpdates({Quarks.install("SuperDirt", "v1.7.2"); thisProcess.recompile()})
+

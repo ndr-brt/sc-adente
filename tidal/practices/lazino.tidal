@@ -63,6 +63,11 @@ d2 silence
 hush
 
 
-d1 $ fast "<8 2 4 3 6>" $ "bd bd cp ~"
 
-drawLine $ fast "<1 2 4 3>" $ "a b c ~"
+d1 $ slow 2 $ fast "<1 2 3>" $ s "bd bd cp ~"  |* cps "<1 2 3>"
+
+d1 $ cat [s "bd bd cp ~", fast 2 $ s "bd bd cp ~"]
+
+d1 $ s "<[bd bd cp ~] [bd bd cp ~]@2 [bd bd cp ~]@3>"
+
+d1 $ s "{bd bd cp ~}%<4 8>"

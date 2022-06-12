@@ -1,0 +1,178 @@
+all $ (rrand "-0.005" "0.005" ~>)
+all $ id
+
+let kick = triode 0.4 # hp 56 0.3
+    bass = oc 2 # triode 0.2 # v 0.3 0.3 0.1 0.1
+
+
+do
+  bpm 115
+  d1
+    -- $ shut
+    -- $ (rrand 0 0.01 ~>)
+    $ every 5 rev
+    $ sb 0.2 (si (press.((# pan sine).(|* sp 2))))
+    $ stack [
+      n "0 [~ 0]" # kick,
+      echoWith 4 "{q e 3s}%{4 7 3}%6" ((|* g 0.88).(|+ coarse "{4 16}"))
+        $ sb 0.2 (# ac (irand 7 + 1))
+        $ n "~ 1/3",
+      sb 0.1 (ply "4 8 16") $ fast "<12!2 6> 3 3" $ n "4" |* g 0.5 # ar 0.001 0.08
+    ]
+    # s "dald"
+    # v 0.4 0.5 0.1 0.1
+    # del rand "x" "q"
+    # tanh 2
+    |* g 0.8
+  d2
+    $ every 4 rev
+    $ n "0 ~ 2.2 5.5"
+    # s "sin"
+    |* gain 0.8
+    # legato 4
+    -- # boo
+    # bass
+  d3
+    -- $ db 0.3
+    $ stutWith "1" "3s" ((|* g 0.95).(|+ dis 0.1).(# pan sine))
+    -- $ fast (iter 3 "3 2 6")
+    $ every 3 (|* note 2)
+    $ note "{0 4.4 11}%{3 6 1.5}%7"
+    # s "sin"
+    # oc 5
+    # legato (rand+0.5)
+    # triode 0.9
+    # tanh 4
+    |* gain 0.4
+    # v 0.8 0.5 0.3 0.3
+
+
+do
+  bpm 115
+  d1
+    $ while "<t f>" (fast "2 1")
+    $ stack [
+      n "4(5,6)" |* g 0.6 # ar 0.001 0.08,
+      echoWith (iter 3 "2 1 3 6") (iter 2 "1%6 1%12") ((|* sp 2).(|* g 0.9).(# pan sine)) $ n "~ <0 [0 [0 ~ 0]]>" # kick
+    ]
+    # s "dald"
+    # v 0.4 0.5 0.1 0.1
+  d2
+    $ slow 2
+    $ n "<7.3!3 10.5>"
+    # s "sin"
+    |* gain 0.8
+    # legato 2
+    -- # boo
+    # bass
+  d3
+    $ sh 2 (|* g 0.8)
+    $ n "7.3*12"
+    # s "sin"
+    # pan "[0.1 0.9]*6"
+    |* g 0.55
+    -- # dis (trigger 3 $ range 0 3 $ slow 10 $ envL) -- this could raise during the song
+    # dis 0.3
+    # c 0.1 (slow 4 sine) 0.2 0.1
+    # cb 0.3 0.4 0.3 0.1
+
+
+do
+  -- mah
+  bpm 111
+  d1
+    $ echo 3 "s" 0.8
+    $ ply (iter 8 "4 8 2")
+    $ s "~ dald:1"
+    # tanh 2
+    # v 0.4 0.4 0.2 0.2
+  d2
+    $ slow 4
+    $ n "0 7.4 3.1 4.3"
+    # s "sin"
+    # bass
+  d3
+    $ n (iter 4 "0 [[4.3 3.1] 7.4]")
+    # s "braids"
+    # oc 4
+    # legato 3
+    |* g 0.8
+    # model 31
+
+do
+  bpm 111
+  d1
+    $ slow "2!7 1"
+    $ echoWith 3 "-1%32" ((|* g 0.9).(|* sp 2))
+    $ sb 0.04 (|+ n "2")
+    $ chunk 16 ((fast 2).(|* sp 2))
+    $ n "4 5 4 5 5 4 4"
+    # s "dald"
+    # ar 0.01 0.27
+    |* g 0.9
+    # v 0.3 0.3 0.1 0.1
+  d2
+    $ n "<3.3!2 5.5>/2"
+    # s "sin"
+    # oc 2
+    # legato 3
+    # bass
+  d3
+    $ n "<3.3!2 5.5>/3"
+    # s "sin"
+    # legato 6
+    # oc 6
+    # tremolo (irand 11 + 1) 0.6
+    # triode rand
+    # pan rand
+    |* g 0.55
+    # v 0.5 0.5 0.2 0.2
+
+do
+  bpm 103
+  d1
+    $ scramble 3
+    -- $ bite 3 (iter 3 "0 2 1")
+    $ stack [
+      n "4*{3 24 6 12}%{4 8 3}" |* g 0.7,
+      n "0" # shape 0.5,
+      sh 2 (|* g 0.9) $ n "~ 1*4 ~" # shape 0.3
+    ]
+    # s "dald"
+    # v 0.3 0.3 0.1 0.1
+    |* g 0.8
+  d2
+    $ sb 0.4 (rev.press)
+    $ sh 4 ((|* g 0.9))
+    $ n "<0 2.4 ~ -3.5>" # s "sin" # oc 3 # legato 4
+    # v 0.4 0.6 0.2 0.2
+    # triode 0.4
+
+d1
+  -- $ fast (iter 4 "2 1 4")
+  $ scramble 1
+  -- $ stutWith "{8 4 2}%2" "{1%4s s 1%2s}%8" ((|+ speed (sine+0.5)).(# pan (fast 2 cosine)).(|- ac (saw-0.5)))
+  $ echoWith 5 "s" (|+ sp ((sine)+0.5))
+  $ scramble "{1 8}%4"
+  $ stack [
+    euclid (iter "{4 5 3}" "3 -3 5") "8" $ n "0",
+    euclid (iter 3 "5 10 -13 2") 16 $ n "1" |* g 0.8,
+    euclid "-3 4 -10" 16 $ n "4" |* g 0.5
+  ]
+  # s "dald"
+  -- # end 0.1
+  # shape 0.8
+
+do
+  d1 $ fast "1 2" $ lingerIn ("0", (iter "16 4 2" $ "h q q h")) $ s "bd" |* g 0.8 # shape 0.8
+  d2 $ s "hh*5"
+
+  lingerAt :: (Time, Time) -> Pattern a -> Pattern a
+  lingerAt a@(t1,t2) p = slow (pure $ t2 - t1) $ zoom a p
+
+  lingerIn :: (Pattern Time,  Pattern Time) -> Pattern a -> Pattern a
+  lingerIn a@(t1,t2) p = slow (t2 - t1) $ zoom' a p
+
+  tParamTup :: ((a,b) -> c -> Pattern d) -> (Pattern a, Pattern b) -> c -> Pattern d
+  tParamTup f = uncurry $ tParam2 $ curry f
+  zoom' = tParamTup zoom

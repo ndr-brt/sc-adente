@@ -86,3 +86,24 @@ do
   d2
     $ n "0(7,12)" # s "superzow" # oc 3 # ar 0.01 0.2 # ac "-1" # lpf 400 # tanh 100
   d3 $ n "0(4,12,1)" # s "superzow" # oc 6 # ar 0.01 0.2 # dis 0.3 # bpf 900 # tanh 10 |* g 0.8
+
+
+
+do
+  bpm 150
+  d1
+    -- $ chew 4 "{0*2 1!3 2}%2"
+    $ juxBy sine (press.rev.("6h" ~>))
+    $ ply (iter "{3 5}%3" "{1 h 4 s 2 8}%2")
+    $ stack [
+      stutWith 3 "x" ((|+ n 12).(#pan sine)) $ n (iter 3 "0 [0*3]*1.5") # s "hhat",
+      s (iter 2 "kk ~") # mu 3,
+      s "~ ss ~",
+      slow 4 $ sh 2 id $ sh "x" id $ n "[0 5.3] 2.2" # s "sin" # oc 4
+    ]
+    # boo
+    # shape 0.4
+    -- # timescale (iter 4 "0.3 1 2")
+    -- # timescalewin 10.4
+    # v 0.5 0.5 0.1 0.1
+    |* g 0.8

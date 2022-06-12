@@ -36,3 +36,6 @@ do
     * speed 0.95
 
 hush
+
+d1 $ s "bd sd"
+

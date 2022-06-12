@@ -1,0 +1,40 @@
+-- claudiossssplit?
+
+do
+  bpm 102
+  d1
+    $ timeLoop 2
+    $ sh (iter 16 "8 4 16 32") id
+    $ sh "h" id
+    $ rslice "8"
+    $ s "dald:5"
+    # v 0.8 0.7 0.2 0.2
+  d2
+    $ ((segment 8 $ slow 4 (sine*2)) <~)
+    $ slow "2"
+    $ echoWith 3 "3q" ((slow 2).(#pan rand).(|* sp 4))
+    $ ply (iter 18 "12 0.5 72 8 24 144 4 36 288")
+    $ s "dald:0"
+    # tanh 10
+    -- # cut 1
+    # legato 0.7
+    -- # end (rrand 0.2 1)
+    # boo
+    # v 0.3 rand 0.1 sine
+    |* g 0.7
+  d3
+    $ ((rand) ~>)
+    $ s "dald:1*6" |* g 0.9
+
+
+do
+  bpm 101
+  d1
+    $ off "q" ((|* sp 8).(slow 2).(|* g 0.7))
+    $ layer [
+      id
+      .(si (|* sp "-0.5"))
+      .(off "e" (|* sp "-0.8"))
+    ]
+    $ s "syntho:8"
+    # v 0.4 0.4 0.1 0.2

@@ -1,0 +1,151 @@
+setcps 0.5
+
+all $ (# nudge 1.8)
+
+do
+  d1
+    $ plyWith "1" ((|* sp (rrand 0.5 1.5)).(|- ac "1"))
+    -- $ iter 4
+    -- $ sh "{4 2}%4" (|* g 0.8)
+    -- $ every 4 (
+    --   (slow 4)
+    --   .(stutWith 6 "e" ((# sp "0.5").(# pan sine)))
+    -- )
+    -- $ chunk 8 (slow 2)
+    $ stack [
+      -- jux (rev.(hurry 2)) $ s "dald:0(5,8)",
+      -- s "dald:4({7 14 12 3},16,3)" # g 0.8 # end 0.4,
+      -- stut 4 1 "s" $ s "~ dald:1/2",
+      "dald:3/3"
+    ]
+    # shape 0.9
+    # boo
+    # v 0.2 0.2 0.1 0.1
+    # mu 1
+    |* sp 0.002
+  d2
+    $ jux rev
+    $ stutWith 4 "s" (|* sp 1.1)
+    $ s "dald:6"
+    |* g 0.9
+    # gain 0.5
+
+
+
+all $ (# shape 0.8)
+  .(# tanh 3)
+  -- .(# hp 58 0.3)
+  .(#v 0.3 0.3 0.1 0.1)
+  .(#c 0.3 0.9 0.1 0.6)
+  .(#cb 0.05 0.99 0.05 0.1)
+
+
+d1 $ slow 2
+  $ ply "{2 1}%{5 3 7}"
+  $ juxBy ((sine-1)*2) ((chunk 2 press).rev)
+  $ stack [
+    sb 0.3 (ply 2) $ sh 2 id $ n "0 0*2 ~ 1",
+    slow 4 $ stutWith 4 "0.25s" ((#pan sine).(|* end 2)) $ n "~!2 4*4 [~ 4]" |* g 0.6 # end 0.1,
+    stutWith 4 "s" (|* sp 1.2) $ n "6" # g 0.6 # ar 0.01 0.5
+  ]
+  # s "dald"
+
+d1
+  $ slow 2
+  -- $ stutWith 12 "-0.5s" ((|* g 0.85).(|* sp 1.1))
+  -- $ bite "16" "<[2 1 3!2]!2 4*2>"
+  $ chunk 6 brak
+  $ chunk 8 (ply 2)
+  $ juxBy ((sin-1)*2) rev
+  $ stack [
+    sh 2 (|* g 0) $ n "0 [0*2 ~] ~ 1",
+    stut 2 0.6 "-s" $ n "[~ 4] ~ 4*2 [~ 4]" # g 0.5 # ar 0.01 0.3,
+    fast (iter 4 "[1 3]*2") $ stutWith 8 "s" (|* sp 1.2) $ n "6" # ar 0.01 0.3 |* g 0.6
+  ]
+  # s "dald"
+
+d1
+  $ slow 2
+  $ bite "8" "7 3"
+  $ rarely ((si press).(|* sp "-1"))
+  $ chunk 16 brak
+  $ chunk 8 (slow 2)
+  $ chunk 12 (plyWith 4 (|* sp 2))
+  $ juxBy (slow 3 $ (sine-1)*2) rev
+  $ stack [
+    sh 2 id $ n "0 [0*2 ~] ~ [1?0.8 1?]",
+    fast (iter 4 "2 1") $ n "4(12,16,1)" # ar 0.01 0.2 # g 0.6 # legato 0.3 # pan sine,
+    brak $ n "~ 2",
+    stutWith 8 "0.5s" (|* sp 1.1) $ n "6" # ar 0.01 0.3 # g 0.6
+  ]
+  # s "dald"
+
+setcps 0.333
+
+d1
+  $ juxBy sine rev
+  $ ply (iter 4 "0.5 2")
+  $ stack [
+    n "{0 2*2 ~ 0}%{4 8}%1",
+    n "6" |* g 0.5 # end 0.4
+  ]
+  # s "dald"
+
+d1
+  -- $ linger "h"
+  -- $ bite 4 "0 3 2 1"
+  $ slow "4"
+  $ off "{s 0.5s}%6" ((ply 2).(|* sp 2))
+  $ stack [
+    n "[~ 0]*12",
+    -- n "1*12" # g 0.75,
+    fast "{2 1}%16" $ n "4*96" # g 0.7 # legato 0.1 # pan sine,
+    n "3*6"
+  ]
+  # s "dald"
+  -- # dis 0.1
+
+
+
+
+
+
+
+
+
+
+
+
+  d1
+    $ slow 1
+    $ stutWith "32 8 16" "s e 0.5s 0.25s" ((|* g 0.92).(|* sp (rand+0.5)))
+    $ plyWith (iter 3 "{128 16 32 64}%{3 8 7}%6") (|* sp "0.9")
+    $ stack [
+      -- n "1",
+      -- n "~ 0",
+      n "[2|3]*2" # legato 0.5 # g 0.8 # ac (rand - 0.5)
+    ]
+    # s "dald"
+    |+ shape 0.1
+    # wl 100
+    # tantanh 1111164
+
+
+
+
+
+
+
+
+
+
+
+d1
+  $ ply 9186
+  $ id
+  $ s "mmbass:3"
+  # cut 0
+  |* sp ((rand * 6) + 1)
+  # shape 0.4
+  # hp 56 0.4
+  # wl 90

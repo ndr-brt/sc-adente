@@ -42,3 +42,12 @@ do
     |* g 0.33
 
 hush
+
+d1
+  $ fast 64
+  $ s "bd sd*2]"
+  # speed (sine + 0.5)
+
+
+s "bd"
+  # gain "2"
