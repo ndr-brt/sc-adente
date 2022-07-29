@@ -1,5 +1,7 @@
 do
   bpm 111
+  let dial number p = do once $ s "eleav" # n number |* g 0.95 # pan p
+  let dial number = do once $ s "eleav" # n number |* g 0.95
   all $ id
     .(# verb 0.6 0.7 "t" 0.2)
     .(# tanh 1.6)
@@ -10,11 +12,14 @@ do
     -- .(# cloudsgain 0)
     -- .(# wl (qtrigger 1 $ range 0 100 $ slow 40 $ envL))
 
-let dial number p = do once $ s "eleav" # n number |* g 0.95 # pan p
 let dial number = do once $ s "eleav" # n number |* g 0.95
 
-dial 47 (segment 3 $ rand)
+dial 26
 
-d1
-  $ chew "<3 2 5>" 4
-  $ s "eleas:14"
+xfadeIn 1 8
+  $ sh "t" ((|* g 0.9).(db "t").(#pan rand))
+  $ jux (|* sp (5/4))
+  $ s "eleas:25"
+  # lp 1400 0.1
+  # io 0.4 0.7
+  # rmod 0.9 7 0.8

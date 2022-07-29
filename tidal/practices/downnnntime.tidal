@@ -34,16 +34,18 @@ do
     # bass
   d3
     -- $ db 0.3
+    $ juxBy 0.7 (# nudge 0.04)
     $ stutWith "1" "3s" ((|* g 0.95).(|+ dis 0.1).(# pan sine))
+    $ every (irand 5) (ply "[1|2]")
     -- $ fast (iter 3 "3 2 6")
     $ every 3 (|* note 2)
     $ note "{0 4.4 11}%{3 6 1.5}%7"
-    # s "sin"
+    # s "sine"
     # oc 5
     # legato (rand+0.5)
-    # triode 0.9
+    -- # triode 0.9
     # tanh 4
-    |* gain 0.4
+    |* gain 0.37
     # v 0.8 0.5 0.3 0.3
 
 
@@ -85,6 +87,7 @@ do
     $ ply (iter 8 "4 8 2")
     $ s "~ dald:1"
     # tanh 2
+    |* g 0.85
     # v 0.4 0.4 0.2 0.2
   d2
     $ slow 4
@@ -105,19 +108,21 @@ do
     $ slow "2!7 1"
     $ echoWith 3 "-1%32" ((|* g 0.9).(|* sp 2))
     $ sb 0.04 (|+ n "2")
-    $ chunk 16 ((fast 2).(|* sp 2))
+    $ chunk 16 (hurry 2)
     $ n "4 5 4 5 5 4 4"
     # s "dald"
-    # ar 0.01 0.27
+    # ar 0.01 0.08
     |* g 0.9
     # v 0.3 0.3 0.1 0.1
   d2
+    -- $ shut
     $ n "<3.3!2 5.5>/2"
     # s "sin"
     # oc 2
     # legato 3
     # bass
   d3
+    -- $ shut
     $ n "<3.3!2 5.5>/3"
     # s "sin"
     # legato 6
@@ -139,7 +144,7 @@ do
       sh 2 (|* g 0.9) $ n "~ 1*4 ~" # shape 0.3
     ]
     # s "dald"
-    # v 0.3 0.3 0.1 0.1
+    # v 0.4 0.4 0.1 0.1
     |* g 0.8
   d2
     $ sb 0.4 (rev.press)
@@ -147,21 +152,19 @@ do
     $ n "<0 2.4 ~ -3.5>" # s "sin" # oc 3 # legato 4
     # v 0.4 0.6 0.2 0.2
     # triode 0.4
+    |* g 0.9
 
-d1
-  -- $ fast (iter 4 "2 1 4")
-  $ scramble 1
-  -- $ stutWith "{8 4 2}%2" "{1%4s s 1%2s}%8" ((|+ speed (sine+0.5)).(# pan (fast 2 cosine)).(|- ac (saw-0.5)))
-  $ echoWith 5 "s" (|+ sp ((sine)+0.5))
-  $ scramble "{1 8}%4"
-  $ stack [
-    euclid (iter "{4 5 3}" "3 -3 5") "8" $ n "0",
-    euclid (iter 3 "5 10 -13 2") 16 $ n "1" |* g 0.8,
-    euclid "-3 4 -10" 16 $ n "4" |* g 0.5
-  ]
-  # s "dald"
-  -- # end 0.1
-  # shape 0.8
+do
+  let pat = iter 3 ("{-3 2 -6 4}%{6 2}" :: Pattern Int)
+  d1
+    -- $ slow 2
+    $ chunk 2 (fast 2)
+    $ echoWith 4 "1%32" (|* sp 2)
+    $ stack [
+      euclid pat 8 $ n "0",
+      echo 4 "1%16" 1 $ ("s" ~>) $ euclid pat 8 $ n "1"
+    ]
+     # s "dald"
 
 do
   d1 $ fast "1 2" $ lingerIn ("0", (iter "16 4 2" $ "h q q h")) $ s "bd" |* g 0.8 # shape 0.8
