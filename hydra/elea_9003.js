@@ -15,7 +15,7 @@ src(s0)
   .kaleid(({time}) => (Math.abs(Math.sin(time/10))+1)*4)
   .scale(({time}) => Math.sin(time/2000))
   .rotate(({time}) => Math.cos(time/10))
-  .thresh(({time}) => 0.8 - a.fft[1]/3)
+  .thresh(({time}) => 1 - a.fft[1]/2)
   .contrast(({time}) => a.fft[2]+1)
   // .add(o0)
   .blend(src(o0).rotate(({time}) => Math.sin(time/20)))
@@ -23,7 +23,3 @@ src(s0)
   // .brightness(({time}) => a.fft[3] - 0.5) //  - 0.8
   // .brightness(0.2)
   .out()
-
-
-  s0.initCam()
-  src(s0).out()

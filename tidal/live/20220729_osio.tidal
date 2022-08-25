@@ -1,0 +1,10 @@
+
+dial 47
+
+d1
+  $ echo 10 "{e s}%3" 1
+  $ si (|* sp "q")
+  $ s "eleas:3/2"
+  |* sp "-1"
+  # tantanh 2
+  # wl (trigger 1 $ range 0 100 $ slow 35 $ envL)

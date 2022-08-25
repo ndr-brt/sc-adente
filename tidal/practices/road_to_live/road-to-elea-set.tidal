@@ -1,7 +1,8 @@
+bpm 111
 do
-  bpm 111
-  let dial number p = do once $ s "eleav" # n number |* g 0.95 # pan p
-  let dial number = do once $ s "eleav" # n number |* g 0.95
+  -- let dial number p = do once $ s "eleav" # n number |* g 0.95 # pan p
+  -- let dial number = do once $ s "eleav" # n number |* g 0.95
+
   all $ id
     .(# verb 0.6 0.7 "t" 0.2)
     .(# tanh 1.6)
@@ -14,12 +15,7 @@ do
 
 let dial number = do once $ s "eleav" # n number |* g 0.95
 
-dial 26
+dial 47
 
-xfadeIn 1 8
-  $ sh "t" ((|* g 0.9).(db "t").(#pan rand))
-  $ jux (|* sp (5/4))
-  $ s "eleas:25"
-  # lp 1400 0.1
-  # io 0.4 0.7
-  # rmod 0.9 7 0.8
+d1
+  $ s "eleas:3/2"
