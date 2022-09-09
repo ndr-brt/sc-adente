@@ -21,6 +21,8 @@ do
       # shape 0.4
       ,
       euclid "<8 14 8>" 16
+      $ chunk 16 (ply 2)
+      $ chunk 8 (fast 2)
       $ sometimes (stutWith 4 0.1 (# lpf 800))
       $ s "hhat"
       # hp 2500 (range 0.2 0.6 $ rand)

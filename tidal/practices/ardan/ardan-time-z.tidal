@@ -1,0 +1,71 @@
+-- init
+let col = pI "f"
+
+-- riutilizzo gli stessi pezzi di codice utilizzando la visualizzazione z
+
+-- take 1
+d1
+  $ chunk 13 (ply 4)
+  -- $ scramble 2
+  $ rarely ((sh 8 (|* g 0.9)).(# col 5))
+  $ chunk "8" (|* sp "3q")
+  $ sh "x" ((# col 3).(off "q" (|* sp 1.333)).(echoWith 2 "6f" (|* sp "3q")))
+  $ sh 3.5 ((# col 2).(sb 0.2 (jux press)))
+  $ s "sine"
+  # col 1
+  |* sp 0.8
+  # lpf 300
+  # io 0 1
+  -- # dis "{0 0.2 0.1 0.05}%5"
+  # v 0.2 0.2 0.1 0.1
+  -- # del 0.5 0.3 0.3
+  |* g 0.7
+
+-- rispetto a TIME_X mi trovo un po' più a mio agio, molto più vicino a un visual
+-- questo feel "a nuvole" di eventi mi spinge a "spargerli" più omogeneamente sullo schermo,
+-- come conseguenza anche il sonoro riempie di più (meglio?) lo spettro delle frequenze
+
+-- take 2
+
+d1
+  -- $ fast "{2 4 8 1}%3"
+  $ plyWith "{8 32 16 2 -4 4}%5" (|* sp "{1.2 0.9}%7")
+  $ layer [
+    (# col 0).(# ac "-1").(euclid 3 8).(# io 0 0.01).(|* sp 0.8)
+    ,
+    (# col 1).(# io 0.7 0.8).(ply 8).(|* sp 16).(chunk 8 (ply 4))
+    ,
+    (# col 2).("h" ~>).(euclid 3 8).(#io 0.05 0.07).(# dis 1.8).(|* g 0.7).(|* sp 2).(echoWith 3 "2q" (|* sp 2))
+  ]
+  $ s "mmbass:3"
+  |* g 0.7
+  # io 0 1
+  # sp 1
+  # v 0.3 0.2 0.1 0.1
+
+-- come nel TIME_X, in questo caso, agendo sulla dimensione del campione,
+-- la visualizzazione risulta poco incisiva, però, aumentando la velocità
+-- e quindi la quantità di eventi, si formano delle nuvole colorate
+-- come fossero dipinte, dandomi comunque un'idea, seppur non così definita,
+-- di quello che sta succedendo, chiaramente dal punto di vista audio ne è uscita una cosa
+-- completamente diversa ma su cui forse non ci sarei arrivato senza questo bisogno di
+-- "riempire lo schermo"
+
+d1
+  $ plyWith (iter 16 "2 4 1 32 16") (|* sp "{1.1 0.96}%12")
+  $ every 4 ((scramble 3))
+  $ chunk 8 (off "s" ((|* sp 2).(|* g 0.9)))
+  $ sb 0.1 (plyWith 4 (|* sp 2))
+  $ stack [
+    s "gabba" # col 1,
+    every 3 ("e" ~>) $ s "~ sn:3" # col 2 # tantanh (irand 5 + 1),
+    chunk 3 (slow 2) $ s "hh:8(7,16)" # col 3
+  ]
+  # sp 1
+  # io 0 1
+  # v (rand) 0.3 0.8 0.1
+  # tanh 4
+  -- # nudge 0.4
+  # g 0.8
+
+-- stesse considerazioni della prima take, riempire e cambiare!

@@ -10,7 +10,7 @@ export default function(p) {
   }
 
 // USER VARIABLE
-  var globaltime = 10;
+  var globaltime = 1;
   var rows = 6;
   var speed_range = [0.01, 4]
 
@@ -24,6 +24,7 @@ export default function(p) {
   var ynum = 0;
   var stave = p.windowHeight/rows;
   var galpha = 80;
+  var r, g, b;
 
 
 
@@ -35,7 +36,7 @@ export default function(p) {
        setTimeout(() => {
          p.background(0, 0, 0);
          for (i = 0; i < rows; i++) {
-             p.strokeWeight(2);
+             // p.strokeWeight(2);
              p.stroke(255, 255, 255, 255);
              p.line(0, ynum, p.windowWidth, ynum);
              ynum = ynum + stave;

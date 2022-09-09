@@ -17,8 +17,8 @@ export default function(p) {
 
 // INIT
   var start = 0;
-  var shiftx = 300;
-  var shifty = 50;
+  var shiftx = 400;
+  var shifty = 100;
   var centerx = (p.windowWidth/3/2);
   var timewidget = 0;
   var framerate = 3;
@@ -66,7 +66,6 @@ this.onOscMessage(message => {
             tidal[tidalArgs[i]] = tidalArgs[i+1]
           };
        console.log(tidal);
-
 
 // SWITCHER + PLOTTER
 

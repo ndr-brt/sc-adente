@@ -1,0 +1,87 @@
+-- init
+let col = pI "f"
+-- all $ ((# io 0 1).(|* sp 1))
+
+all $ id
+
+-- pre take
+d1
+  $ chunk 13 (ply 2)
+  $ chunk 7 (ply 24)
+  $ chunk 4 ((fast 4).(|* sp "3q"))
+  $ plyWith "[3|4|5|7]" (|* sp 2)
+  $ sh "h" id
+  $ sh "x" id
+  $ sh 3 (sb 0.5 (ply 2))
+  $ s "sin:0"
+  |* sp 1
+  # col "[1|2|3]" # io 0 1
+  # pan sine
+  # oc 4
+  # v 0.4 0.4 0.2 0.2
+
+
+-- take 1
+d1
+  -- $ chunk 13 (ply 4)
+  -- $ scramble 2
+  $ chunk "8" (|* sp "3q")
+  $ sh "x" ((# col 3).(off "q" (|* sp 1.333)).(echoWith 2 "6f" (|* sp "3q")))
+  $ sh 3.5 ((# col 2).(sb 0.2 (jux press)))
+  $ s "sine"
+  # col 1
+  |* sp 0.8
+  # lpf 300
+  # dis "{0 0.2 0.1 0.05}%5"
+  # v 0.2 0.2 0.1 0.1
+  -- # del 0.5 0.3 0.3
+  |* g 0.7
+
+-- questa take si basa sull'uso di un campione di suono sinusoidale poi sovrapposto e alterato in
+-- velocità e ripetizioni. una cosa che noto è che la visualizzazione è piccola e statica, la vedo,
+-- è colorata, ma fatico a vederci un uso per questo tipo di processo. Devo provare con un qualcosa di
+-- più ritmico.
+
+-- take 2
+
+d1
+  $ layer [
+    (# col 0).(# ac "-1").(euclid 3 8).(# io 0 0.01).(|* sp 0.8),
+    (# col 1).(# io 0.7 0.8).(ply 8).(|* sp 16).(chunk 8 (ply 4)),
+    (# col 2).("h" ~>).(euclid 3 8).(#io 0.05 0.07).(# dis 1.8).(|* g 0.7).(|* sp 2).(echoWith 3 "2q" (|* sp 2))
+  ]
+  $ s "mmbass:3"
+  |* g 0.7
+  # io 0 1
+  # sp 1
+
+-- in questa take faccio il mio classico "creare una batteria da un campione",
+-- creando kick, hats e "snare". Il problema che vedo qui è che, lavorando con un campione
+-- lungo devo ritagliare pezzi molto piccoli e quindi la forma viene piccolissima,
+-- faccio fatica a vederla.
+
+
+-- un'altra considerazione è che si potrebbe dare dei valori di default
+-- a "speed", "begin", "end", altrimenti sono costretto a specificarli ogni volta,
+-- non un grosso problema comunque
+
+
+d1
+  $ every 4 (scramble 3)
+  $ chunk 8 (off "s" ((|* sp 2).(|* g 0.9)))
+  $ sb 0.1 (ply 4)
+  $ stack [
+    s "bd" # col 1,
+    every 3 ("e" ~>) $ s "~ sd" # col 2,
+    chunk 3 (slow 2) $ s "hh(7,16)" # col 3
+  ]
+  # sp 1
+  # io 0 1
+  # v 0.2 0.2 0.1 0.1
+  -- # tanh 2
+  -- # nudge 0.4
+
+-- qui ho provato a fare una semplice batteria con campioni già fatti,
+-- è al di fuori del mio flow standard, la cosa che noto è che è difficile distinguere
+-- gli eventi perché si sovrappongono sulla stessa riga.
+-- edit, ho cambiato la variabile globaltime portandola a 1, ora è molto più comprensibile
