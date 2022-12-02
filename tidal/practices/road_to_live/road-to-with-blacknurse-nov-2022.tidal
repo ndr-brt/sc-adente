@@ -1,0 +1,45 @@
+
+do
+  bpm 94
+  let cru = crush 3 # dis 0
+  let ki = hp 57 0.42 # cru
+  let sn = ar 0.01 0.25 # sp 0.7 # cru |* g 0.85
+  let hh = g 0.6 # cru
+  let ri = g 0.5 # cru
+  let zzzzz = 0
+  d1
+    $ slow (iter 2 "1 2 1")
+    $ fast 8
+    $ si (rev.press.(|* g 0.9))
+    $ chunk 8 (sh 2 (|* g 0.7))
+    $ stack [
+      sh 8 (|* sp (1 + sine)) $ ply 4 $ n "6(3,7)" # ri
+      ,
+      every 2 (si (rev.(|* sp 4))) $ n "0*8 ~" # ki
+      ,
+      ply 4 $ n "~ [1*3 ~ ~ ~]" # sn
+    ]
+    # s "dald"
+    -- |+ n "{0 1 0 2 4}%3"
+    # tanh 64
+    -- # tanh 18
+    # wl 20
+  d2
+    -- $ shut
+    $ slow 4
+    $ n "<0 3.2 -1.8 4.3 7.63>"
+    # s "sin"
+    # oc 3 |* sp "h" # dis 0.1
+    # tanh 5
+    # end "[h|q|w]"
+    |* g (1 - zzzzz)
+  d4
+    -- $ echoWith "8" "e" ((|* g 0.9).(# ac (rand*4)))
+    $ fast 4
+    $ slice 8 (iter 4 "1 0 3 2 7 5 6 2")
+    $ s "turbe"
+    # lpf 3000
+    # del "h" "h" "h"
+    # tanh 1
+    # ac (rand - 0.5)
+    |* g zzzzz

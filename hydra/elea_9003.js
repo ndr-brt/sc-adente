@@ -8,8 +8,8 @@ vid.src = '/home/andrea/Videos/elea_9003.mp4'
 s0.init({ src: vid })
 
 a.show()
-a.setSmooth(0.8)
 a.setBins(4);
+a.setSmooth(0.8)
 
 src(s0)
   .kaleid(({time}) => (Math.abs(Math.sin(time/10))+1)*4)

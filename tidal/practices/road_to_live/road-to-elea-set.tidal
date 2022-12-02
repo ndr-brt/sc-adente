@@ -1,8 +1,8 @@
-bpm 111
+
 do
   -- let dial number p = do once $ s "eleav" # n number |* g 0.95 # pan p
   -- let dial number = do once $ s "eleav" # n number |* g 0.95
-
+  bpm 111
   all $ id
     .(# verb 0.6 0.7 "t" 0.2)
     .(# tanh 1.6)
@@ -17,5 +17,25 @@ let dial number = do once $ s "eleav" # n number |* g 0.95
 
 dial 47
 
-d1
-  $ s "eleas:3/2"
+
+
+
+
+
+
+
+
+
+
+
+
+      dial 47
+
+      d1
+      $ echo 8 "e" 1
+      $ usi (|* sp "[q]")
+      $ s "eleas:3/2"
+      |* sp "-1"
+      # tantanh 2
+      # wl (trigger 1 $ range 0 100
+        $ slow 45 $ envL)

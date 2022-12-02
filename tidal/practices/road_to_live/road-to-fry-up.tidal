@@ -1,0 +1,21 @@
+do
+  bpm 101
+  let snd = tanh 10 # dis 0.2 # crush 2 # v 0.4 0.4 0.1 0.1 # hp 56 0.3 # lpf 3000
+  d1
+    $ every 3 rev
+    $ si (|* sp 0.5)
+    $ chunk 8 ((|* sp 2).(# pan rand))
+    $ ply 86
+    -- $ echoWith 5 "{3q h}%7" (# pan rand)
+    $ n "5"
+    # s "numbers"
+    |+ n "{2 1 0 13 7}%{3 8}%8"
+    # dis 1.2
+    |* g 0.7
+    # io 0.4 0.7
+    |* sp 0.4
+    -- # legato 0.4
+    -- # oc "{4 6 3}%6"
+    -- # legato 0.9
+    -- # snd
+    # wl 100

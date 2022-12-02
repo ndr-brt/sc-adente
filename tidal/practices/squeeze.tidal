@@ -1,0 +1,24 @@
+
+
+d1
+  $ echoWith 6 "s" ((|* g 0.8).(|* sp 0.99))
+  $ slow 2
+  $ stack [
+    chunk 4 (plyWith 2 (|* sp 2))
+      -- $ sb 0.2 (|* sp 1.08)
+      $ n "[0 [~ 3.4], 16.7]"
+      ||> s "{sin superpiano superchip supergrind}%{2 4 8 16}"
+      # oc 3 # col 1 |* g 0.9 # lp 4000 0.2 # ar 0.01 (rand + 0.2)
+    ,
+    sb 0.2 ((ply 4).(|* g 0.9))
+      $ chunk 16 (|* sp "-1")
+      $ s "drum [~ drum:1]"
+      ||> tanh "2 4"
+      ||> sp (iter 4 "1 2 4 8")
+      # col 2
+      # hp 56 0.3
+    ,
+    s "sin:0" |* sp "q" # dis 0.4
+      # col 3 |* g 0.8
+  ]
+  # v 0.3 0.3 0.1 0.1

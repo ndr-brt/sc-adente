@@ -45,3 +45,28 @@ do
   d1 $ s "<sin:0>"
     -- # ac "-32"
     -- |* sp "8" -- # oc 7 -- # down "e"
+
+hush
+
+d1
+  $ chunk 8 (ply 8)
+  $ sh 3 id
+  $ sh 0.5 id
+  $ n "{[0*3 1] 0 2 2 3}%4"
+  # s "fing"
+  # tanh 10
+
+do
+  d1
+    $ stack [
+      n "[0 0*2?] 1",
+      sometimesBy 0.4 (fast 2) $ n "4*8" # gain 0.5 # pan (slow 4 sine)
+    ]
+    # s "dald"
+  d2
+    $ superimpose ((|* speed (1/4)).(slow 2))
+    $ rarely (fast 2)
+    $ n "0 3.3 6.4 9.1" # s "sin"
+    # gain 0.8
+
+  d3 $ s "uou"
