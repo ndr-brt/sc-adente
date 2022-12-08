@@ -10,7 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "osc": "^2.4.2",
-    "express": "4.17.1",
+    "express": "4.18.2",
     "ws": "7.4.6"
   }
 }
