@@ -8,38 +8,43 @@ do
   let ri = g 0.5 # cru
   let zzzzz = 0
   d1
-    $ slow (iter 2 "1 2 1")
-    $ fast 8
-    $ si (rev.press.(|* g 0.9))
-    $ chunk 8 (sh 2 (|* g 0.7))
+    -- $ shut
+    -- $ slow (iter 2 "1 2 1")
+    -- $ fast 8
+    $ echoWith 12 "s" ((|* g 0.93).(# pan rand))
+    $ si (rev.press.(|* g 0.9).(|* sp 2).(fast (iter 2 "1 2").(# dis 0.9)))
+    $ chunk 8 (sh 2 (|* g 0.8))
     $ stack [
-      sh 8 (|* sp (1 + sine)) $ ply 4 $ n "6(3,7)" # ri
+      n "0(3,7)" # ki
       ,
-      every 2 (si (rev.(|* sp 4))) $ n "0*8 ~" # ki
+      n "~ 1" # sn
       ,
-      ply 4 $ n "~ [1*3 ~ ~ ~]" # sn
+      chunk 8 (shut) $ n "4(6,7)" # hh
     ]
     # s "dald"
     -- |+ n "{0 1 0 2 4}%3"
-    # tanh 64
-    -- # tanh 18
-    # wl 20
+    -- # tanh 64
+    # tanh 18
+    -- # wl 20
   d2
     -- $ shut
-    $ slow 4
-    $ n "<0 3.2 -1.8 4.3 7.63>"
+    $ slow 2
+    -- $ n "<0 3.2 -1.8 4.3 7.63>"
+    $ sb 0.3 (off "e" ((|* sp 2).(|* g 0.8)))
+    $ n "<0.2 [3.6 5.3]>"
     # s "sin"
     # oc 3 |* sp "h" # dis 0.1
     # tanh 5
-    # end "[h|q|w]"
-    |* g (1 - zzzzz)
-  d4
+    -- # end "[h|q|w]"
+    -- |* g (1 - zzzzz)
+  d3
     -- $ echoWith "8" "e" ((|* g 0.9).(# ac (rand*4)))
-    $ fast 4
-    $ slice 8 (iter 4 "1 0 3 2 7 5 6 2")
+    -- $ fast 4
+    -- $ slice 8 (iter 4 "1 0 3 2 7 5 6 2")
+    -- $ shut
     $ s "turbe"
     # lpf 3000
     # del "h" "h" "h"
     # tanh 1
     # ac (rand - 0.5)
-    |* g zzzzz
+    -- |* g zzzzz

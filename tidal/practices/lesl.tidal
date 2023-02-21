@@ -1,0 +1,42 @@
+
+
+do
+  all $ (# v 0.3 0.3 0.1 0.1)
+  let leslv = s "leslv"
+  let leslb = s "leslb" # hp 56 0.3
+  let lesld = s "lesld" # tanh 3 |* g 0.8
+  let leslg = s "leslg" # tanh 3 |* g 0.9
+  -- all (# wl 99)
+  bpm 85
+  d1
+    -- $ shut
+    $ h 1
+    $ every 2 (sh 2 id)
+    $ n "{4 6 1 8}%2"
+    # end 0.5
+    # leslb
+    -- |* g 0
+  d2
+    -- $ every 2 (slow 2)
+    -- $ shut
+    -- $ bite "8" "7 6"
+    -- $ n "{2 7 1}%6"
+    $ every 4 (|+ n 2)
+    $ jux (("1%4s" ~>))
+    $ n "<4 5!2>"
+    # lesld
+    -- |+ n "{1 4 9 2 7 4}%6"
+    -- |* g 0.8
+  d3
+    $ sb 0.3 (sh 4 id)
+    $ n "{4 8 2 6 14 18}%4"
+    # leslg
+    # end "q"
+    # pan rand
+  d4
+    $ fast 2
+    $ echoWith 4 "s" ((# pan (rand)).press)
+    $ sb 0.3 (|* sp "-1")
+    $ n (segment 1 $ irand 21)
+    # leslv
+    # ac (rand - 0.5)

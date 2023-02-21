@@ -59,3 +59,193 @@ do
     -- # waveloss (trigger 4 $ range 0 100 $ slow 10 $ envL)
 
 hush
+
+all $ ((# v rand 0.5 0.1 0.1).(# tanh 20).(# c isaw sine 0.3 0.3).(# cb 0.2 0.2 0.2 0.3))
+
+
+do
+  bpm 135
+  d1
+    $ chew "{4 2 1}%{8 3}%5" "{2 1 4 0 3}%4"
+    $ chunk 8 (shut)
+    $ chunk 6 ((ply 8).(# legato 1).rev)
+    $ echoWith 3 "e" (press.rev.(# pan sine))
+    $ stack [
+      sh "x" (|* sp "x")
+      $ fast (iter 4 "2 1 4")
+      $ n "0*2"
+      ,
+      echoWith 6 "s" ((|* g 0.86).(|* sp 0.98))
+      $ sb 0.2 (ply 2)
+      $ sh "t" id
+      $ fast 2
+      $ n "0*4" # end 0.01 |* sp "h" |* g 0.93
+      ,
+      chop 180 $ n "0" |* sp "e" # end 0.5
+    ]
+    # s "feelfx"
+   |+ n "{3 0*3 1 5*2 2 6}%8"
+    # djf rand
+    # legato 1
+
+
+
+
+d1
+  $ chew 8 "[5 [5 5 3 1 2] 8] <7 [3 5]>"
+  $ sb 0.1 (|+ n (choose[1,2,3]))
+  $ chunk 6 (shut)
+  $ sb 0.2 (ply 3)
+  $ si (press.rev.(|* g 0.9).(# dis 0.3).(ply 2).(# pan rand))
+  $ stack [
+    fast (iter 4 "2 1 4")
+    $ sh "x" (|* sp "t")
+    $ n "0" # begin 0.1
+    ,
+    sb 0.3 (ply 3) $ n "0*6" # io 0 0.01
+    ,
+    chop 16 $ rev $ n "0" |* sp "-h"
+  ]
+  # s "feelfx"
+  |+ n "{0!2 1 5 4*2 2 3}%4"
+  # tantanh 3
+
+
+d1
+  $ chew 8 "[0 <[3 2 [1 6]] 0> <7 2>] <3 2 7>"
+  $ sb 0.1 (|+ n 1)
+  $ chunk 8 (ply 4)
+  $ si (press.rev.(|* g 0.9).(|* sp 1.5).(# dis 8).(# pan rand))
+  $ stack [
+    sh "x" (|* sp "t")
+    $ rslice 4
+    $ n "0"
+    ,
+    sb 0.3 (ply 3) $ n "0*6" # end 0.01
+    ,
+    striateBy 7 0.5 $ n "0" |* sp "1%32" |* g 0.9
+  ]
+  # s "feelfx"
+  |+ n "{0!4 3 2 1}%{7 5}%2"
+  -- # tantanh 200000000
+  -- # tantanh (trigger 1 $ range 1 2000 $ slow 30 $ envL)
+  -- # legato 0.8
+
+
+
+
+d1 $ s "feelfx" # end 0.07 # pan sine |* sp "2" # ac "-1" |* g 0.2
+
+
+
+
+d1
+  $ every 3 (|* sp "-1")
+  $ slow 2
+  $ sh 3 ((|* g 0.8).(# ac "-0.4"))
+  $ sh 4 ((|* g 0.8).(|* sp "-1"))
+  $ chew "{5 4}%7" "<2 3 5>" $ s "eleas:14"
+  # legato 0.9
+
+
+
+
+
+
+
+
+
+
+
+d1
+  $ chew "{4 2 6 8 2}%{7 5}%3" "<[7*3 <3 5>] [[[8 5 7] 4 2] 1]>"
+  $ chunk 2 (shut)
+  $ si ((|* g 0.7).(scramble 15).(|* sp "-2"))
+  $ echoWith 5 "[e|h]" ((|* sp "-2").(|* g 0.9))
+  $ sb 0.3 (|+ n (choose [2,1,3]))
+  $ si (press.rev)
+  $ stack [
+    sh "x" ((|* g 0.8).(|* sp "h"))
+    $ fast (iter 4 "2 1")
+    $ n "0"
+    # lpf 2000
+    ,
+    sb 0.3 (ply 3) $ n "0*6" # end 0.01
+    ,
+    n "0" |* sp "1%32" # io 0.2 0.3
+  ]
+  # s "feelfx:0"
+  # tantanh 500
+  -- # wl 10
+  |+ n "{0!4 2 1 5 3 2}%{3 5}%4"
+  # hp 56 0.3
+
+
+
+
+
+
+
+
+
+
+
+
+bpm 132
+
+do
+  d2 silence
+  d3
+    $ sh 2 (|* g 0.85)
+    $ ply (iter 6 "1 32 1")
+    $ slow 2
+    $ sh 3 id
+    $ si (press.rev.(|* sp 2))
+    $ n "3*3"
+    # s "dald"
+    |* g 0.7
+    |- n (iter 5 "1 0 3")
+    # wl 100
+    # tanh 9
+
+
+
+
+
+
+d1
+  $ echoWith 2 "s" (|* speed 1.5)
+  $ fast (iter 2 "2 1")
+  $ off "0.25" (|* speed 2)
+  $ every 2 (rev)
+  $ s "[bd [~ sd]*2, hh*4]"
+  |* g 1.5
+  # dis 0.8
+
+d2
+  $ chunk 8 (ply 2)
+  $ superimpose (hurry 2)
+  $ superimpose ((|* speed "0.25").(slow 2))
+  $ n "0 3 8 6" # s "sin" |* g 1.2
+
+
+setcps 0.7
+
+d1
+  $ while "t f t" (ply 2)
+  $ s "[bd sd, hh*4] cb*4 cp*2"
+  # gain (fast 4 $ sine*2) # cps "0.7 0.5 0.9 1.2"
+  # speed "0.5 1.5"
+
+
+
+hush
+
+let
+    bounceWith :: Pattern Int -> Pattern Time -> Pattern Rational -> (Pattern a -> Pattern a) -> Pattern a -> Pattern a
+    bounceWith n t l f p = innerJoin $ (\a b l -> _bounceWith a b l f p) <$> n Sound.Tidal.Context.<* t Sound.Tidal.Context.<* l
+    _bounceWith :: (Num n, Ord n) => n -> Time -> Rational -> (Pattern a -> Pattern a) -> Pattern a -> Pattern a
+    _bounceWith count time loss f p | count <= 1 = p
+                         | otherwise = overlay (f (time `rotR` _bounceWith (count-1) (time*loss) loss f p)) p
+in
+    d1 $ bounceWith 8 "t" "3q" (|* sp 1.5) $ s "bd" -- #cut 1 --slow 4 $ stack [s "bd" #cut 1, press $ s "cp" #cut 2]
