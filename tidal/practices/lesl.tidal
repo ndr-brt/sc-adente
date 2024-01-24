@@ -1,13 +1,161 @@
+let leslv = s "leslv"
+    leslb = s "leslb" # hp 56 0.4
+    lesld = s "lesld" # tanh 7 |* g 0.76
+    leslg = s "leslg" # tanh 3 |* g 0.9
+
+all $ (# v 0.3 0.3 0.1 0.1)
+  .(# c (slow 3 cos) (slow 4 isaw) (slow 5 tri) rand)
+  .(# cb 0.6 saw 0.1 0.8)
+  -- .(# legato (range 0.1 1 $ slow 3 rand))
+  .(# legato 1)
+  .(striate 2)
+  .(# ac "-1")
+
+bpm 80
 
 
 do
+  let egd = 1
+  let egb = 0
+  let egv = 0
+  let egg = 0.6
+  d1
+    -- $ every 1 (chop 8024)
+    $ db (1 - egd)
+    -- $ off "q" (|* sp "-1")
+    -- $ juxBy 0.2 (("1%64" ~>).(# dis 0.2))
+    -- $ echo 8 "1%2s" 0.9
+    $ n "<1 1 5 3>"
+    # lesld
+    # end 0.6
+  d2
+    $ db (1 - egv)
+    $ chop (segment 1 $ choose [12, 32, 1, 16, 4])
+    $ every 5 (shut)
+    $ jux ("1%32" ~>)
+    $ n (segment 1 $ irand 40)
+    # leslv
+    -- # ac (rand - 0.5)
+  d3
+    $ db (1 - egb)
+    $ sb 0.2 (|+ n 22)
+    $ n "<1!2 13>"
+    -- $ n "{40 23 37 0 13 1 36 39}%1"
+    # leslb
+  d4
+    $ db (1 - egg)
+    $ n (segment 2 $ irand 39)
+    # leslg
+    |* sp "-2"
+    # pan rand
+
+
+
+
+
+
+
+
+
+
+
+do
+  d1
+    $ off "1%4s" (|* sp (1 + rand))
+    $ striateBy 7 0.13
+    $ n "19"
+    # leslb
+    |+ tanh 7
+  d2
+    $ off "h" ((|* sp 4).(|* g 1).(# pan sine))
+    $ sh "h" id
+    $ striateBy 7 0.12
+    $ jux (press)
+    $ off "q" ((|- begin 0.5).(|- end 0.5))
+    $ n "5"
+    # lesld
+    # io 0.5 0.75
+    # dis 3.7
+  d3
+    $ echoWith 6 "[s|e]" ((|* g 0.9).(# pan rand))
+    $ sb 0.3 (|+ n 3)
+    $ n "{12 15 19 22}%1"
+    # leslv
+    |+ tanh 8
+    # ac (rand - 0.5)
+
+
+
+
+do
+  bpm 80
+  d1
+    -- $ striateBy 5 0.1
+    $ n "28" # leslb
+  d2
+    $ fast (iter 4 "2 1")
+    $ plyWith 2 ((|* sp 2).(# djf (slow 2 sine)))
+    $ striateBy "{7 3 5 11}%3" 0.1
+    $ jux (press.(|* sp "-1"))
+    $ n "{4 7 11 0 8}%2"
+    # io "2q 1q" "4q 3q"
+    # lesld
+    |+ tanh 1
+  d3
+    -- $ shut
+    -- $ sb 0.3 (striateBy 7 0.1)
+    -- $ echoWith 5 "[q|e]" ((# pan rand).(|* sp 1.1))
+    $ n "28" # leslv
+    # dis 12.8
+    # coarse 32
+
+do
+  bpm 80
   all $ (# v 0.3 0.3 0.1 0.1)
   let leslv = s "leslv"
   let leslb = s "leslb" # hp 56 0.3
-  let lesld = s "lesld" # tanh 3 |* g 0.8
+  let lesld = s "lesld" # tanh 3 |* g 0.76
   let leslg = s "leslg" # tanh 3 |* g 0.9
-  -- all (# wl 99)
-  bpm 85
+  d1
+    -- $ si ((slow 2).(euclid 3 7).(|* sp "{8 6 12}%6").(# ac "-0.3").(|* g 0.9))
+    $ db 1
+    $ striateBy 5 0.1
+    $ n "<0>" # leslb
+  d2
+    $ db 1
+    -- $ off "-s" (|* sp "-1")
+    -- $ slow 8
+    -- $ echoWith 2 "s" (|* pan rand)
+    -- $ mask "<t t t f>"
+    $ juxBy (slow 2 sine) rev
+    $ every 2 (sh 2 (# pan rand))
+    $ striate (iter 4 "4 8")
+    $ n "{3 0 9 8}%4"
+    # end "1%2s"
+    # lesld
+    -- # io "2e 3e" "5e 6e"
+  d3
+    $ striateBy 3 "q"
+    $ n "1" # leslg
+    |+ tanh 500
+    -- |* g 0.9
+  d4
+    $ db 1
+    -- $ echoWith 1%2s" ((|* sp 1.2).(# pan rand))
+    -- $ sb 0.3 (|+ n 12)
+    -- $ jux (press.(|+ n 7))
+    $ n (segment 1 $ irand 21)
+    # leslv
+
+
+
+do
+  bpm 80
+  all $ (# v 0.3 0.3 0.1 0.1)
+  let leslv = s "leslv"
+  let leslb = s "leslb" # hp 56 0.3
+  let lesld = s "lesld" # tanh 3 |* g 0.76
+  let leslg = s "leslg" # tanh 3 |* g 0.9
   d1
     -- $ shut
     $ h 1
@@ -40,3 +188,25 @@ do
     $ n (segment 1 $ irand 21)
     # leslv
     # ac (rand - 0.5)
+
+
+do
+  bpm 80
+  d1
+    $ shut
+    $ echoWith "{4 3 5 2}%2" "s" (|- ac ((rand-0.5)/2))
+    $ sb 0.3 (si (("0.5" ~>).(ply 4).(# pan rand)))
+    $ slice 8 (segment 6 $ irand 6) $ n (segment 1 (irand 9)) # s "lesld"
+    # wl 99
+  d2
+    $ shut
+    $ s "leslb:3" |* sp 0.9
+  d3
+    $ shut
+    $ jux (("h" ~>).(|+ n 3)) $ n (segment 1 $ irand 40) # s "leslg"
+    # wl 99
+  d4
+    $ shut
+    $ sb 0.2 (|* sp (rand + 0.5))
+    $ sb 0.3 (echoWith 8 "1%16" ((#pan rand).(|* sp 1.01)))
+    $ n (segment 1 $ irand 40) # s "leslv"

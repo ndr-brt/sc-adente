@@ -1,3 +1,69 @@
+do
+  bpm 96
+  d1
+    -- $ fast "1 2"
+    -- $ every 2 (rev)
+    -- $ echoWith (iter 4 "4 2 3") "[s|e]" ((|* sp 0.8).(|+ dis 0.5))
+    $ echo (iter 3 "6 3 1") "1%16" 0.9
+    $ fast 2
+    $ n "[0|~ 0] [1|1*2]"
+    # s "dald"
+    # dis 1
+    # tanh 5
+    # g 1
+    # lpf 200
+    -- # hp 56 0.4
+    -- |+ n (iter 3 "0 4 6 1")
+  d2
+    $ slow 4
+    $ sb 0.3 (fast 2)
+    $ sh 2 id
+    $ n "4(3,11)"
+    # s "dald" # legato 0.3
+  d3
+    $ s "sin:0"
+    # oc 3
+    |* sp "h"
+    # tanh 2
+
+
+do
+  bpm 94
+  d1
+    $ shut
+    $ sb 0.3 ((|* sp "-1").(ply 3))
+    $ slow 2
+    $ echoWith 3 "[q|e|3e]" ((|* sp 0.4))
+    $ n "4"
+    # s "dald"
+    # end 0.1
+    # g 0.2
+    # tanh 2
+    # ac (iter 3 "-0.2 -0.3")
+    # v 0.3 0.3 0.1 0.1
+  d2
+    $ db 1
+    $ sh (segment 5 ((sine*2) + 1))
+      ((|* g 0.72).(ply (iter 4 "1.5 2 1.666")))
+    $ s "[~ dald:1?] dald:0*6"
+    # tanh 10
+    # g 0.7
+    # hp 56 0.3
+    # lpf 600
+  d4
+    $ echoWith 3 "3x" (|* sp 0.7)
+    $ slow 4
+    $ n "3(6,11)" # s "dald" # dis 0.8
+    # tanh 5 # g 0.7
+  d3
+    $ slow 1.666
+    $ s "sin:-3"
+    # oc 3
+    |* sp 0.5
+    # tanh "2"
+    # g 0.8
+    # dis 0.2
+
 
 do
   bpm 94
@@ -48,3 +114,34 @@ do
     # tanh 1
     # ac (rand - 0.5)
     -- |* g zzzzz
+
+
+
+do
+  bpm 90
+  all $ ((# v 0.6 0.4 0.2 0.2)
+    .(bite 4 (iter 4 "1 0 3 2")) -- up will sl
+    -- .(# djf 0.5)
+    -- .(# legato 1)
+    .(every 2 ((slow 2)))
+    .(sb 0.3 (rev))
+    .(sb 0.4 (sh 2 id))
+    .(every 3 (si rev))
+    -- .(# tantanh 5)
+    .(# wl 10)
+    )
+  d1
+    -- $ shut
+    $ si ((|* sp "h"))
+    $ n "0 0(3,4)" # s "dald" # hp 58 0.3 # lpf (range 200 800 $ sine) # tanh 12 # ac "-1"
+  d2
+    -- $ shut
+    $ echo 3 "q" 0.8
+    $ every 3 (ply 2) $ n "[~ 1 1] ~" # s "dald" # tanh 5 # lp (range 1600 2500 $ tri) 0 # mu 2
+  d3
+    -- $ shut
+    $ chunk 8 (ply 2)
+    $ sb 0.3 (ply 2)
+    $ n "4*6" # s "dald"
+    # g 0.6
+    -- # dis 13.8

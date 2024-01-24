@@ -1,0 +1,262 @@
+do
+  bpm 60
+  all $ (# v 0.9 0.9 0.3 0.3)
+    .(# c rand perlin (slow 13 $ sine) (slow 7 $ saw))
+    .(# cb 0.7 0.6 0.3 0.7)
+    .(slow 2)
+
+do
+  bpm 80
+  d1
+    $ shut
+    $ slow 2
+    $ whenmod 10 6 (|+ n 4)
+    $ striateBy 32 0.5
+    $ sh "q" (|+ n 3)
+    $ sh "h" (|+ n 1)
+    $ rarely ((|* sp "1.5").(|* g 0.8))
+    $ chunk 16 (# rmod 0.8 7 0.8)
+    $ n "{0 2 6 3}%2"
+    # s "airpiano"
+    # legato 0.05
+  d2
+    $ layer [
+      (# n "{2 4 7 5}%1").("t" ~>).(slice 8 "{0 1 3 [4 2] 7}%6").(sb 0.4 (|* sp 2)),
+      (h "q").(# n (irand 7)).(# cut 1).(# hp 56 0.2)
+    ]
+    $ s "airchoir"
+    # cut 0
+
+
+do
+  bpm 60
+  d1
+    $ slow 2
+    $ chunk 8 (|+ n 2)
+    $ sb 0.3 (|+ n 1)
+    $ layer [
+      (# legato (slow 3 tri)).(1.1 ~>).(h 6).(|* g 0.8).(sb 0.5 (plyWith 3 (|* sp "-q"))).(# pan sine),
+      (db 0.2).(# pan perlin),
+      (h "q")
+    ]
+    $ slice "{32 64 128}%{3 6 4}%3" (iter 4 (segment 2 (irand 64)))
+    $ s "airlong:0"
+
+
+do
+  bpm 60
+  d1
+    $ shut
+    $ slow 2
+    $ chunk 8 (|+ n "1")
+    $ layer [
+      (slice 32 (segment 2 (irand 32))).(db "h").(# rmod rand 7 0.8),
+      (slow 2).(slice 16 "~ 11 27 ~ 30").(# pan rand).(|* sp 2).(echo 2 0.9 "s"),
+      (slice 32 "0").(slow 2).(|* sp "e").(# cut 1).(# dis 0.1)
+    ]
+    $ n (irand 2)
+    # s "[airlong]"
+    |* g 0.2
+  d2
+    $ shut
+    $ echoWith 3 (-2.7) ((|* sp "-1").(# pan rand).(echoWith 7 "0.74" ((db 0.5).(|* g 0.9).(|* sp 1.333))))
+    $ sh "e" (id.(# cut 4).(#legato 1))
+    $ n (segment 1 (irand 8))
+    # s "airpiano"
+    # cut 2
+    |* g 0.1
+  d3
+    $ shut
+    $ slow 2
+    -- $ off "3.1" ((|* sp "-1.666").(chop 2).(# pan perlin).(|* g 0.3))
+    -- $ off "2.3" ((|* sp 1.333).(# rmod rand ((irand 8) + 5) 0.8).(# pan rand).(|* g 0.2))
+    $ sh "x" ((# dis 2.8))
+    $ n (segment 1 $ irand 7)
+    # s "airchoir"
+    -- |* g 0.9
+
+
+do
+  d1
+    $ shut
+    $ layer [
+      (slice 32 (segment 2 (irand 32))).(db "h").(# rmod rand (range 5 20 $ rand) 0.8),
+      (slice 16 "~ 19 ~ 7 ~ 31").(# pan rand).(|* sp 2).(|* g 0.8).(echo 3 0.9 "e"),
+      (slice 32 "0").(|* sp "e").(slow 2).(# cut 1).(# dis 0.2)
+    ]
+    $ n (irand 2)
+    # s "airlong" |* g 0.2
+  d2
+    $ shut
+    $ chunk 8 (|/ sp 1.6666)
+    $ echoWith 3 (2.7) ((|* sp "-1").(# pan rand).(echoWith 7 (rand) ((db 0.2).(|* g 0.95).(|* sp 1.333))))
+    $ sh "e" (# cut 4)
+    $ n (segment 1 (irand 8))
+    # s "airpiano"
+    # cut 2
+    |* g 0.3
+  d3
+    $ layer [
+      (|* sp 11).(|* g 0.8).(rand ~>),
+      (juxBy 0.3 (("t" ~>).(|/ sp 1.33))).(# rmod rand (range 3 30 $ rand) 0.8),
+      (h "x").(# dis 1.3)
+    ]
+    $ n (segment 1 (irand 8))
+    # s "airchoir"
+
+
+
+
+
+do
+  d1
+    $ shut
+    $ layer [
+      (slice 32 "~ 19 ~ 20 ~ 3").(plyWith 4 (|/ sp 1.2)).(# pan perlin).(|* sp 1.333).(|* g 0.7),
+      (slice 16 (segment 2 $ irand 16)).(# rmod rand 8 0.8).(db "h"),
+      (slice 32 "0").(|* sp "e").(# cut 0)
+    ]
+    $ n (irand 3)
+    # s "airlong" |* g 0.1
+  d2
+    $ shut
+    $ echoWith 4 "2.3" ((|/ sp "-1.333").(echoWith 2 "q" ((|* sp 3.6).(|* g 0.8))))
+    $ sh "e" ((# cut 3).(# dis 0.1))
+    $ n (segment 1 (irand 8))
+    # s "airpiano"
+    |* g 0
+  d3
+    $ layer [
+      (juxBy 0.4 ((|* sp "-1").(|+ n 2).(#rmod rand (range 3 20 $ rand) 0.8))),
+      (off "t" (|* sp 1.333)),
+      (h "x").(off "h" id).(# dis 1.4)
+    ]
+    $ n (segment 1 $ irand 7)
+    # s "airchoir"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+do
+  d1
+    $ shut
+    $ layer [
+      (slice 32 "~ 30 ~ 11 ~").(h 4).(ply 2).(|* sp 1.333).(# pan perlin).(|* g 0.9),
+      (echoWith 2 "3q" (|* sp "{-1 1.333}")).(slice 32 (segment 2 (irand 32))).(|* sp 0.9),
+      (slice 32 "0").(|* sp "e").(# dis 0.3)
+    ]
+    $ n (segment 1 $ irand 2)
+    # s "airlong"
+    |* g 0.1
+  d2
+    $ shut
+    $ chunk 8 (# rmod rand (irand 10 + 10) 0.8)
+    $ echoWith 3 (-2.7) ((|* sp "-1.333")
+      .(# coarse (irand 64 + 1))
+      .(echoWith 3 "t" ((|* sp 2).(ply "{3}").(|* g 0.8))))
+    $ sh "e" id
+    $ n (segment 1 $ irand 8)
+    # s "airpiano"
+    |* g 0.2
+  d3
+    $ layer [
+      (juxBy 0.3 (|* sp "-1")).(# rmod rand (irand 20 + 5) perlin),
+      (off "t" (|/ sp 1.333)).(striate 64).(# coarse 2),
+      (h "x").(# dis 5.8).(# wl 75).(off "h" id)
+    ]
+    $ n (segment 1 $ irand 7)
+    # s "airchoir"
+
+
+
+
+
+
+
+
+
+
+
+do
+  d1
+    $ shut
+    $ layer [
+      (slice 32 "~ 30 ~ 12 ~ 27").(# coarse 4)
+        .(|* sp 8).(|* sp 1.33).(ply "{3 6 8}%3")
+        .(# pan perlin).(|* g 0.8),
+      (slice 32 (segment 2 $ irand 32)),
+      (slice 32 "0").(|* sp "e").(# dis 0.2)
+    ]
+    $ n (segment 1 $ irand 3)
+    # s "airlong"
+    |* g 0.2
+  d2
+    $ shut
+    $ echoWith 3 2.7 ((|* sp "-1.333")
+      .(# coarse (irand 128 + 1))
+      .(echoWith 3 "{q e}" ((|* sp 4).(ply 3)
+      .(# pan sine).(db 0.5).(|* g 0.9))))
+    $ sh "e" (# dis 0.3)
+    $ n (segment 1 $ irand 8)
+    # s "airpiano"
+    |* g 0.2
+  d3
+    $ layer [
+      ((|* sp 12).(plyWith 4 (|/ sp 1.2)).(rand ~>)),
+      jux (|* sp "-1").(# rmod rand (range 7 20 $ rand) (fast 1.33 saw)),
+      (off "q" (|/ sp 1.333)).(striate 64),
+      (h "x").(off "h" id).(# dis 6.3).(# wl 4a
+        5).(|* g 0.85)
+    ]
+
+
+    $777
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    9 n (segment 1 $ irand 7)
+    # s "airchoir"

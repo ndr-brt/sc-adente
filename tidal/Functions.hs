@@ -151,7 +151,7 @@ geom mult steps pat = fast (parseBP_E $ show steps) $ fast (cat $ take steps $ i
 
 stages l1 l2 = parseBP_E $ unwords (concat ([(replicate x) (show num) | (num, x) <- zip l1 l2]))
 
-smarm cyc = wl (trigger 1 $ range 0 100 $ slow cyc $ envL) # tantanh (trigger 1 $ range 1 10 $ slow cyc $ envL)
+-- smarm cyc = wl (trigger 1 $ range 0 100 $ slow cyc $ envL) # tantanh (trigger 1 $ range 1 10 $ slow cyc $ envL)
 
 -- src: https://club.tidalcycles.org/t/fun-bouncing-ball-rythmns-in-tidal/
 -- _bounceWith :: Int -> Time -> Rational -> (Pattern a -> Pattern a) -> Pattern a -> Pattern a
