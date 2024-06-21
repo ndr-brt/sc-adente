@@ -118,30 +118,46 @@ do
 
 
 do
-  bpm 90
+  bpm 80
   all $ ((# v 0.6 0.4 0.2 0.2)
-    .(bite 4 (iter 4 "1 0 3 2")) -- up will sl
-    -- .(# djf 0.5)
+    .(bite (iter 2 "4") (iter 4 "1 0 2 3")) -- up will sl
+    -- .(# djf sine)
+    -- .(echoWith 8 "1%64" (|* g "0.96"))
     -- .(# legato 1)
-    .(every 2 ((slow 2)))
+    -- .(every 3 ((slow 2)))
     .(sb 0.3 (rev))
     .(sb 0.4 (sh 2 id))
-    .(every 3 (si rev))
-    -- .(# tantanh 5)
-    .(# wl 10)
+    .(every 5 (si rev))
+    .(# tantanh 3)
+    .(|+ tanh 1)
+    .(# wl 5)
+    .(sb 0.4 (|* ac (irand 2)))
+      -- .(|* g 0.9)
     )
   d1
     -- $ shut
-    $ si ((|* sp "h"))
-    $ n "0 0(3,4)" # s "dald" # hp 58 0.3 # lpf (range 200 800 $ sine) # tanh 12 # ac "-1"
+    $ db 0.1
+    $ si (|* sp "q")
+    $ n "0 [0 ~ 0]" # s "dald" # hp 58 0.3 # lpf (range 1200 1800 $ sine)
+    # tanh 12 # ac "-1"
+    -- # dis 0.8
   d2
     -- $ shut
+    $ db 0.7
     $ echo 3 "q" 0.8
-    $ every 3 (ply 2) $ n "[~ 1 1] ~" # s "dald" # tanh 5 # lp (range 1600 2500 $ tri) 0 # mu 2
+    $ every 3 (ply 2) $ n "[~ 1 1] ~" # s "dald" # tanh 5
+    # lp (range 1800 2800 $ tri) 0 # mu 2
   d3
     -- $ shut
+    $ db 0.3
     $ chunk 8 (ply 2)
     $ sb 0.3 (ply 2)
     $ n "4*6" # s "dald"
-    # g 0.6
-    -- # dis 13.8
+    # g 0.7
+    # dis 1.8
+
+
+
+d1 silence
+
+once $ s "sproloquio" # gain 1.4 # begin "0.5" # accelerate "-1"
