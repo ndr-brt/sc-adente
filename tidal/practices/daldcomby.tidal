@@ -1,0 +1,17 @@
+
+
+let smarm a = wl a # tantanh a
+
+let drum = s "dald" # tanh 20 # v 0.3 0.3 0.1 0.1
+
+
+do
+  bpm 85
+  d1
+    $ sb 0.2 (off "e" (|* g 0.9).(|* sp 2))
+    $ chunk 8 ((ply 16).(# cut 1))
+    $ stack [
+      sb 0.3 ((rotL (1/8)).(ply 8).(|* g 0.95)) $ n "0 1",
+      chunk 3 (ply 3) $ n "4*3" # ar 0.01 0.05 |* g 0.9
+    ]
+    # drum
