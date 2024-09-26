@@ -81,8 +81,8 @@ let setI = streamSetI tidal
     setB = streamSetB tidal
 :}
 
-:script ./tidal/Shortcuts.hs
 :script ./tidal/Parameters.hs
+:script ./tidal/Shortcuts.hs
 :script ./tidal/Functions.hs
 
 :set prompt "tidal> "

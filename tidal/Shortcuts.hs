@@ -22,6 +22,7 @@ let ac = accelerate
     shut = const $ silence
     si = superimpose
     sl = slow
+    smarm a = waveloss a # tantanh a
     sp = speed
     str = striate
     strBy = striateBy
