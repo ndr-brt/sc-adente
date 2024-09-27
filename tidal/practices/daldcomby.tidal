@@ -1,19 +1,33 @@
 let drum = s "dald" # tanh 20 # v 0.4 0.4 0.1 0.1
 
 
-d1
-  $ juxBy sine rev
-  -- $ db 0.95
-  $ every 5 (chunk 4 ((|* sp 2).(fast 4).(|+ dis 5.3)))
-  $ stack [
-    sh 5 ((|+ dis 1.2).(|* ac "-0.5").(|* g 0.8))
-      $ every 3 (fast 2) $ n "0" # hp 58 0.7,
-    every 2 (slow 4) $ n "~!3 1*8 ~" |* g 0.8 # cut 1,
-    chunk 3 (ply 10) $ n "4*3" # ar 0.01 0.01 |* g 0.9
-  ]
-  # drum
-  # smarm 10
-  -- |* g 0.9
+do
+  bpm 86
+  d1
+    $ every 5 ((slow "8 4").(# crush 1).(ply 4))
+    $ stack [
+      chunk 4 (slow 2)
+        $ n "3(13,16)" |* g 0.9 # hpf 100 # lp 2200 0.1 # dis 0.2,
+      every 3 (ply 8) $ n "~!3 1" # dis 0.8,
+      n "0 ~ 0/3 ~!3 0*2" # hp 62 0.6 # smarm 4,
+      ply (iter 3 "6 3") $ n "[6 ~](7,16)" # ar 0.01 0.01 |* g 0.7
+    ]
+    # drum
+
+do
+  bpm 125
+  d1
+    $ juxBy sine rev
+    $ every 5 (chunk 4 ((|* sp 2).(fast 4).(|+ dis 5.3)))
+    $ stack [
+      sh 5 ((|+ dis 1.2).(|* ac "-0.5").(|* g 0.8))
+        $ every 3 (fast 2) $ n "0" # hp 62 0.5,
+      every 2 (slow 4) $ n "~!3 1*8 ~" |* g 0.7 # cut 1,
+      chunk 3 (ply 10) $ n "4*3" # ar 0.01 0.01 |* g 0.8
+    ]
+    # drum
+    # smarm 10
+    -- |* g 0.9
 
 do
   bpm 85
