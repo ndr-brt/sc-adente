@@ -1,5 +1,24 @@
-let drum = s "dald" # tanh 20 # v 0.4 0.4 0.1 0.1
+let drum = s "dald" # tanh 20 # v 0.3 0.3 0.1 0.1
+    bd = drum # hp 62 0.4 # o 1 # v 0 0 0 0
+    sd = drum # o 2
+    ft = drum # o 3 # v 0 0 0 0
+    hh = drum # ar 0.01 0.05 |* g 0.8
 
+
+do
+  bpm 99
+  d1
+    $ every 3 (echo 3 "x" 0.9)
+    $ sh 0.5 (# cut 1)
+    $ chunk 16 (|+ n 1)
+    $ stack [
+      echo 2 "q" 1 $ n "0*3 ~" # bd,
+      every 2 (ply 3) $ n "~ [~ 1 ~]" # sd # dis 0.5,
+      sb 0.3 ((echoWith 16 "1%64" (# pan (fast 3 sine))).(# cut 2).(# ac "-0.5"))
+        $ n "7/4" # drum # ar 0.01 0.8 |* g 0.7,
+      n "~ 3/2 3/2 ~" # ft,
+      n "4*3" # hh
+    ]
 
 do
   bpm 86
@@ -9,7 +28,7 @@ do
       chunk 4 (slow 2)
         $ n "3(13,16)" |* g 0.9 # hpf 100 # lp 2200 0.1 # dis 0.2,
       every 3 (ply 8) $ n "~!3 1" # dis 0.8,
-      n "0 ~ 0/3 ~!3 0*2" # hp 62 0.6 # smarm 4,
+      n "0 ~ 0/3 ~!3 0*2" # hp 62 0.5 # smarm 4,
       ply (iter 3 "6 3") $ n "[6 ~](7,16)" # ar 0.01 0.01 |* g 0.7
     ]
     # drum
@@ -21,21 +40,11 @@ do
     $ every 5 (chunk 4 ((|* sp 2).(fast 4).(|+ dis 5.3)))
     $ stack [
       sh 5 ((|+ dis 1.2).(|* ac "-0.5").(|* g 0.8))
-        $ every 3 (fast 2) $ n "0" # hp 62 0.5,
+        $ every 3 (fast 2) $ n "0" # hp 62 0.5
+        ,
       every 2 (slow 4) $ n "~!3 1*8 ~" |* g 0.7 # cut 1,
       chunk 3 (ply 10) $ n "4*3" # ar 0.01 0.01 |* g 0.8
     ]
     # drum
     # smarm 10
-    -- |* g 0.9
-
-do
-  bpm 85
-  d1
-    $ sb 0.2 (off "e" (|* g 0.9).(|* sp 2))
-    $ chunk 8 ((ply 16).(# cut 1))
-    $ stack [
-      sb 0.3 ((rotL (1/8)).(ply 8).(|* g 0.95)) $ n "0 1",
-      chunk 3 (ply 3) $ n "4*3" # ar 0.01 0.05 |* g 0.9
-    ]
-    # drum
+    |* g 0.9

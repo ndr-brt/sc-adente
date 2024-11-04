@@ -1,0 +1,18 @@
+let bd = s "dald" # tanh 30 # hp 67 0.2 # o 1
+    sd = s "dald" # tanh 20 # v 0.3 0.3 0.1 0.1 # o 2
+    hh = s "dald" # ar 0.01 0.05 # tanh 2 # o 3
+    cr = s "dald" # tanh 2 # o 4
+
+do
+  bpm 120
+  d1
+    $ sb 0.3 (sh "h" id)
+    $ stack [
+      every 2 (slow 2) $ n "0 0*2 0*4" # bd
+      ,
+      every 2 (ply 2) $ n "~!3 1 ~!3" # sd
+      ,
+      chunk 6 (ply 6) $ n "4*3" # hh # cut 1
+      ,
+      sb 0.3 (echo 4 (1/32) 0.98) $ n "5/4" # cr # cut 1
+    ]
