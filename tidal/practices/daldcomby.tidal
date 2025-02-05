@@ -3,7 +3,37 @@ let drum = s "dald" # tanh 20 # v 0.3 0.3 0.1 0.1
     sd = drum # o 2
     ft = drum # o 3 # v 0 0 0 0
     hh = drum # ar 0.01 0.05 |* g 0.8
+    ri = hh |* g 0.8
+    cr = drum # ar 0.01 0.8 |* g 0.6
 
+do
+  bpm 86
+  d1
+    $ every 5 (slow 2)
+    $ si ((rinse 2 2).(|* g 0.6))
+    $ stack [
+       chunk 8 (echo 2 "1%8" 1) $ chunk 6 (ply 8)
+        $ n "[0 ~ 0 ~ 0] ~" # bd,
+      every 3 (echo 3 "s" 1) $ n "~ [~ 1]" # sd
+      ,
+      sb 0.4 (ply 2) $ n "6*16" # ri
+    ]
+    # smarm 5
+
+do
+  bpm 89
+  d1
+    $ sh "{0.33 0.5 0.25 1.33}%4" id
+    $ every 5 rev
+    $ chunk 8 (|* sp "-1")
+    $ chunk 4 (si ((ply 16).(# pan rand).(|* g 0.8)))
+    $ stack [
+      n "0 ~ ~ ~ ~ 0 ~" # bd,
+      sb 0.2 (off "-1/14" (|+ n 1)) $ n "~ ~ 1 ~ ~ ~ 1" # sd,
+      db 0.1 $ swing 3.5 $ n "4*7" # hh |- g (rand/3),
+      n "7/7" # cr
+    ]
+    # wl 5
 
 do
   bpm 99
@@ -13,12 +43,13 @@ do
     $ chunk 16 (|+ n 1)
     $ stack [
       echo 2 "q" 1 $ n "0*3 ~" # bd,
-      every 2 (ply 3) $ n "~ [~ 1 ~]" # sd # dis 0.5,
+      every 2 (ply 4) $ n "~ [~ 1]" # sd # dis 0.5,
       sb 0.3 ((echoWith 16 "1%64" (# pan (fast 3 sine))).(# cut 2).(# ac "-0.5"))
         $ n "7/4" # drum # ar 0.01 0.8 |* g 0.7,
       n "~ 3/2 3/2 ~" # ft,
       n "4*3" # hh
     ]
+    -- # smarm 5
 
 do
   bpm 86
@@ -48,3 +79,18 @@ do
     # drum
     # smarm 10
     |* g 0.9
+
+do
+  bpm 111
+  d1
+    $ sb 0.1 (si ((|* sp 8).(ply 3).(|+ dis 0.3).(# pan rand)))
+    $ sb 0.1 (sh "x" (|+ dis 0.5))
+    $ every 7 (|+ n 2)
+    $ every 5 (ply 2)
+    $ every 3 (si ((|* sp "-1").("e" <~)))
+    $ chunk 4 (ply 4)
+    $ stack [
+      n "0 0" # bd,
+      n "[~!7 1] ~" # sd
+    ]
+    # smarm 2

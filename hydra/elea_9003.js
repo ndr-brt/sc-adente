@@ -1,9 +1,12 @@
-vid = document.createElement('video')
+var vid = document.createElement('video')
 vid.autoplay = true
 vid.loop = true
 vid.playbackRate = 0.8
 // vid.src = 'https://localhost:8000/elea_9003.mp4'
 vid.src = '/home/andrea/Videos/elea_9003.mp4'
+
+
+s0.init({ src: Object.assign(document.createElement('video'), { autoplay: true, loop: true, playbackRate: 0.8, src: '/home/andrea/Videos/elea_9003.mp4' }) })
 
 s0.init({ src: vid })
 
