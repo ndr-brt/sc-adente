@@ -4,7 +4,7 @@ let drum = s "dald" # tanh 20 # v 0.3 0.3 0.1 0.1
     ft = drum # o 3 # v 0 0 0 0
     hh = drum # ar 0.01 0.05 |* g 0.8
     ri = hh |* g 0.8
-    cr = drum # ar 0.01 0.8 |* g 0.6
+    cr = drum # ar 0.01 0.8 |* g 0.7
 
 do
   bpm 86
@@ -18,7 +18,9 @@ do
       ,
       sb 0.4 (ply 2) $ n "6*16" # ri
     ]
-    # smarm 5
+    # smarm 2
+    |* g 0.5
+    # crush 1
 
 do
   bpm 89
@@ -34,6 +36,7 @@ do
       n "7/7" # cr
     ]
     # wl 5
+    |* g 0.5
 
 do
   bpm 99
@@ -50,6 +53,8 @@ do
       n "4*3" # hh
     ]
     -- # smarm 5
+    |* g 0.5
+    # crush 1
 
 do
   bpm 86
@@ -63,6 +68,8 @@ do
       ply (iter 3 "6 3") $ n "[6 ~](7,16)" # ar 0.01 0.01 |* g 0.7
     ]
     # drum
+    |* g 0.5
+    # crush 1
 
 do
   bpm 125
@@ -78,7 +85,8 @@ do
     ]
     # drum
     # smarm 10
-    |* g 0.9
+    |* g 0.5
+    # crush 1
 
 do
   bpm 111
@@ -94,3 +102,61 @@ do
       n "[~!7 1] ~" # sd
     ]
     # smarm 2
+    |* g 0.5
+    # crush 1
+
+
+do
+  bpm 115
+  d1
+    $ echoWith (iter 8 "1 3 2") "x" ((|* g 0.8).(ply 3))
+    $ fast (iter 4 "1")
+    $ stack [
+      n "0 ~ ~" # bd,
+      n "~ [1|1*2] ~" # sd,
+      n "[~ <~!2 3>] ~ ~" # ft,
+      n "~ ~ [~ 4]" # ft
+    ]
+    -- # s "dald"
+    # tanh 122
+    # cut (iter 4 "1 2")
+    # v 0.2 0.2 0.1 0.1
+    # hp 74 0.4
+    -- # lpf 5000
+    |* g 0.5
+    # crush 1
+
+
+
+do
+  bpm 180
+  d1
+    $ stack [
+      db 0.4 $ echo "5" "s" 0.85 $ n "1*3" # sd,
+      echo "2" (iter 3 "x 1%12") 1 $ n "~ 0" # bd,
+      fast (iter 3 "3 6 12") $ n "4*11" # hh |* g 0.9,
+      n "<3 ~ [3*2 ~!2]>" # ft |* sp 0.6 # ac "-1",
+      n "~ 7/3 ~" |* sp "-1" # io 0 0.1 |* g 1.6 # cr
+    ]
+    |* g 0.5
+    # tantanh 2
+    # wl 10
+    # crush 1
+
+do
+  bpm 118
+  d1
+    $ stack [
+      sb 0.05 (# crush 2)
+        $ sb 0.1 (fast 2)
+        $ sb 0.3 (rev)
+        $ stack [
+          n "~ 1  ~  ~" # sd |* sp 0.7,
+          (every  7 (|- n 1)) $ n "3 ~ 3*4 ~" # ft,
+          ply (iter 5 "2 1 4") $ n "~ ~  ~  0" # bd
+        ]
+      ,
+      n "[~ 5](5,8)" # hh
+    ]
+    |* g 0.5
+    -- # crush 1
