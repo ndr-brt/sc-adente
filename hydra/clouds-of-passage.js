@@ -22,3 +22,5 @@ shape([4,5,6].fast(0.1).smooth(1),0.000001,[0.2,0.7].smooth(1))
       ,0.85)
 .modulate(voronoi(10,2,2))
 .out()
+
+speed = 0.1

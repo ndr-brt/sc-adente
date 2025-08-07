@@ -1,0 +1,82 @@
+
+
+d1
+  $ echoWith 24 "e s q" ((|* sp 0.99).(|* g 0.96))
+  $ sb 0.3 (rev)
+  $ slow 2
+  $ stack [
+    fast 3 $ s "kick ~" # tanh 10,
+    every 3 (ply 2) $ s "~ sd",
+    fast (1) $ chunk 6 (fast 6) $ s "hc*4",
+    superimpose (hurry "0.25")
+      $ n "0 [4 5] 7 4" # s "{superchip superpwm}%8" |* g 0.7
+  ]
+  -- |* speed (sine + 0.1) |* gain 1
+
+  d1
+    $ sh "{4 2 8 16}%5" id
+    $ every 3 rev
+    -- $ echo 5 "x" 0.9
+    $ chunk 7 (jux rev)
+    $ stack [
+      chunk 3 (ply 2)
+        $ n "6 ~ 6"
+        |* speed 0.7
+        # begin 0.18 # end 0.23
+        # accelerate "-1"
+        # hp 57 0.3
+        # dis 0.2,
+      n "~ 6"
+        |* sp 1 # dis 2.8 # begin 0.15 # end 0.25 # bp 900 0.7
+        # accelerate "0.2" |* g 0.7,
+      every 3 (ply 3) $ n "6*6"
+        # begin 0.37 # end 0.38 # tanh 2,
+      sp "{1 1.33 1.2 1.66}%5"
+        # n "6" # io 0.07 0.16 |* sp 0.20 # lpf 1200 # tanh 8
+    ]
+    |* sp (choose [-1, 1])
+    # s "numbers"
+    # verb 0.3 0.3 0.1 0.1
+    # waveloss 100
+
+
+
+
+d1
+  $ echo 3 "x" 0.9
+  $ stack [
+    every 2 (fast 3) $ n "6 ~" # begin 0.18 # end 0.23 |* speed 0.5 # accelerate "-1" # dis 0.5 # hp 58 0.2 |* gain 0.9,
+    every 3 (ply 2) $ n "~ 6" # io 0.15 0.23 |* speed 0.6 # bp 1600 0.7 # dis 2 # accelerate 0.7 |* gain 0.9,
+    chunk 6 (fast 6) $ n "6*6" # io 0.37 0.38 # dis 0.4,
+    superimpose (hurry 0.125) $ n "6" *| speed "0.2 0.5 0.3 0.8" # io 0.05 0.16 # lpf 700 # dis 0.3 # accelerate "-0.2"
+  ]
+  # s "numbers"
+  -- |+ n (segment 3 $ irand 10)
+  # verb 0.3 0.3 0.1 0.1
+
+
+
+d1 $ ply 64 $ s "numbers:6"
+
+
+
+
+
+
+
+
+
+ d1
+    -- $ superimpose (hurry "2")
+    -- $ echoWith 3 "0.15" ((|* g 0.9).(|+ dis 0.3))
+    -- $ chunk "e" (ply 3)
+    -- $ every 3 ((slow 2).(ply 3))
+    $ stack [
+      n "6" # begin 0.2 # end 0.3 # speed 0.25
+        # accelerate "-1" # hp 56 0.3 # dis 0.1,
+      sb 0.3 (ply 3) $ n "~ 6" # io 0.15 0.19 # speed 0.8 # accelerate 0.4 # dis 2 |* gain 0.8,
+      chunk 3 (ply 6) $ n "6*4" # io 0.37 0.38 # dis 0.3,
+      n "6" # io 0.35 0.45 *| speed "1 0.8 1.33 1.2" |* speed 0.7
+    ]
+    # s "numbers"
+    |+ n 2

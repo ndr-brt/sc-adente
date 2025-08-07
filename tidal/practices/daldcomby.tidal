@@ -1,3 +1,5 @@
+    d1 $ s "bd"
+
 let drum = s "dald" # tanh 20 # v 0.3 0.3 0.1 0.1
     bd = drum # hp 62 0.4 # o 1 # v 0 0 0 0
     sd = drum # o 2
@@ -5,6 +7,22 @@ let drum = s "dald" # tanh 20 # v 0.3 0.3 0.1 0.1
     hh = drum # ar 0.01 0.05 |* g 0.8
     ri = hh |* g 0.8
     cr = drum # ar 0.01 0.8 |* g 0.7
+
+let drum = s "dald" # tanh 20 # v 0.3 0.3 0.1 0.1
+    bd = drum # hp 62 0.4 # o 1 # v 0 0 0 0
+    sd = drum # o 2
+    ft = drum # o 3 # v 0 0 0 0
+    hh = drum # ar 0.01 0.05 |* g 0.8
+    ri = hh |* g 0.8
+    cr = drum # ar 0.01 0.8 |* g 0.7
+
+
+let culous = s "dald" # tanh 20 # v 0.3 0.3 0.1 0.1
+    bd = culous # hp 62 0.4 # o 1 # v 0 0 0 0
+
+let c = s "bd"
+
+d1 $ n "0 1" # culous
 
 do
   bpm 86
@@ -172,3 +190,22 @@ do
       sb 0.5 (fast 3) $ n "4*2" # hh
     ]
     # wl 5
+
+
+
+do
+  bpm 87
+  d1
+    $ every 7 (ply 14)
+    $ chunk 6 ((plyWith 7 ((|+ dis 0.1).(|- legato 0.1))))
+    $ fast 2
+    -- $ every 5 (fast 2)
+    -- $ chunk 12 ((h 2).(|* sp "-1"))
+    $ stack [
+      n "0" # bd,
+      every 4 (echo 2 "x" 0.9)
+        $ sb 0.3 (ply 3)
+        $ n "~!<3 6 1 8> 1"
+        # sd # legato 0.3 |* g 0.8
+      , ply 12 $ n "~ <3 ~ ~>" # ft |* g 0.6 # io 0.1 0.3 # hp 58 0.4
+    ]
