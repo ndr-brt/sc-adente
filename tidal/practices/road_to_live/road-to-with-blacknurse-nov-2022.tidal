@@ -161,3 +161,27 @@ do
 d1 silence
 
 once $ s "sproloquio" # gain 1.4 # begin "0.5" # accelerate "-1"
+once $ s "eleav:9" # gain 1.4 # begin "0.5" # accelerate "-1"
+
+do
+  bpm 80
+  d1
+    -- $ swing 3
+    -- $ sh "h" id
+    -- $ chunk 8 ((ply 8).(# cut 1))
+    -- $ sh "5%3" id
+    -- $ every 5 ((# n "4").(h "5%3"))
+    -- $ chop (iter 5 "2 8 4 1")
+    -- $ echoWith 3 ("s x") (|* gain 0.9)
+    $ stack [
+      sh "5%3" ((|* g 0.85).(every 5 ((ply "45 32 16").(chop "<2 3>")))) $
+        n "{0 1 2}%{3}"
+      , fast 2.2 $ n "4*4" # legato 0.2 # g 0.9
+    ]
+    # s "dald"
+    # tanh 40
+    # dis 2
+    -- # smarm 50
+    -- # hp 56 0.3
+    -- # coarse 3
+    -- # legato 0.2
