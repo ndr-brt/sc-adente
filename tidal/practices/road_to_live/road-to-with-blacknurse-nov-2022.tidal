@@ -163,10 +163,29 @@ d1 silence
 once $ s "sproloquio" # gain 1.4 # begin "0.5" # accelerate "-1"
 once $ s "eleav:9" # gain 1.4 # begin "0.5" # accelerate "-1"
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 do
-  bpm 80
+  bpm 70
   d1
-    -- $ swing 3
+    $ swing 1
     -- $ sh "h" id
     -- $ chunk 8 ((ply 8).(# cut 1))
     -- $ sh "5%3" id
@@ -174,14 +193,142 @@ do
     -- $ chop (iter 5 "2 8 4 1")
     -- $ echoWith 3 ("s x") (|* gain 0.9)
     $ stack [
-      sh "5%3" ((|* g 0.85).(every 5 ((ply "45 32 16").(chop "<2 3>")))) $
+      sh "5%3" ((|* g 0.85).(every 5 ((ply "45 32 16").(chop "<2 3 4>")))) $
         n "{0 1 2}%{3}"
-      , fast 2.2 $ n "4*4" # legato 0.2 # g 0.9
+        , ply (iter 3 "1! 3") $ n "4*5" # legato 0.2 # g 0.9
     ]
     # s "dald"
     # tanh 40
     # dis 2
-    -- # smarm 50
+    -- # smarm (trigger $ slow 10 $ range 50 100 $ envL)
     -- # hp 56 0.3
-    -- # coarse 3
-    -- # legato 0.2
+    # coarse 1
+    -- # legato 0.1
+
+
+
+do
+  bpm 70
+  d1
+    $ bite "6" "{0 3 2}%{2 4}"
+    $ every 7 rev
+    $ stack [
+      sh "5%3" ((|* g 0.85).(every 5 ((chop "<2 4 3>").(ply "{19 37 45 32}%6")))) $
+        n "0 1 3"
+      , ply (iter 3 "1*3 3") $ n "4*5" # legato 0.1 |* sp 4
+    ]
+    # s "dald"
+    # tanh 10
+    # dis 2
+    # smarm 18
+    -- (trigger $ slow 5 $ range 20 100 $ envL)
+
+
+do
+  bpm 70
+  d1
+    $ off "t" ((|* g 0.9).(|+ dis 15).(# coarse 1))
+    $ every 7 rev
+    $ stack [
+      sh "5%3" ((|* g 0.95).(every 5 ((chop "<5 3 8 14>").(ply "23 43 52"))))
+        $ n "0 1 [2|3]",
+      ply (iter 3 "1 6 1 1 3")
+        $ n "4*5" # legato 0.1 |* sp 4 |* g 0.9
+    ]
+    # s "dald" # tanh 10 # dis 2 # smarm 90
+
+
+
+do
+  bpm 70
+  d1
+    $ ply 3
+    $ echoWith 7 "[t|x]" ((|* g 0.97).(|+ dis 25).(# coarse 1))
+    $ every 7 rev
+    $ stack [
+      sh "5%3" ((|* g 0.95).(every 5 ((chop "<5 4 14>").(ply "23 43 53").(# legato 0.6))))
+        $ n "0 1 2",
+      ply (iter 3 "1 3 1 12 1 6")
+        $ n "4*5" # legato 0.1 |* sp 4
+        |* g 1 # ac (slow 6 $ ((sine * 5) - 1))
+    ]
+    # s "dald" #tanh 10 # dis 2 # smarm 95
+
+
+
+
+
+
+do
+  bpm 70
+  d1
+    $ echoWith 4 "t" ((|* g 0.9)
+      .(|+ dis 20).(|* sp 0.6)
+      .(# coarse 2).(# cut 1))
+    $ every 7 rev
+    $ stack [
+      sh "5%3" ((|* g 0.9)
+          .(every 3 ((chop "<4 7 5>")
+            .(ply "23 15 36"))))
+        $ n "0 1 [2|3]",
+      ply (iter 3 "12 1 1 3 1 1 6")
+        $ n "4*5" # legato 0.1
+        |* g 0.9 |* sp 4
+        # ac (slow 4 $ ((sine*2)-1))
+    ]
+    # s "dald"
+    # tanh 100 |+ dis 3
+    # smarm 70
+    |* g 1.7
+
+
+
+
+
+do
+  bpm 70
+  d1
+    $ echoWith 8 "1%36" ((|* g 0.98)
+      .(|* sp (iter 12 "0.9 1.9"))
+      .(# crush "2 5 1 10"))
+    $ stack [
+      sh "5%3" ((|* g 0.9)
+          .(every 5 ((chop (iter 6 "4 7 5 8"))
+            .(ply "23 37 17").(# cut 1))))
+        $ n "0 1 2",
+      ply (iter 3 "1 6 1 12 24 3 1 1 24")
+        $ n "4*5"
+          # legato 0.1 |* sp 24 |* g 1.5
+    ] # s "dald"
+    # tanh 20
+    # dis 15
+    # smarm 70
+
+
+
+
+
+
+
+
+
+
+do
+  bpm 70
+  d1
+    $ echoWith 5 "[x|1%46|1%48]" ((|* sp 0.9)
+      .(|* g 0.9).(# crush 3).(|+ dis 5))
+    $ stack [
+      sh "5%3" ((|* g 0.9).(every 5 (
+          (chop "4 7 2 9").(ply "18 32 24 14")
+          .(# cut 1))))
+        $ n "0 [1 1?] [2|3]",
+      ply (iter 3 "6 1 12 1 3 1 1") $ n "4*5"
+        # legato 0.1
+        |* sp 4 |* g 0.9
+    ]
+    # s "dald"
+    # tanh 100090000000000 
+    # dis 0.9
+    # smarm 68
+    |* g 1.2
